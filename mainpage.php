@@ -77,9 +77,10 @@
 </head>
 <body>
     <?php
-        include("header.php");
+        include("nav.php");
     ?>
-    <hr id="divider">
+    <!-- <hr id="divider"> -->
+    <div style="clear:both;"></div>
     <div class="maincontainter">
         <div class="col"> 
             <div style="margin-left:40px; margin-top: 50px;">

@@ -12,13 +12,13 @@
 
         .topnav {
         overflow: hidden;
-        background-color: #333;
-        position: fixed;
+        background-color: grey;
+        /* position: fixed; */
         width: 100%;
         top: 0%;
         }
 
-        .topnav a {
+        .topnav .navigations{
         float: right;
         color: #f2f2f2;
         text-align: center;
@@ -26,22 +26,16 @@
         text-decoration: none;
         font-size: 17px;
         width: 80px;
+        font-weight: bold;
         }
 
         .topnav .search-container {
         float: right;
         }
 
-        .topnav a:hover {
+        .topnav .navigations:hover {
         background-color: rgb(196, 195, 195);
         color: black;
-        }
-
-        .topnav input[type=text] {
-        padding: 6px;
-        margin-top: 8px;
-        font-size: 17px;
-        border: none;
         }
 
         .topnav .search-container button {
@@ -60,40 +54,36 @@
         }
 
         @media screen and (max-width: 600px) {
-        .topnav .search-container {
-            float: none;
-        }
+            .topnav .search-container {
+                float: none;
+            }
 
-        .topnav a, .topnav input[type=text], .topnav .search-container button {
-            float: none;
-            display: block;
-            text-align: left;
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-        }
-        
-        .topnav input[type=text] {
-            border: 1px solid #ccc;  
-        }
+            .topnav a, .topnav input[type=text], .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+            }
         }
        
-
     </style>
 </head>
 <body>
     <div class="topnav">
-        <div class="search-container">
+        <a href="">
+            <img src="images/brain_logo2.png" style="width:120px;margin-left:50px;">
+        </a>
+        <!-- <div class="search-container">
             <form action="">
               <input type="text" placeholder="Search.." name="search">
               <button type="submit" class="gosearch">?</button>
             </form>
-        </div>
-        <a href="#">Course</a>
-        <a href="#">Join Quiz</a>
-        <a href="#">View</a>
+        </div> -->
+        <a class="navigations" href="#">Course</a>
+        <a class="navigations" href="#">Join Quiz</a>
+        <a class="navigations" href="#">View</a>
     </div>
-
-    
 </body>
 </html>

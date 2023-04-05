@@ -12,6 +12,7 @@
 
         body {
         margin: 0%;
+        font-family: Helvetica, sans-serif;
         }
 
         .topnav {
@@ -19,17 +20,19 @@
         background-color: grey;
         width: 100%;
         top: 0%;
+        box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .topnav .navigations{
+        .navigations{
         float: right;
         color: #f2f2f2;
         text-align: center;
         text-decoration: none;
         font-size: 17px;
-        width: 80px;
         font-weight: bold;
-        padding: 20px 0;
+        padding: 20px 15px;
+        margin: 0 10px;
+        border-radius: 4px;
         }
 
         .container{
@@ -43,7 +46,7 @@
         }
 
         @media screen and (max-width: 600px) {
-            .topnav a, .topnav input[type=text], .topnav .search-container button {
+            .topnav a, .topnav .search-container button {
                 float: none;
                 display: block;
                 text-align: left;
@@ -57,13 +60,7 @@
 </head>
 <body>
     <div class="topnav">
-        <img src="images/brain_logo2.png" style="width:auto; height:75px; margin-left:50px;">
-        <!-- <div class="search-container">
-            <form action="">
-              <input type="text" placeholder="Search.." name="search">
-              <button type="submit" class="gosearch">?</button>
-            </form>
-        </div> -->
+        <a href=""><img src="images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="container">
             <a class="navigations" href="#">Course</a>
             <a class="navigations" href="#">Join Quiz</a>

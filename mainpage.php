@@ -46,6 +46,7 @@
             display: flex;
             text-align: center;
             padding: 25px;
+            box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
         }
         .subjects{
             font-size: 25px;
@@ -160,7 +161,7 @@
             </div>
         </div>
         <div style="clear: both; height:50px;"></div>
-        <div style="background-color: #ececec; padding:20px 0px 65px;">
+        <div style="background-color: #ececec; padding:20px 0px 65px; box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);">
             <div style="text-align: center; padding:70px 0px;">
                 <h1 style="font-size:50px">The prefect way to learn a subject for <br>primary school student</h1>
             </div>
@@ -190,7 +191,7 @@
         </div>
         <div style="text-align: center; margin: 70px 0px;">
             <h1>Join Over 1 million primary students learning on BrainBulb</h1>
-            <input type="button" value="Get started" id="start-btn" style="padding: 23px 30px; font-size:20px;">
+            <input type="button" value="Get started" id="start-btn" style="padding: 23px 30px; margin-top:30px;font-size:20px;">
         </div>
     </div>
 </body>

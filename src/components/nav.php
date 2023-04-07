@@ -72,7 +72,7 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="../../images/brain_logo2.png"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
+        <a href="#"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="container">
             <?php if(isset($_SESSION['user_id'])){ 
                 echo'

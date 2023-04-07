@@ -86,10 +86,10 @@
         <div class="col"> 
             <div style="margin-left:40px; margin-top: 50px;">
                 <div>
-                    <h1 style="font-family: 'Raleway', sans-serif;">BrainBulb is a blablblaggggggggggggggggggggg gggggggggggggggggggggggggggg</h1>
+                    <h1 style="font-family: 'Raleway', sans-serif; font-size:42;">Welcome to Brainbulb!</h1>
                 </div>
                 <div>
-                    <h2>giuabfifemokmfof nofkenwofkn fwoemk nokfn wko nofnfe game is a thing in wrealaiomw</h2>
+                    <h2 style="text-align: justify;  text-justify: inter-word; font-weight:600; opacity:70%; line-height: 1.3;">An e-learning platform empowering parents and teachers to enrich their children's knowledge and equip them with the skills to succeed in the future. <br/>BrainBulb is designed to provide a one-stop-shop for all your educational needs, including interactive lessons, and engaging activities.<br/> Join us, and you can give your child the gift of lifelong learning and help them discover their full potential.</h2>
                 </div>
                 <input type="button" value="Get started" id="start-btn">
             </div>
@@ -98,7 +98,7 @@
         <div class="col" style="text-align: center;">
             <img src="images/person-studying-online.png" style="height:58%;">
         </div>
-        <div style="clear: both;"></div>
+        <div id="coursesScroll" style="clear: both;"></div>
         <div class="coursebox">
             <a href="" class="subjects">
                 <div>
@@ -125,7 +125,7 @@
                 </div>
             </a>
         </div>
-        <div class="features">
+        <div id="featuresScroll" class="features">
             <div class="adv">
                 <div style="margin-left:30px; margin-top: 85px;">
                     <h1>Engagement</h1>
@@ -161,7 +161,7 @@
             </div>
         </div>
         <div style="clear: both; height:50px;"></div>
-        <div style="background-color: #ececec; padding:20px 0px 65px; box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);">
+        <div id="useCaseScroll" style="background-color: #ececec; padding:20px 0px 65px; box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);">
             <div style="text-align: center; padding:70px 0px;">
                 <h1 style="font-size:50px">The prefect way to learn a subject for <br>primary school student</h1>
             </div>

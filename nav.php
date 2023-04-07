@@ -5,6 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.scroll-link').click(function(e) {
+        e.preventDefault();
+        var target = $(this).attr('href');
+        $('html, body').animate({
+            scrollTop: $(target).offset().top
+        }, 500);
+        });
+    });
+    </script>
     <style>
         *{
             box-sizing: border-box;
@@ -62,9 +74,20 @@
     <div class="topnav">
         <a href=""><img src="images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="container">
-            <a class="navigations" href="#">Course</a>
-            <a class="navigations" href="#">Join Quiz</a>
-            <a class="navigations" href="#">View</a>
+            <?php if(isset($_SESSION['user_id'])){ 
+                echo'
+                <a class="navigations" href="#">Course</a>
+                <a class="navigations" href="#">Join Quiz</a>
+                <a class="navigations" href="#">View</a>
+                <a class="navigations" href="logout.php">Logout</a>';
+            }else{
+                echo'
+                <a class="navigations scroll-link" href="manageAccount.php">Get Started</a>
+                <a class="navigations scroll-link" href="#useCaseScroll">use cases</a>
+                <a class="navigations scroll-link" href="#featuresScroll">features</a>
+                <a class="navigations scroll-link" href="#coursesScroll">courses</a>
+                ';
+            } ?>
         </div>
     </div>
 </body>

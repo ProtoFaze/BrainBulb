@@ -72,14 +72,15 @@
 </head>
 <body>
     <div class="topnav">
-        <a href=""><img src="images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
+        <a href="../../images/brain_logo2.png"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="container">
             <?php if(isset($_SESSION['user_id'])){ 
                 echo'
-                <a class="navigations" href="#">Course</a>
-                <a class="navigations" href="#">Join Quiz</a>
+                <a class="navigations" href="logout.php">Logout</a>
                 <a class="navigations" href="#">View</a>
-                <a class="navigations" href="logout.php">Logout</a>';
+                <a class="navigations" href="#">Join Quiz</a>
+                <a class="navigations" href="#">Course</a>
+                ';
             }else{
                 echo'
                 <a class="navigations scroll-link" href="manageAccount.php">Get Started</a>

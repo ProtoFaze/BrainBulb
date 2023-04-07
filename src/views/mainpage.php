@@ -78,7 +78,7 @@
 </head>
 <body>
     <?php
-        include("nav.php");
+        include("../components/nav.php");
     ?>
     <!-- <hr id="divider"> -->
     <div style="clear:both;"></div>
@@ -96,31 +96,31 @@
             
         </div>
         <div class="col" style="text-align: center;">
-            <img src="images/person-studying-online.png" style="height:58%;">
+            <img src='../../images/person-studying-online.png' style="height:58%;">
         </div>
         <div id="coursesScroll" style="clear: both;"></div>
         <div class="coursebox">
             <a href="" class="subjects">
                 <div>
-                    <img src="images/science.png" alt="">
+                    <img src="../../images/science.png" alt="">
                     <p>Science</p>
                 </div>
             </a>
             <a href="" class="subjects">
                 <div>
-                    <img src="images/math2.png" alt="">
+                    <img src="../../images/math2.png" alt="">
                     <p>Mathematics</p>
                 </div>
             </a>
             <a href="" class="subjects">
                 <div>
-                    <img src="images/english1.png" alt="">
+                    <img src="../../images/english1.png" alt="">
                     <p>English</p>
                 </div>
             </a>
             <a href="" class="subjects">
                 <div>
-                    <img src="images/bm.png">
+                    <img src="../../images/bm.png">
                     <p>Bahasa Melayu</p>
                 </div>
             </a>
@@ -133,13 +133,13 @@
                 </div>
             </div>
             <div class="adv" style="text-align:center;">
-                <img src="images/engage.png" style="width:75%;">
+                <img src="../../images/engage.png" style="width:75%;">
             </div>
         </div>
         <div style="clear: both;"></div>
         <div class="features">
             <div class="adv" style="text-align:center;">
-                <img src="images/technology.png" style="width:75%;">
+                <img src="../../images/technology.png" style="width:75%;">
             </div>
             <div class="adv">
                 <div style="margin-left:30px; margin-top: 85px;">
@@ -157,7 +157,7 @@
                 </div>
             </div>
             <div class="adv" style="text-align:center;">
-                <img src="images/bm.png" style="width:65%;">
+                <img src="../../images/bm.png" style="width:65%;">
             </div>
         </div>
         <div style="clear: both; height:50px;"></div>
@@ -168,21 +168,21 @@
             <div class="usertype" >
                 <div class="user">
                     <div>
-                        <img src="images/student.png" style="width:70%;">
+                        <img src="../../images/student.png" style="width:70%;">
                         <h2>Student</h2>
                         <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur <br>adipisicing elit. Consequuntur, debitis.kfsf</p>
                     </div>
                 </div>
                 <div class="user">
                     <div>
-                        <img src="images/parent.png" style="width:70%;">
+                        <img src="../../images/parent.png" style="width:70%;">
                         <h2>Parent</h2>
                         <p style="font-size:18px;">Lorem ipsum dolor sit amet, <br>consectetur adipisicing elit. Aliquid, soluta.</p>
                     </div>
                 </div>
                 <div class="user">
                     <div>
-                        <img src="images/teacher.png" style="width:70%;">
+                        <img src="../../images/teacher.png" style="width:70%;">
                         <h2>Teacher</h2>
                         <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur <br>adipisicing elit. Voluptate, maiores.</p>
                     </div>

@@ -89,7 +89,7 @@
                     <h1 style="font-family: 'Raleway', sans-serif; font-size:42;">Welcome to Brainbulb!</h1>
                 </div>
                 <div>
-                    <h2 style="text-align: justify;  text-justify: inter-word; font-weight:600; opacity:70%; line-height: 1.3;">An e-learning platform empowering parents and teachers to enrich their children's knowledge and equip them with the skills to succeed in the future. <br/>BrainBulb is designed to provide a one-stop-shop for all your educational needs, including interactive lessons, and engaging activities.<br/> Join us, and you can give your child the gift of lifelong learning and help them discover their full potential.</h2>
+                    <h2 style="text-align: justify; font-size:22px; text-justify: inter-word; font-weight:600; opacity:70%; line-height: 1.3;">An e-learning platform empowering parents and teachers to enrich their children's knowledge and equip them with the skills to succeed in the future. <br/>BrainBulb is designed to provide a one-stop-shop for all your educational needs, including interactive lessons, and engaging activities.<br/> Join us, and you can give your child the gift of lifelong learning and help them discover their full potential.</h2>
                 </div>
                 <input type="button" value="Get started" id="start-btn">
             </div>

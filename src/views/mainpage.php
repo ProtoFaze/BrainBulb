@@ -84,7 +84,7 @@
     <div style="clear:both;"></div>
     <div class="maincontainter">
         <div class="col"> 
-            <div style="margin-left:40px; margin-top: 50px;">
+            <div style="margin-left:60px; margin-top: 50px;">
                 <div>
                     <h1 style="font-family: 'Raleway', sans-serif; font-size:42;">Welcome to Brainbulb!</h1>
                 </div>

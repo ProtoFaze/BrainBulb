@@ -29,15 +29,15 @@
 
         .topnav {
         overflow: hidden;
-        background-color: grey;
+        background-color: lightgrey;
         width: 100%;
         top: 0%;
-        box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
 
         .navigations{
         float: right;
-        color: #f2f2f2;
+        color: black;
         text-align: center;
         text-decoration: none;
         font-size: 17px;

@@ -9,11 +9,11 @@
     <script>
     $(document).ready(function() {
         $('.scroll-link').click(function(e) {
-        e.preventDefault();
-        var target = $(this).attr('href');
-        $('html, body').animate({
-            scrollTop: $(target).offset().top
-        }, 500);
+            e.preventDefault();
+            var target = $(this).attr('href');
+            $('html, body').animate({
+                scrollTop: $(target).offset().top
+            }, 500);
         });
     });
     </script>
@@ -83,9 +83,9 @@
             }else{
                 echo'
                 <a class="navigations scroll-link" href="manageAccount.php">Get Started</a>
-                <a class="navigations scroll-link" href="#useCaseScroll">use cases</a>
-                <a class="navigations scroll-link" href="#featuresScroll">features</a>
-                <a class="navigations scroll-link" href="#coursesScroll">courses</a>
+                <a class="navigations scroll-link" href="#useCaseScroll">Use cases</a>
+                <a class="navigations scroll-link" href="#featuresScroll">Features</a>
+                <a class="navigations scroll-link" href="#coursesScroll">Courses</a>
                 ';
             } ?>
         </div>

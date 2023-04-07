@@ -189,7 +189,7 @@
                 </div>
             </div>
         </div>
-        <div style="text-align: center; margin: 70px 0px;">
+        <div style="text-align: center; margin: 100px 0px;">
             <h1>Join Over 1 million primary students learning on BrainBulb</h1>
             <input type="button" value="Get started" id="start-btn" style="padding: 23px 30px; margin-top:30px;font-size:20px;">
         </div>

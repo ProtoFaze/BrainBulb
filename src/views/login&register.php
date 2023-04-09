@@ -260,13 +260,13 @@
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p class="normaltext">To keep connected with us please login with your personal info</p>
+                        <h1>Choose your role</h1>
+                        <p class="normaltext">Already sign up? Please login to BrainBulb</p>
                         <button class="ghost" id="signIn">Login</button>
                     </div>
                     <div class="overlay-panel overlay-right">
-                        <h1>Hello, User!</h1>
-                        <p class="normaltext">Enter your personal details and start journey with us</p>
+                        <h1>Welcome User!</h1>
+                        <p class="normaltext">Not sign up yet? Register now!</p>
                         <button class="ghost" id="signUp">Register</button>
                     </div>
                 </div>

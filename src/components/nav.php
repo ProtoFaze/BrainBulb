@@ -72,7 +72,7 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="#"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
+        <a href="mainpage.php"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="navcontainer">
             <?php if(isset($_SESSION['user_id'])){ 
                 echo'
@@ -83,7 +83,7 @@
                 ';
             }else{
                 echo'
-                <a class="navigations scroll-link" href="manageAccount.php">Get Started</a>
+                <a class="navigations scroll-link" href="login&register.php">Get Started</a>
                 <a class="navigations scroll-link" href="#useCaseScroll">Use cases</a>
                 <a class="navigations scroll-link" href="#featuresScroll">Features</a>
                 <a class="navigations scroll-link" href="#coursesScroll">Courses</a>

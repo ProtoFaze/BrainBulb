@@ -47,7 +47,7 @@
         border-radius: 4px;
         }
 
-        .container{
+        .navcontainer{
             float:right;
             padding: 10px 10px;
         }
@@ -73,7 +73,7 @@
 <body>
     <div class="topnav">
         <a href="#"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
-        <div class="container">
+        <div class="navcontainer">
             <?php if(isset($_SESSION['user_id'])){ 
                 echo'
                 <a class="navigations" href="logout.php">Logout</a>

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather+Sans:ital@0;1&family=Roboto+Mono:ital@0;1&display=swap%27');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,0');
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 :root{
     --barlength:55px;
     --border-radius:20px;
@@ -110,7 +110,8 @@ p,td,.heading_and_data{
 .response{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; /* horizontal alignment */
+    align-items: center; /* vertical alignment */
     width: auto;
 }
 

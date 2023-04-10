@@ -8,11 +8,11 @@
     <style>
         .main h1{
             text-align: center;
-            margin: 40px 0;
+            margin: 50px 0 10px 0;
         }
 
         .subjects{
-            background-color: #62c9c3;
+            /* background-color: #62c9c3; */
             display: flex;
             padding: 0 40px;
             text-align: center;
@@ -20,20 +20,21 @@
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            border-radius: 6px;
+            /* border-radius: 6px;
             border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
+            border-bottom-left-radius: 0; */
             max-width: 1100px;
         }
 
         .subject{
-            background-color: white;
+            background-color: #62D7C3;
             margin: 70px 40px 35px 40px;
             text-decoration: none;
             font-weight: bold;
             font-size: 20px;
             color:black;
             border-radius: 30px;
+            box-shadow: 0 17px #999;
         }
 
         .subject img{
@@ -46,7 +47,13 @@
         }
 
         .subject:active{
-            transform: scale(0.95);
+            background-color: #62D7C3;
+            box-shadow: 0 10px #666;
+            transform: translateY(7px);
+        }
+
+        .subject:hover{
+            background-color: #57AFAA;
         }
     </style>
 </head>
@@ -55,7 +62,7 @@
         include("../components/nav.php");
     ?>
     <div class="main">
-        <h1>Please Select 1 Subject To Study</h1>
+        <h1><i>Please Select </i><span style="color:#62C7C3;">One</span><i> Subject To Begin</i></h1>
         <div class="subjects">
             <a href="" class="subject">
                 <div>

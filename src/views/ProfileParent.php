@@ -16,15 +16,31 @@
         $parent_id = 'PT00000001';
         // $_SESSION['parent_id'];
         $profileRequest = "SELECT * FROM parent 
-        WHERE parent_ID = '$parent_id'";
+        inner join user on parent.parent_ID = user.parent_ID
+        WHERE parent.parent_ID = '$parent_id'";
         $parentRequest = mysqli_query($connection, $profileRequest);
         $parent = mysqli_fetch_assoc($parentRequest);
 
-
-
+        $childsql = "SELECT * FROM student WHERE parent_ID = '$parent_id'";
+        $childRequest = mysqli_query($connection, $childsql);
     ?>
     <style>
+        .content_box{
+            height:300px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0px 50px;
 
+        }
+        .row{
+            align-self: stretch;
+            height: 30%;
+        }
+        .elipse_container{
+            width: 100px;
+            height: 100px;
+
+        }
     </style>
 </head>
 <body>
@@ -39,29 +55,34 @@
             <a href="editParent.php"><button class="material-symbols-outlined flex_button">edit</button></a>
         </div>
         <!-- middle section containing user info, parent into -->
-        <div class="left_section">
-            <img class="elipse_container"src="" alt="parent picture">
-            <div class="info_ltr">Number of children <?= "none"?></div>
-            <div class="info_ltr">Name <?= $parent['pName']?></div>
-            <div class="info_ltr">Birthdate <?= $parent['pDOB']?></div>
-        </div>
-        <div class="right section">
-            <div class="info_ltr">Username <?= $parent['username']?></div>
-            <div class="info_ltr">Email <?= $parent['email']?></div>
-            <div class="info_ltr">IC Number <?= $parent['ic']?></div>
+        <div class="split_container">
+            <div class="split_section">
+                <img class="elipse_container"src="" alt="parent picture">
+                <div class="info_ltr">Number of children <!--<h2 stye = "display:inline;">--><?= mysqli_num_rows($childRequest)?><!--</h2>--></div>
+                <div class="info_ltr">Name <?= $parent['pName']?></div>
+                <div class="info_ltr">Birthdate <?= $parent['pDOB']?></div>
+            </div>
+            <div class="split_section">
+                <div class="info_ltr">Username <?= $parent['username']?></div>
+                <div class="info_ltr">Email <?= $parent['email']?></div>
+                <div class="info_ltr">IC Number <?= $parent['ic']?></div>
+            </div>
         </div>
         <!-- bottomSection containing children info -->
-        <div class="bottomSection">
-        <?php 
-            if(mysqli_num_rows($parentRequest) > 0)
-            while ($row = mysqli_fetch_assoc($parentRequest)) {
-                echo "<div class='childInfo'>";
-                echo "<div class='childName'>Child Name</div>";
-                echo "<div class='childName'>Child Name</div>";
-                echo "<div class='childName'>Child Name</div>";
-                echo "</div>";
-            }
-        ?>
+        <div class="content_box">
+        <?php if(mysqli_num_rows($childRequest) > 0)
+            while ($child = mysqli_fetch_assoc($childRequest)) {
+            echo <<<HTML
+                <div class="row">
+                    <div class="info_ltr">$child[student_ID]</div>
+                    <div class="info_ltr">$child[sName]</div>
+                    <div class="info_ltr">Grade : $child[sGrade]</div>
+                    <div class="info_ltr">Streak: $child[aFrequency]</div>
+                </div>
+            HTML;
+            }else{
+                echo "<h2> No children found </h2>";
+            }?>
         </div>
     </main>
 </body>

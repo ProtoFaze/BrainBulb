@@ -12,7 +12,6 @@
         }
 
         .subjects{
-            /* background-color: #62c9c3; */
             display: flex;
             padding: 0 40px;
             text-align: center;
@@ -24,7 +23,7 @@
         }
 
         .subject{
-            background-color: #62D7C3;
+            background-image: radial-gradient(#59BFAC, #62D7C3,#71F2D8);
             margin: 70px 40px 35px 40px;
             text-decoration: none;
             font-weight: bold;
@@ -36,6 +35,7 @@
 
         .subject img{
             width: 40%;
+            margin-top:15px;
         }
 
         .subject p{

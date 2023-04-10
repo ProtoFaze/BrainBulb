@@ -20,9 +20,6 @@
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            /* border-radius: 6px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0; */
             max-width: 1100px;
         }
 

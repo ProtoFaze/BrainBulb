@@ -29,7 +29,7 @@
 
         .topnav {
         overflow: hidden;
-        background-color: lightgrey;
+        background-image: linear-gradient(to right, lightgrey , #e2e2e2);
         width: 100%;
         top: 0%;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);

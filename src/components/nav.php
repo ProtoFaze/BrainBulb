@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BrainBulb</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
@@ -47,7 +47,7 @@
         border-radius: 4px;
         }
 
-        .container{
+        .navcontainer{
             float:right;
             padding: 10px 10px;
         }
@@ -72,8 +72,8 @@
 </head>
 <body>
     <div class="topnav">
-        <a href="#"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
-        <div class="container">
+        <a href="mainpage.php"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
+        <div class="navcontainer">
             <?php if(isset($_SESSION['user_id'])){ 
                 echo'
                 <a class="navigations" href="logout.php">Logout</a>
@@ -83,7 +83,7 @@
                 ';
             }else{
                 echo'
-                <a class="navigations scroll-link" href="manageAccount.php">Get Started</a>
+                <a class="navigations scroll-link" href="login&register.php">Get Started</a>
                 <a class="navigations scroll-link" href="#useCaseScroll">Use cases</a>
                 <a class="navigations scroll-link" href="#featuresScroll">Features</a>
                 <a class="navigations scroll-link" href="#coursesScroll">Courses</a>

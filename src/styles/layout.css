@@ -5,7 +5,7 @@
     --border-radius:20px;
     --gap:15px;
     --misc-green: rgb(14, 182, 143);
-    --bg: #ebeae6;
+    --bg: #D4FBF4;
     --box-primary: #d4d1c0;
     --box-secondary: #d5d0c9;
     --button: rgb(47, 47, 47);
@@ -17,6 +17,8 @@ body{
 main{
     margin: 0 auto;
     padding: 0px 60px;
+    height: max-content;
+
 }
 h1{
     font-family: 'Bebas Neue', cursive;
@@ -28,7 +30,7 @@ h2,h3,h4,h5,h6,a,input,th{
     font-weight: 100px;
     text-align: center;
 }
-p,td,.heading_and_data{
+p,td,.info_ttp{
     inline-size: 820px;
     font-family: 'Roboto Mono', monospace;
     font-weight: 100px;
@@ -42,8 +44,7 @@ p,td,.heading_and_data{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 30px;
-    gap: auto;
+    gap: var(--gap);
 }
 
 .split_section{
@@ -53,6 +54,7 @@ p,td,.heading_and_data{
     padding: 15px 30px;
     width: auto;
     justify-content: space-around;
+    
     gap: var(--gap);
     background-color: var(--box-primary);
     border-radius: 20px;
@@ -91,17 +93,8 @@ p,td,.heading_and_data{
     transform: scale(1.1);
 }
 
-.split_section h2 ,.right_section h2{
+.split_section h2{
     margin: 10px 0px;
-}
-@media screen and (max-width: 1200px){
-    .split_section,.right_section{
-        float: none;
-        position: relative;
-        left: 0;
-        width: 90%;
-        margin: 50px 0px;
-    }
 }
 /* horizontal flex container for action buttons */
 .response{
@@ -153,12 +146,32 @@ p,td,.heading_and_data{
     height: 155px;
 }
 
-.heading_and_data{
+/* for info display*/
+.info_ltr{
+    display:flex;
+    align-self: stretch;
+    justify-content: space-between;
+    align-items: center;
+}
+.info_ltr>h3{
+    margin: 0px;
+    padding: 0px;
+    width: 40%;
+    text-align: left;
+}
+.info_ltr>p{
+    margin: 0px;
+    padding: 0px;
+    width: 60%;
+    text-align: left;
+}
+/* top to bottom info display, use with br in between heading and data*/
+.info_ttp{
     /* default is for 2 items*/
     overflow: auto;
     height: 45%; 
 }
-    /* subclasses for heading_and_data */
+    /* subclasses for info_ttp */
     .one_item{
         height: 100%; 
     }
@@ -189,8 +202,13 @@ p,td,.heading_and_data{
         height: 100px;
         flex-direction: row;
     }
-    .heading_and_data{
+    .info_ttp{
         height: max-content;
     }
     
 }
+@media only screen and (max-width: 620px) {
+    .split_section,.response,.content_box {
+      width: 100%;
+    }
+  }

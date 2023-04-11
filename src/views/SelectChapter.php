@@ -14,9 +14,10 @@
 <body>
     <?php
         include("../components/nav.php");
+        include "../database/connect.php";
     ?>
     <div class="main">
-
+        
     </div>
 </body>
 </html>

@@ -57,6 +57,7 @@
 <body>
     <?php
         include("../components/nav.php");
+        include "../database/connect.php";
     ?>
     <div class="main">
         <h1><i>Please Select </i><span style="color:#62C7C3;">One</span><i> Subject To Begin</i></h1>

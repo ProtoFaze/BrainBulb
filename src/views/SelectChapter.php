@@ -52,7 +52,7 @@
             /* margin: 90px; */
             border: 10px solid white;
             transform: scale(1.10);
-            opacity: 0.65;
+            opacity: 0.60;
         }
 
         .chapter1.unlock:hover{
@@ -116,15 +116,23 @@
 </head>
 <body>
     <?php
+        $chaplist = array();
+        $studentID = "ST00000008";
         include("../components/nav.php");
         include "../database/connect.php";
+        $query = "SELECT course.chapter_Name FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.student_ID = '$studentID'";
+        $results = mysqli_query($connection,$query);
+        while ($row = mysqli_fetch_assoc($results)) {
+            array_push($chaplist,$row["chapter_Name"][8]);
+        }
+        
     ?>
     <div class="main">
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
-                <td><div class="chapter1 unlock">1</div></td>
+                <td><div <?php if (in_array("1",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>1</div></td>
                 <td></td>
-                <td><div class="chapter1">4</div></td>
+                <td><div <?php if (in_array("4",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>4</div></td>
                 <td>
                     <div class="rectangle2">
                         <div class="horizontalroad"></div>
@@ -134,7 +142,7 @@
                         <div class="horizontalroad"></div>
                     </div>
                 </td>
-                <td><div class="chapter1">5</div></td>
+                <td><div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div></td>
             </tr>
             <tr>
                 <td>
@@ -168,7 +176,7 @@
                 </td>
             </tr>
             <tr>
-                <td><div class="chapter1">2</div></td>
+                <td><div <?php if (in_array("2",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>2</div></td>
                 <td>
                     <div class="rectangle2">
                         <div class="horizontalroad"></div>
@@ -178,9 +186,9 @@
                         <div class="horizontalroad"></div>
                     </div>
                 </td>
-                <td><div class="chapter1">3</div></td>
+                <td><div <?php if (in_array("3",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>3</div></td>
                 <td></td>
-                <td><div class="chapter1">6</div></td>
+                <td><div <?php if (in_array("6",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>6</div></td>
             </tr>
         </table>
     </div>

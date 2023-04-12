@@ -23,7 +23,7 @@
         }
 
         .subject{
-            background-image: radial-gradient(#59BFAC, #62D7C3,#71F2D8);
+            background-image: radial-gradient(#6dd5ed, #84b9bf, #78a4bf);
             margin: 70px 40px 35px 40px;
             text-decoration: none;
             font-weight: bold;

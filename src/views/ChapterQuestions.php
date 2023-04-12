@@ -1,0 +1,881 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://code.jquery.com/jquery-git.js"></script> -->
+</head>
+<style>
+    *{
+        margin: 0;
+    }
+
+    .maincontainer{
+        /* padding-bottom: 0.03px; */
+        /* height: 650px; */
+        /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+        /* margin: auto 100px; */
+        /* background-color: lightgrey; */
+    }
+
+    .progressbar{
+        width: 100%
+        /* max-width: 400px; */
+    }
+
+    .steps{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .steps .circle{
+        display: flex;
+        height: 30px;
+        width: 30px;
+        color: grey;
+        font-size: 24px;
+        font-weight: 500;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 4px solid grey;
+        background-color: white;
+        transition: all 200ms ease;
+        transition-delay: 200ms;
+    }
+
+    .steps .circle.active{
+        transition-delay: 100ms;
+        border-color: #4070f4;
+        color:#4070f4;
+    }
+
+    /* .steps .circle.correct{
+        transition-delay: 100ms;
+        border-color: #58cc02;
+        color:#58cc02;
+    } */
+
+    .steps .progress{
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background-color: #e0e0e0;
+        z-index: -1;
+    }
+
+    .indicator{
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background-color: #4070f4;
+        transition: all 300ms ease;
+    }
+
+    .options{
+        display: flex;
+        font-size: 25px;
+        font-weight: bold;
+        margin: 20px auto;
+        /* background-color: gray; */
+    }
+
+    .options .box{
+        /* margin: 20px 20px; */
+        border-radius: 7px;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 50px 50px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        /* text-align: center; */
+        margin: 45px 20px;
+        border: 0;
+        font-size: 25px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .boxes{
+        border-radius: 7px;
+        background-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        border: 0;
+        cursor: pointer;
+        padding: 10px 50px;
+        margin: 6px 50px;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .title{
+        margin: 20px auto;
+    }
+
+    .box.selected, .boxes.selected{
+        background-color: #DDF4FF;
+        border: 2px solid lightskyblue;
+    }
+
+    .buttons{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 50px 100px;
+        background-color: #fff;
+        box-shadow: 0px -2px 7px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .button-bg-animation-wrong{
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-name: WrongcolorChange;
+        animation-fill-mode: forwards;
+    }
+
+    .button-bg-animation-correct{
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-name: CorrectcolorChange;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes WrongcolorChange {
+        from { background-color: white; }
+        to { background-color: #FFDFE0; }
+    }
+
+    @keyframes CorrectcolorChange {
+        from { background-color: white; }
+        to { background-color: #d7ffb8; }
+    }
+
+    .buttons .conbtn{
+        float: right;
+        border-radius: 7px;
+        background-color: lightgrey;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 10px 40px;
+        border: none;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .buttons .extbtn{
+        float: left;
+        border-radius: 7px;
+        background-color: #FF4B4B;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 10px 40px;
+        border: none;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .container{
+        width: 100%;
+        height: 370px;
+        overflow: hidden;
+    }
+
+    .pages{
+        display: flex;
+        width: 500%;
+        box-sizing: border-box;
+    }
+
+    .page{
+        width: 100%;
+        height: 330px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        transition: all 0.6s;
+    }
+
+    .drag-options{
+        display: flex;
+        font-size: 25px;
+        font-weight: bold;
+        margin: 10px auto;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .drag-options .choice{
+        border-radius: 7px;
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 10px 20px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        /* text-align: center; */
+        margin: 10px 10px;
+        border: 0;
+        font-size: 25px;
+        font-weight: bold;
+        cursor: move;
+    }
+    .drag-area{
+        /* margin: 10px auto; */
+    }
+
+    .drag-area .answer-box{
+        background-color: #ddd;
+        border: 1px solid #999;
+        border-radius: 5px;
+        height: 25px;
+        font-size: 23px;
+        padding: 7px;
+        text-align: center;
+        width: auto;
+        font-weight: bold;
+        min-width: 120px;
+        -webkit-user-select: none;
+    }
+
+    h3{
+        font-size: 23px;
+    }
+
+    .correctpopup,.wrongpopup{
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 200px;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.4);
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+    }
+
+    .correctpopup .cpopup-inner, .wrongpopup .wpopup-inner{
+        background-color: #ececec;
+        margin: auto;
+        padding: 40px;
+        width: 25%;
+        text-align: center;
+        border-radius: 6px;
+        font-size: 20px;
+    }
+
+    .correctpopup .cpopup-inner{
+        color: #58cc02;
+    }
+
+    .wrongpopup .wpopup-inner{
+        color: #FF4B4B;
+    }
+
+    svg {
+        width: 100px;
+        margin: 40px auto;
+    }
+
+    .path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 0;
+    }
+
+    .path.check {
+        stroke-dashoffset: -100;
+        -webkit-animation: dash-check .9s .35s ease-in-out forwards;
+        animation: dash-check .9s .35s ease-in-out forwards;
+    }
+
+    .path.line {
+        stroke-dashoffset: 1000;
+        -webkit-animation: dash .9s .35s ease-in-out forwards;
+        animation: dash .9s .35s ease-in-out forwards;
+    }
+
+    .path.circle {
+        -webkit-animation: dash .9s ease-in-out;
+        animation: dash .9s ease-in-out;
+    }
+
+    @-webkit-keyframes dash {
+        0% {
+            stroke-dashoffset: 1000;
+        }
+        100% {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @keyframes dash {
+        0% {
+            stroke-dashoffset: 1000;
+        }
+        100% {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    @-webkit-keyframes dash-check {
+        0% {
+            stroke-dashoffset: -100;
+        }
+        100% {
+            stroke-dashoffset: 900;
+        }
+    }
+
+    @keyframes dash-check {
+        0% {
+            stroke-dashoffset: -100;
+        }
+        100% {
+            stroke-dashoffset: 900;
+        }
+    }
+
+</style>
+<script>
+    var mcqanswer = [];
+    var questionmode = [];
+    var connectlineanswer = [];
+</script>
+<body>
+    <?php
+        include "../database/connect.php";
+        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.subject_ID = 'SJ00000002' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
+        $results = mysqli_query($connection,$query);
+        $count = mysqli_num_rows($results);
+    ?>
+    <div class="maincontainer">    
+        <div class="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
+            <div class="progressbar">
+                <div class="steps">
+                    <span class="circle active">1</span>
+                    <?php
+                        for($i = 2; $i <= $count;$i++){
+                            echo "<span class='circle'>".$i."</span>";
+                        }
+                    ?>
+                    <div class="progress">
+                        <span class="indicator"></span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="container">
+            <div class="correctpopup" id="cpopup">
+                <div class="cpopup-inner">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                        <circle class="path circle" fill="none" stroke="#58cc02" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                        <polyline class="path check" fill="none" stroke="#58cc02" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                    </svg>
+                    <h2>You are Correct!</h2>
+                </div>
+            </div>
+            <div class="wrongpopup" id="wpopup">
+                <div class="wpopup-inner">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                        <circle class="path circle" fill="none" stroke="#FF4B4B" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                        <line class="path line" fill="none" stroke="#FF4B4B" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
+                        <line class="path line" fill="none" stroke="#FF4B4B" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
+                    </svg>
+                    <h2>You got Wrong!</h2>
+                </div>
+            </div>
+            <?php $c = $count * 100;?>
+            <div class="pages" <?php echo'style="width:'.$c.'%;"'; ?>>
+                <?php
+                    while ($row = mysqli_fetch_assoc($results)) {
+                        ?>
+                        <script>
+                            questionmode.push("<?php echo $row['question_Gamemode'];?>");
+                        </script>
+                        <?php
+                        if ($row['question_Gamemode'] == "MCQ"){
+                            $arrayss = array();
+                            for ($j = 1; $j <= 10; $j++){
+                                if ($row['coption'.$j] != null){
+                                    array_push($arrayss,$row['coption'.$j]);
+                                }         
+                            }
+                            ?>
+                            <script>
+                                mcqanswer.push("<?php echo $arrayss[0]; ?>");
+                            </script>
+                            <?php
+                            for ($j = 1; $j <= 5; $j++){
+                                if ($row['option'.$j] != null){
+                                    array_push($arrayss,$row['option'.$j]);
+                                }         
+                            }
+                            shuffle($arrayss);
+                            echo "<div class='page'>";
+                            echo "<div class='title'>";
+                            echo "<h1>".$row['question']."</h1>";
+                            echo "</div>";
+                            echo "<div class='options'>";
+                            for ($u = 0; $u < count($arrayss); $u++){
+                                echo "<div class='box'>".$arrayss[$u]."</div>";
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        elseif($row['question_Gamemode'] == "ConnectLine"){
+                            ?>
+                            <script>
+                                mcqanswer.push("-");
+                            </script>
+                            <?php
+                            $arrayss = array();
+                            $arrayss2 = array();
+                            for ($j = 1; $j <= 10; $j++){
+                                if ($row['coption'.$j] != null){
+                                    array_push($arrayss,$row['coption'.$j]);
+                                }         
+                            }
+                            for ($j = 1; $j <= 5; $j++){
+                                if ($row['option'.$j] != null){
+                                    array_push($arrayss2,$row['option'.$j]);
+                                }
+                            }
+                            echo "<script>";
+                            echo "var myArray1 = '" . implode(",", $arrayss) . "'.split(',');";
+                            echo "var myArray2 = '" . implode(",", $arrayss2) . "'.split(',');";
+                            echo "</script>";
+                            shuffle($arrayss);
+                            shuffle($arrayss2);
+                            echo "<div class='page'>";
+                            echo "<div class='title'>";
+                            echo "<h1>".$row['question']."</h1>";
+                            echo "</div>";
+                            echo "<div class='connectopt'>";
+                            echo "<table>";
+                            for ($u = 0; $u < count($arrayss); $u++){
+                                echo "<tr>";
+                                echo "<td><div class='boxes'>".$arrayss[$u]."</div></td>";
+                                echo "<td><div class='boxes'>".$arrayss2[$u]."</div></td>";
+                                echo "</tr>";
+                            }
+                            echo "</table>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                    }
+                ?>
+                <!---
+                <div class="page">
+                    <div class="title">
+                        <h1>Apakah imbuhan belakang perkataan "Perkataan" ini?</h1>
+                    </div>
+                    <div class="options">
+                        <div class="box">Per</div>
+                        <div class="box">Kata</div>
+                        <div class="box">An</div>
+                        <div class="box">Taan</div>
+                    </div>
+                </div> -->
+                <!-- <div class="page">
+                    <div class="title">
+                        <h1>Fill match the correct statement</h1>
+                    </div>
+                    <div class="drag-area">
+                        <table cellpadding=5px>
+                            <tr>
+                                <td>
+                                    <h3>Do you know that</h3>
+                                </td>
+                                <td><div class="answer-box" id="box1"></td>
+                                <td>
+                                    <h3>is Hari Raya celebration?</h3>
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding=5px>
+                            <tr>
+                                <td>
+                                    <h3>Do you know that 213</h3>
+                                </td>
+                                <td><div class="answer-box" id="box4"></td>
+                                <td>
+                                    <h3>is Hari Raya celebration?</h3>
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding=5px>
+                            <tr>
+                                <td>
+                                    <h3>Do </h3>
+                                </td>
+                                <td><div class="answer-box" id="box3"></td>
+                                <td>
+                                    <h3>is Hari Raya celebration on that particular date?</h3>
+                                </td>
+                            </tr>
+                        </table>
+                        <table cellpadding=5px>
+                            <tr>
+                                <td>
+                                    <h3>Do </h3>
+                                </td>
+                                <td><div class="answer-box" id="box2"></td>
+                                <td>
+                                    <h3>is Hari Raya celebration on that particular date?</h3>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="drag-options">
+                        <button class="choice" id="reset-button" style="background-color:grey; color:white; font-size:19px; cursor:pointer;" draggable="false">Reset</button>
+                        <div class="choice" id="drag-item-1" draggable="true">Agust</div>
+                        <div class="choice" id="drag-item-2" draggable="true">July</div>
+                        <div class="choice" id="drag-item-3" draggable="true">Wai Kin</div>
+                        <div class="choice" id="drag-item-4" draggable="true">Damon Ng</div>
+                    </div>
+                </div>---> 
+                <!-- <div class="page">
+                    <div class="title">
+                        <h1>Apakah imbuhan belakang perkataan "Perkataan" ini?</h1>
+                    </div>
+                    <div class="connectopt">
+                        <table>
+                            <tr>
+                                <td><div class="boxes">Per</div></td>
+                                <td><div class="boxes">An1</div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="boxes">Kata</div></td>
+                                <td><div class="boxes">An2</div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="boxes">An3</div></td>
+                                <td><div class="boxes">An3</div></td>
+                            </tr>
+                            <tr>
+                                <td><div class="boxes">Taan</div></td>
+                                <td><div class="boxes">An5</div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="buttons" id="Buttonbg">
+            <input type="button" value="Exit" class="extbtn">
+            <input type="button" value="Continue" class="conbtn" onclick="checkanswer();" disabled>
+        </div>
+    </div>
+
+</body>
+<script>
+    function pairsExist(a, b) {
+        for (let i = 0; i < b.length; i++) {
+            const pair = b[i];
+            let pairFound = false;
+
+            for (let j = 0; j < a.length; j++) {
+
+                if ((a[j][0] === pair[0] && a[j][1] === pair[1]) ||
+                    (a[j][0] === pair[1] && a[j][1] === pair[0])) {
+                    pairFound = true;
+                    break;
+                }
+            }
+
+            if (!pairFound) {
+            return false;
+            }
+        }
+        return true;
+    }
+
+
+    console.log(questionmode);
+    console.log(mcqanswer);
+    console.log(connectlineanswer);
+    var mcqselect = "";
+    for (let i = 0; i < myArray1.length; i++){
+        connectlineanswer.push([myArray1[i],myArray2[i]]);
+    }
+    var indexans = 0;
+    const pages = document.querySelectorAll(".page");
+    const prog = document.querySelector(".indicator");
+    const circles = document.querySelectorAll('.circle');
+    const translateAmount = 100;
+    let translate = 0;
+    let progresslvl = 0;
+    let currentstep = 1;
+
+    const boxesbtn = document.querySelectorAll('.box');
+    const nextbtn = document.querySelector('.conbtn');
+    const buttonbg = document.getElementById('Buttonbg');
+    const boxesbtns = document.querySelectorAll('.boxes');
+    let alldragdrop = false;
+
+    let selectedPairs = [];
+
+    var correctpopup = document.getElementById("cpopup");
+    var wrongpopup = document.getElementById("wpopup");
+
+    function checkanswer(){
+        if(questionmode[indexans] == "MCQ"){
+            if (mcqselect == mcqanswer[indexans]){
+                console.log("correct");
+                buttonbg.classList.add('button-bg-animation-correct');
+                correctpopup.style.display = "block";
+                correctpopup.style.opacity = 1;
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-correct');
+                    slide('next');
+                    correctpopup.style.opacity = 0;
+                    setTimeout(function() {
+                        correctpopup.style.display = "none";
+                    }, 300);
+                }, 2300);
+                mcqselect = "";
+            }
+            else{
+                console.log("incorrect")
+                buttonbg.classList.add('button-bg-animation-wrong');
+                wrongpopup.style.display = "block";
+                wrongpopup.style.opacity = 1;
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-wrong');
+                    slide('next');
+                    wrongpopup.style.opacity = 0;
+                    setTimeout(function() {
+                        wrongpopup.style.display = "none";
+                    }, 300);
+                }, 2300);
+                mcqselect = "";
+            }
+
+            nextbtn.disabled = true;
+        }
+        else if(questionmode[indexans] == "FillInTheBlank"){
+            if (alldragdrop == true){
+                const ans1 = document.getElementById('box1');
+                const ans2 = document.getElementById('box2');
+                const ans3 = document.getElementById('box3');
+                const ans4 = document.getElementById('box4');
+                if (ans1.innerHTML == "Wai Kin" && ans2.innerHTML == "Damon Ng" && ans3.innerHTML == "July" && ans4.innerHTML == "Agust"){
+                    console.log("sucessfully correct")
+                    buttonbg.classList.add('button-bg-animation-correct');
+                    setTimeout(function() {
+                        buttonbg.classList.remove('button-bg-animation-correct');
+                        slide('next');
+                        
+                    }, 2300);
+                }
+                else{
+                    console.log("wrong")
+                    buttonbg.classList.add('button-bg-animation-wrong');
+                    setTimeout(function() {
+                        buttonbg.classList.remove('button-bg-animation-wrong');
+                        slide('next');
+                    }, 2300);
+                }
+
+                nextbtn.disabled = true;
+            }
+        }else if(questionmode[indexans] == "ConnectLine"){
+            if(pairsExist(selectedPairs,connectlineanswer)){
+                console.log("sucessfully correct")
+                buttonbg.classList.add('button-bg-animation-correct');
+                correctpopup.style.display = "block";
+                correctpopup.style.opacity = 1;
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-correct');
+                    slide('next');
+                    correctpopup.style.opacity = 0;
+                    setTimeout(function() {
+                        correctpopup.style.display = "none";
+                    }, 300);
+                }, 2300);   
+            }
+            else{
+                console.log("wrong")
+                buttonbg.classList.add('button-bg-animation-wrong');
+                wrongpopup.style.display = "block";
+                wrongpopup.style.opacity = 1;
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-wrong');
+                    slide('next');
+                    setTimeout(function() {
+                        wrongpopup.style.display = "none";
+                    }, 300);
+                }, 2300);
+            }
+            nextbtn.disabled = true;
+        }
+        
+    }
+
+    function slide(direction){
+        indexans += 1
+        if(indexans === <?php echo $count;?>){
+            location.href='mainpage.php';
+            console.log("end");
+        }
+        else{
+            if (direction === "next"){
+                translate -= translateAmount;
+                currentstep += 1;
+                progresslvl += 100/<?php echo $count-1;?>;
+            }
+            else{
+                translate += translateAmount;
+            }
+
+            for (let i = 0; i < pages.length; i++) {
+                pages[i].style.transform = `translateX(${translate}%)`;
+            }
+
+            prog.style.width = `${progresslvl}%`
+
+            circles.forEach((circle,index) =>{
+                circle.classList[`${index < currentstep ? "add" : "remove"}`]("active");
+            })
+            nextbtn.style.backgroundColor = "lightgrey";
+            
+            boxesbtns.forEach(each => {
+                each.classList.remove('selected');
+            })
+        }
+    }
+
+    boxesbtn.forEach(eachbtn => {
+        eachbtn.addEventListener('click',() => {
+            boxesbtn.forEach(each => {
+                each.classList.remove('selected');
+            })
+            eachbtn.classList.add('selected');
+            nextbtn.style.backgroundColor = "#58cc02";
+            nextbtn.disabled = false;
+            if (eachbtn.classList.contains("selected")){
+                mcqselect = eachbtn.innerHTML;
+            }
+        })
+    })
+
+    let firstoption = null;
+    var pair = [];
+    boxesbtns.forEach(option =>{
+        option.addEventListener('click',() =>{
+            if(!option.classList.contains('selected')){
+                if (firstoption === null){
+                    firstoption = option;
+                    option.classList.add('selected');
+                    pair.push(option.innerHTML);
+                }
+                else{
+                    option.classList.add('selected');
+                    pair.push(option.innerHTML);
+                    firstoption = null;
+                }
+                
+                if(pair.length == 2){
+                    selectedPairs.push(pair);
+                    pair = [];
+                    // console.log(selectedPairs);
+                }
+                // console.log(pair);
+                if(selectedPairs.length == document.querySelectorAll('.boxes').length/2){
+                    nextbtn.disabled = false;
+                    nextbtn.style.backgroundColor = "#58cc02";
+
+                }
+            }
+        })
+    })
+
+    /////////////////////////////////
+    const choices = document.querySelectorAll('.choice');
+    const answerBoxes = document.querySelectorAll('.answer-box');
+    const resetButton = document.querySelector('#reset-button');
+    let selectedChoice = null;
+    let selectedBox = null;
+
+    function handleDragStart(event) {
+        selectedChoice = event.target;
+        event.dataTransfer.setData('text/plain', event.target.textContent);
+        event.target.classList.add('dragging');
+    }
+
+    function handleDragEnd(event) {
+        selectedChoice.classList.remove('dragging');
+    }
+
+    function handleDragEnter(event) {
+        event.preventDefault();
+        event.target.classList.add('over');
+    }
+
+    function handleDragLeave(event) {
+        event.target.classList.remove('over');
+    }
+
+    function handleDragOver(event) {
+        event.preventDefault();
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        selectedBox = event.target;
+        selectedBox.textContent = event.dataTransfer.getData('text');
+        selectedChoice.classList.add('dropped');
+        selectedBox.classList.remove('over');
+        if (testing()){
+            nextbtn.style.backgroundColor = "#58cc02";
+            alldragdrop =true;
+        }
+    }
+
+    function handleReset() {
+        selectedChoice = null;
+        selectedBox = null;
+        choices.forEach((choice) => {
+            choice.classList.remove('dropped');
+        });
+        answerBoxes.forEach((box) => {
+            box.textContent = '';
+        });
+        nextbtn.style.backgroundColor = "lightgrey";
+        alldragdrop = false;
+    }
+
+    choices.forEach((choice) => {
+        choice.addEventListener('dragstart', handleDragStart);
+        choice.addEventListener('dragend', handleDragEnd);
+    });
+
+    answerBoxes.forEach((box) => {
+        box.addEventListener('dragenter', handleDragEnter);
+        box.addEventListener('dragleave', handleDragLeave);
+        box.addEventListener('dragover', handleDragOver);
+        box.addEventListener('drop', handleDrop);
+    });
+
+    resetButton.addEventListener('click', handleReset);
+    
+    function testing() {
+        let hasEmptyText = false;
+        answerBoxes.forEach(element => {
+            const text = element.textContent.trim();
+            if (text === '') {
+                hasEmptyText = true;
+            }
+        });
+        return !hasEmptyText;
+    }
+
+</script>
+</html>

@@ -121,7 +121,7 @@
         </div>
         <div class="form-group">
             <button><a href="#" class="btn btn-secondary btn" style="text-decoration:none; color:#fff;">Cancel</a></button>
-            <button class="btn btn-primary btn" id="submit-btn" disabled >Submit</button>
+            <button class="btn btn-primary btn" id="submit-btn" disabled>Post</button>
         </div>
         </form>
     </div>

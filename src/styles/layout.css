@@ -96,6 +96,17 @@ p,td,.info_ttp{
 .split_section h2{
     margin: 10px 0px;
 }
+/*containers that fit inside split sections that occupy a quarter of split container*/
+.split_subsection{
+    background-color: var(--box-primary);
+    display: inherit;
+    flex-direction: column;
+    align-self: stretch;
+    border-radius: inherit;
+    padding: 15px 30px;
+    gap: inherit;
+    justify-content: space-between;
+}
 /* horizontal flex container for action buttons */
 .response{
     display: flex;

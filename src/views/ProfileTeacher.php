@@ -64,14 +64,6 @@
         .split_section{
             flex-grow: 1;
         }
-        .user_info,.qualifications{
-            display: inherit;
-            flex-direction: column;
-            align-self: stretch;
-            border-radius: inherit;
-            padding: 15px 30px;
-            gap: inherit;
-        }
         .heading_and_data>p{
             border-bottom: 3px solid black;
             border-left: 1px solid black;
@@ -99,18 +91,18 @@
         <div class="split_container">
             <div class="split_section">
                 <img class="elipse_container"src="<?=$teacher['profile_Picture']?>" alt="teacher picture">
-                <div class="info_ltr"><h3>Name</h3><div class="divider">:</div><p><?=$teacher['tName']?></p></div>
-                <div class="info_ltr"><h3>Birthdate</h3><div class="divider">:</div><p><?= $teacher['tDOB']?></p></div>
-                <div class="info_ltr"><h3>School</h3><div class="divider">:</div><p><?= $teacher['tSchool']?></p></div>
-                <div class="info_ltr"><h3>Region</h3><div class="divider">:</div><p><?= $teacher['tRegion']?></p></div>
+                <div class="info_ltr"><h3>Name</h3><div class="divider"></div><p><?=$teacher['tName']?></p></div>
+                <div class="info_ltr"><h3>Birthdate</h3><div class="divider"></div><p><?= $teacher['tDOB']?></p></div>
+                <div class="info_ltr"><h3>School</h3><div class="divider"></div><p><?= $teacher['tSchool']?></p></div>
+                <div class="info_ltr"><h3>Region</h3><div class="divider"></div><p><?= $teacher['tRegion']?></p></div>
             </div>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
-                <div class="user_info" style="background-color: var(--box-primary);">
-                    <div class="info_ltr"><h3>Username</h3> <div class="divider">:</div><p><?= $teacher['username']?></p></div>
-                    <div class="info_ltr"><h3>Email</h3> <div class="divider">:</div><p><?= $teacher['email']?></p></div>
-                    <div class="info_ltr"><h3>IC Number</h3> <div class="divider">:</div><p><?= $teacher['ic']?></p></div>
+                <div class="split_subsection">
+                    <div class="info_ltr"><h3>Username</h3> <div class="divider"></div><p><?= $teacher['username']?></p></div>
+                    <div class="info_ltr"><h3>Email</h3> <div class="divider"></div><p><?= $teacher['email']?></p></div>
+                    <div class="info_ltr"><h3>IC Number</h3> <div class="divider"></div><p><?= $teacher['ic']?></p></div>
                 </div>
-                <div class="qualifications" style="background-color: var(--box-primary);">
+                <div class="split_subsection">
                     <div class="heading_and_data"><h3>Qualifications</h3><br/><p><?=$teacher['highest_Qualification']?></p></div>
                     <div class="heading_and_data"><h3>Certification</h3><br/><p><?=$teacher['professionality_Description']?></p></div>
                 </div>

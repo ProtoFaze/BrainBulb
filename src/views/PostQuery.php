@@ -7,6 +7,10 @@
     <title>Post Query</title>
     <link rel="stylesheet" href="../styles/design.css">
     <style>
+    body{
+            background-color:#f2f5f7 ;
+    }
+
     .form, .subTitle {
     max-width: 1300px;
     margin: auto;
@@ -88,7 +92,7 @@
     }
 
     #submit-btn.enabled {
-        background-color: #28812a;
+        background-color: #3a4b61;
         cursor: pointer;
     }
 

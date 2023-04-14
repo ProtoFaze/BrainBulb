@@ -1,10 +1,13 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <script src="https://code.jquery.com/jquery-git.js"></script> -->
+    <title>BrainBulb</title>
+    <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
     *{
@@ -255,7 +258,7 @@
         top:0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0,0,0,0.3);
         opacity: 0;
         transition: opacity 0.6s ease-in-out;
     }
@@ -268,6 +271,7 @@
         text-align: center;
         border-radius: 6px;
         font-size: 20px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     }
 
     .correctpopup .cpopup-inner{
@@ -290,19 +294,19 @@
 
     .path.check {
         stroke-dashoffset: -100;
-        -webkit-animation: dash-check .9s .35s ease-in-out forwards;
-        animation: dash-check .9s .35s ease-in-out forwards;
+        -webkit-animation: dash-check 1.20s 0.75s ease-in-out forwards;
+        animation: dash-check 1.20s 0.75s ease-in-out forwards;
     }
 
     .path.line {
         stroke-dashoffset: 1000;
-        -webkit-animation: dash .9s .35s ease-in-out forwards;
-        animation: dash .9s .35s ease-in-out forwards;
+        -webkit-animation: dash 1.20s 0.75s ease-in-out forwards;
+        animation: dash 1.20s 0.75s ease-in-out forwards;
     }
 
     .path.circle {
-        -webkit-animation: dash .9s ease-in-out;
-        animation: dash .9s ease-in-out;
+        -webkit-animation: dash 1.20s ease-in-out;
+        animation: dash 1.20s ease-in-out;
     }
 
     @-webkit-keyframes dash {
@@ -346,16 +350,22 @@
     var mcqanswer = [];
     var questionmode = [];
     var connectlineanswer = [];
+    var fillinblankans = [];
 </script>
 <body>
     <?php
         include "../database/connect.php";
-        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.subject_ID = 'SJ00000002' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
+        $courseID = "CR00000003";
+        $_SESSION['course'] = $courseID;
+        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
+        $qid = array();
+        // $arra = array();
+        $ind = 0;
     ?>
     <div class="maincontainer">    
-        <div class="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
+        <div id="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
             <div class="progressbar">
                 <div class="steps">
                     <span class="circle active">1</span>
@@ -395,6 +405,7 @@
             <div class="pages" <?php echo'style="width:'.$c.'%;"'; ?>>
                 <?php
                     while ($row = mysqli_fetch_assoc($results)) {
+                        array_push($qid,$row['question_ID']);
                         ?>
                         <script>
                             questionmode.push("<?php echo $row['question_Gamemode'];?>");
@@ -410,6 +421,8 @@
                             ?>
                             <script>
                                 mcqanswer.push("<?php echo $arrayss[0]; ?>");
+                                connectlineanswer.push("-");
+                                fillinblankans.push("-");
                             </script>
                             <?php
                             for ($j = 1; $j <= 5; $j++){
@@ -433,6 +446,7 @@
                             ?>
                             <script>
                                 mcqanswer.push("-");
+                                fillinblankans.push("-")
                             </script>
                             <?php
                             $arrayss = array();
@@ -451,6 +465,15 @@
                             echo "var myArray1 = '" . implode(",", $arrayss) . "'.split(',');";
                             echo "var myArray2 = '" . implode(",", $arrayss2) . "'.split(',');";
                             echo "</script>";
+                            ?>
+                            <script>
+                                temp = [];
+                                for (let i = 0; i < myArray1.length; i++){
+                                    temp.push([myArray1[i],myArray2[i]]);
+                                }
+                                connectlineanswer.push(temp);
+                            </script>
+                            <?php
                             shuffle($arrayss);
                             shuffle($arrayss2);
                             echo "<div class='page'>";
@@ -469,111 +492,72 @@
                             echo "</div>";
                             echo "</div>";
                         }
+                        elseif($row['question_Gamemode'] == "FillInTheBlanks"){
+                            ?>
+                            <script>
+                                mcqanswer.push("-");
+                                connectlineanswer.push("-");
+                            </script>
+                            <?php
+                            $questitle = explode(",",$row['question']);
+                            $a = array();
+                            foreach($questitle as $data){
+                                array_push($a,explode("_",$data));
+                            }
+                            $arrayss2 = array();
+                            for ($j = 1; $j <= 10; $j++){
+                                if ($row['coption'.$j] != null){
+                                    array_push($arrayss2,$row['coption'.$j]);
+                                }         
+                            }
+                            echo "<script>";
+                            echo "var fitbans = '" . implode(",", $arrayss2) . "'.split(',');";
+                            echo "fillinblankans.push(fitbans);";
+                            echo "</script>";
+                            for ($j = 1; $j <= 5; $j++){
+                                if ($row['option'.$j] != null){
+                                    array_push($arrayss2,$row['option'.$j]);
+                                }
+                            }
+                            shuffle($arrayss2);
+                            echo "<div class='page'>";
+                            echo "<div class='title'>"; 
+                            echo "<h1>Match the Following</h1>";
+                            echo "</div>";
+                            echo "<div class='drag-area'>";
+                            $counts = 0;
+                            foreach($a as $v){
+                                $counts += 1;
+                                echo "<table cellpadding=5px>";
+                                echo "<tr>";
+                                echo "<td>";
+                                echo "<h3>". $v[0]."</h3>";
+                                echo "</td>";
+                                echo "<td><div class='answer-box' id='box".$counts."'></td>";
+                                echo "<td>";
+                                echo "<h3>". $v[1]."</h3>";
+                                echo "</td>";
+                                echo "</tr>";
+                                echo "</table>";
+                            }
+                            echo "</div>"; 
+                            echo "<div class='drag-options'>";
+                            echo "<button class='choice' id='reset-button' style='background-color:grey; color:white; font-size:19px; cursor:pointer;' draggable='false'>Reset</button>";
+                            foreach($arrayss2 as $data){
+                                echo "<div class='choice' draggable='true'>".$data."</div>";
+                            }
+                            echo "</div>";
+                            echo "</div>";
+                        }
                     }
                 ?>
-                <!---
-                <div class="page">
-                    <div class="title">
-                        <h1>Apakah imbuhan belakang perkataan "Perkataan" ini?</h1>
-                    </div>
-                    <div class="options">
-                        <div class="box">Per</div>
-                        <div class="box">Kata</div>
-                        <div class="box">An</div>
-                        <div class="box">Taan</div>
-                    </div>
-                </div> -->
-                <!-- <div class="page">
-                    <div class="title">
-                        <h1>Fill match the correct statement</h1>
-                    </div>
-                    <div class="drag-area">
-                        <table cellpadding=5px>
-                            <tr>
-                                <td>
-                                    <h3>Do you know that</h3>
-                                </td>
-                                <td><div class="answer-box" id="box1"></td>
-                                <td>
-                                    <h3>is Hari Raya celebration?</h3>
-                                </td>
-                            </tr>
-                        </table>
-                        <table cellpadding=5px>
-                            <tr>
-                                <td>
-                                    <h3>Do you know that 213</h3>
-                                </td>
-                                <td><div class="answer-box" id="box4"></td>
-                                <td>
-                                    <h3>is Hari Raya celebration?</h3>
-                                </td>
-                            </tr>
-                        </table>
-                        <table cellpadding=5px>
-                            <tr>
-                                <td>
-                                    <h3>Do </h3>
-                                </td>
-                                <td><div class="answer-box" id="box3"></td>
-                                <td>
-                                    <h3>is Hari Raya celebration on that particular date?</h3>
-                                </td>
-                            </tr>
-                        </table>
-                        <table cellpadding=5px>
-                            <tr>
-                                <td>
-                                    <h3>Do </h3>
-                                </td>
-                                <td><div class="answer-box" id="box2"></td>
-                                <td>
-                                    <h3>is Hari Raya celebration on that particular date?</h3>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="drag-options">
-                        <button class="choice" id="reset-button" style="background-color:grey; color:white; font-size:19px; cursor:pointer;" draggable="false">Reset</button>
-                        <div class="choice" id="drag-item-1" draggable="true">Agust</div>
-                        <div class="choice" id="drag-item-2" draggable="true">July</div>
-                        <div class="choice" id="drag-item-3" draggable="true">Wai Kin</div>
-                        <div class="choice" id="drag-item-4" draggable="true">Damon Ng</div>
-                    </div>
-                </div>---> 
-                <!-- <div class="page">
-                    <div class="title">
-                        <h1>Apakah imbuhan belakang perkataan "Perkataan" ini?</h1>
-                    </div>
-                    <div class="connectopt">
-                        <table>
-                            <tr>
-                                <td><div class="boxes">Per</div></td>
-                                <td><div class="boxes">An1</div></td>
-                            </tr>
-                            <tr>
-                                <td><div class="boxes">Kata</div></td>
-                                <td><div class="boxes">An2</div></td>
-                            </tr>
-                            <tr>
-                                <td><div class="boxes">An3</div></td>
-                                <td><div class="boxes">An3</div></td>
-                            </tr>
-                            <tr>
-                                <td><div class="boxes">Taan</div></td>
-                                <td><div class="boxes">An5</div></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div> -->
             </div>
         </div>
         <div class="buttons" id="Buttonbg">
             <input type="button" value="Exit" class="extbtn">
-            <input type="button" value="Continue" class="conbtn" onclick="checkanswer();" disabled>
+            <input type="button" name="continuebtn" value="Continue" class="conbtn" onclick="checkanswer();" disabled>
         </div>
     </div>
-
 </body>
 <script>
     function pairsExist(a, b) {
@@ -591,20 +575,20 @@
             }
 
             if (!pairFound) {
-            return false;
+                return false;
             }
         }
         return true;
     }
 
-
-    console.log(questionmode);
-    console.log(mcqanswer);
-    console.log(connectlineanswer);
+    // console.log(questionmode);
+    // console.log(mcqanswer);
+    // console.log(connectlineanswer);
+    var lvlxp = 10;
+    var correctness = 0;
+    var wrongness = 0;
+    var fillinamount = 0;
     var mcqselect = "";
-    for (let i = 0; i < myArray1.length; i++){
-        connectlineanswer.push([myArray1[i],myArray2[i]]);
-    }
     var indexans = 0;
     const pages = document.querySelectorAll(".page");
     const prog = document.querySelector(".indicator");
@@ -625,131 +609,167 @@
     var correctpopup = document.getElementById("cpopup");
     var wrongpopup = document.getElementById("wpopup");
 
+    function checkfitbans(a){
+        for (var i = 0; i < fillinblankans[indexans].length;i++){
+            if(a[i] != fillinblankans[indexans][i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
     function checkanswer(){
         if(questionmode[indexans] == "MCQ"){
             if (mcqselect == mcqanswer[indexans]){
-                console.log("correct");
                 buttonbg.classList.add('button-bg-animation-correct');
                 correctpopup.style.display = "block";
-                correctpopup.style.opacity = 1;
+                setTimeout(function() {
+                    correctpopup.style.opacity = 1;
+                }, 300);
                 setTimeout(function() {
                     buttonbg.classList.remove('button-bg-animation-correct');
-                    slide('next');
+                    ifended();
                     correctpopup.style.opacity = 0;
                     setTimeout(function() {
                         correctpopup.style.display = "none";
                     }, 300);
                 }, 2300);
                 mcqselect = "";
+                correctness += 1;
             }
             else{
-                console.log("incorrect")
                 buttonbg.classList.add('button-bg-animation-wrong');
                 wrongpopup.style.display = "block";
-                wrongpopup.style.opacity = 1;
+                setTimeout(function() {
+                    wrongpopup.style.opacity = 1;
+                }, 300);
                 setTimeout(function() {
                     buttonbg.classList.remove('button-bg-animation-wrong');
-                    slide('next');
+                    ifended();
                     wrongpopup.style.opacity = 0;
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
                 }, 2300);
                 mcqselect = "";
+                wrongness += 1;
             }
 
             nextbtn.disabled = true;
         }
-        else if(questionmode[indexans] == "FillInTheBlank"){
-            if (alldragdrop == true){
-                const ans1 = document.getElementById('box1');
-                const ans2 = document.getElementById('box2');
-                const ans3 = document.getElementById('box3');
-                const ans4 = document.getElementById('box4');
-                if (ans1.innerHTML == "Wai Kin" && ans2.innerHTML == "Damon Ng" && ans3.innerHTML == "July" && ans4.innerHTML == "Agust"){
-                    console.log("sucessfully correct")
-                    buttonbg.classList.add('button-bg-animation-correct');
-                    setTimeout(function() {
-                        buttonbg.classList.remove('button-bg-animation-correct');
-                        slide('next');
-                        
-                    }, 2300);
-                }
-                else{
-                    console.log("wrong")
-                    buttonbg.classList.add('button-bg-animation-wrong');
-                    setTimeout(function() {
-                        buttonbg.classList.remove('button-bg-animation-wrong');
-                        slide('next');
-                    }, 2300);
-                }
-
-                nextbtn.disabled = true;
+        else if(questionmode[indexans] == "FillInTheBlanks"){
+            var responseans = [];
+            for (var i = 1; i <= fillinblankans[indexans].length;i++){
+                responseans.push(document.getElementById('box'+i+'').innerHTML)
             }
-        }else if(questionmode[indexans] == "ConnectLine"){
-            if(pairsExist(selectedPairs,connectlineanswer)){
-                console.log("sucessfully correct")
+            if(checkfitbans(responseans)){
                 buttonbg.classList.add('button-bg-animation-correct');
                 correctpopup.style.display = "block";
-                correctpopup.style.opacity = 1;
+                setTimeout(function() {
+                    correctpopup.style.opacity = 1;
+                }, 300);
                 setTimeout(function() {
                     buttonbg.classList.remove('button-bg-animation-correct');
-                    slide('next');
+                    ifended();
+                    correctpopup.style.opacity = 0;
+                    setTimeout(function() {
+                        correctpopup.style.display = "none";
+                    }, 300);
+                }, 2300);
+                correctness += 1;
+            }
+            else{
+                buttonbg.classList.add('button-bg-animation-wrong');
+                wrongpopup.style.display = "block";
+                setTimeout(function() {
+                    wrongpopup.style.opacity = 1;
+                }, 300);
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-wrong');
+                    ifended();
+                    wrongpopup.style.opacity = 0;
+                    setTimeout(function() {
+                        wrongpopup.style.display = "none";
+                    }, 300);
+                }, 2300);
+                wrongness += 1;
+            }
+            nextbtn.disabled = true;
+            fillinamount = 0;
+                
+        }else if(questionmode[indexans] == "ConnectLine"){
+            if(pairsExist(selectedPairs,connectlineanswer[indexans])){
+                buttonbg.classList.add('button-bg-animation-correct');
+                correctpopup.style.display = "block";
+                setTimeout(function() {
+                    correctpopup.style.opacity = 1;
+                }, 300);
+                setTimeout(function() {
+                    buttonbg.classList.remove('button-bg-animation-correct');
+                    ifended();
                     correctpopup.style.opacity = 0;
                     setTimeout(function() {
                         correctpopup.style.display = "none";
                     }, 300);
                 }, 2300);   
+                correctness += 1;
             }
             else{
-                console.log("wrong")
                 buttonbg.classList.add('button-bg-animation-wrong');
                 wrongpopup.style.display = "block";
-                wrongpopup.style.opacity = 1;
+                setTimeout(function() {
+                    wrongpopup.style.opacity = 1;
+                }, 300);
                 setTimeout(function() {
                     buttonbg.classList.remove('button-bg-animation-wrong');
-                    slide('next');
+                    ifended();
+                    wrongpopup.style.opacity = 0;
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
                 }, 2300);
+                wrongness += 1;
             }
             nextbtn.disabled = true;
+            selectedPairs = [];
         }
-        
+
+    }
+
+    function ifended(){
+        indexans += 1
+        if(indexans === <?php echo $count;?>){
+            location.href='ChapterSummary.php';
+            localStorage.setItem('correct',correctness);
+            localStorage.setItem('wrong',wrongness);
+            localStorage.setItem('xp',lvlxp);
+        }
+        else{
+            slide("next");
+        }
     }
 
     function slide(direction){
-        indexans += 1
-        if(indexans === <?php echo $count;?>){
-            location.href='mainpage.php';
-            console.log("end");
+        if (direction === "next"){
+            translate -= translateAmount;
+            currentstep += 1;
+            progresslvl += 100/<?php echo $count-1;?>;
         }
-        else{
-            if (direction === "next"){
-                translate -= translateAmount;
-                currentstep += 1;
-                progresslvl += 100/<?php echo $count-1;?>;
-            }
-            else{
-                translate += translateAmount;
-            }
 
-            for (let i = 0; i < pages.length; i++) {
-                pages[i].style.transform = `translateX(${translate}%)`;
-            }
-
-            prog.style.width = `${progresslvl}%`
-
-            circles.forEach((circle,index) =>{
-                circle.classList[`${index < currentstep ? "add" : "remove"}`]("active");
-            })
-            nextbtn.style.backgroundColor = "lightgrey";
-            
-            boxesbtns.forEach(each => {
-                each.classList.remove('selected');
-            })
+        for (let i = 0; i < pages.length; i++) {
+            pages[i].style.transform = `translateX(${translate}%)`;
         }
+
+        prog.style.width = `${progresslvl}%`
+
+        circles.forEach((circle,index) =>{
+            circle.classList[`${index < currentstep ? "add" : "remove"}`]("active");
+        })
+        nextbtn.style.backgroundColor = "lightgrey";
+        
+        boxesbtns.forEach(each => {
+            each.classList.remove('selected');
+        })
     }
 
     boxesbtn.forEach(eachbtn => {
@@ -788,10 +808,12 @@
                     // console.log(selectedPairs);
                 }
                 // console.log(pair);
-                if(selectedPairs.length == document.querySelectorAll('.boxes').length/2){
+                // console.log(selectedPairs);
+                // console.log(connectlineanswer[indexans]);
+                if(selectedPairs.length == connectlineanswer[indexans].length){
                     nextbtn.disabled = false;
                     nextbtn.style.backgroundColor = "#58cc02";
-
+                    // console.log(selectedPairs);
                 }
             }
         })
@@ -833,9 +855,10 @@
         selectedBox.textContent = event.dataTransfer.getData('text');
         selectedChoice.classList.add('dropped');
         selectedBox.classList.remove('over');
+        fillinamount += 1;
         if (testing()){
             nextbtn.style.backgroundColor = "#58cc02";
-            alldragdrop =true;
+            nextbtn.disabled = false;
         }
     }
 
@@ -849,7 +872,8 @@
             box.textContent = '';
         });
         nextbtn.style.backgroundColor = "lightgrey";
-        alldragdrop = false;
+        nextbtn.disabled = true;
+        fillinamount = 0;
     }
 
     choices.forEach((choice) => {
@@ -867,14 +891,10 @@
     resetButton.addEventListener('click', handleReset);
     
     function testing() {
-        let hasEmptyText = false;
-        answerBoxes.forEach(element => {
-            const text = element.textContent.trim();
-            if (text === '') {
-                hasEmptyText = true;
-            }
-        });
-        return !hasEmptyText;
+        if(fillinblankans[indexans].length == fillinamount){
+            return true;
+        }
+        return false;
     }
 
 </script>

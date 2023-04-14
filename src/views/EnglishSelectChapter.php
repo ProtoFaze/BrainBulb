@@ -112,27 +112,52 @@
             opacity: 1;
             cursor: pointer;
         }
+
+        .main a{
+            text-decoration: none;
+            color: black;
+            cursor:auto;
+        }
     </style>
 </head>
 <body>
     <?php
         $chaplist = array();
         $studentID = "ST00000008";
+        $subjectID = 'SJ00000002';//fixed subject
         include("../components/nav.php");
         include "../database/connect.php";
-        $query = "SELECT course.chapter_Name FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.student_ID = '$studentID'";
+        $query = "SELECT * FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.student_ID = '$studentID' AND course.subject_ID = '$subjectID'";
         $results = mysqli_query($connection,$query);
-        while ($row = mysqli_fetch_assoc($results)) {
-            array_push($chaplist,$row["chapter_Name"][8]);
+        if(mysqli_num_rows($results) > 0){
+            while ($row = mysqli_fetch_assoc($results)) {
+                array_push($chaplist,$row["chapter_Name"][8]);
+            }
         }
-        
+        else{
+            array_push($chaplist,"0");
+        }
+        array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
+        <h1 style="text-align:center;">English</h1>
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
-                <td><div <?php if (in_array("1",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>1</div></td>
+                <td>
+                    <a <?php if (in_array("1",$chaplist)) {echo'href="EnglishChapter1Questions.php"';}?>>
+                        <div <?php if (in_array("1",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
+                            1
+                        </div>
+                    </a>
+                </td>
                 <td></td>
-                <td><div <?php if (in_array("4",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>4</div></td>
+                <td>
+                    <a <?php if (in_array("4",$chaplist)) {echo'href="EnglishChapter4Questions.php"';}?>>
+                        <div <?php if (in_array("4",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
+                            4
+                        </div>
+                    </a>
+                </td>
                 <td>
                     <div class="rectangle2">
                         <div class="horizontalroad"></div>
@@ -142,7 +167,11 @@
                         <div class="horizontalroad"></div>
                     </div>
                 </td>
-                <td><div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div></td>
+                <td>
+                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Questions.php"';}?>>
+                        <div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div>
+                    </a>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -176,7 +205,11 @@
                 </td>
             </tr>
             <tr>
-                <td><div <?php if (in_array("2",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>2</div></td>
+                <td>
+                    <a <?php if (in_array("2",$chaplist)) {echo'href="EnglishChapter2Questions.php"';}?>>
+                        <div <?php if (in_array("2",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>2</div>
+                    </a>
+                </td>
                 <td>
                     <div class="rectangle2">
                         <div class="horizontalroad"></div>
@@ -186,9 +219,17 @@
                         <div class="horizontalroad"></div>
                     </div>
                 </td>
-                <td><div <?php if (in_array("3",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>3</div></td>
+                <td>
+                    <a <?php if (in_array("3",$chaplist)) {echo'href="EnglishChapter3Questions.php"';}?>>
+                        <div <?php if (in_array("3",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>3</div>
+                    </a>
+                </td>
                 <td></td>
-                <td><div <?php if (in_array("6",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>6</div></td>
+                <td>
+                    <a <?php if (in_array("6",$chaplist)) {echo'href="EnglishChapter6Questions.php"';}?>>
+                        <div <?php if (in_array("6",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>6</div>
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

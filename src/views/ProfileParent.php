@@ -108,7 +108,7 @@
                     <div class="info_ltr">$child[sName]</div>
                     <div class="info_ltr">Grade : $child[sGrade]</div>
                     <div class="info_ltr">Streak: $child[aFrequency]</div>
-                    <form action="window.location.href = 'application_details.php'" method="post">
+                    <form action="./mainpage.php" method="post">
                         <input type="hidden" name="child" value="$child[student_ID]">
                         <button class="materials-symbols-outlined flex_button" type="submit">More Details<span class="material-symbols-outlined">arrow_forward_ios</span></button>
                     </form>

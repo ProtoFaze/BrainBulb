@@ -101,6 +101,14 @@
         cursor: pointer;
     }
 
+    .box:hover{
+        transform: scale(1.15);
+    }
+
+    .box:active{
+        transform: scale(0.91);
+    }
+
     .boxes{
         border-radius: 7px;
         background-color: rgba(0, 0, 0, 0.1);
@@ -113,6 +121,14 @@
         font-weight: bold;
     }
 
+    .boxes:hover{
+        transform: scale(1.15);
+    }
+
+    .boxes:active{
+        transform: scale(0.91);
+    }
+
     .title{
         margin: 20px auto;
     }
@@ -120,6 +136,7 @@
     .box.selected, .boxes.selected{
         background-color: #DDF4FF;
         border: 2px solid lightskyblue;
+        transform: scale(1);
     }
 
     .buttons{
@@ -171,6 +188,14 @@
         cursor: pointer;
     }
 
+    .buttons .conbtn:hover{
+        transform: scale(1.15);
+    }
+
+    .buttons .conbtn:active{
+        transform: scale(0.91);
+    }
+
     .buttons .extbtn{
         float: left;
         border-radius: 7px;
@@ -184,9 +209,18 @@
         cursor: pointer;
     }
 
+    .buttons .extbtn:hover{
+        transform: scale(1.15);
+    }
+
+    .buttons .extbtn:active{
+        transform: scale(0.91);
+    }
+
     .container{
         width: 100%;
-        height: 370px;
+        /* height: 400px; */
+        height: auto;
         overflow: hidden;
     }
 
@@ -198,7 +232,7 @@
 
     .page{
         width: 100%;
-        height: 330px;
+        height: 400px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -343,6 +377,29 @@
         100% {
             stroke-dashoffset: 900;
         }
+    }
+
+    .resetpair{
+        color:white; 
+        cursor:pointer; 
+        border-radius: 7px;
+        background-color: grey;
+        padding: 10px 20px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        /* text-align: center; */
+        margin: 30px 0;
+        bottom: 0;
+        border: 0;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .resetpair:hover{
+        transform: scale(1.15);
+    }
+
+    .resetpair:active{
+        transform: scale(0.91);
     }
 
 </style>
@@ -490,6 +547,7 @@
                             }
                             echo "</table>";
                             echo "</div>";
+                            echo "<button class='resetpair' onclick='resetPair()'>Reset</button>";
                             echo "</div>";
                         }
                         elseif($row['question_Gamemode'] == "FillInTheBlanks"){
@@ -554,12 +612,17 @@
             </div>
         </div>
         <div class="buttons" id="Buttonbg">
-            <input type="button" value="Exit" class="extbtn">
+            <input type="button" value="Exit" class="extbtn" onclick="leave()">
             <input type="button" name="continuebtn" value="Continue" class="conbtn" onclick="checkanswer();" disabled>
         </div>
     </div>
 </body>
 <script>
+    function leave(){
+        location.reload();
+        window.location.href = "EnglishSelectChapter.php";
+    }
+
     function pairsExist(a, b) {
         for (let i = 0; i < b.length; i++) {
             const pair = b[i];
@@ -581,9 +644,9 @@
         return true;
     }
 
-    // console.log(questionmode);
-    // console.log(mcqanswer);
-    // console.log(connectlineanswer);
+    console.log(questionmode);
+    console.log(mcqanswer);
+    console.log(connectlineanswer);
     var lvlxp = 10;
     var correctness = 0;
     var wrongness = 0;
@@ -771,7 +834,7 @@
             each.classList.remove('selected');
         })
     }
-
+    //mcq select method
     boxesbtn.forEach(eachbtn => {
         eachbtn.addEventListener('click',() => {
             boxesbtn.forEach(each => {
@@ -785,9 +848,20 @@
             }
         })
     })
-
+    //connect line select method
     let firstoption = null;
     var pair = [];
+    function resetPair(){
+        boxesbtns.forEach(option =>{
+            option.classList.remove('selected');
+        });
+        nextbtn.style.backgroundColor = "lightgrey";
+        nextbtn.disabled = true;
+        pair = [];
+        firstoption = null;
+        selectedPairs = [];
+    }
+
     boxesbtns.forEach(option =>{
         option.addEventListener('click',() =>{
             if(!option.classList.contains('selected')){

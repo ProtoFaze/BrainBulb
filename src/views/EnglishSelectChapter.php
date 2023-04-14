@@ -118,6 +118,15 @@
             color: black;
             cursor:auto;
         }
+
+        .main .subjecttitle{
+            padding: 7px 0;
+            color: black;
+            width: 50%;
+            margin: 0 auto;
+            background-image: linear-gradient(45deg, rgb(252,163,17) 20%, white 20%, white 40%, rgb(252,163,17) 40%, rgb(252,163,17) 60%,white 60%, white 80%, rgb(252,163,17) 80%); 
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -140,7 +149,9 @@
         array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
-        <h1 style="text-align:center;">English</h1>
+        <div class="subjecttitle">
+            <h1 style="text-align:center;">English</h1>
+        </div>
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>

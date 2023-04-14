@@ -6,14 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        var myArray = ["apple", "banana", "cherry"];
-    </script>
-    <form action="#" method="post">
-        <input type="hidden" name="myArray" value='<?php echo json_encode($myArray); ?>'>
+    <form id="testform" action="#" method="post">
+        <input type="hidden" name="myArray" value="">
         <!-- other form fields go here -->
         <input type="submit" value="Submit">
     </form>
+    <script>
+        var myArray = ["apple", "banana", "cherry"];
+        var form = document.getElementById("testform");
+        var hiddenInput = form.querySelector('input[name="myArray"]');
+        hiddenInput.value = JSON.stringify(myArray);
+    </script>
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $myArray = json_decode($_POST["myArray"]);

@@ -15,10 +15,36 @@
     }
 
     body {
+        position: fixed;
+        top: 10;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
         background-image: url('../../images/seabg.png');
+        animation: animate-background 10s linear infinite;
         background-repeat: no-repeat;
         background-size: cover;
+        /* opacity: 0.9; */
     }
+
+    /* @keyframes animate-background {
+        0% {
+          background-image: url('background-1.png');
+        }
+        25% {
+          background-image: url('background-2.png');
+        }
+        50% {
+          background-image: url('background-3.png');
+        }
+        75% {
+          background-image: url('background-4.png');
+        }
+        100% {
+          background-image: url('background-1.png');
+        } */
+    /* } */
 
     .main{
         text-align: center;
@@ -26,17 +52,20 @@
     }
 
     .c{
-        margin: 40px 400px;
+        margin: 45px auto;
         padding: 30px;
         border-radius: 7px;
-        background-color: lightgray;
+        background-color: #FCBF29;
+        width: 600px;
+        
     }
     
     .c .items{
         line-height: 1.3;
         border-radius: 7px;
         padding: 20px 0;
-        background-color: darkgray;
+        background-color: #A9D8FF;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         font-size: 19px;
         font-weight: bold;
         min-width: 150px;
@@ -54,20 +83,30 @@
 
     .c .items .flexitems{
         padding: 0 10px;
+        color:black;
     }
 
     .main #buton{
-        padding: 15px 30px;
+        padding: 20px 60px;
         border-radius: 6px;
-        font-size: 19px;
+        font-size: 25px;
         border: none;
-        /* outline: none; */
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         font-weight: bold;
         cursor: pointer;
-        background-color: gray;
+        background-color: #F29C1F;
         color:white;
         margin-bottom: 30px;
+        
     }   
+
+    .main #buton:hover{
+        transform: scale(1.15);
+    }
+
+    .main #buton:active{
+        transform: scale(0.95);
+    }
 
     .progress {
         padding: 7px;
@@ -118,11 +157,11 @@
             $diff = $time->getTimestamp() - $stime->getTimestamp();
             $duration = gmdate("H:i:s", $diff);
             $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$courseID','$studentID','$stime_str','$time_str')";
-            $result = mysqli_query($connection,$query);
+            // $result = mysqli_query($connection,$query);
             ?>
-                <h1 style="font-size:50px; color:#fcc201;">Congratulation, You Did It!</h1>
+                <h1 style="font-size:67px; color:black;">Congratulation, You Did It!</h1>
                 <div class="c">
-                    <h1>Chapter Summary</h1>
+                    <h1 style="font-size:45px;">Chapter Summary</h1>
                     <div class="items">
                         <img src="../../images/accept.png" style="width: 60px;" class="flexitems">
                         <span id="cAmount" class="flexitems"></span>

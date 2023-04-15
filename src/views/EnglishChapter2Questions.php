@@ -395,7 +395,7 @@
     }
 
     .resetpair:hover{
-        transform: scale(1.15);
+        transform: scale(1.000000009);
     }
 
     .resetpair:active{
@@ -408,12 +408,14 @@
     var questionmode = [];
     var connectlineanswer = [];
     var fillinblankans = [];
+    const datetimeString = new Date();
+    // const datetimeString = now.replace(/T/, ' ').replace(/\..+/, '');
 </script>
 <body>
     <?php
         // $studentID = "ST00000008";
-        $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
-        $_SESSION['ctime'] = new DateTime('now', $timezone);
+        // $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
+        // $_SESSION['ctime'] = new DateTime('now', $timezone);
         $courseID = "CR00000003";
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
@@ -811,10 +813,13 @@
     function ifended(){
         indexans += 1
         if(indexans === <?php echo $count;?>){
+            const Edatetime = new Date();
             location.href='ChapterSummary.php';
             localStorage.setItem('correct',correctness);
             localStorage.setItem('wrong',wrongness);
             localStorage.setItem('xp',lvlxp);
+            localStorage.setItem('starttime',datetimeString);
+            localStorage.setItem('endtime',Edatetime);
         }
         else{
             slide("next");

@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 :root{
     --barlength:55px;
-    --border-radius:20px;
+    --border-radius:10px;
     --gap:15px;
     --misc-green: rgb(14, 182, 143);
     --bg: #D4FBF4;

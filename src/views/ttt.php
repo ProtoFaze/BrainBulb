@@ -1,24 +1,40 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title>Pass JS array to PHP.</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 </head>
+
 <body>
-    <script>
-        var myArray = ["apple", "banana", "cherry"];
-    </script>
-    <form action="#" method="post">
-        <input type="hidden" name="myArray" value='<?php echo json_encode($myArray); ?>'>
-        <!-- other form fields go here -->
-        <input type="submit" value="Submit">
-    </form>
-    <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $myArray = json_decode($_POST["myArray"]);
-            var_dump($myArray);
-        }   
-    ?>
+	<h3>Pass JavaScript array into PHP.</h3>
+	<form id="myForm" action="<?php echo base_url('admin/js2php_proc'); ?>" method="post"> 
+		<input type="hidden" id="str" name="str" value="" /> 
+		<input type="submit" id="btn" name="submit" value="Submit" />
+ 	</form>
+ 	
+	<span id="result"></span> 	
+ 	
+	<script>
+		var jsarray = new Array();
+		jsarray[0] = "Saab";
+		jsarray[1] = "Volvo";
+		jsarray[2] = "BMW";		 
+	
+		$(document).ready(function(){
+			$("#btn").click( function() {
+				$.post( $("#myForm").attr("action"),
+					 $('#str').val(JSON.stringify(jsarray)),  
+			         //$("#myForm :input").serializeArray(), 
+			         function(info){ $("#result").html(info); 
+				});
+			});
+			 
+			$("#myForm").submit( function() {
+				return false;	
+			});
+			
+		});
+	</script>
+	
 </body>
 </html>

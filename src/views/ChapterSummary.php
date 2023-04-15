@@ -127,6 +127,8 @@
     let xpValue = localStorage.getItem('xp');
     let startTime = localStorage.getItem('starttime');
     let endTime = localStorage.getItem('endtime');
+    let respone = localStorage.getItem('res');
+    // console.log(respone);
     const options = { timeZone: 'Asia/Kuala_Lumpur' };
     var Ctime = new Date(startTime).toLocaleString('en-US', options);
     var now = new Date(endTime).toLocaleString('en-US', options);
@@ -173,10 +175,11 @@
                         <span id="timespent" class="flexitems"></span>
                     </div>
                 </div>
-                <form method="post" action="calxpprocess.php" style="text-align:center;">
+                <form method="post" action="calxpprocess.php" style="text-align:center;" id="test123">
                     <input type="hidden" id="myVariableInput" name="myVariable">
                     <input type="hidden" id="Input" name="my">
                     <input type="hidden" id="Input2" name="my2">
+                    <input type="hidden" name="myArray" id="myA" value="">
                     <button type="submit" id="buton">Next</button>
                 </form>
             <?php
@@ -279,7 +282,7 @@
                 </style>
                 <div style="text-align: center; margin:150px auto; width:500px; background-image:linear-gradient(to bottom right,lightskyblue,#7AC0F9); padding:40px; border-radius:5px;">
                     <h1 style="padding: 15px;">Xp Gained : <?php echo $_SESSION['xp'];?></h1>
-                    <h1 style="padding: 15px;">Current Experience : <?php echo $v;?></h1>
+                    <h1 style="padding: 15px;">Current Xp : <?php echo $v;?></h1>
                     <h1 style="padding: 15px;">Current Level : <?php echo $level;?></h1>
                     <div class="progress progress-striped">
                         <div style="position:absolute; font-size:28px; font-weight:bold; top: 50%;left: 50%; transform: translate(-50%, -50%);">
@@ -318,6 +321,7 @@
     document.getElementById("myVariableInput").value = xpValue;
     document.getElementById("Input").value = timeformat(Ctime);
     document.getElementById("Input2").value = timeformat(now);
+    document.getElementById("myA").value = JSON.stringify(respone);
 
     if(CValue == null || WValue == null){
         <?php 

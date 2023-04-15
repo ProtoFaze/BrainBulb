@@ -411,8 +411,11 @@
 </script>
 <body>
     <?php
-        include "../database/connect.php";
+        // $studentID = "ST00000008";
+        $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
+        $_SESSION['ctime'] = new DateTime('now', $timezone);
         $courseID = "CR00000003";
+        include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
@@ -644,10 +647,10 @@
         return true;
     }
 
-    console.log(questionmode);
-    console.log(mcqanswer);
-    console.log(connectlineanswer);
-    var lvlxp = 10;
+    // console.log(questionmode);
+    // console.log(mcqanswer);
+    // console.log(connectlineanswer);
+    var lvlxp = 0;
     var correctness = 0;
     var wrongness = 0;
     var fillinamount = 0;
@@ -699,6 +702,7 @@
                 }, 2300);
                 mcqselect = "";
                 correctness += 1;
+                lvlxp += 15;
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -716,6 +720,7 @@
                 }, 2300);
                 mcqselect = "";
                 wrongness += 1;
+                lvlxp += 5;
             }
 
             nextbtn.disabled = true;
@@ -740,6 +745,7 @@
                     }, 300);
                 }, 2300);
                 correctness += 1;
+                lvlxp += 15;
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -756,6 +762,7 @@
                     }, 300);
                 }, 2300);
                 wrongness += 1;
+                lvlxp += 5;
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -776,6 +783,7 @@
                     }, 300);
                 }, 2300);   
                 correctness += 1;
+                lvlxp += 15;
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -792,6 +800,7 @@
                     }, 300);
                 }, 2300);
                 wrongness += 1;
+                lvlxp += 5;
             }
             nextbtn.disabled = true;
             selectedPairs = [];
@@ -970,6 +979,6 @@
         }
         return false;
     }
-
+    <?php mysqli_close($connection);?>
 </script>
 </html>

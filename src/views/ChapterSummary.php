@@ -14,6 +14,12 @@
         margin: 0;
     }
 
+    body {
+        background-image: url('../../images/seabg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
     .main{
         text-align: center;
         margin-top: 30px;
@@ -72,7 +78,7 @@
     }
 
     .progress-bar {	
-        height: 30px;
+        height: 32px;
         background-color: #ee303c;  
         border-radius: 4px; 
         transition: 0.3s linear;  
@@ -82,9 +88,8 @@
 <?php
     // $a = $_SESSION['lists'];
     include "../database/connect.php";
-    $studentID = 'ST00000005';
+    $studentID = 'ST00000005';  
     $courseID = $_SESSION['course'];
-    $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`) VALUES ('$courseID','$studentID')";
     $query2 = "SELECT * FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.course_ID = '$courseID'";
     $query3 = "SELECT * FROM `student` WHERE student_ID = '$studentID'";
     $results2 = mysqli_query($connection,$query2);
@@ -104,28 +109,37 @@
 <body>
     <div class="main">
     <?php
-        if(!array_key_exists("xp", $_SESSION)){
+        if(!array_key_exists("xp", $_SESSION) && array_key_exists("ctime", $_SESSION)){
+            $timezone = new DateTimeZone('Asia/Kuala_Lumpur'); // replace with your desired time zone
+            $stime = $_SESSION['ctime'];
+            $time = new DateTime('now', $timezone);
+            $stime_str = $stime->format('Y-m-d H:i:s');
+            $time_str = $time->format('Y-m-d H:i:s');  
+            $diff = $time->getTimestamp() - $stime->getTimestamp();
+            $duration = gmdate("H:i:s", $diff);
+            $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$courseID','$studentID','$stime_str','$time_str')";
+            $result = mysqli_query($connection,$query);
             ?>
-            <h1>Congratulation, You Did It!</h1>
-            <div class="c">
-                <h1>Chapter Summary</h1>
-                <div class="items">
-                    <img src="../../images/accept.png" style="width: 60px;" class="flexitems">
-                    <span id="cAmount" class="flexitems"></span>
+                <h1 style="font-size:50px; color:#fcc201;">Congratulation, You Did It!</h1>
+                <div class="c">
+                    <h1>Chapter Summary</h1>
+                    <div class="items">
+                        <img src="../../images/accept.png" style="width: 60px;" class="flexitems">
+                        <span id="cAmount" class="flexitems"></span>
+                    </div>
+                    <div class="items">
+                        <img src="../../images/cross.png" style="width: 60px;" class="flexitems">
+                        <span id="wAmount" class="flexitems"></span>
+                    </div>
+                    <div class="items">
+                        <img src="../../images/clock.png" style="width: 60px;" class="flexitems">
+                        <span class="flexitems"><?php echo $duration;?></span>
+                    </div>
                 </div>
-                <div class="items">
-                    <img src="../../images/cross.png" style="width: 60px;" class="flexitems">
-                    <span id="wAmount" class="flexitems"></span>
-                </div>
-                <div class="items">
-                    <div class="flexitems">Xp Gain:</div> 
-                    <span id="xpAmount" class="flexitems"></span>
-                </div>
-            </div>
-            <form method="post" action="calxpprocess.php" style="text-align:center;">
-                <input type="hidden" id="myVariableInput" name="myVariable">
-                <button type="submit" id="buton">Next</button>
-            </form>
+                <form method="post" action="calxpprocess.php" style="text-align:center;">
+                    <input type="hidden" id="myVariableInput" name="myVariable">
+                    <button type="submit" id="buton">Next</button>
+                </form>
             <?php
         }
         else{
@@ -207,9 +221,11 @@
                     }
                 </style>
                 <div style="text-align: center; margin:150px auto; width:500px; background-color:lightgray; padding:40px;">
+                    <h1 style="padding: 15px;">Xp Gain : <?php echo $_SESSION['xp'];?></h1>
                     <h1 style="padding: 15px;">Current Experience : <?php echo $v;?></h1>
                     <h1 style="padding: 15px;">Progress to next level : <?php echo $a;?>%</h1>
                     <div class="progress progress-striped">
+                        <div style="position:absolute; font-size:28px; font-weight:bold; left:50%;"><?php echo $level;?></div>
                         <div class="progress-bar"></div>                       
                     </div> 
                 </div>
@@ -233,6 +249,7 @@
             }
             echo "<script> localStorage.clear();</script>;";
             unset($_SESSION['xp']);
+            unset($_SESSION['ctime']);
         }
     ?>
     </div>

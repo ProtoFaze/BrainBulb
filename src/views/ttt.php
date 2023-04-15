@@ -1,10 +1,10 @@
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<title>Pass JS array to PHP.</title>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 </head>
+
 <body>
     <form id="testform" action="#" method="post">
         <input type="hidden" name="myArray" value="">

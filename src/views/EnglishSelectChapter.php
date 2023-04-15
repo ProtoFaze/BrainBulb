@@ -149,9 +149,9 @@
         array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
-        <div class="subjecttitle">
-            <h1 style="text-align:center;">English</h1>
-        </div>
+        <!-- <div class="subjecttitle"> -->
+        <h1 style="text-align:center; font-size:40px;">English</h1>
+        <!-- </div> -->
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>

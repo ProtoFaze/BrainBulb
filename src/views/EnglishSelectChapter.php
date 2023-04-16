@@ -9,15 +9,9 @@
         .main{
             min-height: 700px;
             height:100%;
-            background-image: linear-gradient(
-            to bottom right,
-            #91defe,
-            #99c0f9,
-            #bdb6ec,
-            #d7b3e3,
-            #efb3d5,
-            #f9bccc
-            );
+            background-image: url('../../images/topdown.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
             padding: 50px 0;
         }
 
@@ -36,13 +30,14 @@
             background: radial-gradient(
                 circle at 75% 30%,
                 white 5px,
-                aqua 8%,
-                darkblue 60%,
-                aqua 100%
+                #c2d8fe 8%,
+                #31969e 60%,
+                #46d6e2 100%
             );
-            box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
+            /* box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
                 inset 88px 0px 60px #c2d8fe, inset -20px -60px 100px #fde9ea,
-                inset 0 50px 140px #fde9ea, 0 0 90px #fff;
+                inset 0 50px 140px #fde9ea, 0 0 90px #fff; */
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,7 +45,7 @@
             font-weight: bold;
             font-size: 30px;
             /* margin: 90px; */
-            border: 10px solid white;
+            /* border: 10px solid #fff; */
             transform: scale(1.10);
             opacity: 0.60;
         }
@@ -149,9 +144,7 @@
         array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
-        <!-- <div class="subjecttitle"> -->
         <h1 style="text-align:center; font-size:40px;">English</h1>
-        <!-- </div> -->
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>

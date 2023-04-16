@@ -78,6 +78,18 @@
     GROUP BY subject.subject_ID";
         $performanceRequest = mysqli_query($connection, $performancesql);
 
+        $activitysql = "SELECT course.chapter_Name, learning_record.end_Datetime FROM course
+        INNER JOIN (
+          SELECT course_ID, MAX(end_dateTime) AS latest_end_time
+          FROM learning_record
+          WHERE student_ID = '$student_id'
+          GROUP BY course_ID
+        ) latest_sr ON course.course_ID = latest_sr.course_ID
+        INNER JOIN learning_record ON learning_record.course_ID = course.course_ID AND learning_record.end_dateTime = latest_sr.latest_end_time
+        JOIN subject ON subject.subject_ID = course.subject_ID
+        GROUP BY subject.subject_ID";
+        $activityRequest = mysqli_query($connection, $activitysql);
+
     //redirect to child
         if(isset($_POST['child'])){
             $child_id = $_POST['child'];
@@ -149,12 +161,10 @@
             flex-direction: row;
             align-items: flex-start;
             padding: 0px;
-            gap: var(--gap);
             /* Inside auto layout */
-            flex: none;
-            order: 0;
-            flex-grow: 0;
-            width: 10%;
+
+            height: 200px;
+            /* height: 100px; */
         }
 
     </style>
@@ -221,14 +231,15 @@
             </div>
         </div>
 
-        <!-- bottom section containing children info -->
+        <!-- bottom section containing subject performance -->
         <div class="content_box">
-        <?php if(mysqli_num_rows($performanceRequest) > 0){
+        <?php if((mysqli_num_rows($performanceRequest) > 0)&&(mysqli_num_rows($activityRequest) > 0)){
             $index=0;
-            while ($score = mysqli_fetch_assoc($performanceRequest)) {
+            while (($score = mysqli_fetch_assoc($performanceRequest))&&($activity = mysqli_fetch_assoc($activityRequest))) {
                 $time = number_format($score['total_time'], 2);
                 $average = (($score['correct']/$score['total_questions'])*100);
                 $incorrect = $score['total_questions']-$score['correct'];
+                $chapterName = $activity['chapter_Name'];
             echo <<<HTML
                     <div class="row">
                         <div class="info_ltr"><h3>$score[subject_Name]</h3></div>
@@ -237,30 +248,42 @@
                         <div class="info_ltr"><button id = "course$index" class="material-symbols-outlined flex_button" onclick=expand(this)>expand_more</button></div>
                     </div>
                     <div class="expandedinfo">
-                        <h3>Performance</h3>
+                        <h3>Overall Performance</h3>
                         <div class="additional_info">
                             <div class="chart_frame">
                                 <canvas id="barChart$index"></canvas>
+                            </div>
+                            <div class="column">
+                                <div class="heading_and_data">
+                                    Latest Activity <br>
+                                    <div class="info_ltr"><div>$chapterName</div><div>##/##</div></div>
+                                </div>
+                                <div class="info_ltr"><div>$chapterName</div><div>##/##</div></div>
                             </div>
                         </div>
                     </div>
             HTML;
             echo <<<JS
                 <script type="text/javascript">
+                    // Chart.defaults.plugins.legend.position = "right";
                     var ctx = document.getElementById('barChart$index');
-                    new Chart(ctx, {
+                    
+                    new Chart(ctx,
+                    {
                     type: 'pie',
                     data: {
                         labels: ['correct', 'incorrect'],
                         datasets: [{
-                        label: 'Overall Performance',
-                        data: [$score[correct],$incorrect],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)'
-                        ]}]}
-                    }
-                    );
+                            label: 'Overall Performance',
+                            data: [$score[correct],$incorrect],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    });
             </script>
             JS;
             $index++;
@@ -271,427 +294,40 @@
     </main>
 </body>
 </html>
-<!-- /* chart frame */
-
-/* Auto layout */
-
-
-width: 472px;
-height: 240px;
-
-
-
-
-
-/* Frame 6 */
-
-/* Auto layout */
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 10px;
-
-width: 150px;
-height: 109px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* Legend: */
-
-width: 92px;
-height: 29px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 29px;
-/* identical to box height */
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* color code */
-
-/* Auto layout */
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-gap: 10px;
-
-width: 150px;
-height: 70px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* Frame 4 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 30px;
-
-width: 150px;
-height: 30px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Rectangle 28 */
-
-width: 32px;
-height: 30px;
-
-background: #FFFFFF;
-border-radius: 10px;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Correct */
-
-width: 57px;
-height: 19px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* Frame 5 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 30px;
-
-width: 150px;
-height: 30px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* Rectangle 29 */
-
-width: 32px;
-height: 30px;
-
-background: #000000;
-border-radius: 10px;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Wrong */
-
-width: 49px;
-height: 19px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* recent info */
-
-/* Auto layout */
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: flex-start;
-padding: 0px;
-gap: 30px;
-
-width: 469px;
-height: 240px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
-
-
-/* Chart */
-
-/* Auto layout */
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 0px;
-
-width: 469px;
-height: 80px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Latest activity: */
-
-width: 174px;
-height: 30px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 30px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Frame 9 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-padding: 0px;
-
-width: 469px;
-height: 50px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
-
-
-/* questionName */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 10px;
-gap: 10px;
-
-width: 306px;
-height: 50px;
-
-border-width: 0px 0px 1px 1px;
-border-style: solid;
-border-color: #000000;
-border-radius: 0px 0px 0px 10px;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* CourseName */
-
-width: 154px;
-height: 30px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 30px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Score */
-
-box-sizing: border-box;
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-align-items: flex-start;
-padding: 10px;
-gap: 10px;
-
-width: 124px;
-height: 50px;
-
-border-width: 1px 1px 0px 0px;
-border-style: solid;
-border-color: #000000;
-border-radius: 0px 10px 0px 0px;
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-flex-grow: 0;
-
-
-/* ###/### */
-
-width: 104px;
-height: 30px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 25px;
-line-height: 30px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* Frame 6 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-padding: 0px;
-gap: 10px;
-
-width: 469px;
-height: 58px;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0;
-
-
-/* Overall performance */
-
-width: 146px;
-height: 58px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 24px;
-line-height: 29px;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-
-/* ##% */
-
-width: 83px;
-height: 58px;
-
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 40px;
-line-height: 48px;
-display: flex;
-align-items: center;
-
-color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 1;
-align-self: stretch;
-flex-grow: 0; -->
+<!-- SELECT course.chapter_Name, learning_record.end_Datetime,
+    
+    (             
+        COALESCE(question1, 0) + 
+        COALESCE(question2, 0) + 
+        COALESCE(question3, 0) + 
+        COALESCE(question4, 0) + 
+        COALESCE(question5, 0) + 
+        COALESCE(question6, 0) + 
+        COALESCE(question7, 0) + 
+        COALESCE(question8, 0) + 
+        COALESCE(question9, 0) + 
+        COALESCE(question10, 0)
+    ) AS correct,
+    (
+        CASE WHEN question1 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question2 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question3 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question4 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question5 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question6 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question7 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question8 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question9 IS NOT NULL THEN 1 ELSE 0 END + 
+        CASE WHEN question10 IS NOT NULL THEN 1 ELSE 0 END
+    ) AS total_questions
+FROM course
+INNER JOIN (
+    SELECT course_ID, MAX(end_dateTime) AS latest_end_time
+    FROM learning_record
+    WHERE student_ID = 'ST00000001'
+    GROUP BY course_ID
+) latest_sr ON course.course_ID = latest_sr.course_ID
+INNER JOIN learning_record ON learning_record.course_ID = course.course_ID AND learning_record.end_dateTime = latest_sr.latest_end_time
+INNER JOIN (SELECT * FROM studentquestionresponse GROUP BY course_ID )sqr ON course.course_ID = sqr.course_ID
+JOIN subject ON subject.subject_ID = course.subject_ID
+GROUP BY subject.subject_ID; -->

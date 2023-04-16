@@ -395,7 +395,7 @@
     }
 
     .resetpair:hover{
-        transform: scale(1.15);
+        transform: scale(1.000000009);
     }
 
     .resetpair:active{
@@ -408,12 +408,14 @@
     var questionmode = [];
     var connectlineanswer = [];
     var fillinblankans = [];
+    const datetimeString = new Date();
+    // const datetimeString = now.replace(/T/, ' ').replace(/\..+/, '');
 </script>
 <body>
     <?php
         // $studentID = "ST00000008";
-        $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
-        $_SESSION['ctime'] = new DateTime('now', $timezone);
+        // $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
+        // $_SESSION['ctime'] = new DateTime('now', $timezone);
         $courseID = "CR00000003";
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
@@ -650,6 +652,7 @@
     // console.log(questionmode);
     // console.log(mcqanswer);
     // console.log(connectlineanswer);
+    var resp = [];
     var lvlxp = 0;
     var correctness = 0;
     var wrongness = 0;
@@ -703,6 +706,7 @@
                 mcqselect = "";
                 correctness += 1;
                 lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -721,6 +725,7 @@
                 mcqselect = "";
                 wrongness += 1;
                 lvlxp += 5;
+                resp.push(false);
             }
 
             nextbtn.disabled = true;
@@ -746,6 +751,7 @@
                 }, 2300);
                 correctness += 1;
                 lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -763,6 +769,7 @@
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
+                resp.push(false);
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -784,6 +791,7 @@
                 }, 2300);   
                 correctness += 1;
                 lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -801,6 +809,7 @@
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
+                resp.push(false);
             }
             nextbtn.disabled = true;
             selectedPairs = [];
@@ -811,10 +820,14 @@
     function ifended(){
         indexans += 1
         if(indexans === <?php echo $count;?>){
+            const Edatetime = new Date();
             location.href='ChapterSummary.php';
             localStorage.setItem('correct',correctness);
             localStorage.setItem('wrong',wrongness);
             localStorage.setItem('xp',lvlxp);
+            localStorage.setItem('starttime',datetimeString);
+            localStorage.setItem('endtime',Edatetime);
+            localStorage.setItem('res',resp);
         }
         else{
             slide("next");

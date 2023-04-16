@@ -45,7 +45,8 @@
             font-weight: bold;
             font-size: 30px;
             /* margin: 90px; */
-            /* border: 10px solid #fff; */
+            /* border-color: #fff; */
+            /* border: 10px outset lightgrey; */
             transform: scale(1.10);
             opacity: 0.60;
         }

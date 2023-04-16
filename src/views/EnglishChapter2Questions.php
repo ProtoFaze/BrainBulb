@@ -102,7 +102,7 @@
     }
 
     .box:hover{
-        transform: scale(1.15);
+        transform: scale(1.07);
     }
 
     .box:active{
@@ -122,7 +122,7 @@
     }
 
     .boxes:hover{
-        transform: scale(1.15);
+        transform: scale(1.07);
     }
 
     .boxes:active{
@@ -222,6 +222,7 @@
         /* height: 400px; */
         height: auto;
         overflow: hidden;
+        -webkit-user-select: none;
     }
 
     .pages{

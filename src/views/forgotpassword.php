@@ -31,8 +31,8 @@
         }
 
         .normaltext {
-            font-size: 18px;
-            font-weight: 110;
+            font-size: 15px;
+            font-weight: 100;
             line-height: 1.3;
             letter-spacing: 0.5px;
             margin: 20px 0 30px;
@@ -40,7 +40,7 @@
 
         .alink{
             color: #333;
-            font-size: 17px;
+            font-size: 14px;
             text-decoration: none;
             margin: 15px 0;
         }
@@ -232,103 +232,79 @@
         .registeroptions:active{
             transform: scale(0.90);
         }
+
+        .cross{
+            position:absolute;
+            width: 50px;
+            height: auto;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
     <?php
         include("../components/nav.php");
         include "../database/connect.php";
-
     ?>
         <div class="contain" id="container">
             <div class="form-container sign-up-container">
-                <div class="lrform">
-                    <h1 class="heavytitle">Create Account</h1>
+                <form class="lrform" method="post">
+                    <h1 class="heavytitle" style="font-size:18px;">You can now change your password.</h1>
                     <br>
-                    <a href="" class="alink">
-                        <div class="registeroptions">
-                            <img src="../../images/parent_and_children.png" style="width:85px; height:auto;">
-                            <p style="padding:0 20px; font-size:17px;">Register as Parent and Student</p>
-                        </div>
-                    </a>
-                    <a href="" class="alink">
-                        <div class="registeroptions">
-                            <img src="../../images/Teacher2.png" style="width:85px; height:auto;">
-                            <p style="padding:0 20px; font-size: 17px;">Register as Teacher</p>
-                        </div>
-                    </a>
+                    <input type="username" name="pass1" placeholder="New Password" class="input-field" required/>
+                    <input type="password" name="pass" placeholder="Re-enter New Password" class="input-field" required />
                     <br>
-                    <p class="normaltext">to unlock the full potential of BrainBulb</p>
-                </div>
+                    <input type="submit" name="enter" class="login-btn" value="Confirm"></input>
+                </form>
             </div>
             <div class="form-container sign-in-container">
+                <a href="login&register.php">
+                    <img src="../../images/cross1.jpg" class="cross">
+                </a>
                 <form action="" class="lrform" method="post">
-                    <h1 class="heavytitle">Login</h1>
+                    <h1 class="heavytitle">Forgot Password</h1>
                     <br>
-                    <input type="text" name="username" placeholder="Username" class="input-field" required/>
-                    <input type="password" name="pass" placeholder="Password" class="input-field" required />
-                    <a href="forgotpassword.php" class="alink">Forgot your password?</a>
+                    <input type="text" name="name" placeholder="IC Number" class="input-field" required/>
+                    <input type="password" name="pass" placeholder="Email Address" class="input-field" required />
+                    <!-- <a href="#" class="alink">Forgot your password?</a> -->
                     <br>
-                    <input type="submit" name="enter" class="login-btn" value="Login"></input>
+                        <input type="submit" name="enter" class="login-btn" value="Continue" id="signUp">
                 </form>
             </div>
             <div class="overlay-container">
                 <div class="overlay">
                     <div class="overlay-panel overlay-left">
-                        <h1 class="heavytitle">Choose your role</h1>
-                        <p class="normaltext">Already sign up? Please login to BrainBulb</p>
-                        <button class="ghost" id="signIn">Login</button>
+                        <h1 class="heavytitle">Change Your Password</h1>
+                        <p class="normaltext">Strong Password: contain 16-digits,<br> special characters, numbers and letters</p>
+                        <!-- <button class="ghost" id="signIn">Login</button> -->
                     </div>
                     <div class="overlay-panel overlay-right">
-                        <h1 class="heavytitle">Welcome User!</h1>
-                        <p class="normaltext">Not sign up yet? Register now!</p>
-                        <button class="ghost" id="signUp">Register</button>
+                        <h1 class="heavytitle">Security<br> Purposes</h1>
+                        <p class="normaltext">Please enter your IC number and Email Address to verify </p>
+                        <!-- <button class="ghost" id="signUp">Register</button> -->
                     </div>
                 </div>
             </div>
         </div>
     <?php
-        if(isset($_POST['enter'])){
-            $username = $_POST['username'];
-            $password = $_POST['pass'];
-            $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password'";
-            $result = mysqli_query($connection,$sql);
-            $row = mysqli_fetch_assoc($result);
-            $count = mysqli_num_rows($result);
-            if($count > 0){
-                if($row['user_Type'] == "Admin"){
-                    $_SESSION['user_id'] = $row['admin_ID'];
-                    
-                }
-                elseif($row['user_Type'] == "Teacher"){
-                    $_SESSION['user_id'] = $row['teacher_ID'];
-                }
-                elseif($row['user_Type'] == "Student"){
-                    $_SESSION['user_id'] = $row['student_ID'];
-                    echo $_SESSION['user_id'];
-                }
-                else{
-                    $_SESSION['user_id'] = $row['parent_ID'];
-                }
-                echo "<script> location.href='mainpage.php'</script>";
-            }
-            else{
-                echo "<script> alert('No username and password exist'); </script>";
-            }
-        }
+        
     ?>
     <script type="text/javascript">
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
 
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
+        // signUpButton.addEventListener('click', () => {
+        //     container.classList.add("right-panel-active");
+        // });
 
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
+        // signInButton.addEventListener('click', () => {
+        //     container.classList.remove("right-panel-active");
+        // });
+        function goback(){
+            location.href = "login&register.php"
+        }
     </script>
     <?php mysqli_close($connection);?>
 </body>

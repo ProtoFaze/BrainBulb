@@ -49,7 +49,7 @@
             echo "<script>window.history.back();</script>";
            
         }
-        
+        mysqli_close($connection);  
     ?>
 </body>
 </html>

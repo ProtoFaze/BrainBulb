@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,15 +12,9 @@
         .main{
             min-height: 700px;
             height:100%;
-            background-image: linear-gradient(
-            to bottom right,
-            #91defe,
-            #99c0f9,
-            #bdb6ec,
-            #d7b3e3,
-            #efb3d5,
-            #f9bccc
-            );
+            background-image: url('../../images/topdown.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
             padding: 50px 0;
         }
 
@@ -36,13 +33,14 @@
             background: radial-gradient(
                 circle at 75% 30%,
                 white 5px,
-                aqua 8%,
-                darkblue 60%,
-                aqua 100%
+                #c2d8fe 8%,
+                #31969e 60%,
+                #46d6e2 100%
             );
-            box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
+            /* box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
                 inset 88px 0px 60px #c2d8fe, inset -20px -60px 100px #fde9ea,
-                inset 0 50px 140px #fde9ea, 0 0 90px #fff;
+                inset 0 50px 140px #fde9ea, 0 0 90px #fff; */
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,7 +48,8 @@
             font-weight: bold;
             font-size: 30px;
             /* margin: 90px; */
-            border: 10px solid white;
+            /* border-color: #fff; */
+            /* border: 10px outset lightgrey; */
             transform: scale(1.10);
             opacity: 0.60;
         }
@@ -149,13 +148,11 @@
         array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
-        <!-- <div class="subjecttitle"> -->
         <h1 style="text-align:center; font-size:40px;">English</h1>
-        <!-- </div> -->
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>
-                    <a <?php if (in_array("1",$chaplist)) {echo'href="EnglishChapter1Questions.php"';}?>>
+                    <a <?php if (in_array("1",$chaplist)) {echo'href="EnglishChapter1Notes.php"';}?>>
                         <div <?php if (in_array("1",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
                             1
                         </div>
@@ -163,7 +160,7 @@
                 </td>
                 <td></td>
                 <td>
-                    <a <?php if (in_array("4",$chaplist)) {echo'href="EnglishChapter4Questions.php"';}?>>
+                    <a <?php if (in_array("4",$chaplist)) {echo'href="EnglishChapter4Notes.php"';}?>>
                         <div <?php if (in_array("4",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
                             4
                         </div>
@@ -179,7 +176,7 @@
                     </div>
                 </td>
                 <td>
-                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Questions.php"';}?>>
+                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Notess.php"';}?>>
                         <div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div>
                     </a>
                 </td>
@@ -217,7 +214,7 @@
             </tr>
             <tr>
                 <td>
-                    <a <?php if (in_array("2",$chaplist)) {echo'href="EnglishChapter2Questions.php"';}?>>
+                    <a <?php if (in_array("2",$chaplist)) {echo'href="EnglishChapter2Notes.php"';}?>>
                         <div <?php if (in_array("2",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>2</div>
                     </a>
                 </td>
@@ -231,18 +228,19 @@
                     </div>
                 </td>
                 <td>
-                    <a <?php if (in_array("3",$chaplist)) {echo'href="EnglishChapter3Questions.php"';}?>>
+                    <a <?php if (in_array("3",$chaplist)) {echo'href="EnglishChapter3Notes.php"';}?>>
                         <div <?php if (in_array("3",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>3</div>
                     </a>
                 </td>
                 <td></td>
                 <td>
-                    <a <?php if (in_array("6",$chaplist)) {echo'href="EnglishChapter6Questions.php"';}?>>
+                    <a <?php if (in_array("6",$chaplist)) {echo'href="EnglishChapter6Notes.php"';}?>>
                         <div <?php if (in_array("6",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>6</div>
                     </a>
                 </td>
             </tr>
         </table>
     </div>
+    <?php mysqli_close($connection);?>
 </body>
 </html>

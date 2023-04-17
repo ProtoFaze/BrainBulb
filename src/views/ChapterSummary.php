@@ -250,7 +250,6 @@
                 }
             }
 
-
             if($bol){
                 //update lvl sql
                 $query4 = "UPDATE `student` SET `level` = $level , `experience` = $v WHERE `student_ID` = '$studentID'";

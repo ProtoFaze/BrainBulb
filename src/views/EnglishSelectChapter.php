@@ -149,7 +149,7 @@
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>
-                    <a <?php if (in_array("1",$chaplist)) {echo'href="EnglishChapter1Questions.php"';}?>>
+                    <a <?php if (in_array("1",$chaplist)) {echo'href="EnglishChapter1Notes.php"';}?>>
                         <div <?php if (in_array("1",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
                             1
                         </div>
@@ -157,7 +157,7 @@
                 </td>
                 <td></td>
                 <td>
-                    <a <?php if (in_array("4",$chaplist)) {echo'href="EnglishChapter4Questions.php"';}?>>
+                    <a <?php if (in_array("4",$chaplist)) {echo'href="EnglishChapter4Notes.php"';}?>>
                         <div <?php if (in_array("4",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>
                             4
                         </div>
@@ -173,7 +173,7 @@
                     </div>
                 </td>
                 <td>
-                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Questions.php"';}?>>
+                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Notess.php"';}?>>
                         <div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div>
                     </a>
                 </td>
@@ -211,7 +211,7 @@
             </tr>
             <tr>
                 <td>
-                    <a <?php if (in_array("2",$chaplist)) {echo'href="EnglishChapter2Questions.php"';}?>>
+                    <a <?php if (in_array("2",$chaplist)) {echo'href="EnglishChapter2Notes.php"';}?>>
                         <div <?php if (in_array("2",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>2</div>
                     </a>
                 </td>
@@ -225,13 +225,13 @@
                     </div>
                 </td>
                 <td>
-                    <a <?php if (in_array("3",$chaplist)) {echo'href="EnglishChapter3Questions.php"';}?>>
+                    <a <?php if (in_array("3",$chaplist)) {echo'href="EnglishChapter3Notes.php"';}?>>
                         <div <?php if (in_array("3",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>3</div>
                     </a>
                 </td>
                 <td></td>
                 <td>
-                    <a <?php if (in_array("6",$chaplist)) {echo'href="EnglishChapter6Questions.php"';}?>>
+                    <a <?php if (in_array("6",$chaplist)) {echo'href="EnglishChapter6Notes.php"';}?>>
                         <div <?php if (in_array("6",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>6</div>
                     </a>
                 </td>

@@ -15,14 +15,8 @@
             session_start();
         }
 
-
-
-        // $user_id = $_SESSION['user_id'];
-        // $idsql = "SELECT student_ID FROM user WHERE user_ID = '$user_id'";
-        // $idRequest = mysqli_query($connection, $idsql);
-        // $student_id = mysqli_fetch_assoc($idRequest);
-        // $SESSION['student_id'] = mysqli_fetch_assoc($idRequest);
-        $student_id = 'ST00000001';
+        $student_id = $_SESSION['user_id'];;
+        // $student_id = 'ST00000001';
 
 
 

@@ -1,3 +1,6 @@
+<?php
+    // session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,21 +77,40 @@
     <div class="topnav">
         <a href="mainpage.php"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="navcontainer">
-            <?php if(isset($_SESSION['user_id'])){ 
-                echo'
-                <a class="navigations" href="logout.php">Logout</a>
-                <a class="navigations" href="#">View</a>
-                <a class="navigations" href="#">Join Quiz</a>
-                <a class="navigations" href="#">Course</a>
-                ';
-            }else{
+            <?php 
+            if (isset($_SESSION['errors'])){
+                if(substr($_SESSION['user_id'],0,2) == "ST"){ 
+                    echo'
+                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="#">View</a>
+                    <a class="navigations" href="#">Join Quiz</a>
+                    <a class="navigations" href="#">Course</a>
+                    ';
+                }elseif(substr($_SESSION['user_id'],0,2) == "PT"){
+                    echo'
+                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="#">131</a>
+                    <a class="navigations" href="#">Join Quiz</a>
+                    <a class="navigations" href="#">Course</a>
+                    ';
+                }elseif(substr($_SESSION['user_id'],0,2) == "TC"){
+                    echo'
+                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="#">View2</a>
+                    <a class="navigations" href="#">Join Quiz</a>
+                    <a class="navigations" href="#">Course</a>
+                    ';
+                }
+            }
+            else{
                 echo'
                 <a class="navigations scroll-link" href="login&register.php">Get Started</a>
                 <a class="navigations scroll-link" href="#useCaseScroll">Use cases</a>
                 <a class="navigations scroll-link" href="#featuresScroll">Features</a>
                 <a class="navigations scroll-link" href="#coursesScroll">Courses</a>
                 ';
-            } ?>
+            }
+            ?>
         </div>
     </div>
 </body>

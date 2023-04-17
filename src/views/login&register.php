@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -286,22 +289,31 @@
         </div>
     <?php
         if(isset($_POST['enter'])){
-            $username = $_POST['name'];
+            $username = $_POST['username'];
             $password = $_POST['pass'];
             $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password'";
             $result = mysqli_query($connection,$sql);
             $row = mysqli_fetch_assoc($result);
-            if($row['user_Type'] == "Admin"){
-                $_SESSION['user_id'] = $row['admin_ID'];
-            }
-            elseif($row['user_Type'] == "Teacher"){
-                $_SESSION['user_id'] = $row['teacher_ID'];
-            }
-            elseif($row['user_Type'] == "Student"){
-                $_SESSION['user_id'] = $row['student_ID'];
+            $count = mysqli_num_rows($result);
+            if($count > 0){
+                if($row['user_Type'] == "Admin"){
+                    $_SESSION['user_id'] = $row['admin_ID'];
+                    
+                }
+                elseif($row['user_Type'] == "Teacher"){
+                    $_SESSION['user_id'] = $row['teacher_ID'];
+                }
+                elseif($row['user_Type'] == "Student"){
+                    $_SESSION['user_id'] = $row['student_ID'];
+                    echo $_SESSION['user_id'];
+                }
+                else{
+                    $_SESSION['user_id'] = $row['parent_ID'];
+                }
+                echo "<script> location.href='mainpage.php'</script>";
             }
             else{
-                $_SESSION['user_id'] = $row['parent_ID'];
+                echo "<script> alert('No username and password exist'); </script>";
             }
         }
     ?>

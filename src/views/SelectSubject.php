@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -68,7 +71,7 @@
                     <p>Science</p>
                 </div>
             </a>
-            <a href="" class="subject">
+            <a href="EnglishSelectChapter.php" class="subject">
                 <div>
                     <img src="../../images/english1.png" alt="">
                     <p>English</p>

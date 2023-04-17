@@ -333,6 +333,6 @@
         document.getElementById('timespent').textContent = Tspent;
         // document.getElementById('xpAmount').textContent = xpValue.toString();
     }
-    
+    <?php mysqli_close($connection);?>
 </script>
 </html>

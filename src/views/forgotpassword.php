@@ -232,13 +232,20 @@
         .registeroptions:active{
             transform: scale(0.90);
         }
+
+        .cross{
+            position:absolute;
+            width: 50px;
+            height: auto;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
     <?php
         include("../components/nav.php");
         include "../database/connect.php";
-
     ?>
         <div class="contain" id="container">
             <div class="form-container sign-up-container">
@@ -252,6 +259,9 @@
                 </form>
             </div>
             <div class="form-container sign-in-container">
+                <a href="login&register.php">
+                    <img src="../../images/cross1.jpg" class="cross">
+                </a>
                 <form action="" class="lrform" method="post">
                     <h1 class="heavytitle">Forgot Password</h1>
                     <br>
@@ -259,7 +269,7 @@
                     <input type="password" name="pass" placeholder="Email Address" class="input-field" required />
                     <!-- <a href="#" class="alink">Forgot your password?</a> -->
                     <br>
-                    <input type="submit" name="enter" class="login-btn" value="Continue" id="signUp"></input>
+                        <input type="submit" name="enter" class="login-btn" value="Continue" id="signUp">
                 </form>
             </div>
             <div class="overlay-container">
@@ -292,6 +302,10 @@
         // signInButton.addEventListener('click', () => {
         //     container.classList.remove("right-panel-active");
         // });
+        function goback(){
+            location.href = "login&register.php"
+        }
     </script>
+    <?php mysqli_close($connection);?>
 </body>
 </html>

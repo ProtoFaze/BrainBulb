@@ -31,8 +31,8 @@
         }
 
         .normaltext {
-            font-size: 15px;
-            font-weight: 100;
+            font-size: 18px;
+            font-weight: 110;
             line-height: 1.3;
             letter-spacing: 0.5px;
             margin: 20px 0 30px;
@@ -40,7 +40,7 @@
 
         .alink{
             color: #333;
-            font-size: 14px;
+            font-size: 17px;
             text-decoration: none;
             margin: 15px 0;
         }
@@ -330,5 +330,6 @@
             container.classList.remove("right-panel-active");
         });
     </script>
+    <?php mysqli_close($connection);?>
 </body>
 </html>

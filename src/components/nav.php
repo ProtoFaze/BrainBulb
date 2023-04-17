@@ -78,13 +78,13 @@
         <a href="mainpage.php"><img src="../../images/brain_logo2.png" style="width:auto; height:75px; margin-left:45px;"></a>
         <div class="navcontainer">
             <?php 
-            if (isset($_SESSION['errors'])){
+            if (isset($_SESSION['user_id'])){
                 if(substr($_SESSION['user_id'],0,2) == "ST"){ 
                     echo'
                     <a class="navigations" href="logout.php">Logout</a>
                     <a class="navigations" href="#">View</a>
-                    <a class="navigations" href="#">Join Quiz</a>
-                    <a class="navigations" href="#">Course</a>
+                    <a class="navigations" href="#">'.$_SESSION['user_id'].'</a>
+                    <a class="navigations" href="SelectSubject.php">Select Subject</a>
                     ';
                 }elseif(substr($_SESSION['user_id'],0,2) == "PT"){
                     echo'

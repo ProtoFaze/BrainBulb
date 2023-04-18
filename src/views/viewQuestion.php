@@ -20,7 +20,7 @@ Get option answer
     <title>View Question</title>
     <style>
         body {
-            background-image: url(imgFile/spaceBG.png);
+            background-image: url(images/spaceBG.png);
             background-size: cover;
             background-attachment: fixed;
         }

@@ -113,7 +113,7 @@
             </form>
         </div>
     </div>
-    <img src="imgFile/coral-reef.png" alt="" id="coralPic" class="pic">
-    <img src="imgFile/coral.png" alt="" id="coralPic2" class="pic">
+    <img src="images/coral-reef.png" alt="" id="coralPic" class="pic">
+    <img src="images/coral.png" alt="" id="coralPic2" class="pic">
 </body>
 </html>

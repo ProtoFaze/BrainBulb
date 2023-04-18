@@ -27,7 +27,6 @@ Get correct Attempts
  -->
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

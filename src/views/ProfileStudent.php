@@ -15,11 +15,8 @@
             session_start();
         }
 
-
-
-
-
-        $student_id = 'ST00000001';
+        $student_id = $_SESSION['user_id'];;
+        // $student_id = 'ST00000001';
 
 
 
@@ -41,8 +38,82 @@
         $achievementRequest = mysqli_query($connection, $achievementSQL);
 
         //student performance
-        $performancesql = "SELECT * FROM student WHERE student_ID = '$student_id'";
+        // need subject name  from subject table
+        // need average score from average score of student response
+        // need total time
+        $performancesql = "SELECT `subject`.`subject_Name`,
+           SUM(             
+            COALESCE(question1, 0) + 
+            COALESCE(question2, 0) + 
+            COALESCE(question3, 0) + 
+            COALESCE(question4, 0) + 
+            COALESCE(question5, 0) + 
+            COALESCE(question6, 0) + 
+            COALESCE(question7, 0) + 
+            COALESCE(question8, 0) + 
+            COALESCE(question9, 0) + 
+            COALESCE(question10, 0)
+           ) AS correct,
+           SUM(
+            CASE WHEN question1 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question2 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question3 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question4 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question5 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question6 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question7 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question8 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question9 IS NOT NULL THEN 1 ELSE 0 END + 
+            CASE WHEN question10 IS NOT NULL THEN 1 ELSE 0 END
+           ) AS total_questions,
+           SUM(TIME_TO_SEC(TIMEDIFF(end_Datetime, start_Datetime)))/3600 AS total_time
+    FROM `studentquestionresponse`
+    JOIN `course` ON `studentquestionresponse`.`course_ID` = `course`.`course_ID`
+    JOIN `subject` ON `course`.`subject_ID` = `subject`.`subject_ID`
+    WHERE studentquestionresponse.student_ID = '$student_id'
+    GROUP BY subject.subject_ID";
         $performanceRequest = mysqli_query($connection, $performancesql);
+
+        $activitysql = "SELECT 
+            s.subject_Name, c.course_ID,
+            (             
+                COALESCE(question1, 0) + 
+                COALESCE(question2, 0) + 
+                COALESCE(question3, 0) + 
+                COALESCE(question4, 0) + 
+                COALESCE(question5, 0) + 
+                COALESCE(question6, 0) + 
+                COALESCE(question7, 0) + 
+                COALESCE(question8, 0) + 
+                COALESCE(question9, 0) + 
+                COALESCE(question10, 0)
+            ) AS correct,
+            (
+                CASE WHEN question1 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question2 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question3 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question4 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question5 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question6 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question7 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question8 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question9 IS NOT NULL THEN 1 ELSE 0 END + 
+                CASE WHEN question10 IS NOT NULL THEN 1 ELSE 0 END
+            ) AS total_questions,
+            c.chapter_Name, sr.end_Datetime
+            FROM (
+            SELECT c.subject_ID, MAX(sr.end_Datetime) AS latest_datetime
+            FROM studentquestionresponse sr
+            INNER JOIN course c ON c.course_ID = sr.course_ID
+            WHERE student_ID = '$student_id'
+            GROUP BY c.subject_ID
+            ) AS latest
+            INNER JOIN studentquestionresponse sr ON sr.end_Datetime = latest.latest_datetime
+            INNER JOIN course c ON c.course_ID = sr.course_ID
+            INNER JOIN subject s ON s.subject_ID = c.subject_ID
+            WHERE sr.student_ID = '$student_id'
+            ORDER BY s.subject_ID";
+        $activityRequest = mysqli_query($connection, $activitysql);
 
     //redirect to child
         if(isset($_POST['child'])){
@@ -75,7 +146,84 @@
         .split_section,.split_subsection{
             flex-grow: 1;
         }
+        .expandedinfo{
+            display: none;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px 30px 0px 0px;
+            gap: 10px;
+
+            /* Inside auto layout */
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+            transition: var(--transitionspeed);
+        }
+        .expandedinfo>h3{
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            line-height: 0.1;
+            /* Inside auto layout */
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+        .expandedinfo>.additional_info{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 0px 30px 30px;
+            gap: 10px;
+            /* Inside auto layout */
+            flex: none;
+            order: 1;
+            align-self: stretch;
+            flex-grow: 0;
+        }
+        .expandedinfo>.additional_info>.chart_frame{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            /* Inside auto layout */
+
+            width: 300px;
+        }
+        .expandedinfo .column{
+            display: inherit;
+            align-self: stretch;
+            align-items: stretch;
+        }
+        .column>.heading_and_data{
+            align-self: stretch;
+            align-items: stretch;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">
+        function expand(index) {
+            var button = document.getElementById("course" + index);
+            var subjectBox = document.getElementById("expandedinfo" + index);
+            var contentBox = document.querySelector('.content_box');
+            var contentBoxBottom = contentBox.offsetTop + contentBox.clientHeight;
+            if (subjectBox.style.display === "flex") {
+                subjectBox.style.display = "none";
+                button.style.transform = "rotateX(0deg)";
+            } else {
+                subjectBox.style.display = "flex";
+                button.style.transform = "rotateX(180deg)";
+                var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
+                var scrollOffset = subjectBoxBottom - contentBoxBottom;
+                contentBox.scrollBy({
+                top: scrollOffset,
+                behavior: 'smooth'
+                });
+            }
+        }
+
+    </script>
 </head>
 <body>
     <header>
@@ -128,22 +276,66 @@
             </div>
         </div>
 
-        <!-- bottom section containing children info -->
+        <!-- bottom section containing subject performance -->
         <div class="content_box">
-        <?php if(mysqli_num_rows($childRequest) > 0){
-            while ($child = mysqli_fetch_assoc($childRequest)) {
+        <?php if((mysqli_num_rows($performanceRequest) > 0)&&(mysqli_num_rows($activityRequest) > 0)){
+            $index=0;
+            while (($score = mysqli_fetch_assoc($performanceRequest))&&($activity = mysqli_fetch_assoc($activityRequest))) {
+                $time = number_format($score['total_time'], 2);
+                $average = ($score['correct']/$score['total_questions'])*100;
+                $incorrect = $score['total_questions']-$score['correct'];
+                $latestPerformance = ($activity['correct']/$activity['total_questions'])*100;
             echo <<<HTML
-                <div class="row">
-                    <div class="info_ltr">$child[student_ID]</div>
-                    <div class="info_ltr">$child[sName]</div>
-                    <div class="info_ltr">Score : $child[sGrade]</div>
-                    <div class="info_ltr">Streak: $child[aFrequency]</div>
-                    <form action="window.location.href = 'mainpage.php'" method="post">
-                        <input type="hidden" name="child" value="$child[student_ID]">
-                        <button class="materials-symbols-outlined flex_button" type="submit">More Details<span class="material-symbols-outlined">arrow_forward_ios</span></button>
-                    </form>
-                </div>
+                    <div class="row">
+                        <div class="info_ltr"><h3>$score[subject_Name]</h3></div>
+                        <div class="info_ltr">Score: $average%</div>
+                        <div class="info_ltr">$time Hours</div>
+                        <div class="info_ltr"><button id = "course$index" class="material-symbols-outlined flex_button" onclick=expand($index)>expand_more</button></div>
+                    </div>
+                    <div class="expandedinfo" id = "expandedinfo$index">
+                        <div style="display: flex; justify-content: space-between; align-self: stretch;"><h3>Overall Performance</h3><h3>Latest Activity </h3></div>
+
+                        <div class="additional_info">
+                            <div class="chart_frame">
+                                <canvas id="barChart$index" ></canvas>
+                            </div>
+                            <div class="column">
+                                <div class="heading_and_data">
+                                    <div class="info_ltr"><div>$activity[chapter_Name]</div><div>$activity[correct]/$activity[total_questions]</div></div>
+                                    <div class="info_ltr">completed on $activity[end_Datetime]</div >
+                                </div>
+                                <div class="info_ltr"><div>Performance</div><div>$latestPerformance%</div></div>
+                            </div>
+                        </div>
+                    </div>
             HTML;
+            echo <<<JS
+                <script type="text/javascript">
+                    Chart.defaults.plugins.legend.position = "left";
+                    var ctx = document.getElementById('barChart$index');
+                    
+                    new Chart(ctx,
+                    {
+                    type: 'pie',
+                    data: {
+                        labels: ['correct', 'incorrect'],
+                        datasets: [{
+                            label: 'Overall Performance',
+                            data: [$score[correct],$incorrect],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        aspectRatio: 3
+                    }
+                    });
+            </script>
+            JS;
+            $index++;
         }}else{
                 echo "<h2> No children found </h2>";
             }?>

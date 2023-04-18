@@ -102,7 +102,7 @@
     }
 
     .box:hover{
-        transform: scale(1.15);
+        transform: scale(1.07);
     }
 
     .box:active{
@@ -122,7 +122,7 @@
     }
 
     .boxes:hover{
-        transform: scale(1.15);
+        transform: scale(1.07);
     }
 
     .boxes:active{
@@ -222,6 +222,7 @@
         /* height: 400px; */
         height: auto;
         overflow: hidden;
+        -webkit-user-select: none;
     }
 
     .pages{
@@ -395,7 +396,7 @@
     }
 
     .resetpair:hover{
-        transform: scale(1.15);
+        transform: scale(1.000000009);
     }
 
     .resetpair:active{
@@ -408,11 +409,16 @@
     var questionmode = [];
     var connectlineanswer = [];
     var fillinblankans = [];
+    const datetimeString = new Date();
+    // const datetimeString = now.replace(/T/, ' ').replace(/\..+/, '');
 </script>
 <body>
     <?php
-        include "../database/connect.php";
+        // $studentID = "ST00000008";
+        // $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
+        // $_SESSION['ctime'] = new DateTime('now', $timezone);
         $courseID = "CR00000003";
+        include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
@@ -644,10 +650,11 @@
         return true;
     }
 
-    console.log(questionmode);
-    console.log(mcqanswer);
-    console.log(connectlineanswer);
-    var lvlxp = 10;
+    // console.log(questionmode);
+    // console.log(mcqanswer);
+    // console.log(connectlineanswer);
+    var resp = [];
+    var lvlxp = 0;
     var correctness = 0;
     var wrongness = 0;
     var fillinamount = 0;
@@ -699,6 +706,8 @@
                 }, 2300);
                 mcqselect = "";
                 correctness += 1;
+                lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -716,6 +725,8 @@
                 }, 2300);
                 mcqselect = "";
                 wrongness += 1;
+                lvlxp += 5;
+                resp.push(false);
             }
 
             nextbtn.disabled = true;
@@ -740,6 +751,8 @@
                     }, 300);
                 }, 2300);
                 correctness += 1;
+                lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -756,6 +769,8 @@
                     }, 300);
                 }, 2300);
                 wrongness += 1;
+                lvlxp += 5;
+                resp.push(false);
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -776,6 +791,8 @@
                     }, 300);
                 }, 2300);   
                 correctness += 1;
+                lvlxp += 15;
+                resp.push(true);
             }
             else{
                 buttonbg.classList.add('button-bg-animation-wrong');
@@ -792,6 +809,8 @@
                     }, 300);
                 }, 2300);
                 wrongness += 1;
+                lvlxp += 5;
+                resp.push(false);
             }
             nextbtn.disabled = true;
             selectedPairs = [];
@@ -802,10 +821,14 @@
     function ifended(){
         indexans += 1
         if(indexans === <?php echo $count;?>){
+            const Edatetime = new Date();
             location.href='ChapterSummary.php';
             localStorage.setItem('correct',correctness);
             localStorage.setItem('wrong',wrongness);
             localStorage.setItem('xp',lvlxp);
+            localStorage.setItem('starttime',datetimeString);
+            localStorage.setItem('endtime',Edatetime);
+            localStorage.setItem('res',resp);
         }
         else{
             slide("next");
@@ -970,6 +993,6 @@
         }
         return false;
     }
-
+    <?php mysqli_close($connection);?>
 </script>
 </html>

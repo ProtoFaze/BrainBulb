@@ -32,7 +32,7 @@
     <style>
         body {
             font-size: large;
-            background-image: url(imgFile/wave.jpg);
+            background-image: url(images/wave.jpg);
             background-repeat: no-repeat;
             background-attachment: fixed; 
             background-size: cover;

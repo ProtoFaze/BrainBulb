@@ -25,7 +25,7 @@ cant use count directly as the questions are all different
     <title>Student Performance</title>
     <style>
         body {
-            background-image: url(imgFile/night.png);
+            background-image: url(images/night.png);
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;

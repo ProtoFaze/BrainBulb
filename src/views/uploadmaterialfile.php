@@ -34,12 +34,13 @@
         /* flex-direction: row; */
         justify-content: center;
         align-items: center;
+        margin:50px;
     }
 
     .drag-area{
-        margin-top: 50px;
+        /* margin-top: 50px; */
         border: 2px dashed black;
-        height: 500px;
+        height: 420px;
         width: 700px;
         border-radius: 5px;
         display: flex;
@@ -72,8 +73,8 @@
         font-weight: 500;
         border: none;
         outline: none;
-        background: #fff;
-        color: #0fb8ac;
+        background: black;
+        color: white;
         border-radius: 5px;
         cursor: pointer;
     }
@@ -86,6 +87,22 @@
 
     #forms{
         
+    }
+
+    .inputform{
+        text-align: center;
+    }
+
+    #submitbutton, #gobackbutton{
+        padding: 10px 25px;
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        background: black;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
     }
 </style>
 <script>
@@ -119,22 +136,28 @@
                 <input type="file" name="file1" hidden>
             </div>    
         </div>
-        <div>
+        <div class="inputform">
             <form action="" method="post" id="forms">
                 <input type="text" name="mattitle" id="">
                 <input type="hidden" name="hide" value="">
-                <input type="submit" value="Submit" name="subbtn">
+                <input type="submit" value="Upload" name="subbtn" id="submitbutton">
             </form>
-            <button onclick="backgo()">Cancel</button>
+            <button id="gobackbutton" onclick="backgo()">Cancel</button>
         </div>
     </div>
     <?php
         if(isset($_POST['subbtn'])){
             $title = $_POST['mattitle'];
-            $subtops = $_POST['subtop'];
             $filename = $_POST["hide"];
             $date = date("Y-m-d");
             $q = "INSERT INTO `learning_material`(`course_ID`, `teacher_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$a','$title','$filename','$date')";
+            $results = mysqli_query($connection,$q);
+            if($results){
+                echo "<script> alert('Uploaded Sucessfully')</script>";
+                echo "<script>location.href='viewlearningmaterial.php' </script>";
+            }else{
+                echo "<script>alert('Uploaded Unsucessfully')</script>";
+            }
         }
     ?>
     <script>        
@@ -173,19 +196,22 @@
 
         function showFile(){
             let fileType = file.type; 
-            let validExtensions = ["application/msword","application/pdf"]; 
+            let validExtensions = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/pdf","application/vnd.openxmlformats-officedocument.presentationml.presentation"]; 
+            console.log(fileType);
             if(validExtensions.includes(fileType)){
-                console.log(file.name);
                 var form = document.getElementById("forms");
                 var hiddenInput = form.querySelector('input[name="hide"]');
                 hiddenInput.value = file.name;
-                dropArea.innerHTML = "<h1>Uploaded Successfully</h1>"; //adding that created img tag inside dropArea container
+                dropArea.innerHTML = "<img src='../../images/accept.png' style='width:90px; height:auto;'><h1>File Recognised</h1>";
             }else{
-                alert("This is not an Image File!");
+                alert("This is not a Valid File");
                 dropArea.classList.remove("active");
                 dragText.textContent = "Drag & Drop to Upload File";
             }
         }
     </script>
+    <?php
+        mysqli_close($connection);
+    ?>
 </body>
 </html>

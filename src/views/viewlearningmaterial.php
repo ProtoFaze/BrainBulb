@@ -102,4 +102,7 @@
         ?>
     </div>
 </body>
+<?php
+    mysqli_close($connection);
+?>
 </html>

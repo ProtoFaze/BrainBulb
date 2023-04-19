@@ -119,14 +119,17 @@
 
         .ask-Btn, .sort-Btn {
             background-color: #3a4b61;
+            border: none;
             color: #f1f4f3;
-            padding:10px 15px;
-            width: 160px;
-            border-radius: 8px;
+            padding: 10px 20px;
             text-align: left;
+            text-decoration: none;
+            display: inline-block;
             font-size: 16px;
-            padding-left: 20px;
-            
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
         }
 
         .functionButton{

@@ -24,9 +24,7 @@ VALUES (value1, value2, value3, ...); -->
 
     <style>
         body {
-            background-image: url(imgFile/oceanBG.png);
-            background-repeat: no-repeat;
-            background-size: cover;
+            
         }
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);

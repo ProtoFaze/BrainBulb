@@ -25,7 +25,7 @@ cant use count directly as the questions are all different
     <title>Student Performance</title>
     <style>
         body {
-            background-image: url(imgFile/night.png);
+            background-image: url(images/night.png);
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
@@ -149,17 +149,18 @@ cant use count directly as the questions are all different
             to {
                 transform: rotateZ(80deg) translate(100px, -1300px);
             }
+           
         }
 
 
     </style>
 </head>
 <body>
-    <img src="imgFile/planet3.png" alt="" id="planet" >
-    <img src="imgFile/planet4.png" alt="" id="planet2" >
-    <img src="imgFile/planet5.png" alt="" id="planet3" >
-    <img src="imgFile/planet6.png" alt="" id="planet4" >
-    <img src="imgFile/planet7.png" alt="" id="planet5" >
+    <img src="images/planet3.png" alt="" id="planet" >
+    <img src="images/planet4.png" alt="" id="planet2" >
+    <img src="images/planet5.png" alt="" id="planet3" >
+    <img src="images/planet6.png" alt="" id="planet4" >
+    <img src="images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
         <h3>Quizz 2 Student Performance</h3>
         <div class="student">

@@ -12,12 +12,13 @@
     }
 
     .mat{
-        margin: 20px;
-        /* padding: 10px; */
+        margin: 20px auto;
         background-color: lightgrey;
         border-radius: 5px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-
+        width: 100%;
+        table-layout: auto;
+		border-collapse: collapse;
     }
 
     .mat a{
@@ -26,9 +27,22 @@
         font-weight: bold;
     }
 
-    .mat li{
-        padding: 20px 20px;
-        font-size: 30px;    
+    .mat td{
+        padding: 22px 22px;
+        font-size: 20px;    
+        /* border: 1px solid black; */
+    }
+
+    .mat tr:hover{
+        background-color: darkgrey;
+    }
+
+    .mat td a{
+        font-size: 30px;
+    }
+
+    .mat td p{
+        font-size: 22px;
     }
 
     .topic{
@@ -52,7 +66,6 @@
         $a = "TC00000002";
         include "../database/connect.php";
         include "../components/nav.php";
-
         $lis = array();
         $query = "SELECT * FROM course WHERE question_Type = 'Customised Quiz' AND teacher_ID = '$a'";
         $results = mysqli_query($connection,$query);
@@ -62,7 +75,7 @@
     ?>
     <div class="big">
         <div class="topic">
-            <h1 style="font-size:35px;">Your Learning Materials</h1>
+            <h1 style="font-size:35px;">Your Quiz Learning Materials</h1>
         </div>
         <?php
             foreach($lis as $data){
@@ -83,20 +96,53 @@
                     $query = "SELECT * FROM ((learning_material INNER JOIN course ON course.course_ID = learning_material.course_ID) INNER JOIN subject ON subject.subject_ID = course.subject_ID) WHERE learning_material.teacher_ID = '$a' AND course.course_ID = '$data'";
                     $results = mysqli_query($connection,$query);
                     if(mysqli_num_rows($results) > 0){
-                        echo "<ul class='mat'>";
+                        echo "<table class='mat' cellpadding='5px'>";
                         while ($row = mysqli_fetch_assoc($results)) {
-                            echo "<li>";
+                            $nowdate = date("Y-m-d");
+                            $duration = date_diff(date_create($row['post_Material_Date']), date_create($nowdate));
+                            if($duration->format("%a") == "0"){
+                                $d = "Today";
+                            }
+                            else{
+                                $d = $duration->format("%a days ago");
+                            }
+
+                            if(substr($row['filename'],-4) == "pptx"){
+                                $imgs = "ppt";
+                            }
+                            elseif(substr($row['filename'],-4) == "docx" || substr($row['filename'],-3) == "doc"){
+                                $imgs = "words";
+                            }
+                            elseif(substr($row['filename'],-3) == "pdf"){
+                                $imgs = "pdf";
+                            }
+
+                            echo "<tr>";
+                            echo "<td>";
+                            echo "<img style='width:30px; height:auto;' src='../../images/".$imgs.".png'>";
+                            echo "</td>";
+                            echo "<td>";
                             echo "<a target='_blank' href='../../materials/".$row['filename']."'>".$row['filename']."</a>";
-                            echo "<a href=''><img src='../../images/delete.png' style='width:30px; height:auto;'></a>";
-                            echo "</li>";
+                            echo "</td>";
+                            echo "<td>";
+                            echo "<p style='margin:0;'>".$row['material_Title']."</p>";
+                            echo "</td>";
+                            echo "<td>";
+                            echo "<p style='margin:0;'>".$d."</p>";
+                            echo "</td>";
+                            echo "<td>";
+                            echo "<a href='deletematerialfile.php?sub=".$row['material_ID']."'><img src='../../images/delete.png' style='width:30px; height:auto;'></a>";
+                            echo "</td>";
+                            echo "</tr>";
                         }
-                        echo "</ul>";
+                        echo "</table>";
                     }
                     else{
                         echo "<center><h1> No learning materials added</h1></center>";
                     }
                 ?>
             </div>
+            <div style="height:30px;"></div>
         <?php
             }
         ?>

@@ -131,11 +131,11 @@
 <body>
     <?php
         $chaplist = array();
-        $studentID = "ST00000008";
+        $studentID = "ST00000001";
         $subjectID = 'SJ00000002';//fixed subject
         include("../components/nav.php");
         include "../database/connect.php";
-        $query = "SELECT * FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.student_ID = '$studentID' AND course.subject_ID = '$subjectID'";
+        $query = "SELECT * FROM studentquestionresponse INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.student_ID = '$studentID' AND course.question_Type = 'Build In Assessment' AND course.subject_ID = '$subjectID'";
         $results = mysqli_query($connection,$query);
         if(mysqli_num_rows($results) > 0){
             while ($row = mysqli_fetch_assoc($results)) {

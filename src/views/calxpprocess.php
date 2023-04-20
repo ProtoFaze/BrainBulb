@@ -17,9 +17,11 @@
             $myVariable = $_POST['myVariable'];
             $t = $_POST['my'];
             $t2 = $_POST['my2'];
+            echo $t;
+            echo $t2;
             $_SESSION['xp'] = $myVariable;
-            $_SESSION['ctime'] = $t;
-            $_SESSION['etime'] = $t2; 
+            // $_SESSION['ctime'] = $t;
+            // $_SESSION['etime'] = $t2; 
             $myArray = json_decode($_POST["myArray"]);
             $myArray = explode(",",$myArray);
             $Array = array();
@@ -37,8 +39,7 @@
             $r = mysqli_query($connection, $q);
             $ro = mysqli_fetch_assoc($r);
             $num = "RP" . str_pad($ro['id']+1, 8, '0', STR_PAD_LEFT);
-            // echo $num;
-            $sql1 = "INSERT INTO studentquestionresponse (`response_ID`,`course_ID`,`student_ID`) VALUES ('$num','$c','$studentid')";
+            $sql1 = "INSERT INTO studentquestionresponse (`response_ID`,`course_ID`,`student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$num','$c','$studentid','$t','$t2')";
             mysqli_query($connection, $sql1);
             for ($i = 1; $i <= count($Array); $i++){
                 $value = mysqli_real_escape_string($connection, $Array[$i-1]);    

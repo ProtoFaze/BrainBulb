@@ -20,7 +20,7 @@ Get option answer
     <title>View Question</title>
     <style>
         body {
-            background-image: url(imgFile/spaceBG.png);
+            background-image: url(images/spaceBG.png);
             background-size: cover;
             background-attachment: fixed;
         }
@@ -125,9 +125,9 @@ Get option answer
     </style>
 </head>
 <body>
-    <img src="imgFile/spaceship.png" alt="" id="spaceship">
-    <img src="imgFile/planet.png" alt="" id="planet">
-    <img src="imgFile/galaxy.png" alt="" id="galaxy">
+    <img src="images/spaceship.png" alt="" id="spaceship">
+    <img src="images/planet.png" alt="" id="planet">
+    <img src="images/galaxy.png" alt="" id="galaxy">
     <div id="viewquiz">
         <div class="qBlock">
             <h3>Question 1</h3>

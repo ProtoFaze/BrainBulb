@@ -111,7 +111,7 @@
     include "../database/connect.php";
     $studentID = 'ST00000005';  
     $courseID = $_SESSION['course'];
-    $query2 = "SELECT * FROM `learning_record` INNER JOIN course ON course.course_ID = learning_record.course_ID WHERE learning_record.course_ID = '$courseID'";
+    $query2 = "SELECT * FROM `studentquestionresponse` INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.course_ID = '$courseID'";
     $query3 = "SELECT * FROM `student` WHERE student_ID = '$studentID'";
     $results2 = mysqli_query($connection,$query2);
     $results3 = mysqli_query($connection,$query3);
@@ -261,10 +261,10 @@
                 $results5 = mysqli_query($connection,$query5);
             }
 
-            $stime_str = $_SESSION['ctime'];
-            $time_str = $_SESSION['etime'];
-            $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$courseID','$studentID','$stime_str','$time_str')";
-            $result = mysqli_query($connection,$query);
+            // $stime_str = $_SESSION['ctime'];
+            // $time_str = $_SESSION['etime'];
+            // $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$courseID','$studentID','$stime_str','$time_str')";
+            // $result = mysqli_query($connection,$query);
             ?>  
                 <style>
                     .progress-striped .progress-bar { 	

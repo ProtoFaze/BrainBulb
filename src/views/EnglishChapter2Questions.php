@@ -403,6 +403,63 @@
         transform: scale(0.91);
     }
 
+    .popuphuman{
+        position:fixed;
+        top:100px;
+        left:-300px;
+        width:100%;
+        height:100%;
+        max-width: 500px;
+        max-height: 449px;
+        display: none;
+        animation-duration: 1s;
+        animation-name: popupani;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        z-index: 2;
+    }
+
+    @keyframes popupani{
+        from {
+            transform: translate(0, 0);
+            opacity: 0;
+            visibility: hidden;
+        }
+        to {
+            transform: translate(300px, 0);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    .popupchat{
+        position:fixed;
+        top:150px;
+        left: -550px;
+        width:100%;
+        height:100%;
+        max-width: 338px;
+        max-height: 246px;
+        animation-name: popupani2;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+        z-index: 2;
+        display: none;
+    }
+
+    @keyframes popupani2{
+        from {
+            transform: translate(0, 0);
+            opacity: 0;
+            visibility: hidden;
+        }
+        to {
+            transform: translate(500px, 0);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
 </style>
 <script>
     var mcqanswer = [];
@@ -410,13 +467,9 @@
     var connectlineanswer = [];
     var fillinblankans = [];
     const datetimeString = new Date();
-    // const datetimeString = now.replace(/T/, ' ').replace(/\..+/, '');
 </script>
 <body>
     <?php
-        // $studentID = "ST00000008";
-        // $timezone = new DateTimeZone('Asia/Kuala_Lumpur');
-        // $_SESSION['ctime'] = new DateTime('now', $timezone);
         $courseID = "CR00000003";
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
@@ -424,7 +477,6 @@
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
         $qid = array();
-        // $arra = array();
         $ind = 0;
     ?>
     <div class="maincontainer">    
@@ -463,6 +515,10 @@
                     </svg>
                     <h2>You got Wrong!</h2>
                 </div>
+            </div>
+            <div>
+                <img src="../../images/human2.png" class='popuphuman'>
+                <!-- <img src="../../images/chat.png" class='popupchat'> -->
             </div>
             <?php $c = $count * 100;?>
             <div class="pages" <?php echo'style="width:'.$c.'%;"'; ?>>
@@ -653,6 +709,9 @@
     // console.log(questionmode);
     // console.log(mcqanswer);
     // console.log(connectlineanswer);
+    const constant = [true,true,false,false,false,false,false,false,false,false];
+    const humani = document.querySelector(".popuphuman");
+    const chatani = document.querySelector(".popupchat");
     var resp = [];
     var lvlxp = 0;
     var correctness = 0;
@@ -727,6 +786,10 @@
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
+                humani.style.display = "block";
+                // if(constant[Math.floor(Math.random() * 10)]){
+                //     humani.style.display = "block";
+                // }
             }
 
             nextbtn.disabled = true;
@@ -771,6 +834,10 @@
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
+                humani.style.display = "block";
+                // if(constant[Math.floor(Math.random() * 10)]){
+                //     humani.style.display = "block";
+                // }
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -807,10 +874,17 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
+                    humani.style.display = "none";  
+                    chatani.style.display = "none";  
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
+                humani.style.display = "block";
+                chatani.style.display = "block";
+                // if(constant[Math.floor(Math.random() * 10)]){
+                //     humani.style.display = "block";
+                // }
             }
             nextbtn.disabled = true;
             selectedPairs = [];

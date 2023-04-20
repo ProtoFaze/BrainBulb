@@ -226,7 +226,7 @@
                 <div>
                     <h2 style="text-align: justify; font-size:22px; text-justify: inter-word; font-weight:600; opacity:70%; line-height: 1.3;">An e-learning platform empowering parents and teachers to enrich their children's knowledge and equip them with the skills to succeed in the future. <br/>BrainBulb is designed to provide a one-stop-shop for all your educational needs, including interactive lessons, and engaging activities.<br/> Join us, and you can give your child the gift of lifelong learning and help them discover their full potential.</h2>
                 </div>
-                <form action="login&register.php">
+                <form action="loginAndRegister.php">
                     <input type="submit" value="Get started" class="start-btn">
                 </form>
             </div>
@@ -357,7 +357,7 @@
         </div>
         <div style="text-align: center; margin: 100px 0px;">
             <h1>Join Over 1 million primary students learning on BrainBulb</h1>
-            <form action="login&register.php">
+            <form action="loginAndRegister.php">
                 <input type="submit" value="Get started" class="start-btn" style="padding: 23px 30px; margin-top:30px;font-size:20px;">
             </form>
            

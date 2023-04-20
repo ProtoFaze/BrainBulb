@@ -9,19 +9,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
+    <script type="text/javascript">
+    //scroll animation
     $(document).ready(function() {
-        $('.scroll-link').click(function(e) {
-            e.preventDefault();
-            var target = $(this).attr('href');
-            $('html, body').animate({
-                scrollTop: $(target).offset().top
-            }, 500);
-        });
+      $('.scroll-link').click(function(e) {
+        e.preventDefault();
+        if (window.location.href.includes("mainpage.php")) {
+          var target = $(this).attr('href');
+          $('html, body').animate({
+              scrollTop: $(target).offset().top
+          }, 500);
+        } else {
+          window.location.href = "mainpage.php"+$(this).attr('href');
+        }
+      });
     });
     </script>
     <style>
-        *{
+       *{
             box-sizing: border-box;
         }
 
@@ -81,21 +86,21 @@
             if (isset($_SESSION['user_id'])){
                 if(substr($_SESSION['user_id'],0,2) == "ST"){ 
                     echo'
-                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="../backend/logout.php">Logout</a>
                     <a class="navigations" href="#">View</a>
-                    <a class="navigations" href="#">'.$_SESSION['user_id'].'</a>
+                    <a class="navigations" href="profileStudent.php">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="SelectSubject.php">Select Subject</a>
                     ';
                 }elseif(substr($_SESSION['user_id'],0,2) == "PT"){
                     echo'
-                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="../backend/logout.php">Logout</a>
                     <a class="navigations" href="#">131</a>
                     <a class="navigations" href="#">Join Quiz</a>
                     <a class="navigations" href="#">Course</a>
                     ';
                 }elseif(substr($_SESSION['user_id'],0,2) == "TC"){
                     echo'
-                    <a class="navigations" href="logout.php">Logout</a>
+                    <a class="navigations" href="../backend/logout.php">Logout</a>
                     <a class="navigations" href="#">View2</a>
                     <a class="navigations" href="#">Join Quiz</a>
                     <a class="navigations" href="#">Course</a>
@@ -103,8 +108,8 @@
                 }
             }
             else{
-                echo'
-                <a class="navigations scroll-link" href="login&register.php">Get Started</a>
+                echo '
+                <a class="navigations" href="loginAndRegister.php">Get Started</a>
                 <a class="navigations scroll-link" href="#useCaseScroll">Use cases</a>
                 <a class="navigations scroll-link" href="#featuresScroll">Features</a>
                 <a class="navigations scroll-link" href="#coursesScroll">Courses</a>

@@ -15,8 +15,8 @@
             session_start();
         }
 
-        $student_id = $_SESSION['user_id'];;
-        // $student_id = 'ST00000001';
+        // $student_id = $_SESSION['user_id'];;
+        $student_id = 'ST00000001';
 
 
 
@@ -123,6 +123,12 @@
         }
     ?>
     <style>
+        :root{
+            --misc: #1cb193; /*green*/
+            --bg: #d7eaf0;
+            --box-primary: #79d2e4;
+            --box-secondary: #29b2e0;
+        }
         main{
             padding: 0px 120px;
         }
@@ -143,6 +149,9 @@
         a{
             text-decoration: none;
         }
+        p{
+            font-size: 20px;
+        }
         .split_section,.split_subsection{
             flex-grow: 1;
         }
@@ -157,8 +166,13 @@
             flex: none;
             order: 1;
             align-self: stretch;
-            flex-grow: 0;
-            transition: var(--transitionspeed);
+            flex-grow: 1;
+            box-shadow: inset 0px -5px rgba(0,0,0,0.2);
+            border-radius: var(--border-radius);
+            /* transform: 0% 100%;
+            transform-origin: top;
+            transition: transform 0.3s ease-in-out; */
+            transition: all 0.5s ease-in-out;
         }
         .expandedinfo>h3{
             display: flex;
@@ -191,38 +205,92 @@
 
             width: 300px;
         }
+        /* .column{
+            flex-grow: 1;
+        } */
         .expandedinfo .column{
             display: inherit;
+        }
+        .expandedinfo .column,.column>.heading_and_data{
             align-self: stretch;
             align-items: stretch;
         }
-        .column>.heading_and_data{
-            align-self: stretch;
-            align-items: stretch;
+        h4{
+            margin: 10px;
+        }
+        .row{
+            background: linear-gradient(0deg, var(--box-primary) 20%, var(--box-secondary) 100%);
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript">
+        //expand button
         function expand(index) {
             var button = document.getElementById("course" + index);
             var subjectBox = document.getElementById("expandedinfo" + index);
+
             var contentBox = document.querySelector('.content_box');
             var contentBoxBottom = contentBox.offsetTop + contentBox.clientHeight;
+
             if (subjectBox.style.display === "flex") {
                 subjectBox.style.display = "none";
                 button.style.transform = "rotateX(0deg)";
+                subjectBox.style.transform = "scaleY(0)";
             } else {
                 subjectBox.style.display = "flex";
                 button.style.transform = "rotateX(180deg)";
+                subjectBox.style.transform = "scaleY(1)";
+
+
                 var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
                 var scrollOffset = subjectBoxBottom - contentBoxBottom;
                 contentBox.scrollBy({
                 top: scrollOffset,
                 behavior: 'smooth'
+
+
                 });
             }
         }
+        // function expand(index){
+        //     var frame = document.getElementById("content_box");
+        //     var button = document.getElementById("course"+index);
+        //     var subjectBox = document.getElementById("expandedinfo"+index);
 
+            
+        //     if (subjectBox.style.display === "flex") {
+        //         // Collapse the subject box
+        //         subjectBox.style.transform = "translateY(-100%)";
+        //         subjectBox.style.opacity = "0";
+        //         setTimeout(function() {
+        //             subjectBox.style.display = "none";
+        //             subjectBox.style.transform = "";
+        //             subjectBox.style.opacity = "";
+        //         }, 500);
+                
+        //         button.style.transform = "rotateX(0deg)";
+                
+        //     } else {
+        //         // Expand the subject box
+        //         subjectBox.style.display = "flex";
+        //         subjectBox.style.transform = "translateY(-100%)";
+        //         subjectBox.style.opacity = "";
+        //         setTimeout(function() {
+        //             subjectBox.style.transform = "";
+        //             subjectBox.style.opacity = "";
+        //         }, 10);
+                
+        //         button.style.transform = "rotateX(180deg)";
+
+        //         var frameBottom = frame.offsetTop + frame.clientHeight;
+
+        //         var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
+        //         var scrollOffset = subjectBoxBottom - frameBottom;
+        //         frame.scrollBy({
+        //         top: scrollOffset,
+        //         behavior: 'smooth'});
+        //     }
+        // }
     </script>
 </head>
 <body>
@@ -234,18 +302,21 @@
         <div class="response">
             <a href="mainpageStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1><?= $student['student_ID']?>'s profile</h1>
-            <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
         </div>
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
             <div class="split_section">
+                <h3>Student Information</h3>
                 <img class="elipse_container"src="<?= $student['profile_Picture']?>" alt="student picture">
                 <div class="info_ltr">
-                    <h3>LV</h3><p><?= $student['level']?></p>
-                    <h3>Grade</h3><p><?= $student['sGrade']?></p>
-                    <h3>Streak</h3><p><?= $student['aFrequency']?></p>
+                    <div><h3>Level</h3><p><?= $student['level']?></p></div>
+                    <div><h3>Experience</h3><p><?= $student['experience']?></p></div>
+                    <div><h3>Grade</h3><p><?= $student['sGrade']?></p></div>
+                    <div><h3>Streak</h3><p><?= $student['aFrequency']?></p></div>
                 </div>
+                <h4 style="align-self:start;">Details</h4>
                 <div class="info_ltr"><h3>Name</h3><p><?=$student['sName']?></p></div>
                 <div class="info_ltr"><h3>Parent</h3><p><?=$student['pName']?></p></div>
                 <div class="info_ltr"><h3>Birthdate</h3><p><?= $student['sDOB']?></p></div>
@@ -254,11 +325,13 @@
             </div>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
                 <div class="split_subsection">
+                    <h3>Account Information</h3>
                     <div class="info_ltr"><h3>Username</h3> <p><?= $student['username']?></p></div>
                     <div class="info_ltr"><h3>Email</h3> <p><?= $student['email']?></p></div>
                     <div class="info_ltr"><h3>IC Number</h3> <p><?= $student['ic']?></p></div>
                 </div>
                 <div class="split_subsection">
+                    <h3>Achievements</h3>
                 <?php if(mysqli_num_rows($achievementRequest)>0){
                     while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
                         echo <<<HTML
@@ -301,10 +374,10 @@
                             </div>
                             <div class="column">
                                 <div class="heading_and_data">
-                                    <div class="info_ltr"><div>$activity[chapter_Name]</div><div>$activity[correct]/$activity[total_questions]</div></div>
-                                    <div class="info_ltr">completed on $activity[end_Datetime]</div >
+                                    <div class="info_ltr"><h4>$activity[chapter_Name]</h4><div>$activity[correct]/$activity[total_questions]</div></div>
+                                    <div class="info_ltr"><h4>completed on</h4><div>$activity[end_Datetime]</div></div >
                                 </div>
-                                <div class="info_ltr"><div>Performance</div><div>$latestPerformance%</div></div>
+                                <div class="info_ltr"><h4>Performance</h4><div>$latestPerformance%</div></div>
                             </div>
                         </div>
                     </div>
@@ -330,7 +403,7 @@
                         }]
                     },
                     options: {
-                        aspectRatio: 3
+                        aspectRatio: 2,
                     }
                     });
             </script>
@@ -341,5 +414,6 @@
             }?>
         </div>
     </main>
+    <script src="../styles/conditionalShadows.js"></script>
 </body>
 </html>

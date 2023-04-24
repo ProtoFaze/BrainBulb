@@ -18,3 +18,12 @@
     transition: var(--transitionspeed);
     transform: scale(1.1);
 }
+input[type="text"]{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap);
+    margin: 10px 0px;
+    background: none;
+}

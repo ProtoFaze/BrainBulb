@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/inputs.css">
+    <script src="../styles/conditionalShadows.js"></script>
     <title>Parent Profile</title>
     <?php 
     //load page
@@ -18,7 +19,7 @@
 
 
 
-
+        // $teacher_id = $_SESSION['user_id'];
         $teacher_id = 'TC00000001';
 
 
@@ -70,6 +71,9 @@
             border-bottom-left-radius: var(--border-radius);
             padding: 0px 10px 0px 20px;
         }
+        .heading_and_data>h3{
+            margin: 1%
+        }
         .heading_and_data,.heading_and_data>h3{
             text-align: left;
         }
@@ -91,27 +95,23 @@
         <div class="split_container">
             <div class="split_section">
                 <img class="elipse_container"src="<?=$teacher['profile_Picture']?>" alt="teacher picture">
-                <div class="info_ltr"><h3>Name</h3><div class="divider"></div><p><?=$teacher['tName']?></p></div>
-                <div class="info_ltr"><h3>Birthdate</h3><div class="divider"></div><p><?= $teacher['tDOB']?></p></div>
-                <div class="info_ltr"><h3>School</h3><div class="divider"></div><p><?= $teacher['tSchool']?></p></div>
-                <div class="info_ltr"><h3>Region</h3><div class="divider"></div><p><?= $teacher['tRegion']?></p></div>
+                <div class="info_ltr"><h3>Name</h3><input type="text" class="textField" name="tName" placeholder="<?=$teacher['tName']?>"/></div>
+                <div class="info_ltr"><h3>Birthdate</h3><input type="text" class="textField" name="tDOB" placeholder="<?= $teacher['tDOB']?>"/></div>
+                <div class="info_ltr"><h3>School</h3><input type="text" class="textField" name="tSchool" placeholder="<?= $teacher['tSchool']?>"/></div>
+                <div class="info_ltr"><h3>Region</h3><input type="text" class="textField" name="tRegion" placeholder="<?= $teacher['tRegion']?>"/></div>
             </div>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
                 <div class="split_subsection">
-                    <div class="info_ltr"><h3>Username</h3> <div class="divider"></div><p><?= $teacher['username']?></p></div>
-                    <div class="info_ltr"><h3>Email</h3> <div class="divider"></div><p><?= $teacher['email']?></p></div>
-                    <div class="info_ltr"><h3>IC Number</h3> <div class="divider"></div><p><?= $teacher['ic']?></p></div>
+                    <div class="info_ltr"><h3>Username</h3><input type="text" class="textField" name="username" placeholder="<?= $teacher['username']?>"/></div>
+                    <div class="info_ltr"><h3>Email</h3><input type="text" class="textField" name="email" placeholder="<?= $teacher['email']?>"/></div>
+                    <div class="info_ltr"><h3>IC Number</h3><input type="text" class="textField" name="ic" placeholder="<?= $teacher['ic']?>"/></div>
                 </div>
                 <div class="split_subsection">
-                    <div class="heading_and_data"><h3>Qualifications</h3><br/><p><?=$teacher['highest_Qualification']?></p></div>
-                    <div class="heading_and_data"><h3>Certification</h3><br/><p><?=$teacher['professionality_Description']?></p></div>
+                    <div class="heading_and_data"><h3>Qualifications</h3><br/><input type="text" class="textField" name="highest_Qualification" placeholder="<?=$teacher['highest_Qualification']?>"/></div>
+                    <div class="heading_and_data"><h3>Certification</h3><br/><textarea type="text" class="textArea" name="highest_Qualification" placeholder="<?=$teacher['professionality_Description']?>"></textarea>
                 </div>
             </div>
         </div>
-
-        <!-- bottom section containing children info -->
-        <!-- <div class="content_box">
-        </div> -->
     </main>
     <script src="../styles/conditionalShadows.js"></script>
 </body>

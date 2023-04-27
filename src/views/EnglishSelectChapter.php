@@ -126,6 +126,13 @@
             background-image: linear-gradient(45deg, rgb(252,163,17) 20%, white 20%, white 40%, rgb(252,163,17) 40%, rgb(252,163,17) 60%,white 60%, white 80%, rgb(252,163,17) 80%); 
             border-radius: 8px;
         }
+
+        .main .titlebg{
+            background-image: linear-gradient(45deg, #83AAE6 12.5%, #E6BF83 12.5%, #E6BF83 25%, #83AAE6 25%, #83AAE6 37.5%, #E6BF83 37.5%, #E6BF83 50%, #83AAE6 50%, #83AAE6 62.5%, #E6BF83 62.5%, #E6BF83 75%, #83AAE6 75%, #83AAE6 87.5%,#E6BF83 87.5%, #E6BF83 ); 
+            padding: 5px 50px;
+            margin: 0 400px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +155,9 @@
         array_push($chaplist,(max($chaplist) +1)."");
     ?>
     <div class="main">
-        <h1 style="text-align:center; font-size:40px;">English</h1>
+        <div class="titlebg">
+            <h1 style="text-align:center; font-size:40px; color:white;">English</h1>
+        </div>
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>
                 <td>

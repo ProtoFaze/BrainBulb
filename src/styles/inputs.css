@@ -18,12 +18,19 @@
     transition: var(--transitionspeed);
     transform: scale(1.1);
 }
-input[type="text"]{
+.info_ltr>input[type="text"]{
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: var(--gap);
     margin: 10px 0px;
-    background: none;
+    width:60%;
+    border: 1px solid var(--button);
+    border-radius: var(--border-radius);
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    box-shadow: none;
+    background-color: none;
+
 }

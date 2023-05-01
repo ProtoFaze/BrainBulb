@@ -85,6 +85,7 @@
             <?php 
             if (isset($_SESSION['user_id'])){
                 if(substr($_SESSION['user_id'],0,2) == "ST"){ 
+                    //the session user id is just for test
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
                     <a class="navigations" href="#">View</a>

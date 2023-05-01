@@ -221,6 +221,11 @@
         .row{
             background: linear-gradient(0deg, var(--box-primary) 20%, var(--box-secondary) 100%);
         }
+        .content_box{
+            background: var(--bg);
+            padding:0px;
+            height: max-content;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript">
@@ -308,8 +313,16 @@
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
             <div class="split_section">
-                <h3>Student Information</h3>
-                <img class="elipse_container"src="<?= $student['profile_Picture']?>" alt="student picture">
+                <h2>Student Information</h2>
+                <?php 
+                if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
+                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
+                }else{
+                    echo <<<HTML
+                     <img class='elipse_container' src='$student[profile_Picture]' alt='student picture'>"
+                     HTML;
+                }
+                ?>
                 <div class="info_ltr">
                     <div><h3>Level</h3><p><?= $student['level']?></p></div>
                     <div><h3>Experience</h3><p><?= $student['experience']?></p></div>
@@ -325,13 +338,13 @@
             </div>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
                 <div class="split_subsection">
-                    <h3>Account Information</h3>
+                    <h2>Account Information</h2>
                     <div class="info_ltr"><h3>Username</h3> <p><?= $student['username']?></p></div>
                     <div class="info_ltr"><h3>Email</h3> <p><?= $student['email']?></p></div>
                     <div class="info_ltr"><h3>IC Number</h3> <p><?= $student['ic']?></p></div>
                 </div>
                 <div class="split_subsection">
-                    <h3>Achievements</h3>
+                    <h2>Achievements</h2>
                 <?php if(mysqli_num_rows($achievementRequest)>0){
                     while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
                         echo <<<HTML
@@ -415,5 +428,7 @@
         </div>
     </main>
     <script src="../styles/conditionalShadows.js"></script>
+    <script src="../styles/togglePlaceholder.js"></script>
+    <?php include_once "../backend/updateProfile.php"; ?>
 </body>
 </html>

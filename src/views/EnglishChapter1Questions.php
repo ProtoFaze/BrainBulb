@@ -442,7 +442,7 @@
 </script>
 <body>
     <?php
-        $courseID = "CR00000004"; //fixed
+        $courseID = "CR00000003"; //fixed
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";

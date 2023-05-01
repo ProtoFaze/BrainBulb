@@ -4,11 +4,11 @@
     --barlength:55px;
     --border-radius:10px;
     --gap:15px;
-    --misc-green: #1cb193;
-    --bg: #D4FBF4;
-    --box-primary: #d4d1c0;
-    --box-secondary: #d5d0c9;
-    --button: rgb(47, 47, 47);
+    --misc: #2E424D;
+    --bg: #EAEBED;
+    --box-primary: #98DAD9;
+    --box-secondary: #5B8291;
+    --button: #2E424D;
     --transitionspeed: 0.3s;
 }
 body{
@@ -200,7 +200,7 @@ p,td,.info_ttp{
     width: 71px;
     height: 71px;
     border-radius: 50%;
-    background-color: var(--misc-green);
+    background-color: var(--misc);
     align-self: center;
     
 }
@@ -231,7 +231,7 @@ p,td,.info_ttp{
     --barlength:55px;
     --border-radius:10px;
     --gap:15px;
-    --misc-green: #1cb193;
+    --misc: #1cb193;
     --bg: #D4FBF4;
     --box-primary: #d4d1c0;
     --box-secondary: #d5d0c9;

@@ -167,7 +167,7 @@
             order: 1;
             align-self: stretch;
             flex-grow: 1;
-            box-shadow: inset 0px -5px rgba(0,0,0,0.2);
+            box-shadow: inset 0 -12px 6px rgba(0, 0, 0, 0.2);
             border-radius: var(--border-radius);
             /* transform: 0% 100%;
             transform-origin: top;
@@ -382,7 +382,7 @@
                         </div>
                     </div>
             HTML;
-            echo <<<JS
+            echo <<<HTML
                 <script type="text/javascript">
                     Chart.defaults.plugins.legend.position = "left";
                     var ctx = document.getElementById('barChart$index');
@@ -407,7 +407,7 @@
                     }
                     });
             </script>
-            JS;
+            HTML;
             $index++;
         }}else{
                 echo "<h2> No children found </h2>";

@@ -298,7 +298,6 @@
             if($count > 0){
                 if($row['user_Type'] == "Admin"){
                     $_SESSION['user_id'] = $row['admin_ID'];
-                    
                 }
                 elseif($row['user_Type'] == "Teacher"){
                     $_SESSION['user_id'] = $row['teacher_ID'];

@@ -3,7 +3,7 @@
 :root{
     --barlength:55px;
     --border-radius:10px;
-    --gap:15px;
+    --gap:30px;
     --misc: #2E424D;
     --bg: #EAEBED;
     --box-primary: #98DAD9;
@@ -29,6 +29,11 @@ h2,h3,h4,h5,h6,a,input,th{
     font-family: 'Merriweather Sans', sans-serif;
     font-weight: 100px;
     text-align: center;
+
+}
+fieldset{
+    border-color: #454545;
+    border-radius: 5px;
 }
 p,td,.info_ttp{
     inline-size: 820px;
@@ -98,6 +103,7 @@ p,td,.info_ttp{
 
 .split_section h2{
     margin: 10px 0px;
+    
 }
 /*containers that fit inside split sections that occupy a quarter of split container*/
 .split_subsection{

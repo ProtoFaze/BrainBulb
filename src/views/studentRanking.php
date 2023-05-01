@@ -399,7 +399,6 @@ cant use count directly as the questions are all different
                 </tr>
             </table>
         </div>
-    
     </div>
 </body>
 </html>

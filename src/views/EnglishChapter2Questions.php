@@ -432,34 +432,6 @@
         }
     }
 
-    .popupchat{
-        position:fixed;
-        top:150px;
-        left: -550px;
-        width:100%;
-        height:100%;
-        max-width: 338px;
-        max-height: 246px;
-        animation-name: popupani2;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-        z-index: 2;
-        display: none;
-    }
-
-    @keyframes popupani2{
-        from {
-            transform: translate(0, 0);
-            opacity: 0;
-            visibility: hidden;
-        }
-        to {
-            transform: translate(500px, 0);
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-
 </style>
 <script>
     var mcqanswer = [];
@@ -518,7 +490,6 @@
             </div>
             <div>
                 <img src="../../images/human2.png" class='popuphuman'>
-                <!-- <img src="../../images/chat.png" class='popupchat'> -->
             </div>
             <?php $c = $count * 100;?>
             <div class="pages" <?php echo'style="width:'.$c.'%;"'; ?>>
@@ -709,9 +680,8 @@
     // console.log(questionmode);
     // console.log(mcqanswer);
     // console.log(connectlineanswer);
-    const constant = [true,true,false,false,false,false,false,false,false,false];
+    const constant = [true,false,false,false,false,false,false,false,false,false];
     const humani = document.querySelector(".popuphuman");
-    const chatani = document.querySelector(".popupchat");
     var resp = [];
     var lvlxp = 0;
     var correctness = 0;
@@ -781,15 +751,15 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
+                    humani.style.display = "none";
                 }, 2300);
                 mcqselect = "";
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
 
             nextbtn.disabled = true;
@@ -830,14 +800,14 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
+                    humani.style.display = "none";
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -874,17 +844,14 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
-                    humani.style.display = "none";  
-                    chatani.style.display = "none";  
+                    humani.style.display = "none";   
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                chatani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
             nextbtn.disabled = true;
             selectedPairs = [];

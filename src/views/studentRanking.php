@@ -1,19 +1,6 @@
-
-<!-- Get student 
-= SELECT student_ID studentIDFROM learning_Record WHERE course_ID ="";
-
-Get question 
-SELECT question_ID AS quesID FROM questionBank WHERE course_ID ="";
-
-Get total question 
-SELECT COUNT(question_ID) AS totalQ FROM questionBank WHERE course_ID;
-
-Get accuracy rate 
-SELECT *
-retrieve data & append into list
-then count list item?
-cant use count directly as the questions are all different
- -->
+<!-- able to view students accuracy
+no problem with retrieve student data & saccuracy
+but got problem with ranking arrangement -->
 
 
 <!DOCTYPE html>
@@ -163,7 +150,7 @@ cant use count directly as the questions are all different
     <img src="images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
         <h3>Quizz 2 Student Performance</h3>
-        <div class="student">
+        <!-- <div class="student">
             <table>
                 <tr>
                     <td style="width: 55px;">No 1</td>
@@ -180,225 +167,79 @@ cant use count directly as the questions are all different
                     </td>
                 </tr>
             </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        </div> -->
+        <?php
+            include 'dbcon.php';
+            // $courseID = $_GET['course_ID'];
+            $query = "SELECT studentquestionresponse.student_ID,student.sName,
+            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) AS correct_attempt,  
+            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question1 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
+            FROM (studentquestionresponse
+            INNER JOIN student ON studentquestionresponse.student_ID = student.student_ID)
+            GROUP BY student_ID
+            ORDER BY correct_attempt DESC
+            ;";
             
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
+            // WHERE course_ID = ".$courseID."
+
+            $result = mysqli_query($connection, $query);
+            $rank = 0;
+            if (mysqli_num_rows($result) > 0) {
+                $question ='';
+                while($row = mysqli_fetch_assoc($result)) {
+                    $rank += 1;
+                    $studentAccuracy = ($row["correct_attempt"]/$row["total_attempt"]) * 100;
+                    $question = 
+                    '<div class="student">
+                        <table>
+                            <tr>
+                                <td style="width: 55px;">No '.$rank.'</td>
+                                <td style="width: 55px;">
+                                    <div class="iconProf">
+                                    </div>
+                                </td>
+                                <td style="width: 150px;">'.$row["sName"].'</td>
+                                <td>
+                                    <div class="accuracyBlock">
+                                        <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy '.$studentAccuracy.'%</label>
+                                        <progress value = "'.$row["correct_attempt"].'" max = "'.$row["total_attempt"].'" class="accracy">70%</progress>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>';
+                    echo $question;
+                }
+            }
+        ?>
     
     </div>
 </body>

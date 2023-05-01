@@ -109,7 +109,7 @@
 <?php
     // $a = $_SESSION['lists'];
     include "../database/connect.php";
-    $studentID = 'ST00000005';  
+    $studentID = $_SESSION['user_id'];  
     $courseID = $_SESSION['course'];
     $query2 = "SELECT * FROM `studentquestionresponse` INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.course_ID = '$courseID'";
     $query3 = "SELECT * FROM `student` WHERE student_ID = '$studentID'";
@@ -247,6 +247,66 @@
                 else{
                     $v = $b;
                     $a = ceil($b/500*100);
+                }
+            }
+            else if($level == 6){
+                if ($b >= 600){
+                    $v =$b%600;
+                    $a = ceil(($b%600)/600*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/600*100);
+                }
+            }
+            else if($level == 7){
+                if ($b >= 700){
+                    $v =$b%700;
+                    $a = ceil(($b%700)/700*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/700*100);
+                }
+            }
+            else if($level == 8){
+                if ($b >= 800){
+                    $v =$b%800;
+                    $a = ceil(($b%800)/800*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/800*100);
+                }
+            }
+            else if($level == 9){
+                if ($b >= 900){
+                    $v =$b%900;
+                    $a = ceil(($b%900)/900*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/900*100);
+                }
+            }
+            else if($level == 10){
+                if ($b >= 1000){
+                    $v =$b%1000;
+                    $a = ceil(($b%1000)/1000*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/1000*100);
                 }
             }
 

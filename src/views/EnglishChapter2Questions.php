@@ -442,7 +442,7 @@
 </script>
 <body>
     <?php
-        $courseID = "CR00000003";
+        $courseID = "CR00000003"; //fixed
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
@@ -455,7 +455,7 @@
         <div id="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
             <div class="progressbar">
                 <div class="steps">
-                    <span class="circle active">1</span>
+                    <span class="circle active">1</span><!--minimum 1 question--->
                     <?php
                         for($i = 2; $i <= $count;$i++){
                             echo "<span class='circle'>".$i."</span>";

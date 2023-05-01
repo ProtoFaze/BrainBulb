@@ -85,10 +85,10 @@
             <?php 
             if (isset($_SESSION['user_id'])){
                 if(substr($_SESSION['user_id'],0,2) == "ST"){ 
+                    //the session user id is just for test
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
                     <a class="navigations" href="#">View</a>
-                    //this is for test only VVV
                     <a class="navigations" href="profileStudent.php">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="SelectSubject.php">Select Subject</a>
                     ';

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -63,7 +66,7 @@
 </style>
 <body>
     <?php
-        $a = "TC00000002";
+        $a = $_SESSION['user_id'];
         include "../database/connect.php";
         include "../components/nav.php";
         $lis = array();
@@ -75,7 +78,14 @@
     ?>
     <div class="big">
         <div class="topic">
-            <h1 style="font-size:35px;">Your Quiz Learning Materials</h1>
+            <?php
+                if(empty($lis)){
+                    echo "<h1 style='font-size:35px;'>No Quiz Learning Material</h1>";
+                }
+                else{
+                    echo "<h1 style='font-size:35px;'>Your Quiz Learning Materials</h1>";
+                }
+            ?>
         </div>
         <?php
             foreach($lis as $data){

@@ -15,6 +15,10 @@
     }
 
     body {
+        z-index: -1;
+        position:fixed;
+        height: 100%;
+        width: 100%;
         background-image: url('../../images/night.png');
         background-size: cover;
     }
@@ -95,7 +99,7 @@
     .options .box{
         /* margin: 20px 20px; */
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         padding: 50px 50px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         /* text-align: center; */
@@ -116,7 +120,7 @@
 
     .boxes{
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         border: 0;
         cursor: pointer;
@@ -136,6 +140,7 @@
 
     .title{
         margin: 20px auto;
+        color:white;
     }
 
     .box.selected, .boxes.selected{

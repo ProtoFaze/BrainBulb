@@ -128,10 +128,13 @@
         }
 
         .main .titlebg{
-            background-image: linear-gradient(45deg, #83AAE6 12.5%, #E6BF83 12.5%, #E6BF83 25%, #83AAE6 25%, #83AAE6 37.5%, #E6BF83 37.5%, #E6BF83 50%, #83AAE6 50%, #83AAE6 62.5%, #E6BF83 62.5%, #E6BF83 75%, #83AAE6 75%, #83AAE6 87.5%,#E6BF83 87.5%, #E6BF83 ); 
-            padding: 5px 50px;
-            margin: 0 400px;
+            /* background-image: linear-gradient(45deg, #83AAE6 12.5%, #E6BF83 12.5%, #E6BF83 25%, #83AAE6 25%, #83AAE6 37.5%, #E6BF83 37.5%, #E6BF83 50%, #83AAE6 50%, #83AAE6 62.5%, #E6BF83 62.5%, #E6BF83 75%, #83AAE6 75%, #83AAE6 87.5%,#E6BF83 87.5%, #E6BF83 );  */
+            background-image: url('../../images/planks.png');
+            padding: 5px 10px;
+            background-position: center;
             border-radius: 5px;
+            background-repeat: no-repeat;
+            /* background-size: cover; */
         }
     </style>
 </head>
@@ -185,7 +188,7 @@
                     </div>
                 </td>
                 <td>
-                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Notess.php"';}?>>
+                    <a <?php if (in_array("5",$chaplist)) {echo'href="EnglishChapter5Notes.php"';}?>>
                         <div <?php if (in_array("5",$chaplist)) {echo'class="chapter1 unlock"';} else {echo 'class="chapter1"';}?>>5</div>
                     </a>
                 </td>

@@ -9,23 +9,20 @@
     <link rel="stylesheet" href="../styles/inputs.css">
     <title>Parent Profile</title>
     <?php 
+
     //load page
         include "../database/connect.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
-
-
-
-
+        // $parent_id = $_SESSION['user_ID'];
         $parent_id = 'PT00000001';
 
 
 
 
 
-        // $_SESSION['parent_id'];
+        // 
         $profileRequest = "SELECT * FROM parent 
         inner join user on parent.parent_ID = user.parent_ID
         WHERE parent.parent_ID = '$parent_id'";
@@ -80,7 +77,13 @@
         <div class="response">
             <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Parent profile</h1>
-            <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <?php
+                if($_SESSION['sourcepage'] == "searchUser"){
+                    echo <<<HTML
+                        <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                HTML;}else{echo <<<HTML
+                    <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                HTML;}?>
         </div>
 
         <!-- middle section containing user info, parent into -->
@@ -114,7 +117,7 @@
                     <div class="info_ltr">$child[sName]</div>
                     <div class="info_ltr">Grade : $child[sGrade]</div>
                     <div class="info_ltr">Streak: $child[aFrequency]</div>
-                    <form action="./mainpage.php" method="post">
+                    <form action="./profileStudent.php" method="post">
                         <input type="hidden" name="child" value="$child[student_ID]">
                         <button class="materials-symbols-outlined flex_button" type="submit">More Details<span class="material-symbols-outlined">arrow_forward_ios</span></button>
                     </form>

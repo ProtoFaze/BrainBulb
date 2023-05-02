@@ -88,7 +88,8 @@
                     //the session user id is just for test
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
-                    <a class="navigations" href="#">View</a>
+                    <a class="navigations" href="#">Discussion Platform</a>
+                    <a class="navigations" href="#">Join Quiz</a>
                     <a class="navigations" href="profileStudent.php">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="SelectSubject.php">Select Subject</a>
                     ';
@@ -102,8 +103,8 @@
                 }elseif(substr($_SESSION['user_id'],0,2) == "TC"){
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
-                    <a class="navigations" href="#">View2</a>
-                    <a class="navigations" href="#">Join Quiz</a>
+                    <a class="navigations" href="viewlearningmaterial.php">Your Learning Material</a>
+                    <a class="navigations" href="#">Discussion Platform</a>
                     <a class="navigations" href="#">Course</a>
                     ';
                 }

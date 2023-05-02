@@ -14,6 +14,11 @@
         margin: 0;
     }
 
+    body {
+        background-image: url('../../images/night.png');
+        background-size: cover;
+    }
+
     .maincontainer{
         /* padding-bottom: 0.03px; */
         /* height: 650px; */
@@ -445,7 +450,7 @@
         $courseID = "CR00000004"; //fixed
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
-        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
+        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
         $qid = array();

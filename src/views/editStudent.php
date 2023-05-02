@@ -7,26 +7,17 @@
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/inputs.css">
-    <title>Student Profile</title>
+    <title>Edit Student</title>
     <?php 
     //load page
         include "../database/connect.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
+        //get values for error variables
+        $student_id = $_SESSION['user_id'];
+        // $student_id = 'ST00000001';
 
-        // $student_id = $_SESSION['user_id'];
-        $teacher_id; $parent_id; $student_id;
-        $user_id = 'PT00000001';
-        if (substr($user_id, 0, 2) == 'ST') {
-            $student_id = $user_id;
-        } else if(substr($user_id, 0, 2) == 'PA') {
-            $parent_id = $user_id;
-        }else if (substr($user_id, 0, 2) == 'TC') {
-            $teacher_id = $user_id;
-        }
-        echo $teacher_id;
-        // $_SESSION['student_id'];
         //user info
         $profileRequest = "SELECT * FROM student 
         inner join user on student.student_ID = user.student_ID
@@ -51,7 +42,7 @@
             --box-secondary: #29b2e0;
         }
         main{
-            padding: 0px 120px;
+            padding: 0 15%;
         }
         .content_box{
             height:300px;
@@ -90,31 +81,55 @@
     <main>
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
-            <h1><?= $student['student_ID']?>'s profile</h1>
-            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <a href="ProfileStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+            <h1>Edit Student</h1>
         </div>
 
         <!-- middle section containing user info, parent into -->
-        <form class="split_container">
-            <div class="split_section">
-                <h3>Student Information</h3>
-                <img class="elipse_container"src="<?= $student['profile_Picture']?>" alt="student picture">
-                <div class="info_ltr"><h3>Grade</h3><input type="text" class="textField" name="sGrade" placeholder="<?= $student['sGrade']?>"/></div>
-                <div class="info_ltr"><h3>Name</h3><input type="text" class="textField" name="sName" placeholder="<?=$student['sName']?>"/></div>
-                <div class="info_ltr"><h3>Parent</h3><input type="text" class="textField" name="pName" placeholder="<?=$student['pName']?>"/></div>
-                <div class="info_ltr"><h3>Birthdate</h3><input type="text" class="textField" name="sDOB" placeholder="<?= $student['sDOB']?>"/></div>
-                <div class="info_ltr"><h3>Region</h3><input type="text" class="textField" name="sRegion" placeholder="<?= $student['sRegion']?>"/></div>
-                <div class="info_ltr"><h3>School</h3><input type="text" class="textField" name="sSchool" placeholder="<?= $student['sSchool']?>"/></div>
-            </div>
-            <div class="split_section" style="background-color: var(--bg); padding: 0;">
-                <h3>Account Information</h3>
-                <div class="info_ltr"><h3>Username</h3> <input type="text" class="textField" name="username" placeholder="<?= $student['username']?>"/></div>
-                <div class="info_ltr"><h3>Email</h3> <input type="text" class="textField" name="email" placeholder="<?= $student['email']?>"/></div>
-                <div class="info_ltr"><h3>IC Number</h3> <input type="text" class="textField" name="ic" placeholder="<?= $student['ic']?>"/></div>
-            </div>
-        </form>
+        <div class="split_container">
+            <form action="../backend/updateProfile.php" method = post class="split_section">
+                <h2>Student Information</h2>
+                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
+                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
+                }else{
+                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
+                }?>
+                <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
+                placeholder="<?= $student['sGrade']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="sGradeError"><?= isset($_POST['save_student_details']) ? $sGradeError : null ?></span>
+                <input type="text" class="textField" id="Name" name="sName" original-value="<?=$student['sName']?>" 
+                placeholder="<?=$student['sName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="sNameError"><?= isset($_POST['save_student_details']) ? $sNameError : null ?></span>
+                <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$student['pName']?>" 
+                placeholder="<?=$student['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="pNameError"><?= isset($_POST['save_student_details']) ? $pNameError : null ?></span>
+                <input type="text" class="textField" name="sDOB" original-value="<?= $student['sDOB']?>" 
+                placeholder="<?= $student['sDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="sDOBError"><?= isset($_POST['save_student_details']) ? $sDOBError : null ?></span>
+                <input type="text" class="textField" name="sRegion" original-value="<?= $student['sRegion']?>" 
+                placeholder="<?= $student['sRegion']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="sRegionError"><?= isset($_POST['save_student_details']) ? $sRegionError : null ?></span>
+                <input type="text" class="textField" name="sSchool" original-value="<?= $student['sSchool']?>" 
+                placeholder="<?= $student['sSchool']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <span class="error" id="sSchoolError"><?= isset($_POST['save_student_details']) ? $sSchoolError : null ?></span>
+                <input type="submit" class="flex_button" name="save_student_details"value="SAVE CHANGES">
+            </form >
+            <form action="../backend/updateProfile.php" method = post class="split_section"> 
+                <h2>Account Information</h2>
+                    <input type="text" class="textField" name="username" original-value="<?= $student['username']?>" 
+                    placeholder="username:&#9;<?= $student['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
+                    <span class="error" id="usernameError"><?= isset($_POST['save_account_details']) ? $usernameError : null ?></span>
+                    <input type="text" class="textField" name="email" original-value="<?= $student['email']?>"
+                    placeholder="Email:&#9;<?= $student['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <span class="error" id="emailError"><?= isset($_POST['save_account_details']) ? $emailError : null ?></span>
+                    <input type="text" class="textField" name="ic" original-value="<?= $student['ic']?>"
+                    placeholder="IC Number:&#9;<?= $student['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <span class="error" id="icError"><?= isset($_POST['save_account_details']) ? $icError : null ?></span>
+                    <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
+            </form >
+        </div>
     </main>
     <!-- <script src="../styles/conditionalShadows.js"></script> -->
+    <script src="../styles/togglePlaceholder.js"></script>
 </body>
 </html>

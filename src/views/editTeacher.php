@@ -11,6 +11,7 @@
     <?php 
     //load page
         include "../database/connect.php";
+        include_once "../backend/displayErr.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -55,14 +56,15 @@
             height: 30%;
         }
         .elipse_container{
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
         }
         a{
             text-decoration: none;
         }
         .split_section{
             flex-grow: 1;
+            gap: 10px;
         }
         .heading_and_data>p{
             border-bottom: 3px solid black;
@@ -100,30 +102,30 @@
                 }?>
                 <input type="text" class="textField" name="tName" original-value="<?=$teacher['tName']?>" 
                 placeholder="<?=$teacher['tName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="tName"><?=isset($_POST["save_teacher_details"])?$tNameError:null?></span>
+                <?php showErr("tName");?>
                 <input type="text" class="textField" name="tDOB" original-value="<?= $teacher['tDOB']?>" 
                 placeholder="<?= $teacher['tDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="tDOB"><?=isset($_POST["save_teacher_details"])?$tDOBError:null?></span>
+                <?php showErr("tDOB");?>
                 <input type="text" class="textField" name="tSchool" original-value="<?= $teacher['tSchool']?>" 
                 placeholder="<?= $teacher['tSchool']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="tSchool"><?=isset($_POST["save_teacher_details"])?$tSchoolError:null?></span>
+                <?php showErr("tSchool");?>
                 <input type="text" class="textField" name="tRegion" original-value="<?= $teacher['tRegion']?>" 
                 placeholder="<?= $teacher['tRegion']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="tRegion"><?=isset($_POST["save_teacher_details"])?$tRegionError:null?></span>
+                <?php showErr("tRegion");?>
                 <input type="submit" class="flex_button" name="save_teacher_details"value="SAVE CHANGES">
             </form>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
                 <form action="../backend/updateProfile.php" method="POST"  class="split_subsection">
                     <h2>Account information</h2>
-                    <input type="text" class="textField" name="username" original-value="<?=$teacher['username']?>" 
-                    placeholder="username:&#9;&#9;<?=$teacher['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                    <span class="error" id="username"><?=isset($_POST["save_account_details"])?$usernameError:null?></span>
-                    <input type="text" class="textField" name="email" original-value="<?=$teacher['email']?>"
-                    placeholder="email:&#9;&#9;<?=$teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                    <span class="error" id="email"><?=isset($_POST["save_account_details"])?$emailError:null?></span>
-                    <input type="text" class="textField" name="ic" original-value="<?=$teacher['ic']?>"
-                    placeholder="ic:&#9;&#9;<?=$teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                    <span class="error" id="ic"><?=isset($_POST["save_account_details"])?$icError:null?></span>
+                    <input type="text" class="textField" name="username" original-value="<?= $teacher['username']?>" 
+                    placeholder="username:&#9;<?= $teacher['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
+                    <?php showErr("username");?>
+                    <input type="text" class="textField" name="email" original-value="<?= $teacher['email']?>"
+                    placeholder="Email:&#9;<?= $teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <?php showErr("email");?>
+                    <input type="text" class="textField" name="ic" original-value="<?= $teacher['ic']?>"
+                    placeholder="IC Number:&#9;<?= $teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <?php showErr("ic");?>
                     <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
                 </form>
                 <form action="../backend/updateProfile.php" method="POST"  class="split_subsection">
@@ -132,13 +134,13 @@
                         <h3>Qualifications</h3>
                         <input type="text" class="textField" name="highest_Qualification" original-value="<?=$teacher['highest_Qualification']?>" 
                         placeholder="<?=$teacher['highest_Qualification']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                        <span class="error" id="highest_Qualification"><?=isset($_POST["save_qualification_details"])?$highest_QualificationError:null?></span>
+                        <?php showErr("highest_Qualification");?>
                     </div>
                     <div class="heading_and_data">
                         <h3>Certification</h3>
                         <textarea class="textField" name="professionality_Description" original-value="<?=$teacher['professionality_Description']?>" 
                         placeholder="<?=$teacher['professionality_Description']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"></textarea>
-                        <span class="error" id="professionality_Description"><?=isset($_POST["save_qualification_details"])?$professionality_DescriptionError:null?></span>
+                        <?php showErr("professionality_Description");?>
                     </div>
                     <input type="submit" class="flex_button" name="save_qualification_details"value="SAVE CHANGES">
                 </form>

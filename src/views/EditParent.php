@@ -11,6 +11,7 @@
     <?php 
     //load page
         include "../database/connect.php";
+        include_once "../backend/displayErr.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -18,7 +19,7 @@
 
 
 
-
+        // $parent_id = $_SESSION['user_id'];
         $parent_id = 'PT00000001';
 
 
@@ -32,8 +33,8 @@
         $parentRequest = mysqli_query($connection, $profileRequest);
         $parent = mysqli_fetch_assoc($parentRequest);
 
-        $childsql = "SELECT * FROM student WHERE parent_ID = '$parent_id'";
-        $childRequest = mysqli_query($connection, $childsql);
+        // $childsql = "SELECT * FROM student WHERE parent_ID = '$parent_id'";
+        // $childRequest = mysqli_query($connection, $childsql);
 
     //redirect to child
         if(isset($_POST['child'])){
@@ -57,8 +58,8 @@
             height: 30%;
         }
         .elipse_container{
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
         }
         a{
             text-decoration: none;
@@ -80,7 +81,6 @@
         <div class="response">
             <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Edit Parent</h1>
-            <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
         </div>
 
         <!-- middle section containing user info, parent into -->
@@ -92,25 +92,25 @@
                 }else{
                     echo "<img class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'>";
                 }?>
-                <input type="text" class="textField" name="pName" original-value="<?=$teacher['pName']?>" 
-                placeholder="<?=$teacher['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="pName"><?=isset($_POST["save_teacher_details"])?$pNameError:null?></span>
-                <input type="text" class="textField" name="spDOB" original-value="<?= $student['spDOB']?>" 
-                placeholder="<?= $student['spDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="spDOBError"><?= isset($_POST['save_student_details']) ? $spDOBError : null ?></span>
-                <input type="submit" class="flex_button" name="save_student_details"value="SAVE CHANGES">
+                <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$parent['pName']?>" 
+                placeholder="<?=$parent['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("pName");?>
+                <input type="text" class="textField" name="spDOB" original-value="<?= $parent['pDOB']?>" 
+                placeholder="<?= $parent['pDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("spDOB");?>
+                <input type="submit" class="flex_button" name="save_parent_details"value="SAVE CHANGES">
             </div>
             <div class="split_section">
                 <h2>account information</h2>
-                <input type="text" class="textField" name="username" original-value="<?=$teacher['username']?>" 
-                placeholder="username:&#9;&#9;<?=$teacher['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="username"><?=isset($_POST["save_account_details"])?$usernameError:null?></span>
-                <input type="text" class="textField" name="email" original-value="<?=$teacher['email']?>"
-                placeholder="email:&#9;&#9;<?=$teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="email"><?=isset($_POST["save_account_details"])?$emailError:null?></span>
-                <input type="text" class="textField" name="ic" original-value="<?=$teacher['ic']?>"
-                placeholder="ic:&#9;&#9;<?=$teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="ic"><?=isset($_POST["save_account_details"])?$icError:null?></span>
+                <input type="text" class="textField" name="username" original-value="<?= $parent['username']?>" 
+                placeholder="username:&#9;<?= $parent['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
+                <?php showErr("username");?>
+                <input type="text" class="textField" name="email" original-value="<?= $parent['email']?>"
+                placeholder="Email:&#9;<?= $parent['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("email");?>
+                <input type="text" class="textField" name="ic" original-value="<?= $parent['ic']?>"
+                placeholder="IC Number:&#9;<?= $parent['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("ic");?>
                 <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
             </div>
         </div>
@@ -139,5 +139,6 @@
         ?>
         </div> -->
     </main>
+    <script src="../styles/togglePlaceholder.js"></script>
 </body>
 </html>

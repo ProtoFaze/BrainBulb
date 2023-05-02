@@ -11,12 +11,12 @@
     <?php 
     //load page
         include "../database/connect.php";
+        include_once "../backend/displayErr.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        //get values for error variables
-        $student_id = $_SESSION['user_id'];
-        // $student_id = 'ST00000001';
+        // $student_id = $_SESSION['user_id'];
+        $student_id = 'ST00000001';
 
         //user info
         $profileRequest = "SELECT * FROM student 
@@ -28,7 +28,7 @@
 
 
     //redirect to child
-        if(isset($_POST['child'])){
+        if(isset($_SESSION['child'])){
             $child_id = $_POST['child'];
             $_SESSION['child_id'] = $child_id;
             echo "<script>windows.location.href ='#'</script>";
@@ -55,8 +55,8 @@
             height: 30%;
         }
         .elipse_container{
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
         }
         a{
             text-decoration: none;
@@ -87,7 +87,7 @@
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
-            <form action="../backend/updateProfile.php" method = post class="split_section">
+            <form action="../backend/updateProfile.php" method = "POST" class="split_section">
                 <h2>Student Information</h2>
                 <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
@@ -96,35 +96,32 @@
                 }?>
                 <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
                 placeholder="<?= $student['sGrade']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="sGradeError"><?= isset($_POST['save_student_details']) ? $sGradeError : null ?></span>
+                <?php showErr("sGrade");?>
                 <input type="text" class="textField" id="Name" name="sName" original-value="<?=$student['sName']?>" 
                 placeholder="<?=$student['sName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="sNameError"><?= isset($_POST['save_student_details']) ? $sNameError : null ?></span>
-                <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$student['pName']?>" 
-                placeholder="<?=$student['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="pNameError"><?= isset($_POST['save_student_details']) ? $pNameError : null ?></span>
+                <?php showErr("sName");?>
                 <input type="text" class="textField" name="sDOB" original-value="<?= $student['sDOB']?>" 
                 placeholder="<?= $student['sDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="sDOBError"><?= isset($_POST['save_student_details']) ? $sDOBError : null ?></span>
+                <?php showErr("sDOB");?>
                 <input type="text" class="textField" name="sRegion" original-value="<?= $student['sRegion']?>" 
                 placeholder="<?= $student['sRegion']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="sRegionError"><?= isset($_POST['save_student_details']) ? $sRegionError : null ?></span>
+                <?php showErr("sRegion");?>
                 <input type="text" class="textField" name="sSchool" original-value="<?= $student['sSchool']?>" 
                 placeholder="<?= $student['sSchool']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <span class="error" id="sSchoolError"><?= isset($_POST['save_student_details']) ? $sSchoolError : null ?></span>
+                <?php showErr("sSchool");?>
                 <input type="submit" class="flex_button" name="save_student_details"value="SAVE CHANGES">
             </form >
-            <form action="../backend/updateProfile.php" method = post class="split_section"> 
+            <form action="../backend/updateProfile.php" method = "POST" class="split_section"> 
                 <h2>Account Information</h2>
                     <input type="text" class="textField" name="username" original-value="<?= $student['username']?>" 
                     placeholder="username:&#9;<?= $student['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
-                    <span class="error" id="usernameError"><?= isset($_POST['save_account_details']) ? $usernameError : null ?></span>
+                    <?php showErr("username");?>
                     <input type="text" class="textField" name="email" original-value="<?= $student['email']?>"
                     placeholder="Email:&#9;<?= $student['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                    <span class="error" id="emailError"><?= isset($_POST['save_account_details']) ? $emailError : null ?></span>
+                    <?php showErr("email");?>
                     <input type="text" class="textField" name="ic" original-value="<?= $student['ic']?>"
                     placeholder="IC Number:&#9;<?= $student['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
-                    <span class="error" id="icError"><?= isset($_POST['save_account_details']) ? $icError : null ?></span>
+                    <?php showErr("ic");?>
                     <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
             </form >
         </div>

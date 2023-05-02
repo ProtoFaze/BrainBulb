@@ -4,33 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="inputs.css">
     <title>Search User</title>
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/inputs.css">
     <style>
-        .titlebox{
-            margin-bottom: 0px;
+        main{
+            padding: 0px;
         }
-        .main{
-            display: flex;
-            flex-direction: row;
-            overflow-x: auto;
-            margin: 0 auto;
-            height: max-content;
-            width: 98%;
-            margin: 0 30px;
+        .grid_box{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            padding: 20px 60px;
+            gap: 30px;
         }
         .profile {
             background-color: var(--box-primary);
             min-width: 350px;
             height: 550px;
             float: left;
-            margin: 30px;
             box-shadow: 2px 5px 10px 1px #867b75;
             padding: 25px;
             padding-top: 45px;
             box-sizing: border-box;
             border: none;
             transition: transform 0.4s;
+            border-radius: var(--border-radius);
         }
 
         .prof_pic{
@@ -63,7 +61,7 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            height: auto;
+            height: 50px;
             background-color: var(--box-secondary);
             border-radius: var(--border-radius);
 
@@ -76,6 +74,10 @@
             position: -webkit-sticky;
             top: 0;
             align-self: flex-start;
+            z-index: 21795;
+        }
+        .response{
+            padding: 0px 20px;
         }
         .search{
             width: auto;
@@ -97,84 +99,121 @@
     <header>
         <?php 
         include "../database/connect.php";
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
         function detectsearch(){
-            if (isset($_POST['display'])) {
+            $sql=null;
+            if (isset($_POST['display']) && !empty($_POST['txtSearch'])) {
                 $searchby = $_POST['searchby'];
                 $searchterm = $_POST['txtSearch'];
-                $sql = "SELECT `application`.`employee_id`, `application`.`full_name`, `application`.`workmode`, `application`.`email`, `application`.`contact_number`, `application`.`personal_image` FROM `application` INNER JOIN `employee` ON `application`.`employee_id` = `employee`.`employee_id` WHERE `employee`.`status` = 1
-    
-                AND $searchby LIKE '%$searchterm%'";
-                return $sql;
+                if($searchby == "Name"){
+                $sql =
+                    "SELECT `user`.`account_id`, `user`.`username`, `teacher`.`tName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID` FROM `user` INNER JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` 
+                    WHERE `user`.`state` = 1 AND t$searchby LIKE '%$searchterm%';
+                    SELECT `user`.`account_id`, `user`.`username`, `parent`.`pName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `parent`.`parent_ID` AS `user_ID` FROM `user` INNER JOIN `parent` ON `user`.`parent_ID` = `parent`.`parent_ID` 
+                    WHERE `user`.`state` = 1 AND p$searchby LIKE '%$searchterm%';
+                    SELECT `user`.`account_id`, `user`.`username`, `student`.`sName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `student`.`student_ID` AS `user_ID` FROM `user` INNER JOIN `student` ON `user`.`student_ID` = `student`.`student_ID` 
+                    WHERE `user`.`state` = 1 AND s$searchby LIKE '%$searchterm%';";
+                }else{
+                $sql = 
+                //join user table with either student, parent or teacher table
+                "SELECT `user`.`account_id`, `user`.`username`, `teacher`.`tName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID` FROM `user` INNER JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` 
+                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%';
+                SELECT `user`.`account_id`, `user`.`username`, `parent`.`pName`, AS `name` `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `parent`.`parent_ID` AS `user_ID` FROM `user` INNER JOIN `parent` ON `user`.`parent_ID` = `parent`.`parent_ID` 
+                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%';
+                SELECT `user`.`account_id`, `user`.`username`, `student`.`sName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `student`.`student_ID` AS `user_ID` FROM `user` INNER JOIN `student` ON `user`.`student_ID` = `student`.`student_ID` 
+                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%';";}
             }else{
                 $sql = 
-                "SELECT `application`.`employee_id`, `application`.`full_name`, `application`.`workmode`, `application`.`email`, `application`.`contact_number`, `application`.`personal_image` 
-                FROM `application` INNER JOIN `employee` ON `application`.`employee_id` = `employee`.`employee_id` WHERE `employee`.`status` = 1";
-                return $sql;
-                
-            }}
+                "SELECT `user`.`account_id`, `user`.`username`, `teacher`.`tName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID` FROM `user` INNER JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` WHERE `user`.`state` = 1;
+                SELECT `user`.`account_id`, `user`.`username`, `parent`.`pName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `parent`.`parent_ID` AS `user_ID` FROM `user` INNER JOIN `parent` ON `user`.`parent_ID` = `parent`.`parent_ID` WHERE `user`.`state` = 1;
+                SELECT `user`.`account_id`, `user`.`username`, `student`.`sName` AS `name`, `user`.`email`, `user`.`ic`, `user`.`profile_Picture`, `student`.`student_ID` AS `user_ID` FROM `user` INNER JOIN `student` ON `user`.`student_ID` = `student`.`student_ID` WHERE `user`.`state` = 1;";
+            }
+            return $sql;
+        }
         $query = detectsearch();
-        $result = mysqli_query($connection, $query);
-        if (mysqli_num_rows($result) > 0) {
-        include "../components/header.php"; ?>
+        if (mysqli_multi_query($connection, $query)) {
+        include "../components/nav.php"; ?>
     </header>
     <main>
-    <div class="response">
-            <button onclick="window.location.href = 'admin_homepage.php'" id='back'><span class="material-symbols-outlined">arrow_back_ios</span>Back</button>
+        <div class="response">
+            <button onclick="window.location.href = 'mainpageAdmin.php'" id='back' class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Back</button>
             <form class="search" method="post">
                 <h5>Search by:<select name="searchby" id="dropdowninput"></h5>
                     <option value="account_ID">Account ID</option>
-                    <option value="full_name">Name</option>
-                    <option value="contact_number">Contact Number</option>
-                    <option value="ic_number">IC number</option>
+                    <option value="Name">Legal name</option>
+                    <option value="username">Name</option>
                     <option value="Email">Email</option>
-                    <option value="Country">Country</option>
-                    <option value="Workmode">Workmode</option>
+                    <option value="ic">IC number</option>
                 </select>
-                <h5>Enter search data: <input type="text" name="txtSearch" id="txtSearch"></h5>
-                <input type="submit" value="Search" name= "display">
+                <h5>Enter search data:</h5> <input type="text" name="txtSearch" id="txtSearch">
+                <input class="flex_button" type="submit" value="Search" name= "display">
             </form>
         </div>
-    <div class="main">
+    <div class="grid_box">
 <?php
-        while($row = mysqli_fetch_assoc($result)) {
-            $data = $row['personal_image'];
-            $employee_id = $row['employee_id'];
-            echo
-                "<button onclick='window.location.href=\"./viewProfile.php?employee_id=$employee_id\"' class='profile'>";
-            if(empty($data) || $data == NULL){
-                echo "<img class='prof_pic' src='./pictureForLogiaid/userheadshot.png'>";
-                }else{
-                echo "<img class='prof_pic' src='./logiaid_uploads_images/$data'>";
+    do {
+        // get result set and process it
+        if ($result = mysqli_store_result($connection)) {
+            while($row = mysqli_fetch_assoc($result)) {
+                $data = $row['profile_Picture'];
+                $user_id = $row['account_id'];
+                if (substr($row['user_ID'], 0, 2) == "TC"){
+                    $user_type = 'Teacher';}
+                elseif (substr($row['user_ID'], 0, 2) == "PA"){
+                    $user_type = 'Parent';}
+                elseif (substr($row['user_ID'], 0, 2) == "ST"){
+                    $user_type = 'Student';}
+                echo
+                    "<form method='POST'>
+                    <button type='submit' name='profile' class='profile'>
+                    <input type='hidden' name='delete_id' value='".$user_id."'>";
+                if(empty($data) || $data == NULL){
+                    echo "<img class='prof_pic' src='../../images/anonymousUser.png'>";
+                    }else{
+                    echo "<img class='prof_pic' src='../../images/$data'>";
+                    }
+                echo"  
+                    <table>
+                        <tr>
+                            <th>User ID </th>
+                            <td>".$user_id."</td>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <td>".$row['username']."</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>".$row['name']."</td>
+                            
+                        </tr>
+                        <tr>
+                            <th>IC</th>
+                            <td>".$row['ic']."</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>".$row['email']."</td>
+                        </tr>
+                    </table>
+                </button></form>";
+                if(isset($_POST['profile'])){
+                    $_SESSION['sourcepage'] = "searchUser";
+                    $_SESSION['delete_id'] = $_POST['delete_id'];
+                    echo "<script>
+                        window.location.href = './Profile$user_type.php';
+                        </script>";
+
                 }
-            echo"  
-                <table>
-                    <tr>
-                        <th>Employee ID </th>
-                        <td>".$row['employee_id']."</td>
-                    </tr>
-                    <tr>
-                        <th>Name</th>
-                        <td>".$row['full_name']."</td>
-                        
-                    </tr>
-                    <tr>
-                        <th>Employment Type</th>
-                        <td>".$row['workmode']."</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>".$row['email']."</td>
-                    </tr>
-                    <tr>
-                        <th>Contact No</th>
-                        <td>".$row['contact_number']."</td>
-                    </tr>
-                </table>
-            </button>";
+            }mysqli_free_result($result);
         }
-    } else {
-        echo "<h2>0 results</h2>";
-    }  
+    }while (mysqli_more_results($connection) && mysqli_next_result($connection));
+ } else {
+    echo "<h2>0 results</h2>";
+}// save current page
+
 ?>
     </main>
 </body>

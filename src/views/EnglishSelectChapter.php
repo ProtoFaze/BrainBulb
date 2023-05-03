@@ -160,7 +160,7 @@ if(session_status() == PHP_SESSION_NONE) {
     ?>
     <div class="main">
         <div class="titlebg">
-            <h1 style="text-align:center; font-size:40px; color:white;">English</h1>
+            <h1 style="text-align:center; font-size:40px; color:#4c3228;">English</h1>
         </div>
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>

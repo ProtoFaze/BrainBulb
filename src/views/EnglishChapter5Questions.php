@@ -51,11 +51,11 @@ if(session_status() == PHP_SESSION_NONE) {
         width: 30px;
         color: grey;
         font-size: 24px;
-        font-weight: 500;
+        font-weight: 700;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        border: 4px solid grey;
+        border: 4.5px solid grey;
         background-color: white;
         transition: all 200ms ease;
         transition-delay: 200ms;
@@ -75,7 +75,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .steps .progress{
         position: absolute;
-        height: 4px;
+        height: 6px;
         width: 100%;
         background-color: #e0e0e0;
         z-index: -1;
@@ -100,7 +100,7 @@ if(session_status() == PHP_SESSION_NONE) {
     .options .box{
         /* margin: 20px 20px; */
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         padding: 50px 50px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         /* text-align: center; */
@@ -121,7 +121,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .boxes{
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         border: 0;
         cursor: pointer;
@@ -141,6 +141,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .title{
         margin: 20px auto;
+        color:white;
     }
 
     .box.selected, .boxes.selected{
@@ -262,7 +263,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .drag-options .choice{
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: #ddd;
         padding: 10px 20px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         /* text-align: center; */
@@ -292,6 +293,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     h3{
         font-size: 23px;
+        color:white;
     }
 
     .correctpopup,.wrongpopup{

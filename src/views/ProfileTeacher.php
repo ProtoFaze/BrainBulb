@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/inputs.css">
-    <title>Parent Profile</title>
+    <title>Teacher Profile</title>
     <?php 
     //load page
         include "../database/connect.php";
@@ -83,14 +83,24 @@
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
             <a href="mainpageTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
-            <h1><?= $teacher['teacher_ID']?>'s profile</h1>
-            <a href="editTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <h1>Teacher profile</h1>
+            <?php
+                if($_SESSION['sourcepage'] == "searchUser"){
+                    echo <<<HTML
+                            <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                HTML;}else{ echo <<<HTML
+                    <a href="editTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                HTML;}?>
         </div>
 
         <!-- middle section containing user info, teacher into -->
         <div class="split_container">
             <div class="split_section">
-                <img class="elipse_container"src="<?=$teacher['profile_Picture']?>" alt="teacher picture">
+                <?php if(empty($teacher['profile_Picture']) || $teacher['profile_Picture'] = NULL){
+                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
+                }else{
+                    echo "<img class='elipse_container' src='".$teacher["profile_Picture"]."' alt='teacher picture'>";
+                }?>
                 <div class="info_ltr"><h3>Name</h3><div class="divider"></div><p><?=$teacher['tName']?></p></div>
                 <div class="info_ltr"><h3>Birthdate</h3><div class="divider"></div><p><?= $teacher['tDOB']?></p></div>
                 <div class="info_ltr"><h3>School</h3><div class="divider"></div><p><?= $teacher['tSchool']?></p></div>

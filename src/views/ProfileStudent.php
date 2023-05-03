@@ -14,9 +14,13 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
-        // $student_id = $_SESSION['user_id'];;
-        $student_id = 'ST00000001';
+        $student_id = null;
+        if(isset($_POST['child'])){
+            $student_id = $_POST['child'];
+        }else{
+            // $student_id = $_SESSION['user_id'];
+            $student_id = 'ST00000001';
+        }
 
 
 
@@ -230,72 +234,72 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript">
         //expand button
-        function expand(index) {
-            var button = document.getElementById("course" + index);
-            var subjectBox = document.getElementById("expandedinfo" + index);
+        // function expand(index) {
+        //     var button = document.getElementById("course" + index);
+        //     var subjectBox = document.getElementById("expandedinfo" + index);
 
-            var contentBox = document.querySelector('.content_box');
-            var contentBoxBottom = contentBox.offsetTop + contentBox.clientHeight;
+        //     var contentBox = document.querySelector('.content_box');
+        //     var contentBoxBottom = contentBox.offsetTop + contentBox.clientHeight;
 
-            if (subjectBox.style.display === "flex") {
-                subjectBox.style.display = "none";
-                button.style.transform = "rotateX(0deg)";
-                subjectBox.style.transform = "scaleY(0)";
-            } else {
-                subjectBox.style.display = "flex";
-                button.style.transform = "rotateX(180deg)";
-                subjectBox.style.transform = "scaleY(1)";
-
-
-                var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
-                var scrollOffset = subjectBoxBottom - contentBoxBottom;
-                contentBox.scrollBy({
-                top: scrollOffset,
-                behavior: 'smooth'
-
-
-                });
-            }
-        }
-        // function expand(index){
-        //     var frame = document.getElementById("content_box");
-        //     var button = document.getElementById("course"+index);
-        //     var subjectBox = document.getElementById("expandedinfo"+index);
-
-            
         //     if (subjectBox.style.display === "flex") {
-        //         // Collapse the subject box
-        //         subjectBox.style.transform = "translateY(-100%)";
-        //         subjectBox.style.opacity = "0";
-        //         setTimeout(function() {
-        //             subjectBox.style.display = "none";
-        //             subjectBox.style.transform = "";
-        //             subjectBox.style.opacity = "";
-        //         }, 500);
-                
+        //         subjectBox.style.display = "none";
         //         button.style.transform = "rotateX(0deg)";
-                
+        //         subjectBox.style.transform = "scaleY(0)";
         //     } else {
-        //         // Expand the subject box
         //         subjectBox.style.display = "flex";
-        //         subjectBox.style.transform = "translateY(-100%)";
-        //         subjectBox.style.opacity = "";
-        //         setTimeout(function() {
-        //             subjectBox.style.transform = "";
-        //             subjectBox.style.opacity = "";
-        //         }, 10);
-                
         //         button.style.transform = "rotateX(180deg)";
+        //         subjectBox.style.transform = "scaleY(1)";
 
-        //         var frameBottom = frame.offsetTop + frame.clientHeight;
 
         //         var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
-        //         var scrollOffset = subjectBoxBottom - frameBottom;
-        //         frame.scrollBy({
+        //         var scrollOffset = subjectBoxBottom - contentBoxBottom;
+        //         contentBox.scrollBy({
         //         top: scrollOffset,
-        //         behavior: 'smooth'});
+        //         behavior: 'smooth'
+
+
+        //         });
         //     }
         // }
+        function expand(index){
+            var frame = document.getElementById("content_box");
+            var button = document.getElementById("course"+index);
+            var subjectBox = document.getElementById("expandedinfo"+index);
+
+            
+            if (subjectBox.style.display === "flex") {
+                // Collapse the subject box
+                subjectBox.style.transform = "translateY(-100%)";
+                subjectBox.style.opacity = "0";
+                setTimeout(function() {
+                    subjectBox.style.display = "none";
+                    subjectBox.style.transform = "";
+                    subjectBox.style.opacity = "";
+                }, 500);
+                
+                button.style.transform = "rotateX(0deg)";
+                
+            } else {
+                // Expand the subject box
+                subjectBox.style.display = "flex";
+                subjectBox.style.transform = "translateY(-100%)";
+                subjectBox.style.opacity = "";
+                setTimeout(function() {
+                    subjectBox.style.transform = "";
+                    subjectBox.style.opacity = "";
+                }, 10);
+                
+                button.style.transform = "rotateX(180deg)";
+
+                var frameBottom = frame.offsetTop + frame.clientHeight;
+
+                var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
+                var scrollOffset = subjectBoxBottom - frameBottom;
+                frame.scrollBy({
+                top: scrollOffset,
+                behavior: 'smooth'});
+            }
+        }
     </script>
 </head>
 <body>
@@ -306,23 +310,25 @@
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
             <a href="mainpageStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
-            <h1><?= $student['student_ID']?>'s profile</h1>
-            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <h1>Student profile</h1>
+            <?php
+                if($_SESSION['sourcepage'] == "searchUser"){
+                    echo <<<HTML
+                        <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                HTML;}else{echo <<<HTML
+                    <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                HTML;}?>
         </div>
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
             <div class="split_section">
                 <h2>Student Information</h2>
-                <?php 
-                if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
+                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
                 }else{
-                    echo <<<HTML
-                     <img class='elipse_container' src='$student[profile_Picture]' alt='student picture'>"
-                     HTML;
-                }
-                ?>
+                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
+                }?>
                 <div class="info_ltr">
                     <div><h3>Level</h3><p><?= $student['level']?></p></div>
                     <div><h3>Experience</h3><p><?= $student['experience']?></p></div>
@@ -423,12 +429,10 @@
             HTML;
             $index++;
         }}else{
-                echo "<h2> No children found </h2>";
+                echo "<h2> No Study Records found </h2>";
             }?>
         </div>
     </main>
     <script src="../styles/conditionalShadows.js"></script>
-    <script src="../styles/togglePlaceholder.js"></script>
-    <?php include_once "../backend/updateProfile.php"; ?>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    $queryID = $_SESSION['queryID'];
+    $queryID = $_GET["queryID"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,9 +78,16 @@
         }
 
         .right h2 {
-            font-size: 24px;
+            font-size: 23px;
             margin-bottom: 10px;
             margin-top: 0px;
+        }
+
+        .right h4{
+            font-size: 18px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            color: #6D5D6E;
         }
 
         .tagsAndbuttons {
@@ -263,78 +270,158 @@
     <div class="functionButton">
         <button class="reply-Btn" id="replyButton">REPLY</button>
     </div>
-    <div class="container">
-        <div class="discussion">
-                <div class="left">
-                    <img src="../../images/anonymousUser.png">
-                    <h4>Muhammad Tambi Alamaks Thuhan</h4>
-                    <p id="dateTime">10th January 2023 13:49:32</p>
-                    <button class="like-btn">
-                        <span class="material-symbols-outlined">
-                            favorite
-                        </span>
-                        <div class="textBesideIcon">
-                            0 Likes
-                        </div>
-                    </button>
-                    <button class="taglineBtn">
-                        GROUP123455
-                    </button>
-                </div>
-                <div class="right">
-                    <div class="question">
-                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi magni praesentium harum obcaecati reiciendis fugiat dolorum itaque dolore? Veritatis labore voluptatum perspiciatis nulla dolorem eaque id deserunt ab quos vero, doloribus corporis impedit provident sapiente non rem eius aliquid quasi! Laboriosam sint tempore rem, ratione voluptas repudiandae veniam unde.</h2>
-                    </div>               
-                </div>
-        </div>
-    </div>
     
-    <div class="replyContainer">
-        Replies
-    </div>
+    <?php
+        $queryID = $_GET["queryID"];
+        //Get Question
+        //Get Question
+        $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.content AS content, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, d.query_Likes AS likes, s.sName AS name, u.profile_Picture AS pic, 
+        (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID 
+        WHERE d.query_ID = ?";
+        
+        //Idk WHAT IS THIS, BUT IT WORKS
+        $stmt_ShowQuery = mysqli_prepare($connection, $sql_ShowQuery);
+        mysqli_stmt_bind_param($stmt_ShowQuery, 's', $queryID);
+        mysqli_stmt_execute($stmt_ShowQuery);
+        $result_ShowQuery = mysqli_stmt_get_result($stmt_ShowQuery);
 
-    <div class="replyBlock" id="hideReply" style="display:none">
-        <h4>RONG WEIWEI<h4>
-        <form action="" method="post">
-            <textarea name="questionInput" id="" cols="30" rows="8"></textarea>
-            <div class="postAndCancel">
-                <button id="cancelBtn">Cancel</button>
-                <button name="postQuery">Post</button>
-            </div>
-        </form>
-    </div>
-
-    <div class="container">
-        <div class="discussion">
-            <div class="left">
-                <img src="../../images/anonymousUser.png">
-                <h4>Muhammad Tambi Alamaks Thuhan</h4>
-                <p id="dateTime">10th January 2023 13:49:32</p>
-                <button class="userRole-btn">
-                    <span class="material-symbols-outlined">
-                        group
-                    </span>
-                    <div class="textBesideIcon">
-                        Teacher Reply
+        
+        //Display Question
+        if(mysqli_num_rows($result_ShowQuery) >0){
+            while($row = mysqli_fetch_assoc($result_ShowQuery)){
+                echo <<<HTML
+                <div class="container">
+                    <div class="discussion">
+                        <div class="left">
+                            <img src="../../images/anonymousUser.png">
+                            <h4>{$row["name"]}</h4>
+                            <p id="dateTime">{$row["qDateTime"]}</p>
+                            <button class="like-btn">
+                                <span class="material-symbols-outlined">
+                                    favorite
+                                </span>
+                                <div class="textBesideIcon">
+                                    {$row["likes"]} Likes
+                                </div>
+                            </button>
+                            <button class="taglineBtn">
+                                {$row["tagline"]}
+                            </button>
+                        </div>
+                        <div class="right">
+                            <div class="question">
+                                <h2>{$row["topic"]}</h2>
+                                <h4>{$row["content"]}</h4>
+                            </div>               
+                        </div>
                     </div>
-                </button>
-                <button class="like-btn">
-                    <span class="material-symbols-outlined">
-                        favorite
-                    </span>
-                    <div class="textBesideIcon">
-                        0 Likes
-                    </div>
-                </button>
-            </div>
-            <div class="right">
-                <div class="question">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi magni praesentium harum obcaecati reiciendis fugiat dolorum itaque dolore? Veritatis labore voluptatum perspiciatis nulla dolorem eaque id deserunt ab quos vero, doloribus corporis impedit provident sapiente non rem eius aliquid quasi! Laboriosam sint tempore rem, ratione voluptas repudiandae veniam unde.</h2>
                 </div>
-            </div>
-        </div>
-	</div>
-</div>
+                <div class="replyContainer">
+                    Replies
+                </div>
+                <!-- Add Replies  -->
+
+
+                <div class="replyBlock" id="hideReply" style="display:none">
+                <h4>RONG WEIWEI<h4>
+                <form action="" method="post">
+                    <textarea name="replyInput" id="" cols="30" rows="8"></textarea>
+                    <div class="postAndCancel">
+                        <button id="cancelBtn">Cancel</button>
+                        <button name="postQuery">Post</button>
+                    </div>
+                </form>
+                </div>
+                HTML;
+
+                
+
+                //Get Teacher Replies
+                $sql_teacherReplies = "SELECT b.query_ID AS queryID, b.teacher_ID AS teacherID, b.replies AS replies, b.reply_Likes AS likes, b.reply_Datetime AS rdateTime, teacher.tName AS teacherName FROM blogreplies b INNER JOIN teacher ON b.teacher_ID = teacher.teacher_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+
+                $stmt_teacherReplies = mysqli_prepare($connection, $sql_teacherReplies);
+                mysqli_stmt_bind_param($stmt_teacherReplies, 's', $queryID);
+                mysqli_stmt_execute($stmt_teacherReplies);
+                $result_teacherReplies = mysqli_stmt_get_result($stmt_teacherReplies);
+
+                 //Get Student Replies
+                $sql_studentReplies = "SELECT b.query_ID AS queryID, b.student_ID AS studentID, b.replies AS replies, b.reply_Likes AS likes, b.reply_Datetime AS rdateTime, student.sName AS studentName FROM blogreplies b INNER JOIN student ON b.student_ID = student.student_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+                 
+                $stmt_studentReplies = mysqli_prepare($connection, $sql_studentReplies); 
+                mysqli_stmt_bind_param($stmt_studentReplies, 's', $queryID);
+                mysqli_stmt_execute($stmt_studentReplies);
+                $result_studentReplies = mysqli_stmt_get_result($stmt_studentReplies);
+                 
+
+                if(mysqli_num_rows($result_teacherReplies)>0){
+                    while($row1 = mysqli_fetch_assoc($result_teacherReplies)){
+                        echo <<<HTML
+                            <div class="container">
+                            <div class="discussion">
+                                <div class="left">
+                                    <img src="../../images/anonymousUser.png">
+                                    <h4>{$row1["teacherName"]}</h4>
+                                    <p id="dateTime">{$row1["rdateTime"]}</p>
+                                    <button class="userRole-btn">
+                                        <span class="material-symbols-outlined">
+                                            group
+                                        </span>
+                                        <div class="textBesideIcon">
+                                            Teacher Reply
+                                        </div>
+                                    </button>
+                                    <button class="like-btn">
+                                        <span class="material-symbols-outlined">
+                                            favorite
+                                        </span>
+                                        <div class="textBesideIcon">
+                                            {$row1["likes"]} Likes
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="right">
+                                    <div class="question">
+                                        <h2> {$row1["replies"]}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        HTML;
+                }
+            }
+                if(mysqli_num_rows($result_studentReplies)>0){
+                    while($row2 = mysqli_fetch_assoc($result_studentReplies)){
+                        echo <<<HTML
+                        <div class="container">
+                            <div class="discussion">
+                                <div class="left">
+                                    <img src="../../images/anonymousUser.png">
+                                    <h4>{$row2["studentName"]}</h4>
+                                    <p id="dateTime">{$row2["rdateTime"]}</p>
+                                    <button class="like-btn">
+                                        <span class="material-symbols-outlined">
+                                            favorite
+                                        </span>
+                                        <div class="textBesideIcon">
+                                            {$row2["likes"]} Likes
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="right">
+                                    <div class="question">
+                                        <h2>{$row2["replies"]}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                HTML;
+                }
+            }
+        }
+    }
+    ?>
+
+
     <script>
             const targetDiv = document.getElementById("hideReply");
             const btn = document.getElementById("replyButton");
@@ -355,27 +442,42 @@
             };  
     </script>
 
+   
+
     <?php
-    if(isset($_POST['postQuery'])){
-        if(isset($_SESSION['user_id'])){
-            $user_id = $_SESSION['user_id'];
-            $question = $_POST['questionInput'];
-            $date = date("Y-m-d H:i:s");
-            $sql = "INSERT INTO `qna`(`user_id`, `question`, `date`) VALUES ('$user_id','$question','$date')";
-            $result = mysqli_query($conn,$sql);
-            if($result){
-                echo "<script>alert('Question Posted!')</script>";
-                echo "<script>window.location.href='qna.php'</script>";
-            }else{
-                echo "<script>alert('Question Failed to Post!')</script>";
-                echo "<script>window.location.href='qna.php'</script>";
+        if(isset($_POST['postQuery'])){
+            if(isset($_SESSION['user_id'])){
+                $user_id = $_SESSION['user_id'];
+                $reply = $_POST['replyInput'];
+                $date = date("Y-m-d H:i:s");
+                
+                // Check the prefix of user_id and assign it to the corresponding ID variable
+                if (substr($user_id,0,2) == "ST") {
+                    $student_ID = $user_id;
+                    $sql_insertStudentReply = "INSERT INTO `blogreplies`(`query_ID`, `student_ID`, `replies`, `reply_Likes`, `reply_Datetime`) VALUES ('$queryID','$student_ID','$reply',0,'$date')";
+                    $result_insertReply = mysqli_query($connection,$sql_insertStudentReply);
+                    if($result_insertReply){
+                        echo "<script>alert('Question Posted!')</script>";
+                        echo "<script>window.location.href='viewSelectedQueries.php?queryID=$queryID'</script>";
+                    }else{
+                        echo "<script>alert('Question Failed to Post!')</script>";
+                        echo "<script>window.location.href='viewSelectedQueries.php'</script>";
+                    }
+                } elseif (substr($user_id,0,2) == "TC" ) {
+                    $teacher_ID = $user_id;
+                    $sql_insertTeacherReply = "INSERT INTO `blogreplies`(`query_ID`, `teacher_ID`, `replies`, `reply_Likes`, `reply_Datetime`) VALUES ('$queryID','$teacher_ID','$reply',0,'$date')";
+                    $result_insertReply = mysqli_query($connection,$sql_insertTeacherReply);
+                    if($result_insertReply){
+                        echo "<script>alert('Question Posted!')</script>";
+                        echo "<script>window.location.href='viewSelectedQueries.php?queryID=$queryID'</script>";
+                    }else{
+                        echo "<script>alert('Question Failed to Post!')</script>";
+                        echo "<script>window.location.href='viewSelectedQueries.php'</script>";
+                    }
+                }
             }
-        }else{
-            echo "<script>alert('No ID here')</script>";
-            echo "<script>window.location.href='qna.php'</script>";
-    }
-}
-        
+        }
     ?>
+
 </body>
 </html>

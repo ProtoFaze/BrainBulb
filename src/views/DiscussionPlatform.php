@@ -1,6 +1,7 @@
-<!-- <?php
+<?php
     session_start();
-    ?> -->
+    $user_id = $_SESSION['user_id'];
+?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -106,6 +107,7 @@
             .question{
                 /* margin-bottom: 15px; */
                 margin: 25px;
+                letter-spacing: 1px;
             }
     
             .material-symbols-outlined {
@@ -140,6 +142,10 @@
             .functionButton{
                 margin-left: 76%;
             }
+
+            .tfunctionButton{
+                margin-left: 80%;
+            }
     
             .ask-Btn{
                 text-align: center;
@@ -157,6 +163,7 @@
             color: black;
             font-weight: bold;
             text-decoration: none; /* no underline */
+            cursor: pointer;
             }
 
         </style>
@@ -170,58 +177,75 @@
         <div class="titlebox">
             <h1>QNA Discussion</h1>
         </div>
-        <div class="functionButton">
-            <a class="askQueryBtn" href="PostQuery.php"><button class="ask-Btn">Ask Query</button></a>
-            <select class="sort-Btn">
-                <option value="mostLikes">Most Likes</option>
-                <option value="mostComments">Most Comments</option>
-                <option value="latestPost">Latest Post</option>
-            </select>
-        </div>
+
         <?php
+            if (substr($user_id,0,2) == "ST") {
+                echo <<<HTML
+                 <div class="functionButton">
+                    <a class="askQueryBtn" href="PostQuery.php"><button class="ask-Btn">Ask Query</button></a>
+                    <select class="sort-Btn">
+                        <option value="mostLikes">Most Likes</option>
+                        <option value="mostComments">Most Comments</option>
+                        <option value="latestPost">Latest Post</option>
+                    </select>
+                </div>
+                HTML;
+
+            } elseif (substr($user_id,0,2) == "TC" ){
+                echo <<<HTML
+                    <div class="tfunctionButton">  
+                        <select class="sort-Btn">
+                            <option value="mostLikes">Most Likes</option>
+                            <option value="mostComments">Most Comments</option>
+                            <option value="latestPost">Latest Post</option>
+                        </select>
+                </div>
+                HTML;
+            }
+
             $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, d.query_Likes AS likes, s.sName AS name, u.profile_Picture AS pic, 
             (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime DESC";     
             $result_ShowQuery = mysqli_query($connection,$sql_ShowQuery);
     
-    if(mysqli_num_rows($result_ShowQuery) > 0){
-        while($row = mysqli_fetch_assoc($result_ShowQuery)){
-            echo <<<HTML
-            <div class="container">
-                <div class="discussion">
-                    <div class="left">
-                        <div class="img">
-                            <img src="../../images/anonymousUser.png">
-                        </div>
-                        <div id="sNameATime"><h4>{$row["name"]}</h4></div>
-                        <div id="sNameATime"><p id="dateTime">{$row["qDateTime"]}</p></div>
-                    </div>
-                    <div class="right">
-                        <div class="question">
-                            <a class="TopicWithLink" href="viewSelectedQueries.php?id={$row["queryID"]}" id="{$row["queryID"]}"><h2>{$row["topic"]}</h2></a>
-                        </div>
-                    </div>
-                    <div class="tagsAndbuttons">
-                        <span>{$row["tagline"]}</span>
-                        <button id="likebtn">
-                            <span class="material-symbols-outlined">
-                                favorite
-                            </span>
-                            <div class="textBesideIcon">
-                                {$row["likes"]} Likes
+            if(mysqli_num_rows($result_ShowQuery) > 0){
+                while($row = mysqli_fetch_assoc($result_ShowQuery)){
+                    echo <<<HTML
+                    <div class="container">
+                        <div class="discussion">
+                            <div class="left">
+                                <div class="img">
+                                    <img src="../../images/anonymousUser.png">
+                                </div>
+                                <div id="sNameATime"><h4>{$row["name"]}</h4></div>
+                                <div id="sNameATime"><p id="dateTime">{$row["qDateTime"]}</p></div>
                             </div>
-                        </button>
-                        <button id="replybtn">
-                            <span class="material-symbols-outlined">
-                                chat
-                            </span>
-                            <div class="textBesideIcon">
-                                {$row["totalQuery"]} Replies
+                            <div class="right">
+                                <div class="question">
+                                    <a onclick="window.location.href='./viewSelectedQueries.php?queryID={$row['queryID']}'" class="TopicWithLink"><h2>{$row["topic"]}</h2></a>
+                                </div>
                             </div>
-                        </button>
+                            <div class="tagsAndbuttons">
+                                <span>{$row["tagline"]}</span>
+                                <button id="likebtn">
+                                    <span class="material-symbols-outlined">
+                                        favorite
+                                    </span>
+                                    <div class="textBesideIcon">
+                                        {$row["likes"]} Likes
+                                    </div>
+                                </button>
+                                <button id="replybtn">
+                                    <span class="material-symbols-outlined">
+                                        chat
+                                    </span>
+                                    <div class="textBesideIcon">
+                                        {$row["totalQuery"]} Replies
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            HTML;
+                    HTML;
                 }
             }
             else{

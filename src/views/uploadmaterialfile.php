@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>BrainBulb</title>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="../styles/inputs.css"> -->
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -39,7 +40,7 @@
 
     .drag-area{
         /* margin-top: 50px; */
-        border: 2px dashed black;
+        border: 4px dashed black;
         height: 420px;
         width: 700px;
         border-radius: 5px;
@@ -90,7 +91,10 @@
     }
 
     .inputform{
+        /* margin-bottom: 50px; */
+        /* margin: 0 auto; */
         text-align: center;
+        /* width: 300px; */
     }
 
     #submitbutton, #gobackbutton{
@@ -103,6 +107,24 @@
         color: white;
         border-radius: 5px;
         cursor: pointer;
+    }
+
+    .input-field{
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 20px;
+        font-weight: bold;
+        /* margin: 8px 0; */
+        box-sizing: border-box;
+        border: 3px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+        width: 100%;
+    }
+
+    .input-field:focus{
+        border: 3px solid #555;
     }
 </style>
 <script>
@@ -136,27 +158,40 @@
                 <input type="file" name="file1" hidden>
             </div>    
         </div>
+        <p style="font-size:20px; text-align:center;">*Only <i style="color:red;">.pdf, .docs and .ppt </i>format allow*</p>
         <div class="inputform">
+            <div style="float: left; width: 33.33%;">
+                <button id="gobackbutton" onclick="backgo()">Cancel</button>
+            </div> 
             <form action="" method="post" id="forms">
-                <input type="text" name="mattitle" id="">
+                <div style="float: left; width: 33.33%;">
+                    <input type="text" name="mattitle" id="" class="input-field" placeholder="Material Title">
+                </div>
                 <input type="hidden" name="hide" value="">
-                <input type="submit" value="Upload" name="subbtn" id="submitbutton">
+                <div style="float: left; width: 33.33%;">
+                    <input type="submit" value="Upload" name="subbtn" id="submitbutton">
+                </div>
             </form>
-            <button id="gobackbutton" onclick="backgo()">Cancel</button>
         </div>
+        <div style="clear:both; height:60px;"></div>
     </div>
     <?php
         if(isset($_POST['subbtn'])){
-            $title = $_POST['mattitle'];
-            $filename = $_POST["hide"];
-            $date = date("Y-m-d");
-            $q = "INSERT INTO `learning_material`(`course_ID`, `teacher_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$a','$title','$filename','$date')";
-            $results = mysqli_query($connection,$q);
-            if($results){
-                echo "<script> alert('Uploaded Sucessfully')</script>";
-                echo "<script>location.href='viewlearningmaterial.php' </script>";
-            }else{
-                echo "<script>alert('Uploaded Unsucessfully')</script>";
+            if($_POST['mattitle'] != ""){
+                $title = $_POST['mattitle'];
+                $filename = $_POST["hide"];
+                $date = date("Y-m-d");
+                $q = "INSERT INTO `learning_material`(`course_ID`, `teacher_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$a','$title','$filename','$date')";
+                $results = mysqli_query($connection,$q);
+                if($results){
+                    echo "<script> alert('Uploaded Sucessfully')</script>";
+                    echo "<script>location.href='viewlearningmaterial.php' </script>";
+                }else{
+                    echo "<script>alert('Uploaded Unsucessfully')</script>";
+                }
+            }
+            else{
+                echo "<script>alert('Please enter Material Title')</script>";
             }
         }
     ?>

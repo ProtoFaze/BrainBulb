@@ -184,9 +184,8 @@
                  <div class="functionButton">
                     <a class="askQueryBtn" href="PostQuery.php"><button class="ask-Btn">Ask Query</button></a>
                     <select class="sort-Btn">
-                        <option value="mostLikes">Most Likes</option>
                         <option value="mostComments">Most Comments</option>
-                        <option value="latestPost">Latest Post</option>
+                        <option value="oldestPost">Oldest Post</option>
                     </select>
                 </div>
                 HTML;
@@ -195,9 +194,8 @@
                 echo <<<HTML
                     <div class="tfunctionButton">  
                         <select class="sort-Btn">
-                            <option value="mostLikes">Most Likes</option>
                             <option value="mostComments">Most Comments</option>
-                            <option value="latestPost">Latest Post</option>
+                            <option value="oldestPost">Oldest Post</option>
                         </select>
                 </div>
                 HTML;
@@ -226,14 +224,6 @@
                             </div>
                             <div class="tagsAndbuttons">
                                 <span>{$row["tagline"]}</span>
-                                <button id="likebtn">
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
-                                    <div class="textBesideIcon">
-                                        {$row["likes"]} Likes
-                                    </div>
-                                </button>
                                 <button id="replybtn">
                                     <span class="material-symbols-outlined">
                                         chat

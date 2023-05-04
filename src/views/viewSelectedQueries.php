@@ -329,7 +329,7 @@
                 
 
                 //Get Teacher Replies
-                $sql_teacherReplies = "SELECT b.query_ID AS queryID, b.teacher_ID AS teacherID, b.replies AS replies, b.reply_Likes AS likes, b.reply_Datetime AS rdateTime, teacher.tName AS teacherName FROM blogreplies b INNER JOIN teacher ON b.teacher_ID = teacher.teacher_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+                $sql_teacherReplies = "SELECT b.query_ID AS queryID, b.teacher_ID AS teacherID, b.replies AS replies, b.reply_Datetime AS rdateTime, teacher.tName AS teacherName FROM blogreplies b INNER JOIN teacher ON b.teacher_ID = teacher.teacher_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
 
                 $stmt_teacherReplies = mysqli_prepare($connection, $sql_teacherReplies);
                 mysqli_stmt_bind_param($stmt_teacherReplies, 's', $queryID);
@@ -337,7 +337,7 @@
                 $result_teacherReplies = mysqli_stmt_get_result($stmt_teacherReplies);
 
                  //Get Student Replies
-                $sql_studentReplies = "SELECT b.query_ID AS queryID, b.student_ID AS studentID, b.replies AS replies, b.reply_Likes AS likes, b.reply_Datetime AS rdateTime, student.sName AS studentName FROM blogreplies b INNER JOIN student ON b.student_ID = student.student_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+                $sql_studentReplies = "SELECT b.query_ID AS queryID, b.student_ID AS studentID, b.replies AS replies, b.reply_Datetime AS rdateTime, student.sName AS studentName FROM blogreplies b INNER JOIN student ON b.student_ID = student.student_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
                  
                 $stmt_studentReplies = mysqli_prepare($connection, $sql_studentReplies); 
                 mysqli_stmt_bind_param($stmt_studentReplies, 's', $queryID);
@@ -423,6 +423,7 @@
     <?php
         if(isset($_POST['postQuery'])){
             if(isset($_SESSION['user_id'])){
+                date_default_timezone_set('Asia/Kuala_Lumpur');
                 $user_id = $_SESSION['user_id'];
                 $reply = $_POST['replyInput'];
                 $date = date("Y-m-d H:i:s");
@@ -430,24 +431,24 @@
                 // Check the prefix of user_id and assign it to the corresponding ID variable
                 if (substr($user_id,0,2) == "ST") {
                     $student_ID = $user_id;
-                    $sql_insertStudentReply = "INSERT INTO `blogreplies`(`query_ID`, `student_ID`, `replies`, `reply_Likes`, `reply_Datetime`) VALUES ('$queryID','$student_ID','$reply',0,'$date')";
+                    $sql_insertStudentReply = "INSERT INTO `blogreplies`(`query_ID`, `student_ID`, `replies`, `reply_Datetime`) VALUES ('$queryID','$student_ID','$reply','$date')";
                     $result_insertReply = mysqli_query($connection,$sql_insertStudentReply);
                     if($result_insertReply){
-                        echo "<script>alert('Question Posted!')</script>";
+                        echo "<script>alert('Reply Posted!')</script>";
                         echo "<script>window.location.href='viewSelectedQueries.php?queryID=$queryID'</script>";
                     }else{
-                        echo "<script>alert('Question Failed to Post!')</script>";
+                        echo "<script>alert('Reply Failed to Post!')</script>";
                         echo "<script>window.location.href='viewSelectedQueries.php'</script>";
                     }
                 } elseif (substr($user_id,0,2) == "TC" ) {
                     $teacher_ID = $user_id;
-                    $sql_insertTeacherReply = "INSERT INTO `blogreplies`(`query_ID`, `teacher_ID`, `replies`, `reply_Likes`, `reply_Datetime`) VALUES ('$queryID','$teacher_ID','$reply',0,'$date')";
+                    $sql_insertTeacherReply = "INSERT INTO `blogreplies`(`query_ID`, `teacher_ID`, `replies`, `reply_Datetime`) VALUES ('$queryID','$teacher_ID','$reply','$date')";
                     $result_insertReply = mysqli_query($connection,$sql_insertTeacherReply);
                     if($result_insertReply){
-                        echo "<script>alert('Question Posted!')</script>";
+                        echo "<script>alert('Reply Posted!')</script>";
                         echo "<script>window.location.href='viewSelectedQueries.php?queryID=$queryID'</script>";
                     }else{
-                        echo "<script>alert('Question Failed to Post!')</script>";
+                        echo "<script>alert('Reply Failed to Post!')</script>";
                         echo "<script>window.location.href='viewSelectedQueries.php'</script>";
                     }
                 }

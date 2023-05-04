@@ -196,12 +196,13 @@
                         <select class="sort-Btn">
                             <option value="mostComments">Most Comments</option>
                             <option value="oldestPost">Oldest Post</option>
+                            <option value="latestPost">Latest Post</option>
                         </select>
                 </div>
                 HTML;
             }
 
-            $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, d.query_Likes AS likes, s.sName AS name, u.profile_Picture AS pic, 
+            $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
             (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime DESC";     
             $result_ShowQuery = mysqli_query($connection,$sql_ShowQuery);
     

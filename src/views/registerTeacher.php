@@ -1,3 +1,7 @@
+<?php
+    include "../database/connect.php";
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -63,7 +67,6 @@
             font-size: 16px;
             display: flex;
             flex-direction: column;
-            margin-left: 74%;
             margin-top: 10px;
         }
 
@@ -97,13 +100,13 @@
             } */
 
 
-            form {
-                max-width: 500px;
-                padding: 10px;
-                background-color: #f2f2f2;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
+        .formAction {
+            max-width: 500px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
         .entireForm {
         display: flex;
@@ -123,7 +126,7 @@
         }
 
         .form2{
-            margin-left: -9%;
+            margin-left: -16%;
         }
 
         textarea{
@@ -134,7 +137,42 @@
             margin-bottom: -75px;
         }
 
+        .submitRegister{
+            max-width: 0;
+            padding: 0px;
+            background-color: none;
+            border: none;
+            margin-left: 74%;
+        }
 
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px;
+            margin-right: 100%;
+        }
+
+        .cancelBtn {
+            background-color: #bbb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-left: -105px;
+        }
+
+        .registerBtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
         </style>
     </head>
@@ -142,13 +180,14 @@
         <div class="titlebox">
             <h1>BrainBulb Teacher Registration</h1>
         </div>
+        <form action="" method="post">
         <div class="entireForm">
             <div class="form1">
-                <form action="" method="post" >
+                <div class="formAction">
                     <div class="usernameInput">
                         <label for="username">Username:</label>
                         <h4>Please enter username for your account.</h4>
-                        <input type="text" id="username" name="username" required placeholder="Eg.emmaMe@0110">
+                        <input type="text" id="username" name="username" placeholder="Eg.emmaMe@0110" required>
                     </div>
                     
                     <div class="passwordInput">
@@ -160,25 +199,25 @@
                     <div class="passwordInput">
                         <label for="password">Confirm Password:</label>
                         <h4>Password Validation</h4>
-                        <input type="password" id="password" name="password" required>
+                        <input type="password" id="password" name="password2" required>
                     </div>
 
                     <div class="icNumberInput">
                         <label for="icnumber">IC Number:</label>
                         <h4>Please enter your IC number in the format YYMMDDXXXXXX. WITHOUT -</h4>
-                        <input type="text" id="icnumber" name="icnumber" required placeholder="Eg.030220201928">
+                        <input type="text" id="icnumber" name="icnumber"  placeholder="Eg.030220201928" required>
                     </div>
 
                     <div class="emailInput">
                         <label for="email">Email:</label>
                         <h4>Please enter a valid email address for your account.</h4>
-                        <input type="email" id="email" name="email" required placeholder="Eg.emmaMe@gmail.com">
+                        <input type="email" id="email" name="email" placeholder="Eg.emmaMe@gmail.com" required>
                     </div>  
-                </form>
+                </div>
             </div>
             
             <div class="form2">
-                <form action="" method="post"  class="form2">
+                <div class="formAction">
                     <div class="profileInput">
                         <div>
                             <label for="name">Name:</label>
@@ -188,7 +227,7 @@
                         <div>
                             <label for="dob">DOB:</label>
                             <h4>Please enter your Date of Birth</h4>
-                            <input type="date" id="dob" name="dob" required placeholder="DD/MM/YYYY">
+                            <input type="date" id="dob" name="dob"  placeholder="DD/MM/YYYY" required>
                         </div>
                     </div>
 
@@ -196,12 +235,12 @@
                         <div>
                             <label for="region">Region:</label>
                             <h4>Please enter the region you teaching</h4>
-                            <input type="text" id="region" name="region" required>
+                            <input type="text" id="region" name="region" placeholder="Eg. " required>
                         </div>
                         <div class="schoolInput">
                             <label for="school">School:</label>
                             <h4>Please enter your school name</h4>
-                            <input type="text" id="school" name="school" required>
+                            <input type="text" id="school" name="school" placeholder="Eg. SJK(C)Asia Pacific Primary Education" required>
                         </div>
                     </div>
 
@@ -209,7 +248,7 @@
                         <div>
                             <label for="education">Highest Education:</label>
                             <h4>Please enter your highest Education level</h4>
-                            <input type="text" id="education" required>
+                            <input type="text" id="education" name="educate" placeholder="Eg. Phd in Primary Teaching" required>
                         </div>
                     </div>
 
@@ -217,12 +256,67 @@
                         <div id="professionalityDiv">
                             <label for="professionality">Professionality Description:</label>
                             <h4>Please describe yourself. You may mention about awards or achievement here.</h4>
-                            <textarea name="professionalityDesc" id="" cols="20" rows="10" placeholder="BALBALBAL"></textarea>
+                            <textarea name="professionalityDesc" id="" cols="20" rows="10" placeholder="Eg. Guru Cermerlang TOP30 Reward 2023"></textarea>
                         </div>
                     </div>
-                </form>
+                </div>  
             </div>
         </div>
-        <button type="submit">Register</button>
+
+        <div class="buttons-container">
+            <div class="submitRegister">
+                <div class="buttons">
+                    <button class="cancelBtn">Cancel</button>
+                    <button class="registerBtn" name="register">Register</button>
+                </div>
+            </div>
+        </div>
+        </form>
+        
+        <?php
+        include "../database/connect.php";
+    
+        if(isset($_POST['register'])){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $password2 = $_POST['password2'];
+            $icnumber = $_POST['icnumber'];
+            $email = $_POST['email'];
+            $name = $_POST['name'];
+            $dob = $_POST['dob'];
+            $region = $_POST['region'];
+            $school = $_POST['school'];
+            $education = $_POST['educate'];
+            $professionalityDesc = $_POST['professionalityDesc'];
+            $userType = "Teacher";
+
+            if ($password == $password2){
+                $userType = "Teacher";
+                $sql_insertTeacher = "INSERT INTO `teacher`(`tName`, `tDOB`, `tRegion`, `tSchool`, `highest_Qualification`, `professionality_Description`) VALUES ('$name', '$dob', '$region', '$school', '$education', '$professionalityDesc')";
+                $result_insertTeacher = mysqli_query($connection, $sql_insertTeacher);
+            
+                if($result_insertTeacher){
+                    $sql_lastTeacherID = "SELECT MAX(teacher_id) AS last_teacher_id FROM teacher";
+                    $result_lastTeacherID = mysqli_query($connection, $sql_lastTeacherID);
+                    $row_lastTeacherID = mysqli_fetch_assoc($result_lastTeacherID);
+                    $lastTeacherID = $row_lastTeacherID['last_teacher_id'];
+                    $sql_insertUser = "INSERT INTO `user`( `username`, `password`, `ic`, `email`,  `user_Type`,  `teacher_ID`) VALUES ('$username','$password','$icnumber',' $email','$userType','$lastTeacherID')";
+                    $result_insertUser = mysqli_query($connection, $sql_insertUser);
+                    if($result_insertUser){
+                        echo "<script>alert('Registration Success!')</script>";
+                        echo "<script>window.location.href='login.php'</script>";
+                    }else{
+                        echo "<script>alert('Registration Failed to User!')</script>";
+                    }
+                }else{
+                    echo "<script>alert('Registration Failed to Teacher!')</script>";
+                    
+                }
+            }else{
+                echo "<script>alert('Password Incorrect')</script>";
+            }
+                
+        }
+?>
   </body>
 </html>

@@ -296,14 +296,6 @@
                             <img src="../../images/anonymousUser.png">
                             <h4>{$row["name"]}</h4>
                             <p id="dateTime">{$row["qDateTime"]}</p>
-                            <button class="like-btn">
-                                <span class="material-symbols-outlined">
-                                    favorite
-                                </span>
-                                <div class="textBesideIcon">
-                                    {$row["likes"]} Likes
-                                </div>
-                            </button>
                             <button class="taglineBtn">
                                 {$row["tagline"]}
                             </button>
@@ -370,14 +362,6 @@
                                             Teacher Reply
                                         </div>
                                     </button>
-                                    <button class="like-btn">
-                                        <span class="material-symbols-outlined">
-                                            favorite
-                                        </span>
-                                        <div class="textBesideIcon">
-                                            {$row1["likes"]} Likes
-                                        </div>
-                                    </button>
                                 </div>
                                 <div class="right">
                                     <div class="question">
@@ -398,14 +382,6 @@
                                     <img src="../../images/anonymousUser.png">
                                     <h4>{$row2["studentName"]}</h4>
                                     <p id="dateTime">{$row2["rdateTime"]}</p>
-                                    <button class="like-btn">
-                                        <span class="material-symbols-outlined">
-                                            favorite
-                                        </span>
-                                        <div class="textBesideIcon">
-                                            {$row2["likes"]} Likes
-                                        </div>
-                                    </button>
                                 </div>
                                 <div class="right">
                                     <div class="question">

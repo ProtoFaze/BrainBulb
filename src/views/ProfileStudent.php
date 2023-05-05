@@ -328,7 +328,7 @@
                 <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
+                    echo "<img class='elipse_container' src='../../images/".$student["profile_Picture"]."' alt='student picture'>";
                 }?>
                 <div class="info_ltr">
                     <div><h3>Level</h3><p><?= $student['level']?></p></div>

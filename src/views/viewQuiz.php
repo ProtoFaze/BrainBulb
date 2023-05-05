@@ -10,7 +10,7 @@
     <title>View Quiz</title>
     <style>
         body {
-            background-image: url(images/night.png);
+            background-image: url(../../images/night.png);
             color: white;
         }
         
@@ -141,9 +141,9 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <button id="newQuizBtn">NEW QUIZ</button>
+        <a href='createQuiz.php' id="newQuizBtn">NEW QUIZ</a>
         <?php
-            include 'dbcon.php';
+            include "../database/connect.php";
 
             if (isset($_POST['deleteQuiz'])) {
                 $quiz = $_POST['deleteQuiz'];
@@ -187,8 +187,7 @@
             FROM (studentquestionresponse 
             INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
             
-            GROUP BY studentquestionresponse.response_ID;";
-            // WHERE course.teacher_ID = 'TC00000001'
+            GROUP BY studentquestionresponse.response_ID ";
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
@@ -197,7 +196,7 @@
                     $totalCorrect = $row['correct_attempt'];
                     $quizname = $row['chapter_Name'];
                     $quizAccuracy = ($totalCorrect/$totalAttempt) * 100;
-                    $quiz .= 
+                    $quiz = 
                         '<div class="quiz">
                             <div class="quizTitle">
                                 <div>
@@ -210,10 +209,10 @@
                                 <div class="theButtons">
                                     <form method="POST">
                                         <button name="deleteQuiz" value="'.$courseid.'">
-                                            <img src="images/delete.png" alt="" class="delBtn">
+                                            <img src="../../images/delete.png" alt="" class="delBtn">
                                         </button>
                                         <button name="editQuiz" onclick="editQuiz">
-                                            <img src="images/edit.png" alt="" class="modifyBtn">
+                                            <img src="../../images/edit.png" alt="" class="modifyBtn">
                                         </button>
                                     </form>
                                 </div>
@@ -226,13 +225,13 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <button>VIEW QUESTION</button>
+                                            <a href="viewQuestion.php">VIEW QUESTION</a>
                                         </td>
                                         <td>
-                                            <button>VIEW ANALYTIC</button>
+                                            <a href="questionAnalytic.php">VIEW ANALYTIC</a>
                                         </td>
                                         <td>
-                                            <button>VIEW STUDENT PERFORMANCE</button>
+                                            <a href="studentRanking.php">VIEW STUDENT PERFORMANCE</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -248,12 +247,13 @@
 
         ?>
 
-        <!-- <script>
+        <script>
             function editQuiz() {
-                window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
+                // window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
                 // need pass the variable of the quiz question
             }
-        </script> -->
+
+        </script>
     </div>
     
 </body>

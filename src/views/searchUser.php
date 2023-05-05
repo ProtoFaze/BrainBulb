@@ -13,22 +13,22 @@
         }
         .grid_box{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             padding: 20px 60px;
             gap: 30px;
         }
         .profile {
             background-color: var(--box-primary);
-            min-width: 350px;
-            height: 550px;
+            min-width: 300px;
+            height: 300px;
             float: left;
-            box-shadow: 2px 5px 10px 1px #867b75;
-            padding: 25px;
-            padding-top: 45px;
+            box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            /* padding-top: 45px; */
             box-sizing: border-box;
             border: none;
             transition: transform 0.4s;
-            border-radius: var(--border-radius);
+            border-radius: 5px;
         }
 
         .prof_pic{
@@ -52,7 +52,7 @@
             padding: 6px;
         }
         td{
-            border: 1px solid black;
+            border-bottom: 1px solid black;
             border-radius: 8px;
             word-break: break-all;
         }
@@ -77,7 +77,10 @@
             z-index: 21795;
         }
         .response{
-            padding: 0px 20px;
+            height: 80px;
+            padding: 15px 20px;
+            border-top-left-radius:0px;
+            border-top-right-radius:0px;
         }
         .search{
             width: auto;
@@ -89,11 +92,6 @@
             align-self: center; 
         }
     </style>
-    <script>
-    function viewprofile(employee_id) {
-        window.location.href = "viewprofile.php?employee_id=" + employee_id;
-    }
-</script>
 </head>
 <body>
     <header>
@@ -175,27 +173,13 @@
                     echo "<img class='prof_pic' src='../../images/$data'>";
                     }
                 echo"  
-                    <table>
+                    <table style='margin: 0 auto;'>
                         <tr>
-                            <th>User ID </th>
-                            <td>".$user_id."</td>
-                        </tr>
+                            <th>User Type</th>
+                            <td class='uType'>".$user_type."</td>
                         <tr>
                             <th>Username</th>
                             <td>".$row['username']."</td>
-                        </tr>
-                        <tr>
-                            <th>Name</th>
-                            <td>".$row['name']."</td>
-                            
-                        </tr>
-                        <tr>
-                            <th>IC</th>
-                            <td>".$row['ic']."</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>".$row['email']."</td>
                         </tr>
                     </table>
                 </button></form>";
@@ -216,5 +200,14 @@
 
 ?>
     </main>
+    <script>
+        var userType = document.getElementsByName("uType").textContent;
+        var profileCard = document.getElementsByClassName('profile');
+        if(userType.innerHTML == "Parent"){
+            profileCard.style.backgroundColor = "rgb(220, 20, 60);";
+        }else if (userType.innerHTML == "Teacher") {
+            profileCard.style.backgroundColor = "rgb(230, 230, 250);";
+        }
+    </script>
 </body>
 </html>

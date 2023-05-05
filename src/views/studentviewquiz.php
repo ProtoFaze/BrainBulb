@@ -159,22 +159,28 @@ if(session_status() == PHP_SESSION_NONE) {
 <?php
     include "../database/connect.php";
     include("../components/nav.php");
-    if($_SESSION['teach'] != "" && $_SESSION['sub'] != ""){
-        $temp = $_SESSION['teach'];
-        $subID = $_SESSION['sub'];
-        $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND course.teacher_ID = '$temp' AND subject.subject_ID = '$subID'";
-    }
-    else if($_SESSION['teach'] != "" && $_SESSION['sub'] == ""){
-        $temp = $_SESSION['teach'];
-        $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND course.teacher_ID = '$temp'";
-    }
-    else if($_SESSION['teach'] == "" && $_SESSION['sub'] != ""){
-        $temp = $_SESSION['sub'];
-        $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND subject.subject_ID = '$temp'";
+    if(isset($_SESSION['teach']) && isset($_SESSION['sub'])){
+        if($_SESSION['teach'] != "" && $_SESSION['sub'] != ""){
+            $temp = $_SESSION['teach'];
+            $subID = $_SESSION['sub'];
+            $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND course.teacher_ID = '$temp' AND subject.subject_ID = '$subID'";
+        }
+        else if($_SESSION['teach'] != "" && $_SESSION['sub'] == ""){
+            $temp = $_SESSION['teach'];
+            $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND course.teacher_ID = '$temp'";
+        }
+        else if($_SESSION['teach'] == "" && $_SESSION['sub'] != ""){
+            $temp = $_SESSION['sub'];
+            $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz' AND subject.subject_ID = '$temp'";
+        }
+        else{
+            $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz'";
+        }
     }
     else{
         $query = "SELECT * FROM ((course INNER JOIN `subject` ON subject.subject_ID = course.subject_ID) INNER JOIN `teacher` ON teacher.teacher_ID = course.teacher_ID) WHERE course.question_Type = 'Customised Quiz'";
     }
+    
     $results = mysqli_query($connection,$query);
     $count = mysqli_num_rows($results);
 ?>
@@ -227,8 +233,8 @@ if(session_status() == PHP_SESSION_NONE) {
                             <p><?php echo $row['subject_Name'];?></p>
                         </div>
                         <div class="sub" style="width: 30%;">
-                            <a href="">
-                                <div class="start"><?php echo $row['course_ID'];?> Start Quiz</div>
+                            <a href="Quiz.php?id=<?php echo $row['course_ID'];?>">
+                                <div class="start">Start Quiz</div>
                             </a>
                             <a href="studentviewmaterial.php?id=<?php echo $row['course_ID'];?>">
                                 <div class="start">Learning Materials</div>
@@ -240,7 +246,7 @@ if(session_status() == PHP_SESSION_NONE) {
             }
             else{
                 echo "<center><h1 style='font-size: 40px;'>No Teachers' Quiz Found</h1></center>";
-                echo "<div style='height:80px;'></div>";
+                echo "<div style='height:500px;'></div>";
             }
 
             if(isset($_POST['filbtn'])){

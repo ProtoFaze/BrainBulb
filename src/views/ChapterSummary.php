@@ -356,18 +356,7 @@ if(session_status() == PHP_SESSION_NONE) {
                 </form>
             <?php
             if(isset($_POST['endbut'])){
-                if($subj == "SJ00000002"){
-                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000001"){
-                    echo"<script>location.href='BMSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000003"){
-                    echo"<script>location.href='ScSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000004"){
-                    echo"<script>location.href='MathSelectChapter.php'</script>";
-                }
+                ;
             }
             echo "<script> localStorage.clear();</script>;";
             unset($_SESSION['xp']);
@@ -385,7 +374,12 @@ if(session_status() == PHP_SESSION_NONE) {
 
     if(CValue == null || WValue == null){
         <?php 
-            if($subj == "SJ00000002"){echo"location.href='EnglishSelectChapter.php'";}elseif($subj == "SJ00000001"){echo"location.href='BMSelectChapter.php'";}elseif($subj == "SJ00000003"){echo"location.href='ScSelectChapter.php'";}elseif($subj == "SJ00000004"){echo"location.href='MathSelectChapter.php'";}
+            if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                if($subj == "SJ00000002"){echo"location.href='EnglishSelectChapter.php'";}elseif($subj == "SJ00000001"){echo"location.href='BMSelectChapter.php'";}elseif($subj == "SJ00000003"){echo"location.href='ScSelectChapter.php'";}elseif($subj == "SJ00000004"){echo"location.href='MathSelectChapter.php'";}
+            }
+            else{
+                echo "location.href='studentviewquiz.php'";
+            }
         ?>
     }
     else{

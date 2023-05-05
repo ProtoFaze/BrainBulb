@@ -18,8 +18,8 @@
         if(isset($_POST['child'])){
             $student_id = $_POST['child'];
         }else{
-            // $student_id = $_SESSION['user_id'];
-            $student_id = 'ST00000001';
+            $student_id = $_SESSION['user_id'];
+            // $student_id = 'ST00000001';
         }
 
 
@@ -309,15 +309,16 @@
     <main>
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+        <?php if(isset($_SESSION['sourcepage']) && $_SESSION['sourcepage'] == "searchUser"){
+            echo <<<HTML
+                <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+                <h1>Student profile</h1>
+                <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+        HTML;unset($_SESSION['sourcepage']);}else{echo <<<HTML
+            <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Student profile</h1>
-            <?php
-                if($_SESSION['sourcepage'] == "searchUser"){
-                    echo <<<HTML
-                        <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
-                HTML;}else{echo <<<HTML
-                    <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
-                HTML;}?>
+            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+        HTML;}?>
         </div>
 
         <!-- middle section containing user info, parent into -->

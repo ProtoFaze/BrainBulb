@@ -274,8 +274,7 @@
     <?php
         $queryID = $_GET["queryID"];
         //Get Question
-        //Get Question
-        $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.content AS content, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, d.query_Likes AS likes, s.sName AS name, u.profile_Picture AS pic, 
+        $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.content AS content, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
         (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID 
         WHERE d.query_ID = ?";
         
@@ -289,6 +288,22 @@
         //Display Question
         if(mysqli_num_rows($result_ShowQuery) >0){
             while($row = mysqli_fetch_assoc($result_ShowQuery)){
+                $user_id = $_SESSION['user_id'];
+                if (substr($user_id,0,2) == "ST") {
+                    $student_ID = $user_id;
+                    $sql_getStudentName = "SELECT  `sName` FROM `student` WHERE `student_ID` = '$student_ID'";
+                    $result_getSName = mysqli_query($connection,$sql_getStudentName);
+                    $row_getName = mysqli_fetch_assoc($result_getSName);
+                    $name = $row_getName["sName"];
+                } elseif (substr($user_id,0,2) == "TC" ) {
+                    $teacher_ID = $user_id;
+                    $sql_getTeacherName = "SELECT  `tName` FROM `teacher` WHERE `teacher_ID` = '$teacher_ID'";
+                    $result_getTName = mysqli_query($connection,$sql_getTeacherName);
+                    $row_getTName = mysqli_fetch_assoc($result_getTName);
+                    $name = $row_getTName["tName"];
+                }
+            
+
                 echo <<<HTML
                 <div class="container">
                     <div class="discussion">
@@ -315,9 +330,9 @@
 
 
                 <div class="replyBlock" id="hideReply" style="display:none">
-                <h4>RONG WEIWEI<h4>
+                <h4>{$name}<h4>
                 <form action="" method="post">
-                    <textarea name="replyInput" id="" cols="30" rows="8"></textarea>
+                    <textarea name="replyInput" id="" cols="30" rows="8" Required></textarea>
                     <div class="postAndCancel">
                         <button id="cancelBtn">Cancel</button>
                         <button name="postQuery">Post</button>

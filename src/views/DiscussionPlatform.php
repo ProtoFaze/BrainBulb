@@ -71,7 +71,7 @@
             
     
             .right h2 {
-                font-size: 20px;
+                font-size: 24px;
                 margin-bottom: 60px;
                 margin-top: 0px;
             }

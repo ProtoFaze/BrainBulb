@@ -241,20 +241,20 @@
                     
                     <div class="passwordInput">
                         <label for="password">Password:</label>
-                        <h4>For security purposes, please create a password with symbols</h4>
-                        <input type="password" id="password" name="password" required>
+                        <h4>For security purposes, please create a 6 digits password with at least 1 symbol, 1 big letter, 1 small letter, and 1 digit.</h4>
+                        <input type="password" id="password" name="password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$">
                     </div>
 
                     <div class="passwordInput">
                         <label for="password">Confirm Password:</label>
                         <h4>Password Validation</h4>
-                        <input type="password" id="password" name="password2" required>
+                        <input type="password" id="password" name="password2" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$">
                     </div>
 
                     <div class="icNumberInput">
                         <label for="icnumber">IC Number:</label>
                         <h4>Please enter your IC number in the format YYMMDDXXXXXX. WITHOUT -</h4>
-                        <input type="text" id="icnumber" name="icnumber"  placeholder="Eg.030220201928" required>
+                        <input type="text" id="icnumber" name="icnumber"  placeholder="Eg.030220201928" required pattern="[0]{1}[0-9]{11}">
                     </div>
 
                     <div class="emailInput">
@@ -271,7 +271,7 @@
                         <div>
                             <label for="name">Name:</label>
                             <h4>Please enter FULLNAME for your account.</h4>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" required pattern="[A-Za-z ]+">
                         </div>
                         <div>
                             <label for="dob">DOB:</label>
@@ -284,7 +284,7 @@
                         <div>
                             <label for="region">Region:</label>
                             <h4>Please enter the region you studying</h4>
-                            <input type="text" id="region" name="region" placeholder="Eg. " required>
+                            <input type="text" id="region" name="region" placeholder="Eg. " required pattern="[A-Za-z ]+">
                         </div>
                         <div class="schoolInput">
                             <label for="school">School:</label>

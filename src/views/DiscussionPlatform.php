@@ -151,8 +151,12 @@
                 text-align: center;
             }
     
-            #replybtn, .tagsAndbuttons>span{
+            .tagsAndbuttons>span{
                 cursor: context-menu;
+            }
+
+            #replybtn{
+                cursor: pointer;
             }
 
             #sNameATime{
@@ -225,7 +229,7 @@
                             </div>
                             <div class="tagsAndbuttons">
                                 <span>{$row["tagline"]}</span>
-                                <button id="replybtn">
+                                <button id="replybtn" onclick="window.location.href='./viewSelectedQueries.php?queryID={$row['queryID']}'">
                                     <span class="material-symbols-outlined">
                                         chat
                                     </span>

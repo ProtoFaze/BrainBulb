@@ -7,7 +7,7 @@ input{
     width: 1px;
     border-color: black;
 }
-.flex_button{
+.flex_button,select{
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -18,11 +18,11 @@ input{
     border-radius: var(--border-radius);
     border: solid var(--button);
 }
-.flex_button:hover{
+.flex_button:hover,select:hover{
     transition: var(--transitionspeed);
     transform: scale(1.1);
 }
-input[type="text"], textarea{
+input[type="text"],textarea{
     display: flex;
     align-items: center;
     justify-content: center;

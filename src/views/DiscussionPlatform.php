@@ -125,7 +125,7 @@
                 margin-top: 1.5px;
             }
     
-            .ask-Btn, .sort-Btn {
+            .ask-Btn, .sort-Btn, .filter-btn, .filter-btn2{
                 background-color: #3a4b61;
                 border: none;
                 color: #f1f4f3;
@@ -137,6 +137,22 @@
                 border-radius: 5px;
                 cursor: pointer;
                 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .filter-btn{
+                display: flex;
+                flex-direction: row;
+                margin-left: -150%;
+                margin-top: -52%;
+                background-color: #455d7c;
+            }
+
+            .filter-btn2{
+                display: flex;
+                flex-direction: row;
+                margin-left: -60%;
+                margin-top: -42%;
+                background-color: #455d7c;
             }
     
             .functionButton{
@@ -185,29 +201,56 @@
         <?php
             if (substr($user_id,0,2) == "ST") {
                 echo <<<HTML
+                
+                <form action="" method="post">
                  <div class="functionButton">
                     <a class="askQueryBtn" href="PostQuery.php"><button class="ask-Btn">Ask Query</button></a>
-                    <select class="sort-Btn">
+                    <select class="sort-Btn" name="sort_option">
                         <option value="mostComments">Most Comments</option>
                         <option value="oldestPost">Oldest Post</option>
+                        <option value="LatestPost">Latest Post</option>
                     </select>
+                    <div class="tfunctionButton">  
+                        <button name="Filter" class="filter-btn2">Filter</button>
+                    </div>
                 </div>
+                </form>
                 HTML;
 
             } elseif (substr($user_id,0,2) == "TC" ){
                 echo <<<HTML
+                <form action="" method="post">
                     <div class="tfunctionButton">  
-                        <select class="sort-Btn">
+                        <select class="sort-Btn" name="sort_option">
                             <option value="mostComments">Most Comments</option>
                             <option value="oldestPost">Oldest Post</option>
-                            <option value="latestPost">Latest Post</option>
+                            <option value="LatestPost">Latest Post</option>
                         </select>
-                </div>
+                        <div class="tfunctionButton">  
+                        <button name="Filter" class="filter-btn">Filter</button>
+                        </div>
+                    </div>
+                    
+                </form>
                 HTML;
             }
 
             $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
-            (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime DESC";     
+            (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime DESC";
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $selected_option = $_POST['sort_option'];
+                if ($selected_option == 'mostComments') {
+                    $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
+                    (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY totalQuery DESC;";
+                } elseif ($selected_option == 'oldestPost') {
+                    $sql_ShowQuery = "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
+                    (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime ASC";
+                }elseif ($selected_option == 'LatestPost') {
+                    "SELECT d.query_ID AS queryID, d.title AS topic, d.tags AS tagline, d.post_Query_Datetime AS qDateTime, s.sName AS name, u.profile_Picture AS pic, 
+                    (SELECT COUNT(*) FROM blogreplies WHERE query_ID = d.query_ID) AS totalQuery FROM discussion d INNER JOIN student s ON d.student_ID = s.student_ID INNER JOIN user u ON s.student_ID = u.student_ID ORDER BY d.post_Query_Datetime DESC";}
+            }
+
             $result_ShowQuery = mysqli_query($connection,$sql_ShowQuery);
     
             if(mysqli_num_rows($result_ShowQuery) > 0){

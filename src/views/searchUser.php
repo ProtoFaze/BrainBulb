@@ -22,7 +22,7 @@
             min-width: 300px;
             height: 300px;
             float: left;
-            box-shadow: 2px 5px 10px 1px #867b75;
+            box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
             padding: 15px;
             /* padding-top: 45px; */
             box-sizing: border-box;
@@ -92,11 +92,6 @@
             align-self: center; 
         }
     </style>
-    <script>
-    function viewprofile(employee_id) {
-        window.location.href = "viewprofile.php?employee_id=" + employee_id;
-    }
-</script>
 </head>
 <body>
     <header>
@@ -206,14 +201,12 @@
 ?>
     </main>
     <script>
-        var userType = document.getElementsByClassName("uType");
+        var userType = document.getElementsByName("uType").textContent;
         var profileCard = document.getElementsByClassName('profile');
         if(userType.innerHTML == "Parent"){
-            profileCard.style.backgroundColor = "rgb(220, 20, 60)";
+            profileCard.style.backgroundColor = "rgb(220, 20, 60);";
         }else if (userType.innerHTML == "Teacher") {
-            profileCard.style.backgroundColor = "rgb(230, 230, 250)";
-        } else {
-            
+            profileCard.style.backgroundColor = "rgb(230, 230, 250);";
         }
     </script>
 </body>

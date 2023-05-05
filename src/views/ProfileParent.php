@@ -15,8 +15,8 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        // $parent_id = $_SESSION['user_ID'];
-        $parent_id = 'PT00000001';
+        $parent_id = $_SESSION['user_ID'];
+        // $parent_id = 'PT00000001';
 
 
 
@@ -83,7 +83,7 @@
                 <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
             HTML;
             unset($_SESSION['sourcepage']);}else{echo <<<HTML
-                <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+                <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
                 <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>
@@ -114,11 +114,58 @@
         <div class="content_box">
         <?php if(mysqli_num_rows($childRequest) > 0){
             while ($child = mysqli_fetch_assoc($childRequest)) {
+
+                $performancesql = "SELECT `subject`.`subject_Name`,
+                SUM(             
+                 COALESCE(question1, 0) + 
+                 COALESCE(question2, 0) + 
+                 COALESCE(question3, 0) + 
+                 COALESCE(question4, 0) + 
+                 COALESCE(question5, 0) + 
+                 COALESCE(question6, 0) + 
+                 COALESCE(question7, 0) + 
+                 COALESCE(question8, 0) + 
+                 COALESCE(question9, 0) + 
+                 COALESCE(question10, 0)
+                ) AS correct,
+                SUM(
+                 CASE WHEN question1 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question2 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question3 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question4 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question5 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question6 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question7 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question8 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question9 IS NOT NULL THEN 1 ELSE 0 END + 
+                 CASE WHEN question10 IS NOT NULL THEN 1 ELSE 0 END
+                ) AS total_questions,
+                SUM(TIME_TO_SEC(TIMEDIFF(end_Datetime, start_Datetime)))/3600 AS total_time
+         FROM `studentquestionresponse`
+         JOIN `course` ON `studentquestionresponse`.`course_ID` = `course`.`course_ID`
+         JOIN `subject` ON `course`.`subject_ID` = `subject`.`subject_ID`
+         WHERE studentquestionresponse.student_ID = '".$child['student_ID']."'
+         GROUP BY subject.subject_ID";
+            $performanceRequest = mysqli_query($connection, $performancesql);
+            $total = $overall = $rounded = null;
+            while($performance = mysqli_fetch_assoc($performanceRequest)){
+                $average = ($performance['correct']/$performance['total_questions'])*100;
+                $total += $average;
+            }
+            if($total == null){
+                $rounded = 0;
+            }else{
+                $overall = ($total/mysqli_num_rows($performanceRequest));
+                $rounded = round($overall, 2);
+            }
+
+
             echo <<<HTML
                 <div class="row">
+                    
                     <div class="info_ltr">$child[student_ID]</div>
                     <div class="info_ltr">$child[sName]</div>
-                    <div class="info_ltr">Grade : $child[sGrade]</div>
+                    <div class="info_ltr">Score : $rounded %</div>
                     <div class="info_ltr">Streak: $child[aFrequency]</div>
                     <form action="./profileStudent.php" method="post">
                         <input type="hidden" name="child" value="$child[student_ID]">
@@ -126,7 +173,7 @@
                     </form>
                 </div>
             HTML;
-        }}else{
+            }}else{
                 echo "<h2> No children found </h2>";
             }?>
         </div>

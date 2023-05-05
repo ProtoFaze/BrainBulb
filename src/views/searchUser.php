@@ -77,7 +77,8 @@
             z-index: 21795;
         }
         .response{
-            padding: 0px 20px;
+            height: 80px;
+            padding: 15px 20px;
             border-top-left-radius:0px;
             border-top-right-radius:0px;
         }

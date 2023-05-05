@@ -59,7 +59,7 @@
         <hr>
         <div class="quizQ">
                 <?php
-                    include 'dbcon.php';
+                    include "../database/connect.php";
                     $query = "SELECT 
                     COUNT(response_ID) AS total,
                     COUNT(CASE WHEN question1 = '1' THEN 1 ELSE NULL END) AS q1,

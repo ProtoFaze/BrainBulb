@@ -105,7 +105,7 @@
                     <a class="navigations" href="">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="viewlearningmaterial.php">Your Learning Material</a>
                     <a class="navigations" href="DiscussionPlatform.php">Discussion Platform</a>
-                    <a class="navigations" href="#">Course</a>
+                    <a class="navigations" href="viewQuiz.php">View Quiz</a>
                     <a class="navigations" href="provideFeedback.php">Provide Feedback</a>
                     ';
                 }elseif(substr($_SESSION['user_id'],0,2) == "AD"){

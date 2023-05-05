@@ -12,7 +12,7 @@ but got problem with ranking arrangement -->
     <title>Student Performance</title>
     <style>
         body {
-            background-image: url(images/night.png);
+            background-image: url(../../images/night.png);
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
@@ -147,11 +147,11 @@ but got problem with ranking arrangement -->
     </style>
 </head>
 <body>
-    <img src="images/planet3.png" alt="" id="planet" >
-    <img src="images/planet4.png" alt="" id="planet2" >
-    <img src="images/planet5.png" alt="" id="planet3" >
-    <img src="images/planet6.png" alt="" id="planet4" >
-    <img src="images/planet7.png" alt="" id="planet5" >
+    <img src="../../images/planet3.png" alt="" id="planet" >
+    <img src="../../images/planet4.png" alt="" id="planet2" >
+    <img src="../../images/planet5.png" alt="" id="planet3" >
+    <img src="../../images/planet6.png" alt="" id="planet4" >
+    <img src="../../images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
         <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
         <!-- <div class="student">
@@ -173,7 +173,7 @@ but got problem with ranking arrangement -->
             </table>
         </div> -->
         <?php
-            include 'dbcon.php';
+            include "../database/connect.php";
             // $courseID = $_GET['course_ID'];
             $query = "SELECT studentquestionresponse.student_ID,student.sName,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +

@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <?php 
-        include 'dbcon.php';
+        include "../database/connect.php";
     ?>
     <style>
         body {
             font-size: large;
-            background-image: url(images/wave.jpg);
+            background-image: url(../../images/wave.jpg);
             background-repeat: no-repeat;
             background-attachment: fixed; 
             background-size: cover;
@@ -113,8 +113,8 @@
         </div>
     </div>
 
-    <img src="images/coral-reef.png" alt="" id="coralPic" class="pic">
-    <img src="images/coral.png" alt="" id="coralPic2" class="pic">
+    <img src="../../images/coral-reef.png" alt="" id="coralPic" class="pic">
+    <img src="../../images/coral.png" alt="" id="coralPic2" class="pic">
 </body>
 </html>
 
@@ -162,7 +162,7 @@
         }
         
     }
-    if ($_POST['cancelBtn'] == "viewQuiz.php") {
-        header("Location: viewQuiz.php");
-    }
+    // if ($_POST['cancelBtn'] == "viewQuiz.php") {
+    //     header("Location: viewQuiz.php");
+    // }
 ?>

@@ -141,7 +141,7 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <button id="newQuizBtn">NEW QUIZ</button>
+        <a href='createQuiz.php' id="newQuizBtn">NEW QUIZ</a>
         <?php
             include "../database/connect.php";
 

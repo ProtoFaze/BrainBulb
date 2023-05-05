@@ -18,7 +18,7 @@
 
 
 
-        $teacher_id = $_SESSION['user_ID'];
+        $teacher_id = $_SESSION['user_id'];
         // $teacher_id = 'TC00000001';
 
 
@@ -101,7 +101,7 @@
                 <?php if(empty($teacher['profile_Picture']) || $teacher['profile_Picture'] = NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$teacher["profile_Picture"]."' alt='teacher picture'>";
+                    echo "<img class='elipse_container' src='../../images".$teacher["profile_Picture"]."' alt='teacher picture'>";
                 }?>
                 <div class="info_ltr"><h3>Name</h3><div class="divider"></div><p><?=$teacher['tName']?></p></div>
                 <div class="info_ltr"><h3>Birthdate</h3><div class="divider"></div><p><?= $teacher['tDOB']?></p></div>

@@ -21,7 +21,7 @@
     <title>View Question</title>
     <style>
         body {
-            background-image: url(images/spaceBG.png);
+            background-image: url(../../images/spaceBG.png);
             background-size: cover;
             background-attachment: fixed;
         }
@@ -156,12 +156,12 @@
     </style>
 </head>
 <body>
-    <img src="images/spaceship.png" alt="" id="spaceship">
-    <img src="images/planet.png" alt="" id="planet">
-    <img src="images/galaxy.png" alt="" id="galaxy">
+    <img src="../../images/spaceship.png" alt="" id="spaceship">
+    <img src="../../images/planet.png" alt="" id="planet">
+    <img src="../../images/galaxy.png" alt="" id="galaxy">
     <div id="viewquiz">
         <?php
-            include 'dbcon.php';
+            include "../database/connect.php";
 
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
@@ -192,10 +192,10 @@
                                 <div class="theButtons">
                                     <form method="POST">
                                         <button name="deleteQuiz" value="'.$row["question_ID"].'">
-                                            <img src="images/delete.png" alt="" class="delBtn">
+                                            <img src="../../images/delete.png" alt="" class="delBtn">
                                         </button>
                                         <button name="editQuiz" onclick="editQuiz" value="'.$row["question_ID"].'">
-                                            <img class="modifyBtn" src="images/edit.png" alt="">
+                                            <img class="modifyBtn" src="../../images/edit.png" alt="">
                                         </button>
                                     </form>
                                 </div>

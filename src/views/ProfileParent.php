@@ -15,7 +15,7 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $parent_id = $_SESSION['user_ID'];
+        $parent_id = $_SESSION['user_id'];
         // $parent_id = 'PT00000001';
 
 
@@ -96,7 +96,7 @@
                 <?php if(empty($parent['profile_Picture']) || $parent['profile_Picture'] = NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='parent picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'>";
+                    echo "<img class='elipse_container' src='../../images/".$parent["profile_Picture"]."' alt='parent picture'>";
                 }?>
                 <div class="info_ltr"><h3>Number of children</h3><p><?= mysqli_num_rows($childRequest)?></p></div>
                 <div class="info_ltr"><h3>Name</h3><p><?=$parent['pName']?></p></div>

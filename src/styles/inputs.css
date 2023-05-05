@@ -12,6 +12,7 @@ input{
     align-items: center;
     text-decoration: none;
     align-self: stretch;
+    padding: 0px 10px;
     color: rgb(255, 255, 255);
     background-color: var(--button);
     border-radius: var(--border-radius);

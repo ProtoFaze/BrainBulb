@@ -246,13 +246,13 @@ if(session_status() == PHP_SESSION_NONE) {
                 <div class="lrform">
                     <h1 class="heavytitle">Create Account</h1>
                     <br>
-                    <a href="" class="alink">
+                    <a href="registerParent.php" class="alink">
                         <div class="registeroptions">
                             <img src="../../images/parent_and_children.png" style="width:85px; height:auto;">
                             <p style="padding:0 20px; font-size:17px;">Register as Parent and Student</p>
                         </div>
                     </a>
-                    <a href="" class="alink">
+                    <a href="registerTeacher.php" class="alink">
                         <div class="registeroptions">
                             <img src="../../images/Teacher2.png" style="width:85px; height:auto;">
                             <p style="padding:0 20px; font-size: 17px;">Register as Teacher</p>

@@ -11,7 +11,7 @@ if(session_status() == PHP_SESSION_NONE) {
 </head>
 <body>
     <?php
-        $studentid = "ST00000002";
+        $studentid = $_SESSION['user_id'];
         $c = $_SESSION['course'];
         include "../database/connect.php";
         if($_SERVER["REQUEST_METHOD"] == "POST"){

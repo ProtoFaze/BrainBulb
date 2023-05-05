@@ -112,7 +112,7 @@ if(session_status() == PHP_SESSION_NONE) {
     include "../database/connect.php";
     $studentID = $_SESSION['user_id'];  
     $courseID = $_SESSION['course'];
-    $query2 = "SELECT * FROM `studentquestionresponse` INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.course_ID = '$courseID'";
+    $query2 = "SELECT * FROM `course` WHERE course_ID = '$courseID'";
     $query3 = "SELECT * FROM `student` WHERE student_ID = '$studentID'";
     $results2 = mysqli_query($connection,$query2);
     $results3 = mysqli_query($connection,$query3);

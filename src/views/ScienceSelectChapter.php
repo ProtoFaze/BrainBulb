@@ -128,10 +128,11 @@
         }
 
         .main .titlebg{
-            background-image: linear-gradient(45deg, #83AAE6 12.5%, #E6BF83 12.5%, #E6BF83 25%, #83AAE6 25%, #83AAE6 37.5%, #E6BF83 37.5%, #E6BF83 50%, #83AAE6 50%, #83AAE6 62.5%, #E6BF83 62.5%, #E6BF83 75%, #83AAE6 75%, #83AAE6 87.5%,#E6BF83 87.5%, #E6BF83 ); 
-            padding: 5px 50px;
-            margin: 0 400px;
+            background-image: url('../../images/planks.png');
+            padding: 5px 10px;
+            background-position: center;
             border-radius: 5px;
+            background-repeat: no-repeat;
         }
     </style>
 </head>
@@ -156,7 +157,7 @@
     ?>
     <div class="main">
         <div class="titlebg">
-            <h1 style="text-align:center; font-size:40px; color:white;">Science</h1>
+            <h1 style="text-align:center; font-size:40px; color:#4c3228;">Science</h1>
         </div>
         <table border=0 style="margin:50px auto; text-align: center;">
             <tr>

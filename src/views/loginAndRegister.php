@@ -292,7 +292,7 @@ if(session_status() == PHP_SESSION_NONE) {
         if(isset($_POST['enter'])){
             $username = $_POST['username'];
             $password = $_POST['pass'];
-            $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password'";
+            $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' AND `state` = 1";
             $result = mysqli_query($connection,$sql);
             $row = mysqli_fetch_assoc($result);
             $count = mysqli_num_rows($result);
@@ -313,7 +313,16 @@ if(session_status() == PHP_SESSION_NONE) {
                 echo "<script> location.href='mainpage.php'</script>";
             }
             else{
-                echo "<script> alert('No username and password exist'); </script>";
+                $sql2 = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' AND `state` = 0";
+                $result2 = mysqli_query($connection,$sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $count2 = mysqli_num_rows($result2);
+                if($count2 > 0){
+                    echo "<script> alert('User has been deactived'); </script>";
+                }
+                else{
+                    echo "<script> alert('No username and password exist'); </script>";
+                }     
             }
         }
     ?>

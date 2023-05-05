@@ -374,12 +374,7 @@ if(session_status() == PHP_SESSION_NONE) {
 
     if(CValue == null || WValue == null){
         <?php 
-            if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                if($subj == "SJ00000002"){echo"location.href='EnglishSelectChapter.php'";}elseif($subj == "SJ00000001"){echo"location.href='BMSelectChapter.php'";}elseif($subj == "SJ00000003"){echo"location.href='ScSelectChapter.php'";}elseif($subj == "SJ00000004"){echo"location.href='MathSelectChapter.php'";}
-            }
-            else{
-                echo "location.href='studentviewquiz.php'";
-            }
+            echo "location.href='calachievement.php?sub=$subj'";
         ?>
     }
     else{

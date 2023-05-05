@@ -93,7 +93,7 @@
                 }elseif(substr($_SESSION['user_id'],0,2) == "PT"){
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
-                    <a class="navigations" href="">'.$_SESSION['user_id'].'</a>
+                    <a class="navigations" href="ProfileParent.php">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="#">131</a>
                     <a class="navigations" href="#">Add Student</a>
                     <a class="navigations" href="#">Course</a>
@@ -102,7 +102,7 @@
                 }elseif(substr($_SESSION['user_id'],0,2) == "TC"){
                     echo'
                     <a class="navigations" href="../backend/logout.php">Logout</a>
-                    <a class="navigations" href="">'.$_SESSION['user_id'].'</a>
+                    <a class="navigations" href="ProfileTeacher.php">'.$_SESSION['user_id'].'</a>
                     <a class="navigations" href="viewlearningmaterial.php">Your Learning Material</a>
                     <a class="navigations" href="DiscussionPlatform.php">Discussion Platform</a>
                     <a class="navigations" href="#">Course</a>

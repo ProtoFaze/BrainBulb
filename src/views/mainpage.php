@@ -11,7 +11,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
-    <title>BrainBulb</title>
+    <title>Home</title>
     <style>
         * {
             box-sizing: border-box;

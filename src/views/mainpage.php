@@ -227,9 +227,30 @@ if(session_status() == PHP_SESSION_NONE) {
                 <div>
                     <h2 style="text-align: justify; font-size:22px; text-justify: inter-word; font-weight:600; opacity:70%; line-height: 1.3;">An e-learning platform empowering parents and teachers to enrich their children's knowledge and equip them with the skills to succeed in the future. <br/>BrainBulb is designed to provide a one-stop-shop for all your educational needs, including interactive lessons, and engaging activities.<br/> Join us, and you can give your child the gift of lifelong learning and help them discover their full potential.</h2>
                 </div>
-                <form action="loginAndRegister.php">
-                    <input type="submit" value="Get started" class="start-btn">
-                </form>
+                <?php
+                    if(isset($_SESSION['user_id'])){
+                        if(substr($_SESSION['user_id'],0,2) == "ST"){
+                            echo '<form action="SelectSubject.php">
+                            <input type="submit" value="Select Subject" class="start-btn">
+                            </form>';
+                        }
+                        else if(substr($_SESSION['user_id'],0,2) == "PT"){
+                            echo '<form action="ProfileParent.php">
+                            <input type="submit" value="View Children Performance" class="start-btn">
+                            </form>';
+                        }
+                        else if(substr($_SESSION['user_id'],0,2) == "TC"){
+                            echo '<form action="viewQuiz.php">
+                            <input type="submit" value="Create Quiz" class="start-btn">
+                            </form>';
+                        }
+                    }
+                    else{
+                        echo '<form action="loginAndRegister.php">
+                        <input type="submit" value="Get started" class="start-btn">
+                        </form>';
+                    }
+                ?>
             </div>
         </div>
         <div class="col" style="text-align: center; margin-top:35px;">
@@ -358,10 +379,30 @@ if(session_status() == PHP_SESSION_NONE) {
         </div>
         <div style="text-align: center; margin: 100px 0px;">
             <h1>Join Over 1 million primary students learning on BrainBulb</h1>
-            <form action="loginAndRegister.php">
-                <input type="submit" value="Get started" class="start-btn" style="padding: 23px 30px; margin-top:30px;font-size:20px;">
-            </form>
-           
+            <?php
+                    if(isset($_SESSION['user_id'])){
+                        if(substr($_SESSION['user_id'],0,2) == "ST"){
+                            echo '<form action="SelectSubject.php">
+                            <input type="submit" value="Select Subject" class="start-btn">
+                            </form>';
+                        }
+                        else if(substr($_SESSION['user_id'],0,2) == "PT"){
+                            echo '<form action="ProfileParent.php">
+                            <input type="submit" value="View Children Performance" class="start-btn">
+                            </form>';
+                        }
+                        else if(substr($_SESSION['user_id'],0,2) == "TC"){
+                            echo '<form action="viewQuiz.php">
+                            <input type="submit" value="Create Quiz" class="start-btn">
+                            </form>';
+                        }
+                    }
+                    else{
+                        echo '<form action="loginAndRegister.php">
+                        <input type="submit" value="Get started" class="start-btn">
+                        </form>';
+                    }
+                ?>
         </div>
     </div>
 </body>

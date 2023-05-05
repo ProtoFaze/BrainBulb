@@ -18,8 +18,8 @@
         if(isset($_POST['child'])){
             $student_id = $_POST['child'];
         }else{
-            // $student_id = $_SESSION['user_id'];
-            $student_id = 'ST00000001';
+            $student_id = $_SESSION['user_id'];
+            // $student_id = 'ST00000001';
         }
 
 

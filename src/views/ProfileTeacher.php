@@ -18,8 +18,8 @@
 
 
 
-
-        $teacher_id = 'TC00000001';
+        $teacher_id = $_SESSION['user_ID'];
+        // $teacher_id = 'TC00000001';
 
 
 

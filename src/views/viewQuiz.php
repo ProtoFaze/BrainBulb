@@ -1,30 +1,4 @@
-<!-- <?php
-    $query = ";";
-    $result = mysqli_query($connection, $query);
-    if (!$result) {
-        die("Error: " . mysqli_error($connection));}
-    $count = mysqli_affected_rows($connection);
-    if ($count > 0) {
-        echo "Print quizzes";
-    } else {
-        echo "Error Error Error Error Error";
-    }
-
-?> -->
-
-<!-- Get every quiz in database 
-= SELECT course_ID as courseID, chapter_Name as quizName FROM course WHERE teacher_ID = " ";
-
-Get questions in quiz 
-= SELECT question_ID as quesID FROM questionBank WHERE course_ID = 'courseID';
-
-Get total Attempts in quiz
-= SELECT COUNT(response_ID) as total_attempt WHERE question_ID = 'quesID';
-
-Get correct Attempts
-= SELECT COUNT(response_ID) as correct_attempt WHERE question_ID = 'quesID' & correctness='1';
-
- -->
+<!-- lack of getting teacher id -->
 
 
 <!DOCTYPE html>
@@ -35,6 +9,11 @@ Get correct Attempts
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz</title>
     <style>
+        body {
+            background-image: url(images/night.png);
+            color: white;
+        }
+        
         progress {
             height: 15px;
             width: 100%;
@@ -50,13 +29,15 @@ Get correct Attempts
             border-radius: 10px 0px 0px 10px;
         }
         #quizzes {
-            width: 1000px;
+            max-width: 1000px;
             margin: auto;
         }
         .quiz {
-            /* background-color: rgb(219, 236, 250); */
-            padding: 10px;
+            /* background-color: rgba(255, 255, 255, 0.6); */
+            /* padding: 10px; */
             margin: 10px;
+            clear:right;
+            border-radius: 10px 10px 0px 0px;
         }
         .progressBlock {
             /* margin: 30px; */
@@ -67,6 +48,7 @@ Get correct Attempts
             padding-right: 50px;
             border-radius: 5px;
             box-shadow: 0px 5px 10px rgb(201, 201, 201);
+            background-color: white;
         }
         .progressBlock label {
             float: right;
@@ -106,11 +88,12 @@ Get correct Attempts
             opacity: 1;
             visibility: visible;
             height: auto;
+            z-index: 1;
         }
 
         .viewMenu table{
             width: 100%;
-            background: linear-gradient(to bottom, #878787 0%, #00000000 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, #00000000 100%);
             padding: 5px;
             padding-bottom: 15px;
         }
@@ -128,55 +111,149 @@ Get correct Attempts
             /* text-decoration: underline; */
             transform: scale(1.2);
         }
-
+        .modifyBtn,.delBtn {
+            width: 25px;
+            height: 25px;
+        }
+        .theButtons {
+            /* margin: 0px; */
+            position: absolute;
+            right: 15px;
+            bottom: 10px;
+        }
+        .quizTitle {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+        .quizTitle div{
+            margin-right: 10px;
+        }
+        .quizTitle button{
+            background-color: #00000000;
+            border: none;
+        }
+        .quizTitle button:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
         <button id="newQuizBtn">NEW QUIZ</button>
-        <div class="quiz">
-            <p><span>Math Quiz</span> 10 Attempts</p>
-            <div class="progressBlock">
-                <label for="progress">Accuracy 40%</label>
-                <progress value = "40" max = "100" class="progress">40%</progress>
-            </div>
-            <div class="viewMenu">
-                <table>
-                    <tr>
-                        <td>
-                            <button>VIEW LEARNING MATERIAL</button>
-                        </td>
-                        <td>
-                            <button>VIEW STUDENT PERFORMANCE</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button>VIEW QUESTION</button>
-                        </td>
-                        <td>
-                            <button>VIEW ANALYTIC</button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="quiz">
-            <p><span>Math Quiz</span> 10 Attempts</p>
-            <div class="progressBlock">
-                <label for="progress">Accuracy 70%</label>
-                <progress value = "70" max = "100" class="progress">70%</progress>
-            </div>
-        </div>
-        <div class="quiz">
-            <p><span>Math Quiz</span> 10 Attempts</p>
-            <div class="progressBlock">
-                <label for="progress">Accuracy 55%</label>
-                <progress value = "55" max = "100" class="progress">55%</progress>
-            </div>
-        </div>
+        <?php
+            include 'dbcon.php';
+
+            if (isset($_POST['deleteQuiz'])) {
+                $quiz = $_POST['deleteQuiz'];
+                $delete_query = "DELETE FROM course WHERE course_ID = '$quiz'";
+                mysqli_query($connection, $delete_query);
+                echo '<script>alert("Quiz deleted successfully")</script>';
+            }
             
+
+            $query = "SELECT studentquestionresponse.response_ID, course.course_ID, course.chapter_Name,
+            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) AS correct_attempt,  
+            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question1 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question2 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question3 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question4 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question5 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question6 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question7 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question8 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
+            SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
+            FROM (studentquestionresponse 
+            INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
+            
+            GROUP BY studentquestionresponse.response_ID;";
+            // WHERE course.teacher_ID = 'TC00000001'
+            $result = mysqli_query($connection, $query);
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    $courseid = $row["course_ID"];
+                    $totalAttempt = $row['total_attempt'];
+                    $totalCorrect = $row['correct_attempt'];
+                    $quizname = $row['chapter_Name'];
+                    $quizAccuracy = ($totalCorrect/$totalAttempt) * 100;
+                    $quiz .= 
+                        '<div class="quiz">
+                            <div class="quizTitle">
+                                <div>
+                                    <h4>'.$quizname.'</h4>
+                                </div>
+                                <div>
+                                    <h5>'.$totalCorrect.' / '.$totalAttempt.' Attempts</h5>
+                                </div>
+                                
+                                <div class="theButtons">
+                                    <form method="POST">
+                                        <button name="deleteQuiz" value="'.$courseid.'">
+                                            <img src="images/delete.png" alt="" class="delBtn">
+                                        </button>
+                                        <button name="editQuiz" onclick="editQuiz">
+                                            <img src="images/edit.png" alt="" class="modifyBtn">
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="progressBlock">
+                                <label for="progress">Accuracy '.$quizAccuracy.'%</label>
+                                <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$quizAccuracy.'%</progress>
+                            </div>
+                            <div class="viewMenu">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <button>VIEW QUESTION</button>
+                                        </td>
+                                        <td>
+                                            <button>VIEW ANALYTIC</button>
+                                        </td>
+                                        <td>
+                                            <button>VIEW STUDENT PERFORMANCE</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>';
+                    echo $quiz;
+                }
+            } else {
+                echo "0 results";
+            }
+            mysqli_close($connection);
+            
+
+        ?>
+
+        <!-- <script>
+            function editQuiz() {
+                window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
+                // need pass the variable of the quiz question
+            }
+        </script> -->
     </div>
     
 </body>

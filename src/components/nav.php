@@ -97,6 +97,7 @@
                     <a class="navigations" href="#">131</a>
                     <a class="navigations" href="#">Add Student</a>
                     <a class="navigations" href="#">Course</a>
+                    <a class="navigations" href="provideFeedback.php">Provide Feedback</a>
                     ';
                 }elseif(substr($_SESSION['user_id'],0,2) == "TC"){
                     echo'
@@ -105,6 +106,13 @@
                     <a class="navigations" href="viewlearningmaterial.php">Your Learning Material</a>
                     <a class="navigations" href="DiscussionPlatform.php">Discussion Platform</a>
                     <a class="navigations" href="#">Course</a>
+                    <a class="navigations" href="provideFeedback.php">Provide Feedback</a>
+                    ';
+                }elseif(substr($_SESSION['user_id'],0,2) == "AD"){
+                    echo'
+                    <a class="navigations" href="../backend/logout.php">Logout</a>
+                    <a class="navigations" href="searchUser.php">User List</a>
+                    <a class="navigations" href="viewfeedback.php">View Feedback</a>
                     ';
                 }
             }

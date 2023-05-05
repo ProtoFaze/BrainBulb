@@ -158,13 +158,13 @@
     </script>
     <?php
         if(isset($_POST['postQuery'])){
+            date_default_timezone_set('Asia/Kuala_Lumpur');
             $student_id = $_SESSION['user_id'];
             $query = $_POST['question'];
             $content = $_POST['content'];
             $tagline =$_POST['tagline'];
             $query_date = date('Y-m-d H:i:s');
-            $query_like = 0;
-            $query_sql = "INSERT INTO `discussion`(`student_ID`, `title`, `content`, `tags`, `post_Query_Datetime`, `query_Likes`) VALUES ('$student_id','$query','$content','$tagline','$query_date',$query_like)";
+            $query_sql = "INSERT INTO `discussion`(`student_ID`, `title`, `content`, `tags`, `post_Query_Datetime`) VALUES ('$student_id','$query','$content','$tagline','$query_date')";
             $query_result = mysqli_query($connection, $query_sql);
             if($query_result){
                 echo "<script>alert('Your query has been posted!'); window.location.href='DiscussionPlatform.php';</script>";

@@ -73,17 +73,20 @@
         <?php include "../components/nav.php"; ?>
     </header>
     <main>
-        <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
-            <h1>Parent profile</h1>
-            <?php
-                if($_SESSION['sourcepage'] == "searchUser"){
-                    echo <<<HTML
-                        <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
-                HTML;}else{echo <<<HTML
-                    <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
-                HTML;}?>
+        <!-- top section containing back button, username_ID and edit button -->
+        <?php
+            if(isset($_SESSION['sourcepage']) && $_SESSION['sourcepage'] == "searchUser"){
+                echo <<<HTML
+                <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+                <h1>Parent profile</h1>
+                <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+            HTML;
+            unset($_SESSION['sourcepage']);}else{echo <<<HTML
+                <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+                <h1>Parent profile</h1>
+                <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            HTML;}?>
         </div>
 
         <!-- middle section containing user info, parent into -->

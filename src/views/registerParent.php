@@ -1,3 +1,7 @@
+<?php
+    include "../database/connect.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +27,7 @@
             font-weight:bolder;
         }
 
-        form {
+        .formAction {
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
@@ -140,6 +144,10 @@
             margin-right: 10px;
         }
 
+        .alert{
+            text-align: center;
+            margin-top: 15px;
+        }
 
     </style>
 </head>
@@ -147,67 +155,102 @@
         <div class="titlebox">
             <h1>BrainBulb Parent Registration</h1>
         </div>
-        <div class="addStudentButtonForRegister">
-            <button>
-                <span class="material-symbols-outlined">
-                    group_add
-                </span>
-                Add Student Account
-            </button>
-        </div>
-        <div class="form1">
-            <form action="" method="post" >
+        <form action="" method="post">
+            <div class="form1">
+                <div class="formAction">
                 <div class="usernameInput">
-                    <label for="username">Username:</label>
-                    <h4>Please enter username for your account.</h4>
-                    <input type="text" id="username" name="username" required placeholder="Eg.emmaMe@0110">
-                </div>
-                
-                <div class="passwordInput">
-                    <label for="password">Password:</label>
-                    <h4>For security purposes, please create a password with symbols</h4>
-                    <input type="password" id="password" name="password" required>
-                </div>
+                        <label for="username">Username:</label>
+                        <h4>Please enter username for your account.</h4>
+                        <input type="text" id="username" name="username" required placeholder="Eg.emmaMe@0110">
+                    </div>
+                    
+                    <div class="passwordInput">
+                        <label for="password">Password:</label>
+                        <h4>For security purposes, please create a password with symbols</h4>
+                        <input type="password" id="password" name="password" required>
+                    </div>
 
-                <div class="passwordInput">
-                    <label for="password">Confirm Password:</label>
-                    <h4>Password Validation</h4>
-                    <input type="password" id="password" name="password" required>
-                </div>
+                    <div class="passwordInput">
+                        <label for="password">Confirm Password:</label>
+                        <h4>Password Validation</h4>
+                        <input type="password" id="password" name="password2" required>
+                    </div>
 
-                <div class="icNumberInput">
-                    <label for="icnumber">IC Number:</label>
-                    <h4>Please enter your IC number in the format YYMMDDXXXXXX. WITHOUT -</h4>
-                    <input type="text" id="icnumber" name="icnumber" required placeholder="Eg.030220201928">
-                </div>
+                    <div class="icNumberInput">
+                        <label for="icnumber">IC Number:</label>
+                        <h4>Please enter your IC number in the format YYMMDDXXXXXX. WITHOUT -</h4>
+                        <input type="text" id="icnumber" name="icnumber" required placeholder="Eg.030220201928">
+                    </div>
 
-                <div class="emailInput">
-                    <label for="email">Email:</label>
-                    <h4>Please enter a valid email address for your account.</h4>
-                    <input type="email" id="email" name="email" required placeholder="Eg.emmaMe@gmail.com">
-                </div>  
+                    <div class="emailInput">
+                        <label for="email">Email:</label>
+                        <h4>Please enter a valid email address for your account.</h4>
+                        <input type="email" id="email" name="email" required placeholder="Eg.emmaMe@gmail.com">
+                    </div>  
 
-                <div class="profileInput">
-                        <div>
-                            <label for="name">Name:</label>
-                            <h4>Please enter FULLNAME for your account.</h4>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div>
-                            <label for="dob">DOB:</label>
-                            <h4>Please enter your Date of Birth</h4>
-                            <input type="date" id="dob" name="dob" required placeholder="DD/MM/YYYY">
+                    <div class="profileInput">
+                            <div>
+                                <label for="name">Name:</label>
+                                <h4>Please enter FULLNAME for your account.</h4>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div>
+                                <label for="dob">DOB:</label>
+                                <h4>Please enter your Date of Birth</h4>
+                                <input type="date" id="dob" name="dob" required placeholder="DD/MM/YYYY">
+                            </div>
+                    </div>
+                    <h4 class="alert">Please login into BrainBulb to add STUDENT account</h4>
+                </div>               
+            </div>
+                <div class="buttons-container">
+                    <div class="submitRegister">
+                        <div class="buttons">
+                            <button class="cancelBtn"><a href="loginAndRegister.php"  style="text-decoration:none; color:#fff;">Cancel</a></button>
+                            <button class="registerBtn" name="register">Register</button>
                         </div>
                     </div>
-            </form>
-        </div>
-            <form action="" method="post" class="submitRegister">
-                <div class="buttons">
-                    <button class="cancelBtn">Cancel</button>
-                    <button class="registerBtn">Register</button>
                 </div>
-            </form>
-        </div>
-        
+            </div>
+        </form>
+        <?php
+            if(isset($_POST['register'])){
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $password2 = $_POST['password2'];
+                $icnumber = $_POST['icnumber'];
+                $email = $_POST['email'];
+                $name = $_POST['name'];
+                $dob = $_POST['dob'];
+                $userType = "Parent";
+    
+                if ($password == $password2){
+
+                    $sql_insertParent = "INSERT INTO `parent`( `pName`, `pDOB`) VALUES ('$name','$dob')";
+                    $result_insertParent = mysqli_query($connection, $sql_insertParent);
+                
+                    if($result_insertParent){
+                        $sql_lastParentID = "SELECT MAX(parent_id) AS last_parent_id FROM parent";
+                        $result_lastParentID = mysqli_query($connection, $sql_lastParentID);
+                        $row_lastParentID = mysqli_fetch_assoc($result_lastParentID);
+                        $lastParentID = $row_lastParentID['last_parent_id'];
+
+                        $sql_insertUser = "INSERT INTO `user`( `username`, `password`, `ic`, `email`,`state`, `user_Type`, `parent_ID`) VALUES ('$username','$password','$icnumber',' $email',1,'$userType','$lastParentID')";
+                        $result_insertUser = mysqli_query($connection, $sql_insertUser);
+                        if($result_insertUser){
+                            echo "<script>alert('Registration Success!')</script>";
+                            echo "<script>window.location.href='loginAndRegister.php'</script>";
+                        }else{
+                            echo "<script>alert('Registration Failed to User!')</script>";
+                        }
+                    }else{
+                        echo "<script>alert('Registration Failed to Teacher due to!')</script>";
+                        
+                    }
+                }else{
+                    echo "<script>alert('Password Incorrect')</script>";
+                }
+            }
+    ?>
 </body>
 </html>

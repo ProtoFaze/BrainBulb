@@ -94,9 +94,9 @@
                 }else{
                     echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
                 }?>
-                <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
+                <!-- <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
                 placeholder="<?= $student['sGrade']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <?php showErr("sGrade");?>
+                <?php showErr("sGrade");?> -->
                 <input type="text" class="textField" id="Name" name="sName" original-value="<?=$student['sName']?>" 
                 placeholder="<?=$student['sName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("sName");?>

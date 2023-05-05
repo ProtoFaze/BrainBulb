@@ -89,7 +89,7 @@
                     <h1>Teacher profile</h1>
                     <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
             HTML;unset($_SESSION['sourcepage']);}else{ echo <<<HTML
-                <a href="mainpageTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+                <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Teacher profile</h1>
                 <a href="editTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>

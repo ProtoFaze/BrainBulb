@@ -14,6 +14,14 @@
             margin: 50px 0 10px 0;
         }
 
+        body{
+            z-index: -1;
+            height: auto;
+            width: 100%;
+            background-image: url('../../images/undersea.png');
+            background-size: cover;
+        }
+
         .subjects{
             display: flex;
             padding: 0 40px;
@@ -33,7 +41,7 @@
             font-size: 20px;
             color:black;
             border-radius: 30px;
-            box-shadow: 0 17px #999;
+            box-shadow: 0 17px #bebebe;
         }
 
         .subject img{
@@ -63,7 +71,7 @@
         include "../database/connect.php";
     ?>
     <div class="main">
-        <h1><i>Please Select </i><span style="color:#62C7C3;">One</span><i> Subject To Begin</i></h1>
+        <h1><i>Please Select </i><span style="color:#ebecf0;">One</span><i> Subject To Begin</i></h1>
         <div class="subjects">
             <a href="ScienceSelectChapter.php" class="subject">
                 <div>

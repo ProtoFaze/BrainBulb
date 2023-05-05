@@ -15,7 +15,7 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $parent_id = $_SESSION['user_ID'];
+        $parent_id = $_SESSION['user_id'];
         // $parent_id = 'PT00000001';
 
 

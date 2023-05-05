@@ -18,7 +18,7 @@
 
 
 
-        $teacher_id = $_SESSION['user_ID'];
+        $teacher_id = $_SESSION['user_id'];
         // $teacher_id = 'TC00000001';
 
 

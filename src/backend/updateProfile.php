@@ -211,7 +211,43 @@ if(isset($_POST['save_qualification_details'])){
         }
     }
 }
+if(isset($_FILES['profile_Picture']) && $_FILES['profile_Picture'] != null && (isset($_POST['save_student_details']) || isset($_POST['save_parent_details']) || isset($_POST['save_teacher_details']))){
+    //validate input
+    //get temp location and type from input
+    $temp = $_FILES['profile_Picture']['tmp_name'];
+    $type = $_FILES['profile_Picture']['type'];
 
+    $data = file_get_contents($temp);
+    $readable = base64_encode($data);
+    $fullData = "data:$type;base64,$readable";
+    //perform regex to check for valid dataurl
+    if(!preg_match("/^data:image\/(png|jpg|jpeg);base64,/", $fullData)){
+        $_SESSION["profile_PictureError"] = "Invalid file type";
+        echo "<script>alert('invalid file type')</script>";
+    }elseif($_FILES['profile_Picture']['size'] > 500000){
+        $_SESSION["profile_PictureError"] = "File size too large";
+        echo "<script>alert('file size too large')</script>";
+    } else {
+        //declare $sql variable
+        $query = "";
+        // initialize parameterized sql for uploading image
+        if(isset($_POST['save_student_details'])){
+            $query = "UPDATE user SET profile_Picture = ? WHERE student_ID = ?";
+        } else if(isset($_POST['save_parent_details'])){
+            $query = "UPDATE user SET profile_Picture = ? WHERE parent_ID = ?";
+        } else if(isset($_POST['save_teacher_details'])){
+            $query = "UPDATE user SET profile_Picture = ? WHERE teacher_ID = ?";
+        }
+        //prepare statement
+        $stmt = $pdo->prepare($query);
+        //execute statement
+        if($stmt->execute([$fullData, $user_id])){
+            echo "<script>alert('Profile picture updated successfully')</script>";
+        } else {
+            echo "<script>alert('Profile picture update failed')</script>";
+        };
+    }
+}
 
 
 
@@ -225,7 +261,8 @@ if($arrInputs!=null){
 }else{
     echo '<script>alert("No changes detected")</script>';
 }
-//check session user id's first 2 characters to determine which page to redirect to
+// check session user id's first 2 characters to determine which page to redirect to
+
 if (substr($user_id, 0, 2) == 'ST') {
     echo "<script>window.location.href='../views/editStudent.php'</script>";
 } else if(substr($user_id, 0, 2) == 'PT') {

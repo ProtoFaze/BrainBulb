@@ -63,12 +63,11 @@
         }
 
         @media screen and (max-width: 600px) {
-            .topnav a, .topnav .search-container button {
+            .topnav a, .topnav>.navcontainer {
                 float: none;
                 display: block;
                 text-align: left;
                 width: 100%;
-                margin: 0;
                 padding: 14px;
             }
         }

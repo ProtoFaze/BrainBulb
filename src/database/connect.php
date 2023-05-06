@@ -9,4 +9,6 @@ if ($connection === false) ///if connection fails then exit the script and displ
 {
     die("Connection failed: " . mysqli_connect_error());
 }
+$dsn = "mysql:host=$host;dbname=$database";
+$pdo = new PDO($dsn, $username, $password);
 ?>

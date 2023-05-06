@@ -87,16 +87,25 @@
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
-            <form action="../backend/updateProfile.php" method = "POST" class="split_section">
+            <form action="../backend/updateProfile.php" method = "POST" class="split_section" enctype="multipart/form-data">
                 <h2>Student Information</h2>
-                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
-                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
+                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] == NULL){
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
                 }?>
-                <!-- <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
-                placeholder="<?= $student['sGrade']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <?php showErr("sGrade");?> -->
+                <select name="sGrade" original-value="<?= $student['sGrade']?>">
+                    <option value="<?= $student['sGrade']?>">Default <?= $student['sGrade']?></option>
+                    <option value="Standard 1">Standard 1</option>
+                    <option value="Standard 2">Standard 2</option>
+                    <option value="Standard 3">Standard 3</option>
+                    <option value="Standard 4">Standard 4</option>
+                    <option value="Standard 5">Standard 5</option>
+                    <option value="Standard 6">Standard 6</option>
+                </select>
+                <?php showErr("sGrade");?>
                 <input type="text" class="textField" id="Name" name="sName" original-value="<?=$student['sName']?>" 
                 placeholder="<?=$student['sName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("sName");?>
@@ -128,5 +137,6 @@
     </main>
     <!-- <script src="../styles/conditionalShadows.js"></script> -->
     <script src="../styles/togglePlaceholder.js"></script>
+    <script src="../styles/previewImage.js"></script>
 </body>
 </html>

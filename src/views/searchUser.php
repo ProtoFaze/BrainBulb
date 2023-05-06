@@ -193,7 +193,7 @@
                 if(empty($data) || $data == NULL){
                     echo "<img class='prof_pic' src='../../images/anonymousUser.png'>";
                     }else{
-                    echo "<img class='prof_pic' src='../../images/$data'>";
+                    echo "<img class='prof_pic' src='$data'>";
                     }
                 echo"  
                     <table style='margin: 0 auto;'>

@@ -19,8 +19,8 @@
 
 
 
-        // $teacher_id = $_SESSION['user_id'];
-        $teacher_id = 'TC00000001';
+        $teacher_id = $_GET['teacher_ID'];
+        // $teacher_id = 'TC00000001';
 
 
 
@@ -101,7 +101,8 @@
                 }else{
                     echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$teacher["profile_Picture"]."' alt='teacher picture'></label>
                     <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
-                }?>
+                }
+                showErr("profile_Picture");?>
                 <input type="text" class="textField" name="tName" original-value="<?=$teacher['tName']?>" 
                 placeholder="<?=$teacher['tName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("tName");?>
@@ -123,10 +124,10 @@
                     placeholder="username:&#9;<?= $teacher['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
                     <?php showErr("username");?>
                     <input type="text" class="textField" name="email" original-value="<?= $teacher['email']?>"
-                    placeholder="Email:&#9;<?= $teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    placeholder="email:&#9;&#9;<?= $teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                     <?php showErr("email");?>
                     <input type="text" class="textField" name="ic" original-value="<?= $teacher['ic']?>"
-                    placeholder="IC Number:&#9;<?= $teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    placeholder="ic:&#9;&#9;&#9;&#9;<?= $teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                     <?php showErr("ic");?>
                     <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
                 </form>

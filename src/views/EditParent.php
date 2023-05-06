@@ -19,8 +19,9 @@
 
 
 
-        // $parent_id = $_SESSION['user_id'];
-        $parent_id = 'PT00000001';
+        $parent_id = $_GET['parent_ID'];
+        echo $parent_id;
+        // $parent_id = 'PT00000001';
 
 
 
@@ -79,7 +80,7 @@
     <main>
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+            <a href="ProfileParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Edit Parent</h1>
         </div>
 
@@ -93,7 +94,8 @@
                 }else{
                     echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'></label>
                     <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
-                }?>
+                }
+                showErr("profile_Picture");?>
                 <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$parent['pName']?>" 
                 placeholder="<?=$parent['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("pName");?>
@@ -108,10 +110,10 @@
                 placeholder="username:&#9;<?= $parent['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
                 <?php showErr("username");?>
                 <input type="text" class="textField" name="email" original-value="<?= $parent['email']?>"
-                placeholder="Email:&#9;<?= $parent['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                placeholder="email:&#9;&#9;<?= $parent['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("email");?>
                 <input type="text" class="textField" name="ic" original-value="<?= $parent['ic']?>"
-                placeholder="IC Number:&#9;<?= $parent['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                placeholder="ic:&#9;&#9;&#9;&#9;<?= $parent['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("ic");?>
                 <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
             </form>

@@ -40,7 +40,6 @@
         if(isset($_POST['child'])){
             $child_id = $_POST['child'];
             $_SESSION['child_id'] = $child_id;
-            header("Location: ../views/ProfileChild.php");
         }
     ?>
     <style>
@@ -93,7 +92,7 @@
             unset($_SESSION['sourcepage']);}else{echo <<<HTML
                 <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
-                <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                <a href="editParent.php?parent_ID=$parent_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>
         </div>
 

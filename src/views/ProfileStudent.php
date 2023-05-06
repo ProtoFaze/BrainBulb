@@ -15,15 +15,18 @@
             session_start();
         }
         $student_id = null;
+        //if parents access child profile
         if(isset($_POST['child'])){
             $student_id = $_POST['child'];
+        // if admin access student profile
         }elseif(isset($_SESSION['management_id'])){
             $student_id = $_SESSION['management_id'];
+        // if student access own profile via login
         }else{
             $student_id = $_SESSION['user_id'];
             
-            // $student_id = 'ST00000001';
         }
+        // $student_id = 'ST00000001';
 
 
 
@@ -122,12 +125,6 @@
             ORDER BY s.subject_ID";
         $activityRequest = mysqli_query($connection, $activitysql);
 
-    //redirect to child
-        if(isset($_POST['child'])){
-            $child_id = $_POST['child'];
-            $_SESSION['child_id'] = $child_id;
-            echo "<script>windows.location.href ='#'</script>";
-        }
     ?>
     <style>
         :root{
@@ -236,7 +233,7 @@
         <?php include "../components/nav.php"; ?>
     </header>
     <main>
-        <!-- top section containing back button, username_ID and edit button -->
+        <!-- top section containing back button, username_ID and action button -->
         <div class="response">
         <?php if(isset($_SESSION['sourcepage']) && $_SESSION['sourcepage'] == "searchUser"){
             echo <<<HTML
@@ -246,7 +243,7 @@
         HTML;unset($_SESSION['sourcepage']);}else{echo <<<HTML
             <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Student profile</h1>
-            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <a href="editStudent.php?student_ID=$student_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
         HTML;}?>
         </div>
         <!-- middle section containing user info, parent into -->

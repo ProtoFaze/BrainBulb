@@ -119,7 +119,7 @@ if(session_status() == PHP_SESSION_NONE) {
         ?>
 
         <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 1 : Frasa tentang kehidupan harian</h1>
+            <h1>Bab 1 : Frasa tentang kehidupan harian</h1>
         </div>
         <div class="con">
             <div class="idea" style="background-color:transparent;">

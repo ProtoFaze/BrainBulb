@@ -14,7 +14,7 @@ if(session_status() == PHP_SESSION_NONE) {
     *{
         margin: 0;
     }
-
+    
     body {
         z-index: -1;
         position:fixed;
@@ -454,7 +454,8 @@ if(session_status() == PHP_SESSION_NONE) {
 </script>
 <body>
     <?php
-        $courseID = "CR00000006"; //fixed
+        $courseID = substr($_GET['course'],0,10); //fixed
+        $s = substr($_GET['course'],10);
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' ORDER BY questionbank.post_Datetime ASC";
@@ -664,7 +665,7 @@ if(session_status() == PHP_SESSION_NONE) {
 <script>
     function leave(){
         location.reload();
-        window.location.href = "EnglishSelectChapter.php";
+        window.location.href = "<?php echo $s;?>SelectChapter.php";
     }
 
     function pairsExist(a, b) {

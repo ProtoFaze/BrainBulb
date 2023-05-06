@@ -292,15 +292,15 @@
                 while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
                     echo <<<HTML
                     <div class="row" style="height:min-content; box-shadow: inset 0 12px 10px rgba(0, 0, 0, 0.2);">
-                        <div class="column">
-                            <div class="info_ltr" style="width:100%;">
-                                <div class="elipse_container" src='../../images/badge1.jpg' style='height: 75px; width:75px;'></div>
+                        <div class="column"style="width:35%;">
+                            <div class="info_ltr" >
+                                <img class="elipse_container" src='../../images/badge1.png' style='height: 75px; width:75px; background-color:inherit;'/>
                                 <p style="margin:0px; word-break: break-all width:60%">$achievement[title]</p>
                             </div>
                             <p style="margin:0px; color:rgb(85,85,85); font-size:12px;">$achievement[achievementDate]</p>
                         </div>
-                        <div class="column">
-                            <div class="info_ltr" style="font-size:14px; word-break: break-all"><p>$achievement[description]</p></div>
+                        <div class="column" style="width=65%; align-self: stretch;">
+                            <p class="info_ltr" style="font-size:14px; word-break: break-all; width:100%;">$achievement[description]</p>
                         </div>
                     </div>
                     HTML;

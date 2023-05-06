@@ -253,21 +253,21 @@ if(session_status() == PHP_SESSION_NONE) {
                 <form class="lrform" method="post">
                     <h1 class="heavytitle" style="font-size:18px;">You can now change your password.</h1>
                     <br>
-                    <input type="username" name="pass1" placeholder="New Password" class="input-field" required/>
+                    <input type="password" name="pass1" placeholder="New Password" class="input-field" required/>
                     <input type="password" name="pass" placeholder="Re-enter New Password" class="input-field" required />
                     <br>
-                    <input type="submit" name="enter" class="login-btn" value="Confirm"></input>
+                    <input type="submit" name="enter1" class="login-btn" value="Confirm"></input>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <a href="login&register.php">
+                <a href="loginAndregister.php">
                     <img src="../../images/cross1.jpg" class="cross">
                 </a>
                 <form action="" class="lrform" method="post">
                     <h1 class="heavytitle">Forgot Password</h1>
                     <br>
-                    <input type="text" name="name" placeholder="IC Number" class="input-field" required/>
-                    <input type="password" name="pass" placeholder="Email Address" class="input-field" required />
+                    <input type="text" name="ic" placeholder="IC Number" class="input-field" required pattern="[0]{1}[0-9]{11}"/>
+                    <input type="text" name="email" placeholder="Email Address" class="input-field" required  />
                     <!-- <a href="#" class="alink">Forgot your password?</a> -->
                     <br>
                         <input type="submit" name="enter" class="login-btn" value="Continue" id="signUp">
@@ -289,20 +289,41 @@ if(session_status() == PHP_SESSION_NONE) {
             </div>
         </div>
     <?php
-        
+        if(isset($_POST['enter'])){
+            $a = $_POST['ic'];
+            $b = $_POST['email'];
+        }
+        if(isset($_POST['enter1'])){
+            $p1 = $_POST['pass'];
+            $p2 = $_POST['pass1'];
+            if(substr($b, -9) == "@gmail.com" || substr($b, -12) == "@hotmail.com" || substr($b, -10) == "@yahoo.com" || substr($b,-12) == "@outlook.com"){
+                $q = "SELECT * FROM user WHERE ic = $a AND email = $b";
+                $c = mysqli_query($connection,$q);
+                $count = mysqli_num_rows($c);
+                if($count > 0){
+
+                }
+                else{
+                    echo "<script> alert('No Account Found');</script>";
+                }
+            }
+            else{
+                echo "<script> alert('Invalid Email Format');</script>";
+            }
+        }
     ?>
     <script type="text/javascript">
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
 
-        // signUpButton.addEventListener('click', () => {
-        //     container.classList.add("right-panel-active");
-        // });
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
 
-        // signInButton.addEventListener('click', () => {
-        //     container.classList.remove("right-panel-active");
-        // });
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
         function goback(){
             location.href = "login&register.php"
         }

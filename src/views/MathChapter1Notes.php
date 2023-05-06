@@ -114,8 +114,7 @@ if(session_status() == PHP_SESSION_NONE) {
         <?php
             for($i = 0; $i < 20; $i++){
                 echo "<div class='dots'><span class='dot'></span></div>";
-            }
-            
+            } 
         ?>
 
         <div style=" background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">

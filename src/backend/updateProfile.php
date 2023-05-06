@@ -264,9 +264,9 @@ if($arrInputs!=null){
 // check session user id's first 2 characters to determine which page to redirect to
 
 if (substr($user_id, 0, 2) == 'ST') {
-    echo "<script>window.location.href='../views/editStudent.php'</script>";
+    echo "<script>window.location.href='../views/editStudent.php?student_ID=$user_id'</script>";
 } else if(substr($user_id, 0, 2) == 'PT') {
-    echo "<script>window.location.href='../views/editParent.php'</script>";
+    echo "<script>window.location.href='../views/editParent.php?parent_ID=$user_id'</script>";
 } else if(substr($user_id, 0, 2) == 'TC') {
-    echo "<script>window.location.href='../views/editTeacher.php'</script>";
+    echo "<script>window.location.href='../views/editTeacher.php?teacher_ID=$user_id'</script>";
 }

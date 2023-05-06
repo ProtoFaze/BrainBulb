@@ -157,6 +157,14 @@
         .split_section,.split_subsection{
             flex-grow: 1;
         }
+        #right_section{
+            width: 50%;
+        }
+        @media only screen and (max-width: 860px){
+            #right_section{
+                width: 100%;
+            }
+        }
         .expandedinfo{
             display: none;
             flex-direction: column;
@@ -182,6 +190,7 @@
             flex: none;
             order: 0;
             flex-grow: 0;
+            height: fit-content;
         }
         .expandedinfo>.additional_info{
             display: flex;
@@ -204,9 +213,6 @@
 
             width: 300px;
         }
-        /* .column{
-            flex-grow: 1;
-        } */
         .expandedinfo .column{
             display: inherit;
         }
@@ -224,6 +230,11 @@
             background: var(--bg);
             padding:0px;
             height: max-content;
+        }
+        @media only screen and (max-width: 500px){
+            main{
+                padding: 0px;
+            }
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -268,7 +279,7 @@
                 <div class="info_ltr"><h3>Region</h3><p><?= $student['sRegion']?></p></div>
                 <div class="info_ltr"><h3>School</h3><p><?= $student['sSchool']?></p></div>
             </div>
-            <div class="split_section" style="background-color: var(--bg); padding: 0;">
+            <div class="split_section" id="right_section" style="background-color: var(--bg); padding: 0;">
                 <div class="split_subsection">
                     <h2>Account Information</h2>
                     <div class="info_ltr"><h3>Username</h3> <p><?= $student['username']?></p></div>
@@ -276,16 +287,23 @@
                     <div class="info_ltr"><h3>IC Number</h3> <p><?= $student['ic']?></p></div>
                 </div>
                 <div class="split_subsection">
-                    <h2>Achievements</h2>
+                    <h2 style="position:sticky; top:0px; background-color:var(--box-primary)">Achievements</h2>
                 <?php if(mysqli_num_rows($achievementRequest)>0){
-                    while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
-                        echo <<<HTML
-                        <div class="row">
-                            <div class="info_ltr"><h3>title</h3> <p>$achievement[title]</p></div>
-                            <div class="info_ltr"><h3>date</h3> <p>$achievement[achievementDate]</p></div>
-                            <div class="info_ltr"><h3>Description</h3> <p>$achievement[Description]</p></div>
+                while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
+                    echo <<<HTML
+                    <div class="row" style="height:min-content; box-shadow: inset 0 12px 10px rgba(0, 0, 0, 0.2);">
+                        <div class="column"style="width:35%;">
+                            <div class="info_ltr" >
+                                <img class="elipse_container" src='../../images/badge1.png' style='height: 75px; width:75px; background-color:inherit;'/>
+                                <p style="margin:0px; word-break: break-all width:60%">$achievement[title]</p>
+                            </div>
+                            <p style="margin:0px; color:rgb(85,85,85); font-size:12px;">$achievement[achievementDate]</p>
                         </div>
-                        HTML;
+                        <div class="column" style="width=65%; align-self: stretch;">
+                            <p class="info_ltr" style="font-size:14px; word-break: break-all; width:100%;">$achievement[description]</p>
+                        </div>
+                    </div>
+                    HTML;
                     }
                 }else{
                     echo"<h2>No achivements Unlocked</h2>";

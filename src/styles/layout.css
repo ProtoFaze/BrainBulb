@@ -183,6 +183,7 @@ p,td,.info_ttp{
     padding: 0px;
     width: 60%;
     text-align: left;
+    word-break: break-all;
 }
 /* top to bottom info display, use with br in between heading and data*/
 .info_ttp{
@@ -232,59 +233,18 @@ p,td,.info_ttp{
     }
     
 }
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 860px) {
     .split_section,.response,.content_box {
       width: 100%;
     }
+    .split_container,.response{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .response{
+        height: fit-content;
+    }
+    .row{
+        height: max-content;
+    }
   }
-  /* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather+Sans:ital@0;1&family=Roboto+Mono:ital@0;1&display=swap%27');
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-:root{
-    --barlength:55px;
-    --border-radius:10px;
-    --gap:15px;
-    --misc: #1cb193;
-    --bg: #D4FBF4;
-    --box-primary: #d4d1c0;
-    --box-secondary: #d5d0c9;
-    --button: rgb(47, 47, 47);
-    --transitionspeed: 0.3s;
-}
-body{
-    background-color: var(--bg);
-}
-main{
-    margin: 0 auto;
-    padding: 0px 60px;
-    height: max-content;
-
-}
-h1{
-    font-family: 'Product Sans', Clinton;
-    font-weight: 300;
-    text-align: center;
-}
-h2,h3,h4,h5,h6,a,input,th{
-    font-family: 'SF Pro Display', sans-serif;
-    font-weight: 100px;
-    text-align: center;
-}
-p,td,.info_ttp{
-    inline-size: 820px;
-    font-family: 'Futura', Poppins, ;
-    font-weight: 100px;
-    line-height: 35px;
-    width: auto;
-}
-
-for split sections
-.split_container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap);
-}
-.split_section, .split_subsection{
-    box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
-} */

@@ -17,9 +17,12 @@
 
 
 
-
+        if(isset($_SESSION['management_id'])){
+            $teacher_id = $_SESSION['management_id'];
+        }else{
         $teacher_id = $_SESSION['user_id'];
         // $teacher_id = 'TC00000001';
+        }
 
 
 
@@ -87,21 +90,21 @@
                 echo <<<HTML
                     <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                     <h1>Teacher profile</h1>
-                    <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                    <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
             HTML;unset($_SESSION['sourcepage']);}else{ echo <<<HTML
                 <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Teacher profile</h1>
-                <a href="editTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                <a href="editTeacher.php?teacher_ID =$teacher_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>
         </div>
 
         <!-- middle section containing user info, teacher into -->
         <div class="split_container">
             <div class="split_section">
-                <?php if(empty($teacher['profile_Picture']) || $teacher['profile_Picture'] = NULL){
+                <?php if(empty($teacher['profile_Picture']) || $teacher['profile_Picture'] == NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='../../images".$teacher["profile_Picture"]."' alt='teacher picture'>";
+                    echo "<img class='elipse_container' src='".$teacher["profile_Picture"]."' alt='teacher picture'>";
                 }?>
                 <div class="info_ltr"><h3>Name</h3><div class="divider"></div><p><?=$teacher['tName']?></p></div>
                 <div class="info_ltr"><h3>Birthdate</h3><div class="divider"></div><p><?= $teacher['tDOB']?></p></div>

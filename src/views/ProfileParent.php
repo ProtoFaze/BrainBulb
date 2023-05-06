@@ -15,8 +15,12 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $parent_id = $_SESSION['user_id'];
-        // $parent_id = 'PT00000001';
+        if(isset($_SESSION['management_id'])){
+            $parent_id = $_SESSION['management_id'];
+        }else{
+            $parent_id = $_SESSION['user_id'];
+            // $parent_id = 'PT00000001';
+        }
 
 
 
@@ -36,7 +40,6 @@
         if(isset($_POST['child'])){
             $child_id = $_POST['child'];
             $_SESSION['child_id'] = $child_id;
-            header("Location: ../views/ProfileChild.php");
         }
     ?>
     <style>
@@ -44,14 +47,15 @@
             padding: 0px 120px;
         }
         .content_box{
-            height:300px;
             width: 100%;
             margin: 0 auto;
-            padding: 0px 50px;
+            background: var(--bg);
+            padding: 0px;
+            height: max-content;
         }
         .row{
             align-self: stretch;
-            height: 30%;
+            /* height: 30%; */
         }
         .elipse_container{
             width: 100px;
@@ -65,6 +69,9 @@
         } */
         .split_section{
             flex-grow: 1;
+        }
+        .row{
+            background-color: var(--box-primary);
         }
     </style>
 </head>
@@ -80,12 +87,12 @@
                 echo <<<HTML
                 <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
-                <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
             HTML;
             unset($_SESSION['sourcepage']);}else{echo <<<HTML
                 <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
-                <a href="editParent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                <a href="editParent.php?parent_ID=$parent_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>
         </div>
 
@@ -93,10 +100,10 @@
         <div class="split_container">
             <div class="split_section">
                 <h2>Parent's information</h2>
-                <?php if(empty($parent['profile_Picture']) || $parent['profile_Picture'] = NULL){
+                <?php if(empty($parent['profile_Picture']) || $parent['profile_Picture'] == NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='parent picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='../../images/".$parent["profile_Picture"]."' alt='parent picture'>";
+                    echo "<img class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'>";
                 }?>
                 <div class="info_ltr"><h3>Number of children</h3><p><?= mysqli_num_rows($childRequest)?></p></div>
                 <div class="info_ltr"><h3>Name</h3><p><?=$parent['pName']?></p></div>

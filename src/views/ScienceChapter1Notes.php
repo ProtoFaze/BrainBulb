@@ -224,18 +224,7 @@ if(session_status() == PHP_SESSION_NONE) {
         function start(){
             location.href = "BuiltInQuestions.php?course=CR00000016Science";
         }
-        const audios = document.querySelectorAll("audio");
-        const songs = document.querySelectorAll("i");
-        songs.forEach((song,index) =>{
-            song.addEventListener("click",function(){
-                audios[index].play();
-                song.style.opacity = "1";
-            });
-
-            audios[index].addEventListener("ended", function() {
-                song.style.opacity = "0.5";
-            });
-        })
+        
     </script>
 </body>
 </html>

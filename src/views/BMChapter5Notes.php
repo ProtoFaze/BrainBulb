@@ -8,6 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -47,7 +48,7 @@ if(session_status() == PHP_SESSION_NONE) {
         top: 20%;
         right: 20%;
     }
-    <?php for ($i = 1; $i <= 20; $i++) : ?>
+    <?php for ($i = 1; $i <= 30; $i++) : ?>
         .dots:nth-child(<?php echo $i; ?>) {
             top: <?php echo rand(15,90); ?>%;
             left: <?php echo rand(1,90); ?>%;
@@ -76,6 +77,8 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -96,6 +99,27 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
+
+    .contain{
+        display:flex;
+        flex-wrap:wrap;
+    }
+
+    .contain > div{
+        text-align: center;
+        padding: 20px 50px;
+        line-height: 75px;   
+        font-size: 28px;
+        /* background-color: cyan; */
+        border-radius: 7px;
+        /* width:100px; */
+        margin:10px;
+        font-weight: bold;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -105,19 +129,94 @@ if(session_status() == PHP_SESSION_NONE) {
 <body>
     <div class="main">
         <?php
-            for($i = 0; $i < 20; $i++){
+            for($i = 0; $i < 30; $i++){
                 echo "<div class='dots'><span class='dot'></span></div>";
             }
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 5</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Bab 5 : Tatabahasa (Kata Ganti Name Diri)</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <!-- <div class="idea" style="background-color:transparent;">
+                <b>Puisi tradisional yang terdiri daripada empat baris dalam tiap-tiap rangkap. Pantun teka-teki, pantun kanak-kanak, pantun jenaka dan lain-lain adalah contoh jenis pantun</b>  
+            </div> -->
+            <!-- <div class="idea">
+                <div class="sub" style="width: 50%;">
+                    <p style="color:#58cc02; font-weight:bold;">Buah lontar masak berisi;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dari rantau tanam di laman;<br></p>
+                    <p style="color:#ff4b4b; font-weight:bold;">Kamera pintar alatan inovasi;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Untuk memantau sekitar kediaman.</p>
+                </div>
+                <div class="sub" style="width:10%;">
+                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
+                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="margin-left: 100px; padding:20px; background-color:#58cc02; border-radius:7px; text-align:center; margin-bottom: 10px; font-weight:bold;">Pembayang</div>
+                    <div style="margin-left: 100px; padding:20px; background-color:#ff4b4b; border-radius:7px; text-align:center; font-weight:bold; ">Maksud</div>
+                </div>    
+            </div>
+            <div class="idea" style="background-color:transparent;">
+                <b>Contoh dan Maksud Pantun</b>  
+            </div> -->
+            <div class="idea">
+                <p style="margin:10px;"><b>Maksud Kata ganti nama diri</b><br>
+                Menjadi pengganti kepada benda atau orang
+                </p>
+            </div>
+            <div class="idea" style="background-color:transparent;">
+                <b>3 Jenis kata ganti nama diri</b>  
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%;">
+                    <div style="display:flex; flex-direction: column;">
+                        <h3 style="margin:10px;">Kata Ganti Nama Diri Pertama</h3>
+                        <div class="contain">
+                            <div style="background-color: #cc99c9">Saya</div>
+                            <div style="background-color: #9bf6ff;">Aku</div>
+                            <div style="background-color: #ffadad;">Kita</div>
+                            <div style="background-color: #ffc6ff;">Kami</div>
+                        </div>
+                        <h4 style="margin:10px;">Contohnya :</h4>
+                        <p style="margin: 10px;"><b>Saya</b> telah dilantik menjadi ketua darjah.</p>
+                    </div>
+                </div>
+                <div class="sub" style="width: 30%; display:flex; justify-content:center; align-items:center;">
+                    <img src="../../images/saya.png" style="width:45%;">
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; flex-direction: column;">
+                        <h3 style="margin:10px;">Kata Ganti Nama Diri Kedua</h3>
+                        <ul style="line-height: 60px; ">
+                            <li>Kamu</li>
+                            <li>Kalian</li>
+                            <li>Awak</li>
+                            <li>Anda</li>
+                        </ul>
+                        <h4 style="margin:10px;">Contohnya :</h4>
+                        <p style="margin: 10px;">Saya akan ke rumah <b>awak</b> esok.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; flex-direction: column;">
+                        <h3 style="margin:10px;">Kata Ganti Nama Diri Ketiga</h3>
+                        <div class="contain">
+                            <div style="background-color: #ffadad">Mereka</div>
+                            <div style="background-color: #ffd6a5;">Dia</div>
+                            <div style="background-color: #fdffb6;">Beliau</div>
+                            <div style="background-color: #caffbf;">Ia</div>
+                        </div>
+                        <h4 style="margin:10px;">Contohnya :</h4>
+                        <p style="margin: 10px;"><b>Mereka</b> belajar bersama-sama pada setiap hujung minggu.</p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -127,6 +226,18 @@ if(session_status() == PHP_SESSION_NONE) {
         function start(){
             location.href = "BuiltInQuestions.php?course=CR00000026BM";
         }
+        const audios = document.querySelectorAll("audio");
+        const songs = document.querySelectorAll("i");
+        songs.forEach((song,index) =>{
+            song.addEventListener("click",function(){
+                audios[index].play();
+                song.style.opacity = "1";
+            });
+
+            audios[index].addEventListener("ended", function() {
+                song.style.opacity = "0.5";
+            });
+        })
     </script>
 </body>
 </html>

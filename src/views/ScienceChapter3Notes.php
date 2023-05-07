@@ -107,7 +107,7 @@ if(session_status() == PHP_SESSION_NONE) {
     .contain{
         display:flex;
         flex-wrap:wrap;
-        width:100%;
+        /* margin: 0 auto; */
     }
 
     .contain > div{

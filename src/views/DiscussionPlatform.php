@@ -260,7 +260,13 @@
                         <div class="discussion">
                             <div class="left">
                                 <div class="img">
-                                    <img src="../../images/anonymousUser.png">
+                    HTML;
+                    if(empty($row['pic']) || $row['pic'] == NULL) {
+                        echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
+                    } else {
+                        echo "<img class='elipse_container' src='../../images/". $row["pic"]. "' alt='teacher picture'>";
+                    }
+                    echo <<<HTML
                                 </div>
                                 <div id="sNameATime"><h4>{$row["name"]}</h4></div>
                                 <div id="sNameATime"><p id="dateTime">{$row["qDateTime"]}</p></div>

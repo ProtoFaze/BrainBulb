@@ -76,6 +76,10 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        display: flex;
+        gap:10px;
+        align-items: stretch;
+        justify-content: space-between;
     }
 
     .start{
@@ -88,13 +92,15 @@ if(session_status() == PHP_SESSION_NONE) {
         font-weight: bold;
         cursor: pointer;
     }
-
     .start:hover{
         transform: scale(1.06);
     }
 
     .start:active{
         transform: scale(0.95);
+    }
+    .sub b{
+        color: #4C7399;
     }
 </style>
 <?php
@@ -111,13 +117,51 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 6</h1>
+        <div style="background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 6: Shapes</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+        <b class="idea" style="background-color:transparent;">This lesson teaches you about shapes</b>
+        <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">What are shapes</b>
+                    </div>
+                    A shape is the outline of a thing right that you see. There are many different types of shapes, like circles, squares, triangles, rectangles, and more.
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Circles</b>
+                    </div>
+                    A circle is a shape that is round and has no pointy ends known as corners. It is made up of all the edges of the shape that are the same length from the center of this shape. Example of circles are wheels and pizzas.
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Squares</b>
+                    </div>
+                    Squares are four-sided shapes with four equal sides and four corners that look like L s. It is often used in building, as many structures are built with square shapes. You can also find squares like chess boards or boxes.
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Triangles</b>
+                    </div>
+                    A triangle is a three-sided shape with three corners. There are many types of triangles, such as equilateral triangles (where all three sides are the same length) and isosceles triangles (where two sides are the same length). You can find triangles in many things, like rooftops and the triangle musical instrument.
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Rectangles</b>
+                    </div>
+                    A rectangle is a four-sided shape with two sets of equal sides that are the opposite of each other. It has four right L looking corners, just like a square. You can find rectangles in many things, like doors and haybales.
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,7 +169,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "MathChapter6Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000015Math";
         }
     </script>
 </body>

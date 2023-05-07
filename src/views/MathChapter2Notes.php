@@ -76,6 +76,10 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        display: flex;
+        gap:10px;
+        align-items: stretch;
+        justify-content: space-between;
     }
 
     .start{
@@ -96,6 +100,9 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+    .sub b{
+        color: #4C7399;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -111,13 +118,67 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 2</h1>
+        <div style="background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 2: Simple Arithmetics</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <b class="idea" style="background-color:transparent;">In this lesson, we will learn about the four basic operations: addition, subtraction, multiplication, and division.</b>
+            <div class="idea">
+                <div class="sub" style="width: 70%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Addition</b>
+                    </div>
+                Addition is putting <b>two numbers together</b> to get a new number. For example, if you have <b>3</b> apples and someone gives you <b>2</b> more, you now have a total of <b>5</b> apples. We use the <b>plus sign (+)</b> to show additions. So, 3 + 2 = 5.
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <img src="../../images/plus.png" style="height:320px; width:auto;">
+                    <!-- sourced from pngimg.com :https://pngimg.com/image/40947 -->
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Subtraction</b>
+                    </div>
+                    Subtraction is <b>taking a number away from another number</b> to get a new number. For instance, if you have <b>7</b> candies and you eat <b>3</b>, you now have <b>4</b> candies left. The <b>minus sign (-)</b> is used to represent subtraction. So, 7 - 3 = 4.
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <img src="../../images/minus.png" style="height:320px; width:auto;">
+                    <!-- sourced from pngimg.com :https://pngimg.com/image/41011 -->
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Multiplication</b>
+                    </div>
+                    Multiplication is <b>adding a number to itself a set amount of times</b>. Like if you and 2 of your other friends have <b>4</b> pencils each and you want to know how many pencils all have together. If you multiply them by <b>3</b>, meaning you add <b>4 + 4 + 4</b>, which equals <b>12</b> pencils.</br> We use the <b>multiplication sign (x)</b> to show multiplication. So, 4 x 3 = 12.
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <img src="../../images/multiply.png" style="height:320px; width:auto;">
+                    <!-- sourced from hiclipart.com :https://www.hiclipart.com/free-transparent-background-png-clipart-mggoh -->
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Division</b>
+                    </div>
+                    Division is when you <b>split a number into equal parts</b>. For example, you have <b>12</b> cookies and you want to share them <b>equally among 3</b> friends, you would give <b>each friend 4</b> cookies. We use the <b>division sign (÷)</b> to show division. So, 12 ÷ 3 = 4.
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <img src="../../images/divide.png" style="height:320px; width:auto;">
+                    <!-- sourced from hiclipart.com :https://www.hiclipart.com/free-transparent-background-png-clipart-mggoh -->
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Comparing Numbers</b>
+                    </div>
+                    Lastly, to determine which number is <b>greater or less</b> than another number like we learned previously, we can use the symbols <b>> (greater than)</b>, <b>< (less than)</b>, or <b>= (equal to)</b>. For example, 500 > 100 means that 500 is greater than 100 and 100 < 500 means that 100 is less than 500. If two numbers are the same, we use the symbol = to show that they are equal. For example, 10 = 10.
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,7 +186,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "MathChapter2Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000011Math";
         }
     </script>
 </body>

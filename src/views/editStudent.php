@@ -15,8 +15,8 @@
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        // $student_id = $_SESSION['user_id'];
-        $student_id = 'ST00000001';
+        $student_id = $_GET['student_ID'];
+        // $student_id = 'ST00000001';
 
         //user info
         $profileRequest = "SELECT * FROM student 
@@ -80,23 +80,34 @@
     </header>
     <main>
         <!-- top section containing back button, username_ID and edit button -->
-        <div class="response">
-            <a href="ProfileStudent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+        <form action = "ProfileStudent.php" method="POST"class="response">
+            <label for="back" class="flex_button" style="align-self: auto;"><input type="submit" id="back" style="display:none;"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</label>
+            <input type="hidden" name="child" value="<?= $student_id ?>">
             <h1>Edit Student</h1>
-        </div>
+        </form>
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
-            <form action="../backend/updateProfile.php" method = "POST" class="split_section">
+            <form action="../backend/updateProfile.php" method = "POST" class="split_section" enctype="multipart/form-data">
                 <h2>Student Information</h2>
-                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
-                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
+                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] == NULL){
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
-                }?>
-                <!-- <input type="text" class="textField" name="sGrade" original-value="<?= $student['sGrade']?>" 
-                placeholder="<?= $student['sGrade']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <?php showErr("sGrade");?> -->
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
+                }
+                showErr("pName");?>
+                <select name="sGrade" original-value="<?= $student['sGrade']?>">
+                    <option value="<?= $student['sGrade']?>">Default <?= $student['sGrade']?></option>
+                    <option value="Standard 1">Standard 1</option>
+                    <option value="Standard 2">Standard 2</option>
+                    <option value="Standard 3">Standard 3</option>
+                    <option value="Standard 4">Standard 4</option>
+                    <option value="Standard 5">Standard 5</option>
+                    <option value="Standard 6">Standard 6</option>
+                </select>
+                <?php showErr("sGrade");?>
                 <input type="text" class="textField" id="Name" name="sName" original-value="<?=$student['sName']?>" 
                 placeholder="<?=$student['sName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("sName");?>
@@ -117,10 +128,10 @@
                     placeholder="username:&#9;<?= $student['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
                     <?php showErr("username");?>
                     <input type="text" class="textField" name="email" original-value="<?= $student['email']?>"
-                    placeholder="Email:&#9;<?= $student['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    placeholder="email:&#9;&#9;<?= $student['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                     <?php showErr("email");?>
                     <input type="text" class="textField" name="ic" original-value="<?= $student['ic']?>"
-                    placeholder="IC Number:&#9;<?= $student['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    placeholder="ic:&#9;&#9;&#9;&#9;<?= $student['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                     <?php showErr("ic");?>
                     <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
             </form >
@@ -128,5 +139,6 @@
     </main>
     <!-- <script src="../styles/conditionalShadows.js"></script> -->
     <script src="../styles/togglePlaceholder.js"></script>
+    <script src="../styles/previewImage.js"></script>
 </body>
 </html>

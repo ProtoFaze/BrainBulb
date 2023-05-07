@@ -8,7 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
-    <title>BrainBulb</title>
+    <title>Account</title>
     <style>
         * {
             box-sizing: border-box;
@@ -249,7 +249,7 @@ if(session_status() == PHP_SESSION_NONE) {
                     <a href="registerParent.php" class="alink">
                         <div class="registeroptions">
                             <img src="../../images/parent_and_children.png" style="width:85px; height:auto;">
-                            <p style="padding:0 20px; font-size:17px;">Register as Parent and Student</p>
+                            <p style="padding:0 20px; font-size:17px;">Register as Parent</p>
                         </div>
                     </a>
                     <a href="registerTeacher.php" class="alink">
@@ -305,7 +305,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 }
                 elseif($row['user_Type'] == "Student"){
                     $_SESSION['user_id'] = $row['student_ID'];
-                    echo $_SESSION['user_id'];
                 }
                 else{
                     $_SESSION['user_id'] = $row['parent_ID'];

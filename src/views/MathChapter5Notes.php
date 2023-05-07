@@ -76,6 +76,10 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        display: flex;
+        gap:10px;
+        align-items: stretch;
+        justify-content: space-between;
     }
 
     .start{
@@ -96,6 +100,9 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+    .sub b{
+        color: #4C7399;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -111,13 +118,44 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 5</h1>
+        <div style="background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 5: Percentage</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+        <b class="idea" style="background-color:transparent;">This lesson teaches you how Percentage works</b>
+        <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">What are percentages</b>
+                    </div>
+                    Percentage is a way to write a fraction , but it must be a fraction of 100.</br></br>
+                    For instance, if you have 10 apples and 4 of them are red, then 40% of the apples are red. This is because 4/10 is the same as 40/100.
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Calculating Percentages</b>
+                    </div>
+                    you multiple the fraction by 100 to get the percentage.</br></br>
+                    So the formula is:</br>
+                    <b>Percentage % = (numerator/denominator * 100)</b></br>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Percentage increase and decrease</b>
+                    </div>
+                    Percentages are also used to calculate increases and decreases in values.</br>
+                    An example is when the price of your favorite toy increases from RM50 to RM60, you can calculate the percentage increase using the formula:</br></br>
+                    percentage increase = [(new value - old value) / old value] x 100</br>
+                    which is an increase in 20% = [(60 - 50) / 50] x 100</br></br>
+                    As for percentage decrease, the only difference is <b>subtracting the old value with the new value</b>. So the formula is:</br></br>
+                    percentage decrease = [(old value - new value) / old value] x 100</br>
+                    an example would be a decrease in 20% = [(60 - 48) / 60]</br></br>
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,7 +163,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "MathChapter5Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000014Math";
         }
     </script>
 </body>

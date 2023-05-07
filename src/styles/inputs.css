@@ -1,4 +1,4 @@
-input{
+input,textarea, select{
     font-size: 20px;
 }
 .divider{
@@ -7,7 +7,7 @@ input{
     width: 1px;
     border-color: black;
 }
-.flex_button{
+.flex_button,select{
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -18,11 +18,14 @@ input{
     border-radius: var(--border-radius);
     border: solid var(--button);
 }
-.flex_button:hover{
+select{
+    margin: 10px 0px;
+}
+.flex_button:hover,select:hover{
     transition: var(--transitionspeed);
     transform: scale(1.1);
 }
-input[type="text"], textarea{
+input[type="text"],textarea{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,4 +62,8 @@ input[type="text"]:focus,textarea:focus{
     /* #BCE9F5 */
     ;
     transition: border 0.05s;
+}
+img[id=preview-image]:hover{
+    border: 1px solid rgb(45, 45, 45);
+    transition: all 0.05s ease-in-out;
 }

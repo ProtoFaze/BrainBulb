@@ -15,12 +15,18 @@
             session_start();
         }
         $student_id = null;
+        //if parents access child profile
         if(isset($_POST['child'])){
             $student_id = $_POST['child'];
+        // if admin access student profile
+        }elseif(isset($_SESSION['management_id'])){
+            $student_id = $_SESSION['management_id'];
+        // if student access own profile via login
         }else{
             $student_id = $_SESSION['user_id'];
-            // $student_id = 'ST00000001';
+            
         }
+        // $student_id = 'ST00000001';
 
 
 
@@ -119,12 +125,6 @@
             ORDER BY s.subject_ID";
         $activityRequest = mysqli_query($connection, $activitysql);
 
-    //redirect to child
-        if(isset($_POST['child'])){
-            $child_id = $_POST['child'];
-            $_SESSION['child_id'] = $child_id;
-            echo "<script>windows.location.href ='#'</script>";
-        }
     ?>
     <style>
         :root{
@@ -137,10 +137,8 @@
             padding: 0px 120px;
         }
         .content_box{
-            height:300px;
             width: 100%;
             margin: 0 auto;
-            padding: 0px 50px;
         }
         .row{
             align-self: stretch;
@@ -159,13 +157,21 @@
         .split_section,.split_subsection{
             flex-grow: 1;
         }
+        #right_section{
+            width: 50%;
+        }
+        @media only screen and (max-width: 860px){
+            #right_section{
+                width: 100%;
+            }
+        }
         .expandedinfo{
             display: none;
             flex-direction: column;
             align-items: flex-start;
             padding: 0px 30px 0px 0px;
             gap: 10px;
-
+            height: fit-content;
             /* Inside auto layout */
             flex: none;
             order: 1;
@@ -173,9 +179,6 @@
             flex-grow: 1;
             box-shadow: inset 0 -12px 6px rgba(0, 0, 0, 0.2);
             border-radius: var(--border-radius);
-            /* transform: 0% 100%;
-            transform-origin: top;
-            transition: transform 0.3s ease-in-out; */
             transition: all 0.5s ease-in-out;
         }
         .expandedinfo>h3{
@@ -187,6 +190,7 @@
             flex: none;
             order: 0;
             flex-grow: 0;
+            height: fit-content;
         }
         .expandedinfo>.additional_info{
             display: flex;
@@ -209,9 +213,6 @@
 
             width: 300px;
         }
-        /* .column{
-            flex-grow: 1;
-        } */
         .expandedinfo .column{
             display: inherit;
         }
@@ -230,105 +231,40 @@
             padding:0px;
             height: max-content;
         }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="text/javascript">
-        //expand button
-        // function expand(index) {
-        //     var button = document.getElementById("course" + index);
-        //     var subjectBox = document.getElementById("expandedinfo" + index);
-
-        //     var contentBox = document.querySelector('.content_box');
-        //     var contentBoxBottom = contentBox.offsetTop + contentBox.clientHeight;
-
-        //     if (subjectBox.style.display === "flex") {
-        //         subjectBox.style.display = "none";
-        //         button.style.transform = "rotateX(0deg)";
-        //         subjectBox.style.transform = "scaleY(0)";
-        //     } else {
-        //         subjectBox.style.display = "flex";
-        //         button.style.transform = "rotateX(180deg)";
-        //         subjectBox.style.transform = "scaleY(1)";
-
-
-        //         var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
-        //         var scrollOffset = subjectBoxBottom - contentBoxBottom;
-        //         contentBox.scrollBy({
-        //         top: scrollOffset,
-        //         behavior: 'smooth'
-
-
-        //         });
-        //     }
-        // }
-        function expand(index){
-            var frame = document.getElementById("content_box");
-            var button = document.getElementById("course"+index);
-            var subjectBox = document.getElementById("expandedinfo"+index);
-
-            
-            if (subjectBox.style.display === "flex") {
-                // Collapse the subject box
-                subjectBox.style.transform = "translateY(-100%)";
-                subjectBox.style.opacity = "0";
-                setTimeout(function() {
-                    subjectBox.style.display = "none";
-                    subjectBox.style.transform = "";
-                    subjectBox.style.opacity = "";
-                }, 500);
-                
-                button.style.transform = "rotateX(0deg)";
-                
-            } else {
-                // Expand the subject box
-                subjectBox.style.display = "flex";
-                subjectBox.style.transform = "translateY(-100%)";
-                subjectBox.style.opacity = "";
-                setTimeout(function() {
-                    subjectBox.style.transform = "";
-                    subjectBox.style.opacity = "";
-                }, 10);
-                
-                button.style.transform = "rotateX(180deg)";
-
-                var frameBottom = frame.offsetTop + frame.clientHeight;
-
-                var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
-                var scrollOffset = subjectBoxBottom - frameBottom;
-                frame.scrollBy({
-                top: scrollOffset,
-                behavior: 'smooth'});
+        @media only screen and (max-width: 500px){
+            main{
+                padding: 0px;
             }
         }
-    </script>
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
         <?php include "../components/nav.php"; ?>
     </header>
     <main>
-        <!-- top section containing back button, username_ID and edit button -->
+        <!-- top section containing back button, username_ID and action button -->
         <div class="response">
         <?php if(isset($_SESSION['sourcepage']) && $_SESSION['sourcepage'] == "searchUser"){
             echo <<<HTML
                 <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Student profile</h1>
-                <a href="deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
         HTML;unset($_SESSION['sourcepage']);}else{echo <<<HTML
             <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Student profile</h1>
-            <a href="editStudent.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <a href="editStudent.php?student_ID=$student_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
         HTML;}?>
         </div>
-
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
             <div class="split_section">
                 <h2>Student Information</h2>
-                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] = NULL){
+                <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] == NULL){
                     echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
                 }else{
-                    echo "<img class='elipse_container' src='../../images/".$student["profile_Picture"]."' alt='student picture'>";
+                    echo "<img class='elipse_container' src='".$student["profile_Picture"]."' alt='student picture'>";
                 }?>
                 <div class="info_ltr">
                     <div><h3>Level</h3><p><?= $student['level']?></p></div>
@@ -343,7 +279,7 @@
                 <div class="info_ltr"><h3>Region</h3><p><?= $student['sRegion']?></p></div>
                 <div class="info_ltr"><h3>School</h3><p><?= $student['sSchool']?></p></div>
             </div>
-            <div class="split_section" style="background-color: var(--bg); padding: 0;">
+            <div class="split_section" id="right_section" style="background-color: var(--bg); padding: 0;">
                 <div class="split_subsection">
                     <h2>Account Information</h2>
                     <div class="info_ltr"><h3>Username</h3> <p><?= $student['username']?></p></div>
@@ -351,16 +287,23 @@
                     <div class="info_ltr"><h3>IC Number</h3> <p><?= $student['ic']?></p></div>
                 </div>
                 <div class="split_subsection">
-                    <h2>Achievements</h2>
+                    <h2 style="position:sticky; top:0px; background-color:var(--box-primary)">Achievements</h2>
                 <?php if(mysqli_num_rows($achievementRequest)>0){
-                    while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
-                        echo <<<HTML
-                        <div class="row">
-                            <div class="info_ltr"><h3>title</h3> <p>$achievement[title]</p></div>
-                            <div class="info_ltr"><h3>date</h3> <p>$achievement[achievementDate]</p></div>
-                            <div class="info_ltr"><h3>Description</h3> <p>$achievement[Description]</p></div>
+                while ($achievement = mysqli_fetch_assoc($achievementRequest)) {
+                    echo <<<HTML
+                    <div class="row" style="height:min-content; box-shadow: inset 0 12px 10px rgba(0, 0, 0, 0.2);">
+                        <div class="column"style="width:35%;">
+                            <div class="info_ltr" >
+                                <img class="elipse_container" src='../../images/badge1.png' style='height: 75px; width:75px; background-color:inherit;'/>
+                                <p style="margin:0px; word-break: break-all width:60%">$achievement[title]</p>
+                            </div>
+                            <p style="margin:0px; color:rgb(85,85,85); font-size:12px;">$achievement[achievementDate]</p>
                         </div>
-                        HTML;
+                        <div class="column" style="width=65%; align-self: stretch;">
+                            <p class="info_ltr" style="font-size:14px; word-break: break-all; width:100%;">$achievement[description]</p>
+                        </div>
+                    </div>
+                    HTML;
                     }
                 }else{
                     echo"<h2>No achivements Unlocked</h2>";
@@ -387,7 +330,6 @@
                     </div>
                     <div class="expandedinfo" id = "expandedinfo$index">
                         <div style="display: flex; justify-content: space-between; align-self: stretch;"><h3>Overall Performance</h3><h3>Latest Activity </h3></div>
-
                         <div class="additional_info">
                             <div class="chart_frame">
                                 <canvas id="barChart$index" ></canvas>
@@ -435,5 +377,45 @@
         </div>
     </main>
     <script src="../styles/conditionalShadows.js"></script>
+    <script type="text/javascript">
+        //expand button
+        function expand(index) {
+            var frame = document.getElementById("content_box");
+            var button = document.getElementById("course" + index);
+            var subjectBox = document.getElementById("expandedinfo" + index);
+
+            if (subjectBox.style.display === "flex") {
+                // Collapse the subject box
+                subjectBox.style.transform = "translateY(-100%)";
+                subjectBox.style.opacity = "0";
+                setTimeout(function() {
+                subjectBox.style.display = "none";
+                subjectBox.style.transform = "";
+                subjectBox.style.opacity = "";
+                }, 500);
+
+                button.style.transform = "rotateX(0deg)";
+
+            } else {
+                // Expand the subject box
+                subjectBox.style.display = "flex";
+                subjectBox.style.transform = "translateY(-100%)";
+                subjectBox.style.opacity = "";
+                setTimeout(function() {
+                subjectBox.style.transform = "";
+                subjectBox.style.opacity = "";
+                // Scroll the main scroller of the webpage to the bottom of the expanded info
+                var subjectBoxBottom = subjectBox.offsetTop + subjectBox.clientHeight;
+                var bodyBottom = document.body.scrollHeight;
+                window.scrollTo({
+                    top: Math.min(subjectBoxBottom, bodyBottom),
+                    behavior: "smooth"
+                });
+                }, 10);
+
+                button.style.transform = "rotateX(180deg)";
+            }
+        }
+    </script>
 </body>
 </html>

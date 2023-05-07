@@ -19,8 +19,9 @@
 
 
 
-        // $parent_id = $_SESSION['user_id'];
-        $parent_id = 'PT00000001';
+        $parent_id = $_GET['parent_ID'];
+        echo $parent_id;
+        // $parent_id = 'PT00000001';
 
 
 
@@ -79,19 +80,22 @@
     <main>
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+            <a href="ProfileParent.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Edit Parent</h1>
         </div>
 
         <!-- middle section containing user info, parent into -->
         <div class="split_container">
-            <div class="split_section">
+            <form action="../backend/updateProfile.php" class="split_section" method="POST" enctype="multipart/form-data">
                 <h2>Parent's information</h2>
-                <?php if(empty($parent['profile_Picture']) || $parent['profile_Picture'] = NULL){
-                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='parent picture'>";
+                <?php if(empty($parent['profile_Picture']) || $parent['profile_Picture'] == NULL){
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='../../images/anonymousUser.png' alt='parent picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
                 }else{
-                    echo "<img class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'>";
-                }?>
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$parent["profile_Picture"]."' alt='parent picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
+                }
+                showErr("profile_Picture");?>
                 <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$parent['pName']?>" 
                 placeholder="<?=$parent['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("pName");?>
@@ -99,46 +103,23 @@
                 placeholder="<?= $parent['pDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("spDOB");?>
                 <input type="submit" class="flex_button" name="save_parent_details"value="SAVE CHANGES">
-            </div>
-            <div class="split_section">
+            </form>
+            <form action="../backend/updateProfile.php" class="split_section" method="POST" enctype="multipart/form-data">
                 <h2>account information</h2>
                 <input type="text" class="textField" name="username" original-value="<?= $parent['username']?>" 
                 placeholder="username:&#9;<?= $parent['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
                 <?php showErr("username");?>
                 <input type="text" class="textField" name="email" original-value="<?= $parent['email']?>"
-                placeholder="Email:&#9;<?= $parent['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                placeholder="email:&#9;&#9;<?= $parent['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("email");?>
                 <input type="text" class="textField" name="ic" original-value="<?= $parent['ic']?>"
-                placeholder="IC Number:&#9;<?= $parent['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                placeholder="ic:&#9;&#9;&#9;&#9;<?= $parent['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("ic");?>
                 <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
-            </div>
+            </form>
         </div>
-
-        <!-- bottom section containing children info -->
-        <!-- <div class="content_box">
-        <?php 
-        // if(mysqli_num_rows($childRequest) > 0){
-        //     while ($child = mysqli_fetch_assoc($childRequest)) {
-            echo <<<HTML
-                <!-- <div class="row">
-                    <div class="info_ltr">$child[student_ID]</div>
-                    <div class="info_ltr">$child[sName]</div>
-                    <div class="info_ltr">Grade : $child[sGrade]</div>
-                    <div class="info_ltr">Streak: $child[aFrequency]</div>
-                    <form action="./profileStudent.php" method="post">
-                        <input type="hidden" name="child" value="$child[student_ID]">
-                        <button class="materials-symbols-outlined flex_button" type="submit">More Details<span class="material-symbols-outlined">arrow_forward_ios</span></button>
-                    </form>
-
-                </div> -->
-            HTML;
-        // }}else{
-        //         echo "<h2> No children found </h2>";
-        //     }
-        ?>
-        </div> -->
     </main>
     <script src="../styles/togglePlaceholder.js"></script>
+    <script src="../styles/previewImage.js"></script>
 </body>
 </html>

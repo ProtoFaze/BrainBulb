@@ -290,6 +290,7 @@ if(session_status() == PHP_SESSION_NONE) {
         </div>
     <?php
         if(isset($_POST['enter'])){
+            sleep(3);
             $username = $_POST['username'];
             $password = $_POST['pass'];
             $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' AND `state` = 1";

@@ -3,12 +3,12 @@
 :root{
     --barlength:55px;
     --border-radius:10px;
-    --gap:15px;
-    --misc-green: #1cb193;
-    --bg: #D4FBF4;
-    --box-primary: #d4d1c0;
-    --box-secondary: #d5d0c9;
-    --button: rgb(47, 47, 47);
+    --gap:10px;
+    --misc: #2E424D;
+    --bg: #EAEBED;
+    --box-primary: #e3f2fc;
+    --box-secondary: #b1defc;
+    --button: #2E424D;
     --transitionspeed: 0.3s;
 }
 body{
@@ -29,6 +29,11 @@ h2,h3,h4,h5,h6,a,input,th{
     font-family: 'Merriweather Sans', sans-serif;
     font-weight: 100px;
     text-align: center;
+
+}
+fieldset{
+    border-color: #454545;
+    border-radius: 5px;
 }
 p,td,.info_ttp{
     inline-size: 820px;
@@ -44,7 +49,7 @@ p,td,.info_ttp{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: var(--gap);
+    gap: 30px;
 }
 .split_section, .split_subsection{
     box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
@@ -98,6 +103,7 @@ p,td,.info_ttp{
 
 .split_section h2{
     margin: 10px 0px;
+    
 }
 /*containers that fit inside split sections that occupy a quarter of split container*/
 .split_subsection{
@@ -177,6 +183,7 @@ p,td,.info_ttp{
     padding: 0px;
     width: 60%;
     text-align: left;
+    word-break: break-all;
 }
 /* top to bottom info display, use with br in between heading and data*/
 .info_ttp{
@@ -200,11 +207,17 @@ p,td,.info_ttp{
     width: 71px;
     height: 71px;
     border-radius: 50%;
-    background-color: var(--misc-green);
+    background-color: var(--misc);
     align-self: center;
     
 }
-
+.error{
+    color: red;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0;
+}
 @media screen and (max-width: 1080px){
     .row{
         flex-direction: column;
@@ -220,59 +233,23 @@ p,td,.info_ttp{
     }
     
 }
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 860px) {
     .split_section,.response,.content_box {
       width: 100%;
     }
-  }
-  /* @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather+Sans:ital@0;1&family=Roboto+Mono:ital@0;1&display=swap%27');
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-:root{
-    --barlength:55px;
-    --border-radius:10px;
-    --gap:15px;
-    --misc-green: #1cb193;
-    --bg: #D4FBF4;
-    --box-primary: #d4d1c0;
-    --box-secondary: #d5d0c9;
-    --button: rgb(47, 47, 47);
-    --transitionspeed: 0.3s;
+    .split_container,.response{
+        flex-direction: column;
+        gap: 10px;
+    }
+    .response{
+        height: fit-content;
+    }
+    .row{
+        height: max-content;
+    }
 }
-body{
-    background-color: var(--bg);
+@media only screen and (max-width: 500px) {
+    main{
+        padding: 0px;
+    }
 }
-main{
-    margin: 0 auto;
-    padding: 0px 60px;
-    height: max-content;
-
-}
-h1{
-    font-family: 'Product Sans', Clinton;
-    font-weight: 300;
-    text-align: center;
-}
-h2,h3,h4,h5,h6,a,input,th{
-    font-family: 'SF Pro Display', sans-serif;
-    font-weight: 100px;
-    text-align: center;
-}
-p,td,.info_ttp{
-    inline-size: 820px;
-    font-family: 'Futura', Poppins, ;
-    font-weight: 100px;
-    line-height: 35px;
-    width: auto;
-}
-
-for split sections
-.split_container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap);
-}
-.split_section, .split_subsection{
-    box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
-} */

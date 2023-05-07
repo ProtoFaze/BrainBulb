@@ -12,10 +12,14 @@ but got problem with ranking arrangement -->
     <title>Student Performance</title>
     <style>
         body {
-            background-image: url(images/night.png);
+            background-image: url(../../images/night.png);
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
+        }
+        #rankingTitle {
+            color: white;
+            text-shadow: 1px 1px 1px white;
         }
         #viewRanking {
             width: 1000px;
@@ -45,7 +49,7 @@ but got problem with ranking arrangement -->
             border-radius: 8px;
             margin: 20px;
             padding: 5px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
         }
         .student table{
             width: 100%;
@@ -143,13 +147,13 @@ but got problem with ranking arrangement -->
     </style>
 </head>
 <body>
-    <img src="images/planet3.png" alt="" id="planet" >
-    <img src="images/planet4.png" alt="" id="planet2" >
-    <img src="images/planet5.png" alt="" id="planet3" >
-    <img src="images/planet6.png" alt="" id="planet4" >
-    <img src="images/planet7.png" alt="" id="planet5" >
+    <img src="../../images/planet3.png" alt="" id="planet" >
+    <img src="../../images/planet4.png" alt="" id="planet2" >
+    <img src="../../images/planet5.png" alt="" id="planet3" >
+    <img src="../../images/planet6.png" alt="" id="planet4" >
+    <img src="../../images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
-        <h3>Quizz 2 Student Performance</h3>
+        <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
         <!-- <div class="student">
             <table>
                 <tr>
@@ -169,7 +173,7 @@ but got problem with ranking arrangement -->
             </table>
         </div> -->
         <?php
-            include 'dbcon.php';
+            include "../database/connect.php";
             // $courseID = $_GET['course_ID'];
             $query = "SELECT studentquestionresponse.student_ID,student.sName,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
@@ -204,9 +208,7 @@ but got problem with ranking arrangement -->
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
             FROM (studentquestionresponse
             INNER JOIN student ON studentquestionresponse.student_ID = student.student_ID)
-            GROUP BY student_ID
-            ORDER BY correct_attempt DESC
-            ;";
+            GROUP BY student_ID;";
             
             // WHERE course_ID = ".$courseID."
 
@@ -215,8 +217,17 @@ but got problem with ranking arrangement -->
             if (mysqli_num_rows($result) > 0) {
                 $question ='';
                 while($row = mysqli_fetch_assoc($result)) {
-                    $rank += 1;
                     $studentAccuracy = ($row["correct_attempt"]/$row["total_attempt"]) * 100;
+                    $dataAccuracy = array($row["sName"],$row["correct_attempt"],$row["total_attempt"],$studentAccuracy);
+                    $array[] = $dataAccuracy;
+                }
+                usort($array, function($a, $b) {
+                    return $b[3] <=> $a[3];
+                });
+                
+                // print_r($array);
+                foreach ($array as $info) {
+                    $rank += 1;
                     $question = 
                     '<div class="student">
                         <table>
@@ -226,11 +237,11 @@ but got problem with ranking arrangement -->
                                     <div class="iconProf">
                                     </div>
                                 </td>
-                                <td style="width: 150px;">'.$row["sName"].'</td>
+                                <td style="width: 150px;">'.$info[0].'</td>
                                 <td>
                                     <div class="accuracyBlock">
-                                        <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy '.$studentAccuracy.'%</label>
-                                        <progress value = "'.$row["correct_attempt"].'" max = "'.$row["total_attempt"].'" class="accracy">70%</progress>
+                                        <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy '.$info[3].'%</label>
+                                        <progress value = "'.$info[1].'" max = "'.$info[2].'" class="accracy">70%</progress>
                                     </div>
                                 </td>
                             </tr>
@@ -238,6 +249,7 @@ but got problem with ranking arrangement -->
                     </div>';
                     echo $question;
                 }
+                
             }
         ?>
     

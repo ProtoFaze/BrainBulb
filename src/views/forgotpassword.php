@@ -1,13 +1,14 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
-    <title>BrainBulb</title>
+    <title>Forgot password</title>
     <style>
         * {
             box-sizing: border-box;
@@ -249,28 +250,28 @@
     ?>
         <div class="contain" id="container">
             <div class="form-container sign-up-container">
-                <form class="lrform" method="post">
+                <form class="lrform" method="post" id='mainform'>
                     <h1 class="heavytitle" style="font-size:18px;">You can now change your password.</h1>
                     <br>
-                    <input type="username" name="pass1" placeholder="New Password" class="input-field" required/>
+                    <input type="password" name="pass1" placeholder="New Password" class="input-field" required/>
                     <input type="password" name="pass" placeholder="Re-enter New Password" class="input-field" required />
                     <br>
-                    <input type="submit" name="enter" class="login-btn" value="Confirm"></input>
+                    <input type="submit" name="enter1" class="login-btn" value="Confirm"></input>
                 </form>
             </div>
             <div class="form-container sign-in-container">
-                <a href="login&register.php">
+                <a href="loginAndregister.php">
                     <img src="../../images/cross1.jpg" class="cross">
                 </a>
-                <form action="" class="lrform" method="post">
+                <div class="lrform">
                     <h1 class="heavytitle">Forgot Password</h1>
                     <br>
-                    <input type="text" name="name" placeholder="IC Number" class="input-field" required/>
-                    <input type="password" name="pass" placeholder="Email Address" class="input-field" required />
+                    <input type="text" name="ic" placeholder="IC Number" class="input-field" required form='mainform'/>
+                    <input type="text" name="email" placeholder="Email Address" class="input-field" required form='mainform'/>
                     <!-- <a href="#" class="alink">Forgot your password?</a> -->
                     <br>
-                        <input type="submit" name="enter" class="login-btn" value="Continue" id="signUp">
-                </form>
+                    <input type="button" name="enter" class="login-btn" value="Continue" id="signUp">
+                </div>
             </div>
             <div class="overlay-container">
                 <div class="overlay">
@@ -288,20 +289,75 @@
             </div>
         </div>
     <?php
-        
+        function t($arr,$c){
+            if($c == "symbol"){
+                $meet = array("@",",",".",">","<","`","~","!","#","$","%","^","&","*","(",")","-","+","_","=","[","]","{","}","|",";",":","?","/");
+            }
+            elseif($c == "small"){
+                $meet = array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","t","r","s","u","v","w","x","y","z");
+            }
+            elseif($c == "big"){
+                $meet = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","T","W","X","Y","Z");
+            }
+            elseif($c == "number"){
+                $meet = array("0","1","2","3","4","5","6","7","8","9");
+            }
+
+            foreach(str_split($arr) as $data){
+                if(in_array($data,$meet)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $a = $_POST['ic'];
+            $b = $_POST['email'];
+            $p1 = $_POST['pass'];
+            $p2 = $_POST['pass1'];
+            $q = "SELECT * FROM user WHERE ic = '$a' AND email = '$b'";
+            $c = mysqli_query($connection,$q);
+            $row = mysqli_fetch_assoc($c);
+            $temp = $row['account_ID'];
+            $count = mysqli_num_rows($c);
+            if($count > 0){
+                if($p1 == $p2){
+                    if(t($p1,"symbol") && t($p1,"small") && t($p1,"big") && t($p1,"number") && t($p2,"symbol") && t($p2,"small") && t($p2,"big") && t($p2,"number") && strlen($p1) >= 6 && strlen($p2) >= 6){
+                        $q2 = "UPDATE `user` SET `password`='$p1' WHERE `account_ID` = '$temp'";
+                        $c2 = mysqli_query($connection,$q2);
+                        if($c2){
+                            echo "<script> alert('Successfully changed the password!');</script>";
+                        }
+                        else{
+                            echo "<script> alert('Password changed failure');</script>";
+                        }
+                    }
+                    else{
+                        echo "<script> alert('New password must be atleast 6 letter long and contain 1 capital letter, 1 number, 1 small capital letter and 1 symbol');</script>";
+                    }
+                }
+                else{
+                    echo "<script> alert('Both new password are not the same!');</script>";
+                }
+            }
+            else{
+                echo "<script> alert('No Account Found');</script>";
+            }
+        }
     ?>
     <script type="text/javascript">
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
         const container = document.getElementById('container');
 
-        // signUpButton.addEventListener('click', () => {
-        //     container.classList.add("right-panel-active");
-        // });
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
 
-        // signInButton.addEventListener('click', () => {
-        //     container.classList.remove("right-panel-active");
-        // });
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
         function goback(){
             location.href = "login&register.php"
         }

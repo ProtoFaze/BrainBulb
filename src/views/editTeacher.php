@@ -7,11 +7,11 @@
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/inputs.css">
-    <script src="../styles/conditionalShadows.js"></script>
-    <title>Parent Profile</title>
+    <title>Edit Teacher</title>
     <?php 
     //load page
         include "../database/connect.php";
+        include_once "../backend/displayErr.php";
         if(session_status() == PHP_SESSION_NONE) {
             session_start();
         }
@@ -19,8 +19,8 @@
 
 
 
-        // $teacher_id = $_SESSION['user_id'];
-        $teacher_id = 'TC00000001';
+        $teacher_id = $_GET['teacher_ID'];
+        // $teacher_id = 'TC00000001';
 
 
 
@@ -56,14 +56,15 @@
             height: 30%;
         }
         .elipse_container{
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
         }
         a{
             text-decoration: none;
         }
         .split_section{
             flex-grow: 1;
+            gap: 10px;
         }
         .heading_and_data>p{
             border-bottom: 3px solid black;
@@ -86,33 +87,71 @@
     <main>
         <!-- top section containing back button, username_ID and edit button -->
         <div class="response">
-            <a href="mainpageTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
-            <h1><?= $teacher['teacher_ID']?>'s profile</h1>
-            <a href="editTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            <a href="profileTeacher.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
+            <h1>Edit Teacher </h1>
         </div>
 
         <!-- middle section containing user info, teacher into -->
         <div class="split_container">
-            <div class="split_section">
-                <img class="elipse_container"src="<?=$teacher['profile_Picture']?>" alt="teacher picture">
-                <div class="info_ltr"><h3>Name</h3><input type="text" class="textField" name="tName" placeholder="<?=$teacher['tName']?>"/></div>
-                <div class="info_ltr"><h3>Birthdate</h3><input type="text" class="textField" name="tDOB" placeholder="<?= $teacher['tDOB']?>"/></div>
-                <div class="info_ltr"><h3>School</h3><input type="text" class="textField" name="tSchool" placeholder="<?= $teacher['tSchool']?>"/></div>
-                <div class="info_ltr"><h3>Region</h3><input type="text" class="textField" name="tRegion" placeholder="<?= $teacher['tRegion']?>"/></div>
-            </div>
+            <form action="../backend/updateProfile.php" method="POST" class="split_section" enctype="multipart/form-data">
+                <h2>Teacher's information</h2>
+                <?php if(empty($teacher['profile_Picture']) || $teacher['profile_Picture'] == NULL){
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
+                }else{
+                    echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='".$teacher["profile_Picture"]."' alt='teacher picture'></label>
+                    <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
+                }
+                showErr("profile_Picture");?>
+                <input type="text" class="textField" name="tName" original-value="<?=$teacher['tName']?>" 
+                placeholder="<?=$teacher['tName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("tName");?>
+                <input type="text" class="textField" name="tDOB" original-value="<?= $teacher['tDOB']?>" 
+                placeholder="<?= $teacher['tDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("tDOB");?>
+                <input type="text" class="textField" name="tSchool" original-value="<?= $teacher['tSchool']?>" 
+                placeholder="<?= $teacher['tSchool']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("tSchool");?>
+                <input type="text" class="textField" name="tRegion" original-value="<?= $teacher['tRegion']?>" 
+                placeholder="<?= $teacher['tRegion']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                <?php showErr("tRegion");?>
+                <input type="submit" class="flex_button" name="save_teacher_details"value="SAVE CHANGES">
+            </form>
             <div class="split_section" style="background-color: var(--bg); padding: 0;">
-                <div class="split_subsection">
-                    <div class="info_ltr"><h3>Username</h3><input type="text" class="textField" name="username" placeholder="<?= $teacher['username']?>"/></div>
-                    <div class="info_ltr"><h3>Email</h3><input type="text" class="textField" name="email" placeholder="<?= $teacher['email']?>"/></div>
-                    <div class="info_ltr"><h3>IC Number</h3><input type="text" class="textField" name="ic" placeholder="<?= $teacher['ic']?>"/></div>
-                </div>
-                <div class="split_subsection">
-                    <div class="heading_and_data"><h3>Qualifications</h3><br/><input type="text" class="textField" name="highest_Qualification" placeholder="<?=$teacher['highest_Qualification']?>"/></div>
-                    <div class="heading_and_data"><h3>Certification</h3><br/><textarea type="text" class="textArea" name="highest_Qualification" placeholder="<?=$teacher['professionality_Description']?>"></textarea>
-                </div>
+                <form action="../backend/updateProfile.php" method="POST"  class="split_subsection">
+                    <h2>Account information</h2>
+                    <input type="text" class="textField" name="username" original-value="<?= $teacher['username']?>" 
+                    placeholder="username:&#9;<?= $teacher['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
+                    <?php showErr("username");?>
+                    <input type="text" class="textField" name="email" original-value="<?= $teacher['email']?>"
+                    placeholder="email:&#9;&#9;<?= $teacher['email']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <?php showErr("email");?>
+                    <input type="text" class="textField" name="ic" original-value="<?= $teacher['ic']?>"
+                    placeholder="ic:&#9;&#9;&#9;&#9;<?= $teacher['ic']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)"/>
+                    <?php showErr("ic");?>
+                    <input type="submit" class="flex_button" name="save_account_details"value="SAVE CHANGES">
+                </form>
+                <form action="../backend/updateProfile.php" method="POST"  class="split_subsection">
+                    <h2>Teacher's Qualifications</h2>
+                    <div class="heading_and_data">
+                        <h3>Qualifications</h3>
+                        <input type="text" class="textField" name="highest_Qualification" original-value="<?=$teacher['highest_Qualification']?>" 
+                        placeholder="<?=$teacher['highest_Qualification']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
+                        <?php showErr("highest_Qualification");?>
+                    </div>
+                    <div class="heading_and_data">
+                        <h3>Certification</h3>
+                        <textarea class="textField" name="professionality_Description" original-value="<?=$teacher['professionality_Description']?>" 
+                        placeholder="<?=$teacher['professionality_Description']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"></textarea>
+                        <?php showErr("professionality_Description");?>
+                    </div>
+                    <input type="submit" class="flex_button" name="save_qualification_details"value="SAVE CHANGES">
+                </form>
             </div>
         </div>
     </main>
     <script src="../styles/conditionalShadows.js"></script>
+    <script src="../styles/togglePlaceholder.js"></script>
+    <script src="../styles/previewImage.js"></script>
 </body>
 </html>

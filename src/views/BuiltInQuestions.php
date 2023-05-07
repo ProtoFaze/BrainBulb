@@ -1,6 +1,7 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +13,15 @@
 <style>
     *{
         margin: 0;
+    }
+    
+    body {
+        z-index: -1;
+        position:fixed;
+        height: 100%;
+        width: 100%;
+        background-image: url('../../images/night.png');
+        background-size: cover;
     }
 
     .maincontainer{
@@ -41,11 +51,11 @@
         width: 30px;
         color: grey;
         font-size: 24px;
-        font-weight: 500;
+        font-weight: 700;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        border: 4px solid grey;
+        border: 4.5px solid grey;
         background-color: white;
         transition: all 200ms ease;
         transition-delay: 200ms;
@@ -65,7 +75,7 @@
 
     .steps .progress{
         position: absolute;
-        height: 4px;
+        height: 6px;
         width: 100%;
         background-color: #e0e0e0;
         z-index: -1;
@@ -90,7 +100,7 @@
     .options .box{
         /* margin: 20px 20px; */
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         padding: 50px 50px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         /* text-align: center; */
@@ -111,7 +121,7 @@
 
     .boxes{
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: white;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         border: 0;
         cursor: pointer;
@@ -131,6 +141,7 @@
 
     .title{
         margin: 20px auto;
+        color:white;
     }
 
     .box.selected, .boxes.selected{
@@ -252,7 +263,7 @@
 
     .drag-options .choice{
         border-radius: 7px;
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: #ddd;
         padding: 10px 20px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
         /* text-align: center; */
@@ -282,6 +293,7 @@
 
     h3{
         font-size: 23px;
+        color:white;
     }
 
     .correctpopup,.wrongpopup{
@@ -432,34 +444,6 @@
         }
     }
 
-    .popupchat{
-        position:fixed;
-        top:150px;
-        left: -550px;
-        width:100%;
-        height:100%;
-        max-width: 338px;
-        max-height: 246px;
-        animation-name: popupani2;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-        z-index: 2;
-        display: none;
-    }
-
-    @keyframes popupani2{
-        from {
-            transform: translate(0, 0);
-            opacity: 0;
-            visibility: hidden;
-        }
-        to {
-            transform: translate(500px, 0);
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-
 </style>
 <script>
     var mcqanswer = [];
@@ -470,20 +454,20 @@
 </script>
 <body>
     <?php
-        $courseID = "CR00000003";
+        $courseID = substr($_GET['course'],0,10); //fixed
+        $s = substr($_GET['course'],10);
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
-        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' AND course.chapter_Name = 'Chapter 2: Advanced English Knowledge' ORDER BY questionbank.post_Datetime ASC";
+        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
         $qid = array();
-        $ind = 0;
     ?>
     <div class="maincontainer">    
         <div id="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
             <div class="progressbar">
                 <div class="steps">
-                    <span class="circle active">1</span>
+                    <span class="circle active">1</span><!--minimum 1 question--->
                     <?php
                         for($i = 2; $i <= $count;$i++){
                             echo "<span class='circle'>".$i."</span>";
@@ -518,7 +502,6 @@
             </div>
             <div>
                 <img src="../../images/human2.png" class='popuphuman'>
-                <!-- <img src="../../images/chat.png" class='popupchat'> -->
             </div>
             <?php $c = $count * 100;?>
             <div class="pages" <?php echo'style="width:'.$c.'%;"'; ?>>
@@ -682,7 +665,7 @@
 <script>
     function leave(){
         location.reload();
-        window.location.href = "EnglishSelectChapter.php";
+        window.location.href = "<?php echo $s;?>SelectChapter.php";
     }
 
     function pairsExist(a, b) {
@@ -709,9 +692,8 @@
     // console.log(questionmode);
     // console.log(mcqanswer);
     // console.log(connectlineanswer);
-    const constant = [true,true,false,false,false,false,false,false,false,false];
+    const constant = [true,false,false,false,false,false,false,false,false,false];
     const humani = document.querySelector(".popuphuman");
-    const chatani = document.querySelector(".popupchat");
     var resp = [];
     var lvlxp = 0;
     var correctness = 0;
@@ -781,15 +763,15 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
+                    humani.style.display = "none";
                 }, 2300);
                 mcqselect = "";
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
 
             nextbtn.disabled = true;
@@ -830,14 +812,14 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
+                    humani.style.display = "none";
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
             nextbtn.disabled = true;
             fillinamount = 0;
@@ -874,17 +856,14 @@
                     setTimeout(function() {
                         wrongpopup.style.display = "none";
                     }, 300);
-                    humani.style.display = "none";  
-                    chatani.style.display = "none";  
+                    humani.style.display = "none";   
                 }, 2300);
                 wrongness += 1;
                 lvlxp += 5;
                 resp.push(false);
-                humani.style.display = "block";
-                chatani.style.display = "block";
-                // if(constant[Math.floor(Math.random() * 10)]){
-                //     humani.style.display = "block";
-                // }
+                if(constant[Math.floor(Math.random() * 10)]){
+                    humani.style.display = "block";
+                }
             }
             nextbtn.disabled = true;
             selectedPairs = [];

@@ -1,3 +1,5 @@
+<!-- lack of getting teacher id -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Quiz</title>
     <style>
-         progress {
+        body {
+            background-image: url(../../images/night.png);
+            color: white;
+        }
+        
+        progress {
             height: 15px;
             width: 100%;
             border-radius: 10px;
@@ -22,13 +29,15 @@
             border-radius: 10px 0px 0px 10px;
         }
         #quizzes {
-            width: 1000px;
+            max-width: 1000px;
             margin: auto;
         }
         .quiz {
-            /* background-color: rgb(219, 236, 250); */
-            padding: 10px;
+            /* background-color: rgba(255, 255, 255, 0.6); */
+            /* padding: 10px; */
             margin: 10px;
+            clear:right;
+            border-radius: 10px 10px 0px 0px;
         }
         .progressBlock {
             /* margin: 30px; */
@@ -39,6 +48,7 @@
             padding-right: 50px;
             border-radius: 5px;
             box-shadow: 0px 5px 10px rgb(201, 201, 201);
+            background-color: white;
         }
         .progressBlock label {
             float: right;
@@ -83,7 +93,7 @@
 
         .viewMenu table{
             width: 100%;
-            background: linear-gradient(to bottom, #878787 0%, #00000000 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, #00000000 100%);
             padding: 5px;
             padding-bottom: 15px;
         }
@@ -101,15 +111,29 @@
             /* text-decoration: underline; */
             transform: scale(1.2);
         }
-        .modifyBtn {
+        .modifyBtn,.delBtn {
             width: 25px;
             height: 25px;
         }
-        #quizTitle button{
+        .theButtons {
+            /* margin: 0px; */
+            position: absolute;
+            right: 15px;
+            bottom: 10px;
+        }
+        .quizTitle {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+        .quizTitle div{
+            margin-right: 10px;
+        }
+        .quizTitle button{
             background-color: #00000000;
             border: none;
         }
-        #quizTitle button:hover {
+        .quizTitle button:hover {
             transform: scale(1.2);
         }
     </style>
@@ -117,9 +141,18 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <button id="newQuizBtn">NEW QUIZ</button>
+        <a href='createQuiz.php' id="newQuizBtn">NEW QUIZ</a>
         <?php
-            include 'dbcon.php';
+            include "../database/connect.php";
+
+            if (isset($_POST['deleteQuiz'])) {
+                $quiz = $_POST['deleteQuiz'];
+                $delete_query = "DELETE FROM course WHERE course_ID = '$quiz'";
+                mysqli_query($connection, $delete_query);
+                echo '<script>alert("Quiz deleted successfully")</script>';
+            }
+            
+
             $query = "SELECT studentquestionresponse.response_ID, course.course_ID, course.chapter_Name,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
@@ -153,35 +186,37 @@
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
             FROM (studentquestionresponse 
             INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
-            WHERE course.teacher_ID = 'TC00000001'
-            GROUP BY studentquestionresponse.response_ID;";
+            
+            GROUP BY studentquestionresponse.response_ID ";
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
-                // $totalAttempt = 0;
-                // $totalCorrect = 0;
                 while($row = mysqli_fetch_assoc($result)) {
+                    $courseid = $row["course_ID"];
                     $totalAttempt = $row['total_attempt'];
                     $totalCorrect = $row['correct_attempt'];
-                    $quizname = $row['course.chapter_Name'];
+                    $quizname = $row['chapter_Name'];
                     $quizAccuracy = ($totalCorrect/$totalAttempt) * 100;
                     $quiz = 
                         '<div class="quiz">
-                            <table id="quizTitle" width="100%">
-                                <tr>
-                                    <td font-size="10px">'.$quizname.'</td>
-                                    <td width="80%" font-size="8px">'.$totalCorrect.' / '.$totalAttempt.' Attempts</td>
-                                    <td>
-                                        <button >
-                                            <img src="images/edit.png" alt="" class="modifyBtn">
+                            <div class="quizTitle">
+                                <div>
+                                    <h4>'.$quizname.'</h4>
+                                </div>
+                                <div>
+                                    <h5>'.$totalCorrect.' / '.$totalAttempt.' Attempts</h5>
+                                </div>
+                                
+                                <div class="theButtons">
+                                    <form method="POST">
+                                        <button name="deleteQuiz" value="'.$courseid.'">
+                                            <img src="../../images/delete.png" alt="" class="delBtn">
                                         </button>
-                                    </td>
-                                    <td>
-                                        <button >
-                                            <img src="images/delete.png" alt="" class="modifyBtn">
+                                        <button name="editQuiz" onclick="editQuiz">
+                                            <img src="../../images/edit.png" alt="" class="modifyBtn">
                                         </button>
-                                    </td>
-                                </tr>
-                            </table>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="progressBlock">
                                 <label for="progress">Accuracy '.$quizAccuracy.'%</label>
                                 <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$quizAccuracy.'%</progress>
@@ -190,13 +225,13 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <button>VIEW QUESTION</button>
+                                            <a href="viewQuestion.php">VIEW QUESTION</a>
                                         </td>
                                         <td>
-                                            <button>VIEW ANALYTIC</button>
+                                            <a href="questionAnalytic.php">VIEW ANALYTIC</a>
                                         </td>
                                         <td>
-                                            <button>VIEW STUDENT PERFORMANCE</button>
+                                            <a href="studentRanking.php">VIEW STUDENT PERFORMANCE</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -204,8 +239,21 @@
                         </div>';
                     echo $quiz;
                 }
+            } else {
+                echo "0 results";
             }
+            mysqli_close($connection);
+            
+
         ?>
+
+        <script>
+            function editQuiz() {
+                // window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
+                // need pass the variable of the quiz question
+            }
+
+        </script>
     </div>
     
 </body>

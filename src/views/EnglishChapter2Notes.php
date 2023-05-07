@@ -1,6 +1,7 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -124,7 +125,7 @@
     </div>
     <script>
         function start(){
-            location.href = "EnglishChapter2Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000004English";
         }
     </script>
 </body>

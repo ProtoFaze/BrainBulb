@@ -1,6 +1,7 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,7 @@
 </head>
 <body>
     <?php
-        $studentid = "ST00000002";
+        $studentid = $_SESSION['user_id'];
         $c = $_SESSION['course'];
         include "../database/connect.php";
         if($_SERVER["REQUEST_METHOD"] == "POST"){

@@ -14,6 +14,14 @@
             margin: 50px 0 10px 0;
         }
 
+        body{
+            z-index: -1;
+            height: auto;
+            width: 100%;
+            background-image: url('../../images/undersea.png');
+            background-size: cover;
+        }
+
         .subjects{
             display: flex;
             padding: 0 40px;
@@ -33,7 +41,7 @@
             font-size: 20px;
             color:black;
             border-radius: 30px;
-            box-shadow: 0 17px #999;
+            box-shadow: 0 17px #bebebe;
         }
 
         .subject img{
@@ -63,31 +71,31 @@
         include "../database/connect.php";
     ?>
     <div class="main">
-        <h1><i>Please Select </i><span style="color:#62C7C3;">One</span><i> Subject To Begin</i></h1>
+        <h1><i>Please Select </i><span style="color:#ebecf0;">One</span><i> Subject To Begin</i></h1>
         <div class="subjects">
-            <a href="" class="subject">
+            <a href="ScienceSelectChapter.php" class="subject">
                 <div>
-                    <img src="../../images/science.png" alt="">
+                    <img src="../../images/science.png">
                     <p>Science</p>
                 </div>
             </a>
             <a href="EnglishSelectChapter.php" class="subject">
                 <div>
-                    <img src="../../images/english1.png" alt="">
+                    <img src="../../images/english1.png">
                     <p>English</p>
                 </div>
             </a>
         </div>
         <div class="subjects" style="margin:0 auto; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; border-top-right-radius: 0; border-top-left-radius: 0;"> 
-            <a href="" class="subject" style="margin: 25px 40px 50px 40px;">
+            <a href="MathSelectChapter.php" class="subject" style="margin: 25px 40px 50px 40px;">
                 <div>
-                    <img src="../../images/math2.png" alt="">
+                    <img src="../../images/math2.png">
                     <p>Mathematics</p>
                 </div>
             </a>
-            <a href="" class="subject" style="margin: 35px 40px 70px 40px;">
+            <a href="BMSelectChapter.php" class="subject" style="margin: 35px 40px 70px 40px;">
                 <div>
-                    <img src="../../images/bm.png" alt="">
+                    <img src="../../images/bm.png">
                     <p>Bahasa Melayu</p>
                 </div>
             </a>

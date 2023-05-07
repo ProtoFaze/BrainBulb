@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['user_id'])){
+        echo "<script>alert('Login Required'); window.location.href='loginAndRegister.php';</script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,9 +130,9 @@
             <label>Tagline</label>
             <input type="text" id="tagline" name="tagline" placeholder="Put a simple tagline to classify your question. EG: ScienceIsHard" autocomplete="off">
         </div>
-        <div class="form-group">
-            <button><a href="#" class="btn btn-secondary btn" style="text-decoration:none; color:#fff;">Cancel</a></button>
-            <button class="btn btn-primary btn" id="submit-btn" disabled>Post</button>
+        <div class="form-group">    
+            <button><a href="DiscussionPlatform.php" class="btn btn-secondary btn" style="text-decoration:none; color:#fff;">Cancel</a></button>
+            <button class="btn btn-primary btn" id="submit-btn" disabled name="postQuery">Post</button>
         </div>
         </form>
     </div>
@@ -149,5 +156,22 @@
         queryDetails.addEventListener("input", validateInputs);
         queryTagline.addEventListener("input", validateInputs);
     </script>
+    <?php
+        if(isset($_POST['postQuery'])){
+            date_default_timezone_set('Asia/Kuala_Lumpur');
+            $student_id = $_SESSION['user_id'];
+            $query = $_POST['question'];
+            $content = $_POST['content'];
+            $tagline =$_POST['tagline'];
+            $query_date = date('Y-m-d H:i:s');
+            $query_sql = "INSERT INTO `discussion`(`student_ID`, `title`, `content`, `tags`, `post_Query_Datetime`) VALUES ('$student_id','$query','$content','$tagline','$query_date')";
+            $query_result = mysqli_query($connection, $query_sql);
+            if($query_result){
+                echo "<script>alert('Your query has been posted!'); window.location.href='DiscussionPlatform.php';</script>";
+            } else {
+                echo "<script>alert('Failed to post your query!'); window.location.href='PostQuery.php';</script>";
+            }
+            }
+    ?>
 </body>
 </html>

@@ -1,13 +1,14 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
-    <title>BrainBulb</title>
+    <title>Account</title>
     <style>
         * {
             box-sizing: border-box;
@@ -245,13 +246,13 @@
                 <div class="lrform">
                     <h1 class="heavytitle">Create Account</h1>
                     <br>
-                    <a href="" class="alink">
+                    <a href="registerParent.php" class="alink">
                         <div class="registeroptions">
                             <img src="../../images/parent_and_children.png" style="width:85px; height:auto;">
-                            <p style="padding:0 20px; font-size:17px;">Register as Parent and Student</p>
+                            <p style="padding:0 20px; font-size:17px;">Register as Parent</p>
                         </div>
                     </a>
-                    <a href="" class="alink">
+                    <a href="registerTeacher.php" class="alink">
                         <div class="registeroptions">
                             <img src="../../images/Teacher2.png" style="width:85px; height:auto;">
                             <p style="padding:0 20px; font-size: 17px;">Register as Teacher</p>
@@ -289,23 +290,22 @@
         </div>
     <?php
         if(isset($_POST['enter'])){
+            sleep(3);
             $username = $_POST['username'];
             $password = $_POST['pass'];
-            $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password'";
+            $sql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' AND `state` = 1";
             $result = mysqli_query($connection,$sql);
             $row = mysqli_fetch_assoc($result);
             $count = mysqli_num_rows($result);
             if($count > 0){
                 if($row['user_Type'] == "Admin"){
                     $_SESSION['user_id'] = $row['admin_ID'];
-                    
                 }
                 elseif($row['user_Type'] == "Teacher"){
                     $_SESSION['user_id'] = $row['teacher_ID'];
                 }
                 elseif($row['user_Type'] == "Student"){
                     $_SESSION['user_id'] = $row['student_ID'];
-                    echo $_SESSION['user_id'];
                 }
                 else{
                     $_SESSION['user_id'] = $row['parent_ID'];
@@ -313,7 +313,16 @@
                 echo "<script> location.href='mainpage.php'</script>";
             }
             else{
-                echo "<script> alert('No username and password exist'); </script>";
+                $sql2 = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password' AND `state` = 0";
+                $result2 = mysqli_query($connection,$sql2);
+                $row2 = mysqli_fetch_assoc($result2);
+                $count2 = mysqli_num_rows($result2);
+                if($count2 > 0){
+                    echo "<script> alert('User has been deactived'); </script>";
+                }
+                else{
+                    echo "<script> alert('No username and password exist'); </script>";
+                }     
             }
         }
     ?>

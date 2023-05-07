@@ -1,6 +1,7 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -109,9 +110,9 @@
 <?php
     // $a = $_SESSION['lists'];
     include "../database/connect.php";
-    $studentID = 'ST00000005';  
+    $studentID = $_SESSION['user_id'];  
     $courseID = $_SESSION['course'];
-    $query2 = "SELECT * FROM `studentquestionresponse` INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.course_ID = '$courseID'";
+    $query2 = "SELECT * FROM `course` WHERE course_ID = '$courseID'";
     $query3 = "SELECT * FROM `student` WHERE student_ID = '$studentID'";
     $results2 = mysqli_query($connection,$query2);
     $results3 = mysqli_query($connection,$query3);
@@ -249,6 +250,66 @@
                     $a = ceil($b/500*100);
                 }
             }
+            else if($level == 6){
+                if ($b >= 600){
+                    $v =$b%600;
+                    $a = ceil(($b%600)/600*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/600*100);
+                }
+            }
+            else if($level == 7){
+                if ($b >= 700){
+                    $v =$b%700;
+                    $a = ceil(($b%700)/700*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/700*100);
+                }
+            }
+            else if($level == 8){
+                if ($b >= 800){
+                    $v =$b%800;
+                    $a = ceil(($b%800)/800*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/800*100);
+                }
+            }
+            else if($level == 9){
+                if ($b >= 900){
+                    $v =$b%900;
+                    $a = ceil(($b%900)/900*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/900*100);
+                }
+            }
+            else if($level == 10){
+                if ($b >= 1000){
+                    $v =$b%1000;
+                    $a = ceil(($b%1000)/1000*100);
+                    $bol = true;
+                    $level += 1;
+                }
+                else{
+                    $v = $b;
+                    $a = ceil($b/1000*100);
+                }
+            }
 
             if($bol){
                 //update lvl sql
@@ -295,18 +356,7 @@
                 </form>
             <?php
             if(isset($_POST['endbut'])){
-                if($subj == "SJ00000002"){
-                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000001"){
-                    echo"<script>location.href='BMSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000003"){
-                    echo"<script>location.href='ScSelectChapter.php'</script>";
-                }
-                elseif($subj == "SJ00000004"){
-                    echo"<script>location.href='MathSelectChapter.php'</script>";
-                }
+                ;
             }
             echo "<script> localStorage.clear();</script>;";
             unset($_SESSION['xp']);
@@ -324,7 +374,7 @@
 
     if(CValue == null || WValue == null){
         <?php 
-            if($subj == "SJ00000002"){echo"location.href='EnglishSelectChapter.php'";}elseif($subj == "SJ00000001"){echo"location.href='BMSelectChapter.php'";}elseif($subj == "SJ00000003"){echo"location.href='ScSelectChapter.php'";}elseif($subj == "SJ00000004"){echo"location.href='MathSelectChapter.php'";}
+            echo "location.href='calachievement.php?sub=$subj'";
         ?>
     }
     else{

@@ -134,7 +134,7 @@ if(session_status() == PHP_SESSION_NONE) {
                     <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
                         <img src="../../images/clinic.png" style="height:300px; width:auto;">
                         <br>
-                        <b style="font-size:35px;">Clinci</b>
+                        <b style="font-size:35px;">Clinic</b>
                     </div>
                 </div>
             </div>

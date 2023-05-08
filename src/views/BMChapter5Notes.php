@@ -136,7 +136,7 @@ if(session_status() == PHP_SESSION_NONE) {
         ?>
 
         <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Bab 5 : Tatabahasa (Kata Ganti Name Diri)</h1>
+            <h1>Bab 5 : Tatabahasa (Kata Ganti Nama Diri)</h1>
         </div>
         <div class="con">
             <!-- <div class="idea" style="background-color:transparent;">

@@ -66,15 +66,22 @@ VALUES (value1, value2, value3, ...); -->
         }
     </style>
 </head>
+<?php
+    $h = substr($_GET['quizName'],0,-1);
+    $n = substr($_GET['quizName'],-1);
+    $a = (string)(((int)substr($_GET['quizName'],-1)) + 1);
+    $combine = $h.$a;
+    $combine = str_replace(' ','',$combine);
+?>  
 <body>
     <div id="setQues">
         <!-- <h4>haha</h4> -->
         <h2>Quiz Name</h2>
         <hr>
         <div id="block">
-            <form action="">
+            <form action="" method="post">
                 <div id="ques">
-                    <p>Question 1</p>
+                    <p>Question <?php echo $n;?></p>
                     <input type="text" name="" id="quesInput">
                 </div>
 
@@ -96,12 +103,18 @@ VALUES (value1, value2, value3, ...); -->
                         <input type="text" name="ans4" class="">
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
         <div id="btnBlock">
-            <button class="btn">NEXT</button>
+                <input type="submit" value="Next" class="btn" name="button">
+            </form>
             <button class="btn">CANCEL</button>
+            <button class="btn">DONE</button>
         </div>
+        <?php
+            if(isset($_POST['button'])){
+                echo "<script>location.href='setQuestion.php?quizName=".$combine."'</script>";
+            }
+        ?>
     </div>
 </body>
 </html>

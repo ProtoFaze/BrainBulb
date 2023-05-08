@@ -8,6 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -76,6 +77,8 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -96,6 +99,10 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -111,13 +118,70 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 2</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 2 : Verbs</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea">
+                <div class="sub" style="width: 50%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/build.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Build</b>
+                    </div>
+                </div>
+                <div class="sub" style="width: 50%;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/play.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Play</b>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 50%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/row.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Row</b>
+                    </div>
+                </div>
+                <div class="sub" style="width: 50%;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/care.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Care</b>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 50%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/catch.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Catch</b>
+                    </div>
+                </div>
+                <div class="sub" style="width: 50%;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/climb.png" style="height:320px; width:auto;">
+                        <br>
+                        <b style="font-size:35px;">Climb</b>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 50%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/eat.png" style="height:320px; width:auto;">
+                    </div>
+                </div>
+                <div class="sub" style="width: 50%;">
+                    <div style="display:flex; align-items:center; justify-content:center; flex-direction:column;">
+                        <img src="../../images/walk.png" style="height:320px; width:auto;">
+                    </div>
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>

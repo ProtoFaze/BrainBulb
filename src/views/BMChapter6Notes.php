@@ -293,7 +293,7 @@ if(session_status() == PHP_SESSION_NONE) {
                 </div>
                 <div class="sub" style="width: 50%;">
                     <div style="display:flex; flex-direction: column;">
-                        <h3 style="margin:10px;">Ayat Kerja Pasif</h3>
+                        <h3 style="margin:10px;">Kata Kerja Pasif</h3>
                         <ul style="line-height: 60px; ">
                             <li>dimasak</li>
                             <li>diambil</li>
@@ -311,7 +311,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "BuiltInQuestions.php?course=CR00000026BM";
+            location.href = "BuiltInQuestions.php?course=CR00000027BM";
         }
         const audios = document.querySelectorAll("audio");
         const songs = document.querySelectorAll("i");

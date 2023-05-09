@@ -645,7 +645,7 @@ if(session_status() == PHP_SESSION_NONE) {
                             }
                             echo "</div>"; 
                             echo "<div class='drag-options'>";
-                            echo "<button class='choice' id='reset-button' style='background-color:grey; color:white; font-size:19px; cursor:pointer;' draggable='false'>Reset</button>";
+                            echo "<button class='choice' id='reset-button' style='background-color:grey; color:white; font-size:19px; cursor:pointer;' draggable='false' onclick='handleReset()'>Reset</button>";
                             foreach($arrayss2 as $data){
                                 echo "<div class='choice' draggable='true'>".$data."</div>";
                             }

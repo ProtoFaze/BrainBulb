@@ -147,21 +147,13 @@ but got problem with ranking arrangement -->
     </style>
 </head>
 <body>
-<<<<<<< Updated upstream
     <img src="../../images/planet3.png" alt="" id="planet" >
     <img src="../../images/planet4.png" alt="" id="planet2" >
     <img src="../../images/planet5.png" alt="" id="planet3" >
     <img src="../../images/planet6.png" alt="" id="planet4" >
     <img src="../../images/planet7.png" alt="" id="planet5" >
-=======
-    <img src="images/planet3.png" alt="" id="planet" >
-    <img src="images/planet4.png" alt="" id="planet2" >
-    <img src="images/planet5.png" alt="" id="planet3" >
-    <img src="images/planet6.png" alt="" id="planet4" >
-    <img src="images/planet7.png" alt="" id="planet5" >
->>>>>>> Stashed changes
-    <div id="viewRanking">
-        <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
+
+       <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
         <!-- <div class="student">
             <table>
                 <tr>

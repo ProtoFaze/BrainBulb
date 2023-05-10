@@ -1,16 +1,4 @@
-<!-- not done -->
-<!-- question retrieving incomplete -->
-<!-- need to add option list answer -->
 
-
-
-
-<script>
-    function editQuiz() {
-        window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
-        // need pass the variable of the quiz question
-    }
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,6 +131,8 @@
         .ans {
             overflow: hidden;
             padding-left: 50px;
+            display: flex;
+            flex-direction: column;
         }
 
         .ans p {
@@ -150,7 +140,10 @@
             float: left;
             box-sizing: border-box;
         }
-
+        .correctiveIcon img{
+            width: 30px;
+            height: 30px;
+        }
         
 
     </style>
@@ -163,6 +156,8 @@
         <?php
             include "../database/connect.php";
 
+            $courseid = $_GET['courseid'];
+
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
                 $delete_query = "DELETE FROM questionBank WHERE question_ID = '$question_id'";
@@ -171,15 +166,17 @@
             }
             if (isset($_POST['editQuiz'])) {
                 $question_id = $_POST['editQuiz'];
-                echo "<script>window.location.href='editQuestion.php?quizName=".$name."&".$question_id."'</script>";
+                echo "<script>window.location.href='editQuestion.php?questionid=".$question_id."'</script>";
             }
 
             $query = "SELECT questionBank.question_ID, questionBank.question, questioncorrectanswer.*, questionoptionlist.*
                 FROM ((questionBank
                 INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
-                INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID);";
+                INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID)
+                WHERE questionBank.course_ID = ".$courseid.";";
             $result = mysqli_query($connection, $query);
             $count = 0;
+
 
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
@@ -192,10 +189,10 @@
                                 <div class="theButtons">
                                     <form method="POST">
                                         <button name="deleteQuiz" value="'.$row["question_ID"].'">
-                                            <img src="../../images/delete.png" alt="" class="delBtn">
+                                            <img src="images/delete.png" alt="" class="delBtn">
                                         </button>
                                         <button name="editQuiz" onclick="editQuiz" value="'.$row["question_ID"].'">
-                                            <img class="modifyBtn" src="../../images/edit.png" alt="">
+                                            <img class="modifyBtn" src="images/edit.png" alt="">
                                         </button>
                                     </form>
                                 </div>
@@ -203,10 +200,28 @@
                             <div class="quesBlock">
                                 <p>'.$row["question"].'</p>
                                 <div class="ans">
-                                    <p>'.$row["option1"].'</p>
-                                    <p>'.$row["option2"].'</p>
-                                    <p>'.$row["option3"].'</p>
-                                    <p>'.$row["option4"].'</p>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$row["coption1"].'</p></span>
+                                            </td>
+                                            <td>
+                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option1"].'</p></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option2"].'</p></span>
+                                            </td>
+                                            <td>
+                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option3"].'</p></span>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>';
@@ -217,45 +232,6 @@
             }
             mysqli_close($connection);
         ?>
-
-
-
-        <!-- <div class="qBlock">
-            <table>
-                <tr>
-                    <th><h3>Question 1</h3></th>
-                    <td><button><img class="delBtn" src="images/delete.png" alt=""></button></td>
-                </tr>
-            </table>
-        
-            <div class="quesBlock">
-                <h4>Why ahh why ah why ahhh?</h4>
-                <div class="ans">
-                    <p>Here is the answer of the question</p>
-                    <p>Where is the answer of the question</p>
-                    <p>I cant found the asnwer of the question</p>
-                    <p>Aiyaa cincai lahh ntg is important</p>
-                    <p>Ahhhhhhhhhhh what the fk are all these?</p>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- <div class="qBlock">
-            <h3>Question 1</h3>
-            <div class="quesBlock">
-                <p>Why ahh why why ahh?</p>
-                <table class="optionTable">
-                    <tr>
-                        <td>Option 1</td>
-                        <td>Option 2</td>
-                    </tr>
-                    <tr>
-                        <td>Option 3</td>
-                        <td>Option 4</td>
-                    </tr>
-                </table>
-            </div>
-        </div> -->
     </div>
     
 

@@ -1,7 +1,3 @@
-<!-- able to view students accuracy
-no problem with retrieve student data & saccuracy
-but got problem with ranking arrangement -->
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -152,29 +148,12 @@ but got problem with ranking arrangement -->
     <img src="../../images/planet5.png" alt="" id="planet3" >
     <img src="../../images/planet6.png" alt="" id="planet4" >
     <img src="../../images/planet7.png" alt="" id="planet5" >
-
-       <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
-        <!-- <div class="student">
-            <table>
-                <tr>
-                    <td style="width: 55px;">No 1</td>
-                    <td style="width: 55px;">
-                        <div class="iconProf">
-                        </div>
-                    </td>
-                    <td style="width: 150px;">Name Ojibala</td>
-                    <td>
-                        <div class="accuracyBlock">
-                            <label for="accracy" style="float: right;font-size: 1.525ch;">Accuracy 70%</label>
-                            <progress value = "70" max = "100" class="accracy">70%</progress>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div> -->
+    <div id="viewRanking">
+        <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
         <?php
             include "../database/connect.php";
-            // $courseID = $_GET['course_ID'];
+
+            $courseid = $_GET['courseid'];
             $query = "SELECT studentquestionresponse.student_ID,student.sName,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
@@ -208,9 +187,8 @@ but got problem with ranking arrangement -->
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
             FROM (studentquestionresponse
             INNER JOIN student ON studentquestionresponse.student_ID = student.student_ID)
+            WHERE course_ID = ".$courseid."
             GROUP BY student_ID;";
-            
-            // WHERE course_ID = ".$courseID."
 
             $result = mysqli_query($connection, $query);
             $rank = 0;

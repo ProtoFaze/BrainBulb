@@ -176,7 +176,8 @@
     
 
     function insertQues() {
-        include 'dbcon.php';
+        include "../database/connect.php";
+        include("../components/nav.php");
         // $_SESSION['ansArray'] = array();
 
         // if(!isset($_SESSION['ansArray'])) {

@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Analytics</title>
     <style>
+        body {
+            background-image: url(../../images/night.png);
+            color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
         #viewAnalytic {
             margin: auto;
             width: 1000px;
@@ -31,13 +38,13 @@
             border-radius: 10px 0px 0px 10px;
         }
         .progressBlock {
-            /* margin: 30px; */
             padding-top: 5px;
             padding-bottom: 25px;
-            /* background-color: azure; */
+            background-color: white;
             padding-left: 50px;
             padding-right: 50px;
             border-radius: 5px;
+
             box-shadow: 0px 5px 10px rgb(201, 201, 201);
         }
         .progressBlock label {
@@ -45,11 +52,19 @@
             font-size: medium;
             color: rgb(69, 69, 69);
         }
-        
+        #earth {
+            z-index: -1;
+            width: 1400px;
+            height: 700px;
+            position: fixed;
+            bottom: -500px;
+            margin: auto;
+        }
         
     </style>
 </head>
 <body>
+    <img src="../../images/planet4.png" alt="" id="earth" >
     <div id="viewAnalytic">
         <h2>Question Analytics</h2>
         <h3>Quiz Name</h3>
@@ -57,6 +72,7 @@
         <div class="quizQ">
             <?php
                 include "../database/connect.php";
+                // include "dbcon.php";
 
                 $courseid = $_GET['courseid'];
 
@@ -77,6 +93,7 @@
                 $result = mysqli_query($connection, $query);
                 $count =0 ;
                 if (mysqli_num_rows($result) > 0) {
+                    echo '<script>alert("Quiz created successfully")</script>';
                     while($row = mysqli_fetch_assoc($result)) {
                         for ($x = 1; $x <= 10; $x++) {
                             $count += 1;

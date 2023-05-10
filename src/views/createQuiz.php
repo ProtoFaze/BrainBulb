@@ -18,7 +18,7 @@
     <style>
         body {
             font-size: large;
-            background-image: url(images/wave.jpg);
+            background-image: url(../../images/wave.jpg);
             background-repeat: no-repeat;
             background-attachment: fixed; 
             background-size: cover;
@@ -117,8 +117,8 @@
         </div>
     </div>
 
-    <img src="images/coral-reef.png" alt="" id="coralPic" class="pic">
-    <img src="images/coral.png" alt="" id="coralPic2" class="pic">
+    <img src="../../images/coral-reef.png" alt="" id="coralPic" class="pic">
+    <img src="../../images/coral.png" alt="" id="coralPic2" class="pic">
 </body>
 </html>
 

@@ -155,8 +155,10 @@
     <div id="viewquiz">
         <?php
             include "../database/connect.php";
+            // include "dbcon.php";
 
             $courseid = $_GET['courseid'];
+            echo $courseid;
 
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
@@ -173,7 +175,7 @@
                 FROM ((questionBank
                 INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
                 INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID)
-                WHERE questionBank.course_ID = ".$courseid.";";
+                -- WHERE questionBank.course_ID = ".$courseid.";";
             $result = mysqli_query($connection, $query);
             $count = 0;
 

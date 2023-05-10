@@ -1,6 +1,7 @@
 <?php
     session_start();
     $teacherID = $_SESSION['user_id'];
+    // $teacherID = "TC00000002";
 ?>
 
 
@@ -13,8 +14,11 @@
     <title>View Quiz</title>
     <style>
         body {
-            background-image: url(images/night.png);
+            background-image: url(../../images/night.png);
             color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
         
         progress {
@@ -145,12 +149,8 @@
         <h2>Quizzes</h2>
         <button id="newQuizBtn">NEW QUIZ</button>
         <?php
-            include "../database/connect.php";
-
-            if(isset($_POST['addQuestion'])) {
-                $quizName = $_POST['addQuestion'];
-                echo '<script>window.location.href = "newQuestion.php?quizName=" . '.$quizName.';</script>';
-            }            
+            // include "../database/connect.php";
+            include "dbcon.php";            
             
             $query = "SELECT studentquestionresponse.response_ID, course.*, course.chapter_Name,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
@@ -226,7 +226,7 @@
                                 </div>
                                 <div class="theButtons">
                                     <form method="POST">
-                                        <button name="addQuestion" onclick="addQuestion()" value="'.$quizname.'">
+                                        <button name="addQuestion" onclick="addQuestion()" value="'.$courseid.'">
                                             <img src="images/add.png" alt="" class="addBtn">
                                         </button>
                                     </form>                            
@@ -252,16 +252,17 @@
                                 </table>
                             </div>
                         </div>';
-                    // echo $quiz;
                 }
-                // echo $quiz;
             }
             echo $quiz;
 
-            // mysqli_close($connection);
+            if(isset($_POST['addQuestion'])) {
+                echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
+            }
             
 
         ?>
+
 
         
     </div>

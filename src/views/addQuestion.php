@@ -1,7 +1,8 @@
 
 <?php
     session_start();
-    $quizName = $_GET['quizName'];
+    $courseid = $_GET['courseid'];
+    $quizname = $_GET['quizname'];
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,7 @@
     <title>Create Question</title>
 
     <style>
+
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -63,12 +65,12 @@
 
 <body>
     <div id="setQues">
-        <h4><?php echo $quizName ?></h4>
+        <h4><?php echo $quizname ?></h4>
         <hr>
         <div id="block">
             <form action="" method="post">
                 <div id="ques">
-                    <p>Question <?php echo $_SESSION['pageNumber'] ?></p>
+                    <p>Question</p>
                     <input type="text" name="ques" id="quesInput">
                 </div>
                 <div id="optionList">
@@ -98,7 +100,6 @@
                 <button class="btn" id="cancelBtn" name="cancelBtn">CANCEL</button>
             </form>
         </div>
-
     </div>
     
 </body>
@@ -106,16 +107,6 @@
 
 <?php
     include "../database/connect.php";
-    $query1 = "SELECT course_ID FROM course ORDER BY course_ID DESC LIMIT 1;";
-    $result = mysqli_query($connection, $query1);
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $courseid = $row['course_ID'];
-            echo "ookkkkk";
-        }
-    } else {
-        echo "0 results";
-    }
 
     if(isset($_POST['done'])) {
         arrayStoring();
@@ -128,10 +119,6 @@
     }
     
     function newPage() {
-        $pageNumber = isset($_SESSION['pageNumber']) && $_SESSION['pageNumber'] > 0 ? $_SESSION['pageNumber'] : 1;
-        $pageNumber+=1;
-        $_SESSION['pageNumber'] = $pageNumber;
-        echo $_SESSION['pageNumber'];
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     }
@@ -153,6 +140,7 @@
     
 
     function insertQues() {
+        // include 'dbcon.php';
         include "../database/connect.php";
 
         foreach ($_SESSION['ansArray'] as $data ) {

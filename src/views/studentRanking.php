@@ -152,6 +152,7 @@
         <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
         <?php
             include "../database/connect.php";
+            // include "dbcon.php";
 
             $courseid = $_GET['courseid'];
             $query = "SELECT studentquestionresponse.student_ID,student.sName,

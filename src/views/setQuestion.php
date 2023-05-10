@@ -70,6 +70,13 @@
         }
     </style>
 </head>
+<?php
+    $h = substr($_GET['quizName'],0,-1);
+    $n = substr($_GET['quizName'],-1);
+    $a = (string)(((int)substr($_GET['quizName'],-1)) + 1);
+    $combine = $h.$a;
+    $combine = str_replace(' ','',$combine);
+?>  
 <body>
     <div id="setQues">
         <h4><?php echo $quizName ?></h4>
@@ -77,8 +84,8 @@
         <div id="block">
             <form action="" method="post">
                 <div id="ques">
-                    <p>Question </p><?php echo $_SESSION['pageNumber'] ?>
-                    <input type="text" name="ques" id="quesInput">
+                    <p>Question 1</p>
+                    <input type="text" name="" id="quesInput">
                 </div>
                 <div id="optionList">
                     <div class="options">
@@ -102,15 +109,12 @@
                         <input type="text" name="ans4" class="">
                     </div>
                 </div>
-                <button class="btn" name="done" type="submit">DONE</button>
-                <button class="btn" name="newQ">NEW QUESTION</button>
-                <button class="btn" id="cancelBtn" name="cancelBtn">CANCEL</button>
             </form>
         </div>
-        <!-- <form action="" method='post'>
-            
-        </form> -->
-        
+        <div id="btnBlock">
+            <button class="btn">NEXT</button>
+            <button class="btn">CANCEL</button>
+        </div>
     </div>
     
 </body>

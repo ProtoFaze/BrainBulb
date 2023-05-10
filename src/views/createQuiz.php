@@ -153,7 +153,7 @@
         if (mysqli_query($connection, $query)) {
             echo "it works HAHAHAHA";
             echo '<script>alert("Quiz created successfully")</script>';
-            echo "<script>window.location.href='setQuestion.php?quizName=".$name."'</script>";
+            echo "<script>window.location.href='setQuestion.php?quizName=".$name."1"."'</script>";
             // header("Location: setQuestion.php?quizName=".$name);
             // header("Refresh:1");
         } else {

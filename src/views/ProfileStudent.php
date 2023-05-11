@@ -251,11 +251,16 @@
                 <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Student profile</h1>
                 <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
-        HTML;unset($_SESSION['sourcepage']);}else{echo <<<HTML
+        HTML;}else{echo <<<HTML
             <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
             <h1>Student profile</h1>
-            <a href="editStudent.php?student_ID=$student_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
-        HTML;}?>
+            
+        HTML;}
+        if(isset($_POST['child'])){
+            echo <<<HTML
+                <a href="editStudent.php?student_ID=$student_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+            HTML;
+        }?>
         </div>
         <!-- middle section containing user info, parent into -->
         <div class="split_container">

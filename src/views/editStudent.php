@@ -90,6 +90,7 @@
         <div class="split_container">
             <form action="../backend/updateProfile.php" method = "POST" class="split_section" enctype="multipart/form-data">
                 <h2>Student Information</h2>
+                <input type="hidden" name="editChildID" value ="<?=$student_id?>">
                 <?php if(empty($student['profile_Picture']) || $student['profile_Picture'] == NULL){
                     echo "<label for='file_input'><img id='preview-image' class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'></label>
                     <input type='file' id='file_input' name='profile_Picture' style='display:none;' onchange='previewImage();'>";
@@ -124,6 +125,7 @@
             </form >
             <form action="../backend/updateProfile.php" method = "POST" class="split_section"> 
                 <h2>Account Information</h2>
+                    <input type="hidden" name="editChildID" value ="<?=$student_id?>">
                     <input type="text" class="textField" name="username" original-value="<?= $student['username']?>" 
                     placeholder="username:&#9;<?= $student['username']?>" onblur="showPlaceholder(this, this.name)" onfocus="hidePlaceholder(this)">
                     <?php showErr("username");?>

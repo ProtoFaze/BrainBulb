@@ -353,7 +353,7 @@
                         $result_insertUser = mysqli_query($connection, $sql_insertUser);
                         if($result_insertUser){
                             echo "<script>alert('Registration Success!')</script>";
-                            echo "<script>window.location.href='loginAndRegister.php'</script>";
+                            echo "<script>window.location.href='mainpage.php'</script>";
                         }else{
                             echo "<script>alert('Registration Failed to User!')</script>";
                         }

@@ -111,13 +111,49 @@
         ?>
 
         <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 5</h1>
+            <h1>Chapter 5 : Magnet</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <p>A magnet is an object that produces a magnetic field. Magnetic field is invisible force that pulls on other ferromagnetic materials. <br>Ferromagnetic material is materials that attracted to a magnet. Most of the ferromagnetic materials are metals such as iron, steel, nickel, cobalt, etc.
+                    The example of non-ferromagnetic materials are wood, cloth, plastic, etc.
+        </p>
+                    <img src="../../images/magnet.png" style="width:40%; margin:0 auto;">
+                </div>
+            </div>
+            <div class="idea">
+                <h3 style="margin:10px;">Uses of Magnet</h3>
+                <img src="../../images/magnetuse.png" style="width:70%; margin:0 auto;">
+                <p>In the picture above, it show two uses of magnet in our daily life. The first example is about a refrigerator door closing tightly. It is because the refrigerator door has magnets in it and the magnets attract to another ferromagnetic material so the refrigerator door can be closed tight. 
+                <br><br>
+                The second example is the name tag of the teacher can be secured on the shirt without a pin. The name tag is made with ferromagnetic material with a magnet bar attach to it. The magnet bar is place under the cloth then the name tag is attached on the magnet bar outside of the cloth. The magnet bar will attract the name tag although there is a layer of cloth apart them so this is the reason of the name tag can be secured without using a pin.</p>
+            </div>
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <h3 style="margin:10px;">Shapes of Magnet</h3>
+                    <p style="margin:10px;">Magnets exist will various of shapes. </p>
+                    <img src="../../images/magnetshape.png" style="width:70%; margin:0 auto;">
+                </div>
+            </div>
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <h3 style="margin:10px;">Attractions and Repulsion of Magnets</h3>
+                    <p style="margin:10px;">When two magnets are put close together they can attract or repel. Every magnet has two opposite poles, the North pole and the South pole.
+                    Same of the magnet will state the poles. N represent the North pole while S represent the South pole.
+                    <br><br>
+                    When you put two magnet together, the magnets will have different reaction based on the direction of the magnet poles. 
+                    <br><br>
+                    If the magnets with opposite pole are put together, the magnets will attract to each other. 
+                    However, the magnets with the same pole are put together, the magnets will not be attracted but repel to each other.
+                    </p>
+                <img src="../../images/pole.png" style="width:70%; margin:0 auto;">
+                </div>
+            </div>
+
+    
         </div>
+
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
         </div>

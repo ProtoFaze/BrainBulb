@@ -109,6 +109,7 @@
             background: none;
             border: none;
             transition: transform 0.5s;
+            color:white;
         }
         .viewMenu a:hover{
             transform: scale(1.2);
@@ -149,8 +150,8 @@
         <h2>Quizzes</h2>
         <button id="newQuizBtn">NEW QUIZ</button>
         <?php
-            // include "../database/connect.php";
-            include "dbcon.php";            
+            include "../database/connect.php";
+            // include "dbcon.php";            
             
             $query = "SELECT studentquestionresponse.response_ID, course.*, course.chapter_Name,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
@@ -208,6 +209,7 @@
             $totalAttempt = "";
             $totalCorrect = "";
             $quizAccuracy = "";
+            $quiz = "";
             foreach ($totalCourse as $quizData) {
                 $courseid = $quizData[0];
                 $teacherid = $quizData[1];
@@ -217,7 +219,7 @@
                 $quizAccuracy = $quizData[5];
                 // print_r($quizData);
                 
-                if ($teacherid == $teacher_ID) {
+                if ($teacherid == $teacherID) {
                     $quiz .= 
                         '<div class="quiz">
                             <div class="quizTitle">

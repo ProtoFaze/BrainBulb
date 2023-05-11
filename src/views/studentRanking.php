@@ -188,7 +188,7 @@
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
             FROM (studentquestionresponse
             INNER JOIN student ON studentquestionresponse.student_ID = student.student_ID)
-            WHERE course_ID = ".$courseid."
+            WHERE course_ID = '$courseid'
             GROUP BY student_ID;";
 
             $result = mysqli_query($connection, $query);

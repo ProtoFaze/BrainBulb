@@ -20,7 +20,6 @@
 
 
         $parent_id = $_GET['parent_ID'];
-        echo $parent_id;
         // $parent_id = 'PT00000001';
 
 
@@ -99,9 +98,9 @@
                 <input type="text" class="textField" id="Parent" name="pName" original-value="<?=$parent['pName']?>" 
                 placeholder="<?=$parent['pName']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
                 <?php showErr("pName");?>
-                <input type="text" class="textField" name="spDOB" original-value="<?= $parent['pDOB']?>" 
+                <input type="text" class="textField" name="pDOB" original-value="<?= $parent['pDOB']?>" 
                 placeholder="<?= $parent['pDOB']?>" onblur="showPlaceholder(this)" onfocus="hidePlaceholder(this)"/>
-                <?php showErr("spDOB");?>
+                <?php showErr("pDOB");?>
                 <input type="submit" class="flex_button" name="save_parent_details"value="SAVE CHANGES">
             </form>
             <form action="../backend/updateProfile.php" class="split_section" method="POST" enctype="multipart/form-data">

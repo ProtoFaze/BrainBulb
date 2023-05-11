@@ -115,6 +115,11 @@
         if(session_status() == PHP_SESSION_NONE){
             session_start();
         }
+        if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && isset($_SESSION['management_id']) && isset($_SESSION['delete_id'])){
+            unset($_SESSION['sourceage']);
+            unset($_SESSION['delete_id']);
+            unset($_SESSION['management_id']);
+        }
         function detectsearch(){
             $sql=null;
             if (isset($_POST['display']) && !empty($_POST['txtSearch'])) {

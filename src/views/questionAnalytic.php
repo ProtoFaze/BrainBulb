@@ -89,7 +89,7 @@
                 COUNT(CASE WHEN question9 = '1' THEN 1 ELSE NULL END) AS q9,
                 COUNT(CASE WHEN question10 = '1' THEN 1 ELSE NULL END) AS q10
                 FROM studentquestionresponse
-                WHERE course_ID =".$courseid.";";
+                WHERE course_ID ='$courseid';";
                 $result = mysqli_query($connection, $query);
                 $count =0 ;
                 if (mysqli_num_rows($result) > 0) {

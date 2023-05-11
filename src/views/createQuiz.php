@@ -1,5 +1,8 @@
 
 
+<?php
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +13,7 @@
     <title>Create Quiz</title>
     <?php 
         include "../database/connect.php";
+        $_SESSION['ansArray'] = array();
     ?>
     <style>
         body {
@@ -122,13 +126,14 @@
 <!-- cant inert into database -->
 
 <?php
+    $teacherID = $_SESSION['user_id'];
+    
     if(isset($_POST['createQuizBtn'])) {
-        $teacherID = "TC00000001";
         $name = $_POST['quizName'];
         $subj = $_POST['quizSubj'];
         $desc = $_POST['quizDesc'];
         $qType = "Customised Quiz";
-        // $subject_id = 'SJ00000001';
+        $subject_id = 'SJ00000001';
         switch ($subj) {
             case "Malay":
                 $subject_id = 'SJ00000001';
@@ -142,9 +147,6 @@
             case "Math":
                 $subject_id = 'SJ00000004';
                 break;
-            // set as others 
-            // need to add other option in database
-            // insert all subjects in primary education to database manually
           }
 
         $query = "INSERT INTO course (subject_ID, teacher_ID, question_Type, chapter_Name, `description`)
@@ -153,16 +155,15 @@
         if (mysqli_query($connection, $query)) {
             echo "it works HAHAHAHA";
             echo '<script>alert("Quiz created successfully")</script>';
-            echo "<script>window.location.href='setQuestion.php?quizName=".$name."1"."'</script>";
-            // header("Location: setQuestion.php?quizName=".$name);
-            // header("Refresh:1");
+            echo "<script>window.location.href='newQuestion.php?quizName=".$name."'</script>";
+
         } else {
             echo '<script>alert("Create quiz fail")</script>';
             echo "Error deleting record: " . mysqli_error($connection);
         }
         
     }
-    // if ($_POST['cancelBtn'] == "viewQuiz.php") {
-    //     header("Location: viewQuiz.php");
-    // }
+    if ($_POST['cancelBtn'] == "viewQuiz.php") {
+        header("Location: viewQuiz.php");
+    }
 ?>

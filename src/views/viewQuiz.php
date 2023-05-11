@@ -1,4 +1,8 @@
-<!-- lack of getting teacher id -->
+<?php
+    session_start();
+    $teacherID = $_SESSION['user_id'];
+    // $teacherID = "TC00000002";
+?>
 
 
 <!DOCTYPE html>
@@ -12,6 +16,9 @@
         body {
             background-image: url(../../images/night.png);
             color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
         
         progress {
@@ -33,17 +40,13 @@
             margin: auto;
         }
         .quiz {
-            /* background-color: rgba(255, 255, 255, 0.6); */
-            /* padding: 10px; */
             margin: 10px;
             clear:right;
             border-radius: 10px 10px 0px 0px;
         }
         .progressBlock {
-            /* margin: 30px; */
             padding-top: 5px;
             padding-bottom: 25px;
-            /* background-color: azure; */
             padding-left: 50px;
             padding-right: 50px;
             border-radius: 5px;
@@ -99,21 +102,24 @@
         }
         .viewMenu td {
             text-align: center;
-            padding: 5px;
+            padding: 10px;
         }
-        .viewMenu button {
+        .viewMenu a{
             text-decoration: none;
             background: none;
             border: none;
             transition: transform 0.5s;
         }
-        .viewMenu button:hover{
-            /* text-decoration: underline; */
+        .viewMenu a:hover{
             transform: scale(1.2);
         }
-        .modifyBtn,.delBtn {
+        .delBtn {
             width: 25px;
             height: 25px;
+        }
+        .addBtn {
+            width: 20px;
+            height: 20px;
         }
         .theButtons {
             /* margin: 0px; */
@@ -141,19 +147,12 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <a href='createQuiz.php' id="newQuizBtn">NEW QUIZ</a>
+        <button id="newQuizBtn">NEW QUIZ</button>
         <?php
-            include "../database/connect.php";
-
-            if (isset($_POST['deleteQuiz'])) {
-                $quiz = $_POST['deleteQuiz'];
-                $delete_query = "DELETE FROM course WHERE course_ID = '$quiz'";
-                mysqli_query($connection, $delete_query);
-                echo '<script>alert("Quiz deleted successfully")</script>';
-            }
+            // include "../database/connect.php";
+            include "dbcon.php";            
             
-
-            $query = "SELECT studentquestionresponse.response_ID, course.course_ID, course.chapter_Name,
+            $query = "SELECT studentquestionresponse.response_ID, course.*, course.chapter_Name,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
@@ -186,35 +185,51 @@
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
             FROM (studentquestionresponse 
             INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
-            
-            GROUP BY studentquestionresponse.response_ID ";
+            GROUP BY course.course_ID";
+
+            $totalCourse = array();
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
-                    $courseid = $row["course_ID"];
-                    $totalAttempt = $row['total_attempt'];
-                    $totalCorrect = $row['correct_attempt'];
-                    $quizname = $row['chapter_Name'];
-                    $quizAccuracy = ($totalCorrect/$totalAttempt) * 100;
-                    $quiz = 
+                    $cID = $row["course_ID"];
+                    $tID = $row['teacher_ID'];
+                    $countAttempt = $row['total_attempt'];
+                    $countCorrect = $row['correct_attempt'];
+                    $nameOfquiz = $row['chapter_Name'];
+                    $countAccuracy = ($countCorrect/$countAttempt) * 100;
+                    $totalCourse[] = array($cID,$tID,$nameOfquiz,$countAttempt,$countCorrect,$countAccuracy);
+                }
+            } else {
+                echo "0 results";
+            }
+            $courseid = "";
+            $teacherid = "";
+            $quizname = "";
+            $totalAttempt = "";
+            $totalCorrect = "";
+            $quizAccuracy = "";
+            foreach ($totalCourse as $quizData) {
+                $courseid = $quizData[0];
+                $teacherid = $quizData[1];
+                $quizname = $quizData[2];
+                $totalAttempt = $quizData[3];
+                $totalCorrect = $quizData[4];
+                $quizAccuracy = $quizData[5];
+                // print_r($quizData);
+                
+                if ($teacherid == $teacher_ID) {
+                    $quiz .= 
                         '<div class="quiz">
                             <div class="quizTitle">
                                 <div>
                                     <h4>'.$quizname.'</h4>
                                 </div>
-                                <div>
-                                    <h5>'.$totalCorrect.' / '.$totalAttempt.' Attempts</h5>
-                                </div>
-                                
                                 <div class="theButtons">
                                     <form method="POST">
-                                        <button name="deleteQuiz" value="'.$courseid.'">
-                                            <img src="../../images/delete.png" alt="" class="delBtn">
+                                        <button name="addQuestion" onclick="addQuestion()" value="'.$courseid.'">
+                                            <img src="images/add.png" alt="" class="addBtn">
                                         </button>
-                                        <button name="editQuiz" onclick="editQuiz">
-                                            <img src="../../images/edit.png" alt="" class="modifyBtn">
-                                        </button>
-                                    </form>
+                                    </form>                            
                                 </div>
                             </div>
                             <div class="progressBlock">
@@ -225,35 +240,31 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <a href="viewQuestion.php">VIEW QUESTION</a>
+                                            <a href="viewQuestion.php?courseid='.$courseid.'">VIEW QUESTION</a>
                                         </td>
                                         <td>
-                                            <a href="questionAnalytic.php">VIEW ANALYTIC</a>
+                                            <a href="questionAnalytic.php?courseid='.$courseid.'">VIEW ANALYTIC</a>
                                         </td>
                                         <td>
-                                            <a href="studentRanking.php">VIEW STUDENT PERFORMANCE</a>
+                                            <a href="studentRanking.php?courseid='.$courseid.'">VIEW STUDENT PERFORMANCE</a>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </div>';
-                    echo $quiz;
                 }
-            } else {
-                echo "0 results";
             }
-            mysqli_close($connection);
+            echo $quiz;
+
+            if(isset($_POST['addQuestion'])) {
+                echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
+            }
             
 
         ?>
 
-        <script>
-            function editQuiz() {
-                // window.location.href="/Applications/XAMPP/xamppfiles/htdocs/sem5_sdp/setQuestion.php";
-                // need pass the variable of the quiz question
-            }
 
-        </script>
+        
     </div>
     
 </body>

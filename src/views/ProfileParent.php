@@ -87,9 +87,9 @@
                 echo <<<HTML
                 <a href="searchUser.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
-                <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Delete Profile</button></a>
+                <a href="../backend/deleteProfile.php?id='$_SESSION[delete_id]'"><button class="flex_button"><span class="material-symbols-outlined">delete</span>Delete Profile</button></a>
             HTML;
-            unset($_SESSION['sourcepage']);}else{echo <<<HTML
+            }else{echo <<<HTML
                 <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Parent profile</h1>
                 <a href="editParent.php?parent_ID=$parent_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
@@ -173,11 +173,22 @@
                     <div class="info_ltr">$child[student_ID]</div>
                     <div class="info_ltr">$child[sName]</div>
                     <div class="info_ltr">Score : $rounded %</div>
-                    <div class="info_ltr">Streak: $child[aFrequency]</div>
+                    <div class="info_ltr">Frequency: $child[aFrequency]</div>
+                HTML;
+                if(isset($_SESSION['sourcepage']) && $_SESSION['sourcepage'] == "searchUser"){
+                    echo <<<HTML
+
+                    HTML;
+                }else{
+                    echo <<<HTML
                     <form action="./profileStudent.php" method="post">
                         <input type="hidden" name="child" value="$child[student_ID]">
                         <button class="materials-symbols-outlined flex_button" type="submit">More Details<span class="material-symbols-outlined">arrow_forward_ios</span></button>
                     </form>
+                    
+                    HTML;
+                }
+            echo <<<HTML
                 </div>
             HTML;
             }}else{
@@ -185,5 +196,6 @@
             }?>
         </div>
     </main>
+
 </body>
 </html>

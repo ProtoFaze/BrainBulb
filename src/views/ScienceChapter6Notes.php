@@ -111,13 +111,39 @@
         ?>
 
         <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 6</h1>
+            <h1>Chapter 6 : Absorption</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <h3 style="margin:10px;">Parts of plants</h3>
+                    <p style="margin:10px;">Water Absorbent Objects & Non-water Absorbent Objects
+                    Absorbents are different types of materials which can soak up liquid.
+                    <br><br>
+                    An absorbent material has small holes in it. When a liquid comes into contact with an absorbent material, the tiny holes draw in the liquid and it spread through the material.
+                    </p>
+                    <img src="../../images/waterSpilled.png" style="width:70%; margin:0 auto;">
+                    <p style="margin:10px;">The picture above show an incident that is a glass of liquid is spilled on the glass table. The liquid stay above on the table. 
+                    <br><br>
+                    Then, the liquid is wiped off with a piece of cloth and disappear from the table. This incident proved that the glass table is a non-water absorbent object and cloth is water absorbent object. </p>
+                </div>
+            </div>
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <h3 style="margin:10px;">The importance of non-water absorbent objects</h3>
+                    <img src="../../images/rain.png" style="width:70%; margin:0 auto;">
+                    <p style="margin:10px;">The figure above show a raining situation. The iron barrel in the figure act as a storage that can hold and collect the rain water. 
+                    <br><br>
+                    The boy use a plastic umbrella to avoid getting wet in the rain so that he will not get cold of wet body in rain. 
+                    <br><br>
+                    The rubber boots that the boy is wearing can prevent his feet from getting wet. The normal shoe wear are made with water absorbent materials that will absorb the water so the boy choose to wear a rubber boots. 
+                    <br><br>
+                    The glass windscreen of a car will act as a shelter that can apart the rain water that it prevent rain water to get in into the car.</p>
+                </div>
+            </div>
         </div>
+        
+
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
         </div>

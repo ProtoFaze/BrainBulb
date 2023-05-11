@@ -204,7 +204,7 @@
                 
                 <form action="" method="post">
                  <div class="functionButton">
-                    <a class="askQueryBtn" href="PostQuery.php"><button class="ask-Btn">Ask Query</button></a>
+                    <a class="askQueryBtn" href="PostQuery.php"><div class="ask-Btn">Ask Query</div></a>
                     <select class="sort-Btn" name="sort_option">
                         <option value="mostComments">Most Comments</option>
                         <option value="oldestPost">Oldest Post</option>

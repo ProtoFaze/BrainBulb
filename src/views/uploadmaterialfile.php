@@ -139,7 +139,7 @@
 </script>
 <body>
     <?php
-        $a = $_SESSION['user_id'];
+        // $a = $_SESSION['user_id'];
         include "../database/connect.php";
         include "../components/nav.php";
         if(isset($_GET['sub'])){
@@ -187,7 +187,7 @@
                     $title = $_POST['mattitle'];
                     $filename = $_POST["hide"];
                     $date = date("Y-m-d");
-                    $q = "INSERT INTO `learning_material`(`course_ID`, `teacher_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$a','$title','$filename','$date')";
+                    $q = "INSERT INTO `learning_material`(`course_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$title','$filename','$date')";
                     $results = mysqli_query($connection,$q);
                     if($results){
                         echo "<script> alert('Uploaded Sucessfully')</script>";

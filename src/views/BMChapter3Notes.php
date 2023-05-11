@@ -8,6 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -47,7 +48,7 @@ if(session_status() == PHP_SESSION_NONE) {
         top: 20%;
         right: 20%;
     }
-    <?php for ($i = 1; $i <= 20; $i++) : ?>
+    <?php for ($i = 1; $i <= 30; $i++) : ?>
         .dots:nth-child(<?php echo $i; ?>) {
             top: <?php echo rand(15,90); ?>%;
             left: <?php echo rand(1,90); ?>%;
@@ -76,6 +77,8 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -96,6 +99,10 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -105,19 +112,90 @@ if(session_status() == PHP_SESSION_NONE) {
 <body>
     <div class="main">
         <?php
-            for($i = 0; $i < 20; $i++){
+            for($i = 0; $i < 30; $i++){
                 echo "<div class='dots'><span class='dot'></span></div>";
             }
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 3</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Bab 3 : Pantun</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea" style="background-color:transparent;">
+                <b>Puisi tradisional yang terdiri daripada empat baris dalam tiap-tiap rangkap. Pantun teka-teki, pantun kanak-kanak, pantun jenaka dan lain-lain adalah contoh jenis pantun</b>  
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 50%;">
+                    <p style="color:#58cc02; font-weight:bold;">Buah lontar masak berisi;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dari rantau tanam di laman;<br></p>
+                    <p style="color:#ff4b4b; font-weight:bold;">Kamera pintar alatan inovasi;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Untuk memantau sekitar kediaman.</p>
+                </div>
+                <div class="sub" style="width:10%;">
+                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
+                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="margin-left: 100px; padding:20px; background-color:#58cc02; border-radius:7px; text-align:center; margin-bottom: 10px; font-weight:bold;">Pembayang</div>
+                    <div style="margin-left: 100px; padding:20px; background-color:#ff4b4b; border-radius:7px; text-align:center; font-weight:bold; ">Maksud</div>
+                </div>    
+            </div>
+            <div class="idea" style="background-color:transparent;">
+                <b>Contoh dan Maksud Pantun</b>  
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 60%;">
+                    <p>Mengail puyu di hujung desa,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Dalam terusan nampak berbayang;<br></p>
+                    <p style="font-weight:bold;">Pantun Melayu kesenian bangsa,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Pusaka warisan nenek dan moyang.</p>
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="padding:20px; height:100%; background-color:#87cefa; border-radius:7px; text-align:center; font-weight:bold; align-items: center; display:flex;">
+                        Pantun merupakan budaya peringgalan nenek moyang.
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 60%;">
+                    <p>Manisnya rasa tidak terkira,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Buah papaya di Kampung Berangan;<br></p>
+                    <p style="font-weight:bold;">Indah bahasa pantun berbicara;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Seni budaya dibuang jangan.</p>
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="padding:20px; height:100%; background-color:#87cefa; border-radius:7px; text-align:center; font-weight:bold; align-items: center; display:flex;">
+                        Bahasa pantun indah dan bersantun.
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 60%;">
+                    <p>Cantik seninya ukiran kayu,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Sukar dicari begitu rupa;<br></p>
+                    <p style="font-weight:bold;">Tinggi nilainya pantun Melayu;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Jati diri janganlah lupa.</p>
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="padding:20px; height:100%; background-color:#87cefa; border-radius:7px; text-align:center; font-weight:bold; align-items: center; display:flex;">
+                        Pantun Melayu ini tinggi nilainya dan jangan sesekali kita lupa.
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 60%;">
+                    <p>Dalam taman berbunya tanjung,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Bersopan santun dipetik si dara;<br></p>
+                    <p style="font-weight:bold;">Meski berzaman tetap disanjung;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Jagalah pantun tradisi dipelihara.</p>
+                </div>
+                <div class="sub" style="width: 40%;">
+                    <div style="padding:20px; height:100%; background-color:#87cefa; border-radius:7px; text-align:center; font-weight:bold; align-items: center; display:flex;">
+                        Pelihar dan jagalah pantun dan budaya kita supaya tidak hilang dan lupus daripada ingatan.
+                    </div>
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,8 +203,20 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "BMChapter3Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000024BM";
         }
+        const audios = document.querySelectorAll("audio");
+        const songs = document.querySelectorAll("i");
+        songs.forEach((song,index) =>{
+            song.addEventListener("click",function(){
+                audios[index].play();
+                song.style.opacity = "1";
+            });
+
+            audios[index].addEventListener("ended", function() {
+                song.style.opacity = "0.5";
+            });
+        })
     </script>
 </body>
 </html>

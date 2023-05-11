@@ -1,12 +1,14 @@
 <?php
+if(session_status() == PHP_SESSION_NONE) {
     session_start();
-?>
+}?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -75,6 +77,8 @@
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -95,6 +99,28 @@
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
+
+    .contain{
+        display:flex;
+        flex-wrap:wrap;
+        /* margin: 0 auto; */
+    }
+
+    .contain > div{
+        text-align: center;
+        padding: 20px 50px;
+        line-height: 75px;   
+        font-size: 28px;
+        /* background-color: cyan; */
+        border-radius: 7px;
+        /* width:100px; */
+        margin:10px;
+        font-weight: bold;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -110,13 +136,56 @@
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 3</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 3 : Animals</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <!-- <div class="idea" style="background-color:transparent;">
+                <b>Human Senses</b>  
+            </div> -->
+            <div class="idea">
+                <div style="display:flex; flex-direction: column;">
+                    <h3 style="margin:10px;">Parts of animals</h3>
+                    <div class="contain">
+                        <div style="background-color: #ff6663;">Body</div>
+                        <div style="background-color: #9ee09e;">Head</div>
+                        <div style="background-color: #FDFD97;">Tail</div>
+                        <div style="background-color: #cc99c9">Horn</div>
+                        <div style="background-color: #ffbdda;">Wings</div>
+                        <div style="background-color: #18ffb1;">Feather</div>
+                        <div style="background-color: #9affff;">Beak</div>
+                        <div style="background-color: #a9bcff;">Shell</div>
+                        <div style="background-color: #ffd493;">Fine hair</div>
+                        <div style="background-color: #ff9f8c;">Fin</div>
+                        <div style="background-color: #feb144;">Hard skin</div>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <img src="../../images/lion.png" style="width:70%;margin:0 auto;">
+            </div>
+            <div class="idea">
+                <img src="../../images/tiger.jpg" style="width:70%;margin:0 auto;">
+            </div>
+            <div class="idea">
+                <img src="../../images/horse.png" style="width:70%;margin:0 auto;">
+            </div>
+            <div class="idea">
+                <img src="../../images/change.png" style="width:70%;margin:0 auto;">
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div style="display:flex; flex-direction: column;">
+                        <h3 style="margin:10px;">The importance of parts of animals body</h3>
+                        <ul style="line-height: 60px; ">
+                            <li>Crocodiles has hard skin for self-protection. The hard skin can protect the organs of crocodiles.</li>
+                            <li>Fishes has fins so that fishes can swim in water.</li>
+                            <li>Birds has wings to fly in the air.</li>
+                            <li>Some of the animals has fine hair to keep them warm.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -124,8 +193,9 @@
     </div>
     <script>
         function start(){
-            location.href = "ScienceChapter3Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000018Science";
         }
+        
     </script>
 </body>
 </html>

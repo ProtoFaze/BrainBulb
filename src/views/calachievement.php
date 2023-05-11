@@ -15,7 +15,6 @@
     $subj = $_GET['sub'];
 ?>
 <body>
-    <script>
     <?php
         $date = date('Y-m-d');
         $q = "SELECT SUM(             
@@ -51,23 +50,24 @@
             $res2 = mysqli_query($connection,$q2);
             if(mysqli_num_rows($res2) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='EnglishSelectChapter.php'";
+                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($y >= 50){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000009','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='EnglishSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
+                }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
 
@@ -75,72 +75,79 @@
             $res5 = mysqli_query($connection,$q5);
             if(mysqli_num_rows($res5) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='EnglishSelectChapter.php'";
+                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($x >= 30){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000012','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='EnglishSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
+                }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='EnglishSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
         }
         elseif($subj == "SJ00000001"){//BM
+            // echo "1";
             $q2 = "SELECT * FROM student_achievement WHERE student_ID = '$studentID' AND achievement_ID = 'AC00000003'";
             $res2 = mysqli_query($connection,$q2);
             if(mysqli_num_rows($res2) > 0){
+                // echo "2";
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='BMSelectChapter.php'";
+                    echo"<script>location.href='BMSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
+                // echo "1";
                 if($y >= 50){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000003','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='BMSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
                 }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='BMSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
+                }
+                
             }
 
             $q5 = "SELECT * FROM student_achievement WHERE student_ID = '$studentID' AND achievement_ID = 'AC00000006'";
             $res5 = mysqli_query($connection,$q5);
             if(mysqli_num_rows($res5) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='BMSelectChapter.php'";
+                    echo"<script>location.href='BMSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($x >= 30){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000006','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='BMSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
+                }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='BMSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
         }
@@ -149,48 +156,51 @@
             $res2 = mysqli_query($connection,$q2);
             if(mysqli_num_rows($res2) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='ScienceSelectChapter.php'";
+                    echo"<script>location.href='ScienceSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($y >= 50){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000015','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='ScienceSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
                 }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='ScienceSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
+                }
+                
             }
 
             $q5 = "SELECT * FROM student_achievement WHERE student_ID = '$studentID' achievement_ID = 'AC00000018'";
             $res5 = mysqli_query($connection,$q5);
             if(mysqli_num_rows($res5) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='ScienceSelectChapter.php'";
+                    echo"<script>location.href='ScienceSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($x >= 30){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000018','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='ScienceSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
                 }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='ScienceSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
+                } 
             }
         }
         elseif($subj == "SJ00000004"){
@@ -198,23 +208,24 @@
             $res2 = mysqli_query($connection,$q2);
             if(mysqli_num_rows($res2) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='MathSelectChapter.php'";
+                    echo"<script>location.href='MathSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($y >= 50){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000021','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='MathSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
+                }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='MathSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
 
@@ -222,28 +233,28 @@
             $res5 = mysqli_query($connection,$q5);
             if(mysqli_num_rows($res5) > 0){
                 if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                    echo"location.href='MathSelectChapter.php'";
+                    echo"<script>location.href='MathSelectChapter.php'</script>";
                 }
                 else{
-                    echo "location.href='studentviewquiz.php'";
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
             else{
                 if($x >= 30){
                     $q3 = "INSERT INTO student_achievement (achievement_ID, student_ID, achievementDate) VALUES ('AC00000024','$studentID',$date)";
                     mysqli_query($connection,$q3);
-                    echo "alert('New Achievement Unlocked!');";
-                    if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
-                        echo"location.href='MathSelectChapter.php'";
-                    }
-                    else{
-                        echo "location.href='studentviewquiz.php'";
-                    }
+                    echo "<script>alert('New Achievement Unlocked!');</script>";
+                }
+
+                if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+                    echo"<script>location.href='MathSelectChapter.php'</script>";
+                }
+                else{
+                    echo "<script>location.href='studentviewquiz.php'</script>";
                 }
             }
         }
         
     ?>
-    </script>
 </body>
 </html>

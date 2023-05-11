@@ -1,7 +1,4 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Analytics</title>
     <style>
+        body {
+            background-image: url(../../images/night.png);
+            color: white;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
         #viewAnalytic {
             margin: auto;
             width: 1000px;
@@ -34,13 +38,13 @@
             border-radius: 10px 0px 0px 10px;
         }
         .progressBlock {
-            /* margin: 30px; */
             padding-top: 5px;
             padding-bottom: 25px;
-            /* background-color: azure; */
+            background-color: white;
             padding-left: 50px;
             padding-right: 50px;
             border-radius: 5px;
+
             box-shadow: 0px 5px 10px rgb(201, 201, 201);
         }
         .progressBlock label {
@@ -48,57 +52,68 @@
             font-size: medium;
             color: rgb(69, 69, 69);
         }
-        
+        #earth {
+            z-index: -1;
+            width: 1400px;
+            height: 700px;
+            position: fixed;
+            bottom: -500px;
+            margin: auto;
+        }
         
     </style>
 </head>
 <body>
+    <img src="../../images/planet4.png" alt="" id="earth" >
     <div id="viewAnalytic">
         <h2>Question Analytics</h2>
         <h3>Quiz Name</h3>
         <hr>
         <div class="quizQ">
-                <?php
-                    include "../database/connect.php";
-                    $query = "SELECT 
-                    COUNT(response_ID) AS total,
-                    COUNT(CASE WHEN question1 = '1' THEN 1 ELSE NULL END) AS q1,
-                    COUNT(CASE WHEN question2 = '1' THEN 1 ELSE NULL END) AS q2,
-                    COUNT(CASE WHEN question3 = '1' THEN 1 ELSE NULL END) AS q3,
-                    COUNT(CASE WHEN question4 = '1' THEN 1 ELSE NULL END) AS q4,
-                    COUNT(CASE WHEN question5 = '1' THEN 1 ELSE NULL END) AS q5,
-                    COUNT(CASE WHEN question6 = '1' THEN 1 ELSE NULL END) AS q6,
-                    COUNT(CASE WHEN question7 = '1' THEN 1 ELSE NULL END) AS q7,
-                    COUNT(CASE WHEN question8 = '1' THEN 1 ELSE NULL END) AS q8,
-                    COUNT(CASE WHEN question9 = '1' THEN 1 ELSE NULL END) AS q9,
-                    COUNT(CASE WHEN question10 = '1' THEN 1 ELSE NULL END) AS q10
-                    FROM studentquestionresponse
-                    WHERE course_ID = 'CR00000003';";
-                    // WHERE course.teacher_ID = 'TC00000001'
-                    $result = mysqli_query($connection, $query);
-                    $count =0 ;
-                    if (mysqli_num_rows($result) > 0) {
-                        // echo '<script>alert("Quiz created successfully")</script>';
-                        while($row = mysqli_fetch_assoc($result)) {
-                            for ($x = 1; $x <= 10; $x++) {
-                                $count += 1;
-                                $accuracy1 = ($row["q$x"] / $row['total']) * 100;
-                                $accuracy = round($accuracy1);
-                                $question =
-                                    '<div class="quizQ">
-                                        <h4>Question '.$count.'</h4>
-                                        <div class="barAnalytic">
-                                            <div class="progressBlock">
-                                                <label for="progress">Accuracy '.$accuracy.'%</label>
-                                                <progress value = '.$row["q$x"].' max = '.$row["total"].' class="progress">'.$accuracy.'%</progress>
-                                            </div>
+            <?php
+                include "../database/connect.php";
+                // include "dbcon.php";
+
+                $courseid = $_GET['courseid'];
+
+                $query = "SELECT 
+                COUNT(response_ID) AS total,
+                COUNT(CASE WHEN question1 = '1' THEN 1 ELSE NULL END) AS q1,
+                COUNT(CASE WHEN question2 = '1' THEN 1 ELSE NULL END) AS q2,
+                COUNT(CASE WHEN question3 = '1' THEN 1 ELSE NULL END) AS q3,
+                COUNT(CASE WHEN question4 = '1' THEN 1 ELSE NULL END) AS q4,
+                COUNT(CASE WHEN question5 = '1' THEN 1 ELSE NULL END) AS q5,
+                COUNT(CASE WHEN question6 = '1' THEN 1 ELSE NULL END) AS q6,
+                COUNT(CASE WHEN question7 = '1' THEN 1 ELSE NULL END) AS q7,
+                COUNT(CASE WHEN question8 = '1' THEN 1 ELSE NULL END) AS q8,
+                COUNT(CASE WHEN question9 = '1' THEN 1 ELSE NULL END) AS q9,
+                COUNT(CASE WHEN question10 = '1' THEN 1 ELSE NULL END) AS q10
+                FROM studentquestionresponse
+                WHERE course_ID =".$courseid.";";
+                $result = mysqli_query($connection, $query);
+                $count =0 ;
+                if (mysqli_num_rows($result) > 0) {
+                    echo '<script>alert("Quiz created successfully")</script>';
+                    while($row = mysqli_fetch_assoc($result)) {
+                        for ($x = 1; $x <= 10; $x++) {
+                            $count += 1;
+                            $accuracy1 = ($row["q$x"] / $row['total']) * 100;
+                            $accuracy = round($accuracy1);
+                            $question =
+                                '<div class="quizQ">
+                                    <h4>Question '.$count.'</h4>
+                                    <div class="barAnalytic">
+                                        <div class="progressBlock">
+                                            <label for="progress">Accuracy '.$accuracy.'%</label>
+                                            <progress value = '.$row["q$x"].' max = '.$row["total"].' class="progress">'.$accuracy.'%</progress>
                                         </div>
-                                    </div>';
-                                echo $question;;
-                            } 
-                        }
+                                    </div>
+                                </div>';
+                            echo $question;;
+                        } 
                     }
-                ?>
+                }
+            ?>
         </div>
     </div>
 </body>

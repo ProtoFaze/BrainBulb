@@ -8,6 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -76,6 +77,8 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -96,6 +99,10 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -111,13 +118,83 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 4</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 4 : Making New Words</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea" style="background-color:transparent;">
+                <b>Combining two or more words become a fully new words with different meaning.</b>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 30%;">
+                    <div style="display:flex; align-items:center; flex-direction:column;">
+                        <b style="font-size:35px;">Super + Market</b>
+                    </div>
+                </div>
+                <div class="sub" style="width: 70%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center;">
+                        <p>A <b>supermarket</b> is a big store where you can buy lots of different things you need for your home, like food, drinks, snacks, and household items. You can walk through the aisles, pick out things you want to buy, and pay for them at the checkout. It's a fun and convenient place to go shopping!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 30%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; flex-direction:column;">
+                        <b style="font-size:35px;">Rail + Ways</b>
+                    </div>
+                </div>
+                <div class="sub" style="width: 70%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center;">
+                        <p><b>Railways</b> are a network of tracks and trains used for transportation. Trains run on these tracks and can carry people, goods, and cargo from one place to another. Many people use railways to commute to work or travel long distances. Railways are also used to transport goods and cargo across countries, making trade and commerce easier and faster.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 65%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Shop + Keeper</b> 
+                    </div>
+                    A <b>shopkeeper</b> is someone who owns and manages a small store or shop. They are responsible for buying and selling goods, managing inventory, and keeping the store organized and clean. Shopkeepers are also responsible for greeting and helping customers, answering their questions, and handling transactions at the cash register. They play an important role in the local community by providing goods and services that people need on a daily basis.
+                </div>
+                <div class="sub" style="width: 35%; margin-left:35px;">
+                    <img src="../../images/shopkeeper.png" style="height:320px; width:auto;">
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center;">
+                        <p>An <b>airport</b> is where planes take off and land, and people use it to travel long distances quickly. Passengers’ check-in, go through security, and wait for their flights in airport buildings, which also offer shops and restaurants. Airports are crucial for global travel and commerce, making it easier for people and goods to move quickly across countries and continents.</p>
+                    </div>
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <div style="display:flex; align-items:center; flex-direction:column;">
+                        <b style="font-size:35px;">Air + Port</b>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 70%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; justify-content:center;">
+                        <p>A <b>hairdresser</b> is a professional who cuts, styles, and colours hair in a salon or barbershop. They use a range of tools such as scissors, combs, and hair dryers to create different hairstyles and advise clients on hair care. Hairdressers help people to feel confident and attractive, and they are highly valued in their communities.</p>
+                    </div>
+                </div>
+                <div class="sub" style="width: 30%;">
+                    <div style="display:flex; align-items:center; flex-direction:column;">
+                        <b style="font-size:35px;">Hair + Dresser</b>
+                    </div>
+                </div>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 75%; margin-left:30px;">
+                    <div style="display:flex; align-items:center; margin-bottom:10px;">
+                        <b style="font-size:35px; margin-right:25px;">Police + Women</b> 
+                    </div>
+                    <b>Policewomen</b> are female police officers who keep communities safe. They patrol streets, respond to emergencies, and investigate crimes. They play an important role in upholding the law and keeping people secure.
+                </div>
+                <div class="sub" style="width: 25%; margin-left:35px;">
+                    <img src="../../images/police.png" style="height:320px; width:auto;">
+                </div>
+            </div>
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,7 +202,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "EnglishChapter4Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000006English";
         }
     </script>
 </body>

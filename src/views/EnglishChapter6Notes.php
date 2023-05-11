@@ -8,6 +8,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainBulb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
 </head>
 <style>
@@ -76,6 +77,8 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 30px;
         border-radius: 5px;
         text-align: justify;
+        line-height: 1.5;
+        display:flex;
     }
 
     .start{
@@ -96,6 +99,17 @@ if(session_status() == PHP_SESSION_NONE) {
     .start:active{
         transform: scale(0.95);
     }
+
+    .sub{
+        float:left;
+    }
+
+    .contain{
+        padding:20px 40px;
+        border-radius: 7px;
+        margin: 30px 10px;
+        /* width: 100%; */
+    }
 </style>
 <?php
     // $a = $_SESSION['lists'];
@@ -111,13 +125,62 @@ if(session_status() == PHP_SESSION_NONE) {
             
         ?>
 
-        <div style="width: 400px; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
-            <h1>Chapter 6</h1>
+        <div style="width: auto; background-color: lightskyblue; text-align:center; font-size:30px; margin:50px auto; padding:10px; border-radius: 5px;">
+            <h1>Chapter 6 : Colour Around Us</h1>
         </div>
         <div class="con">
-            <div class="idea">Lorem ipsum <b>dolor</b> sit amet consectetur adipisicing elit. Accusamus labore totam beatae praesentium animi et quia iste minima ea repudiandae rerum nesciunt, delectus neque quaerat nulla molestiae, assumenda dolores unde voluptates? Accusamus impedit mollitia dolores animi laudantium, exercitationem, tempore ab officiis quos quia perferendis laboriosam dolore ipsam, vitae vero eligendi! </div>
-            <div class="idea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente quaerat nisi iste veniam veritatis vero accusantium, voluptate reprehenderit, quod laborum<b> ducimus quae eum quo </b>laboriosam. Sint quibusdam id labore qui!</div>
-            <div class="idea">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis velit mollitia earum quod repudiandae adipisci vitae! Quam incidunt reiciendis ad beatae officia nam, quos sed eaque, <b> animi minus ab, </b>dolorem exercitationem doloribus possimus asperiores! Optio dolores, voluptatibus aspernatur sit dolore doloremque architecto culpa quasi natus? Perferendis, temporibus! Minima dignissimos error necessitatibus nobis est cum in enim deleniti quasi? Hic, accusamus.</div>
+            <div class="idea" style="background-color:transparent;">
+                <b>Colours are beautiful and they make our world more interesting and fun. There are many colours in the world, and each colour has its own unique beauty.</b>
+            </div>
+            <div class="idea">
+                <div class="sub" style="width: 100%;">
+                    <div class="contain" style="background-color: #ffb1b0;">
+                        <b>Red</b> is a bold and strong colour, it can mean love, passion, or danger.
+                        <br>
+                        <br>
+                        <b>Example:</b> Cherry, Tomato, Blood
+                    </div>
+                    <div class="contain" style="background-color: #ffffbf;">
+                        <b>Yellow</b> is a bright and cheerful colour, it can mean happiness, sunshine, or friendship.
+                        <br>
+                        <br>
+                        <b>Example:</b> Banana, Butter, Lemon, Yolk, Cheese
+                    </div>
+                    <div class="contain" style="background-color: #a9d1f7;">
+                        <b>Blue</b> is a calm and peaceful colour, it can mean trust, wisdom, or sadness.
+                        <br>
+                        <br>
+                        <b>Example:</b> Sky, Ocean
+                    </div>
+                    <div class="contain" style="background-color: #ffdfbe;">
+                        <b>Orange</b> is a fun and energetic colour, it can mean excitement, warmth, or caution.
+                        <br>
+                        <br>
+                        <b>Example:</b> Carrot, Pumpkin, Oranges
+                    </div>
+                    
+                    <div class="contain" style="background-color: #CC99FF;">
+                        <b>Purple</b> is a royal and luxurious colour, it can mean creativity, royalty, or mystery.
+                        <br>
+                        <br>
+                        <b>Example:</b> Dragon fruit, Eggplant, Grapes
+                    </div>
+                    <div class="contain" style="background-color: #000; color:#fff;">
+                        <b>Black</b> is a mysterious and powerful colour, it can mean strength, sophistication, or mourning.
+                        <br>
+                        <br>
+                        <b>Example:</b> Coffee, Chocolate, Charcoal
+                    </div>
+                    <div class="contain" style="background-color: #fff;">
+                        <b>White</b> is a pure and peaceful colour, it can mean innocence, purity, or peace.
+                        <br>
+                        <br>
+                        <b>Example:</b> Snow, Chalk, Milk
+                    </div>
+                </div>
+
+            </div>
+
         </div>
         <div style="margin: 40px auto; text-align:center;">
             <button class="start" onclick="start()">Start Execrise</button>
@@ -125,7 +188,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "EnglishChapter6Questions.php";
+            location.href = "BuiltInQuestions.php?course=CR00000008English";
         }
     </script>
 </body>

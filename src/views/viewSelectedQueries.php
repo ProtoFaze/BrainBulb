@@ -308,7 +308,13 @@
                 <div class="container">
                     <div class="discussion">
                         <div class="left">
-                            <img src="../../images/anonymousUser.png">
+                HTML;
+                if(empty($row['pic']) || $row['pic'] == NULL) {
+                    echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
+                } else {
+                    echo "<img class='elipse_container' src='../../images/". $row["pic"]. "' alt='teacher picture'>";
+                }
+                echo <<<HTML
                             <h4>{$row["name"]}</h4>
                             <p id="dateTime">{$row["qDateTime"]}</p>
                             <button class="taglineBtn">
@@ -344,7 +350,8 @@
                 
 
                 //Get Teacher Replies
-                $sql_teacherReplies = "SELECT b.query_ID AS queryID, b.teacher_ID AS teacherID, b.replies AS replies, b.reply_Datetime AS rdateTime, teacher.tName AS teacherName FROM blogreplies b INNER JOIN teacher ON b.teacher_ID = teacher.teacher_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+                $sql_teacherReplies = "SELECT b.query_ID AS queryID, b.teacher_ID AS teacherID, b.replies AS replies, b.reply_Datetime AS rdateTime, teacher.tName AS teacherName, u.profile_Picture AS tpic 
+                FROM blogreplies b INNER JOIN teacher ON b.teacher_ID = teacher.teacher_ID INNER JOIN user u ON teacher.teacher_ID = u.teacher_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
 
                 $stmt_teacherReplies = mysqli_prepare($connection, $sql_teacherReplies);
                 mysqli_stmt_bind_param($stmt_teacherReplies, 's', $queryID);
@@ -352,7 +359,7 @@
                 $result_teacherReplies = mysqli_stmt_get_result($stmt_teacherReplies);
 
                  //Get Student Replies
-                $sql_studentReplies = "SELECT b.query_ID AS queryID, b.student_ID AS studentID, b.replies AS replies, b.reply_Datetime AS rdateTime, student.sName AS studentName FROM blogreplies b INNER JOIN student ON b.student_ID = student.student_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
+                $sql_studentReplies = "SELECT b.query_ID AS queryID, b.student_ID AS studentID, b.replies AS replies, b.reply_Datetime AS rdateTime, student.sName AS studentName, user.profile_Picture AS spic FROM blogreplies b INNER JOIN student ON b.student_ID = student.student_ID INNER JOIN user ON student.student_ID = user.student_ID WHERE b.query_ID = ? ORDER BY b.reply_Datetime DESC";
                  
                 $stmt_studentReplies = mysqli_prepare($connection, $sql_studentReplies); 
                 mysqli_stmt_bind_param($stmt_studentReplies, 's', $queryID);
@@ -360,13 +367,19 @@
                 $result_studentReplies = mysqli_stmt_get_result($stmt_studentReplies);
                  
 
-                if(mysqli_num_rows($result_teacherReplies)>0){
-                    while($row1 = mysqli_fetch_assoc($result_teacherReplies)){
+                if(mysqli_num_rows($result_teacherReplies) > 0) {
+                    while($row1 = mysqli_fetch_assoc($result_teacherReplies)) {
                         echo <<<HTML
-                            <div class="container">
+                        <div class="container">
                             <div class="discussion">
                                 <div class="left">
-                                    <img src="../../images/anonymousUser.png">
+                HTML;
+                        if(empty($row1['tpic']) || $row1['tpic'] == NULL) {
+                            echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='teacher picture'>";
+                        } else {
+                            echo "<img class='elipse_container' src='../../images/". $row1["tpic"]. "' alt='teacher picture'>";
+                        }
+                        echo <<<HTML
                                     <h4>{$row1["teacherName"]}</h4>
                                     <p id="dateTime">{$row1["rdateTime"]}</p>
                                     <button class="userRole-btn">
@@ -386,15 +399,23 @@
                             </div>
                         </div>
                         HTML;
+                    }
                 }
-            }
+                
+                
                 if(mysqli_num_rows($result_studentReplies)>0){
                     while($row2 = mysqli_fetch_assoc($result_studentReplies)){
                         echo <<<HTML
                         <div class="container">
                             <div class="discussion">
                                 <div class="left">
-                                    <img src="../../images/anonymousUser.png">
+                    HTML;
+                    if(empty($row2['spic']) || $row2['spic'] == NULL) {
+                        echo "<img class='elipse_container' src='../../images/anonymousUser.png' alt='student picture'>";
+                    } else {
+                        echo "<img class='elipse_container' src='../../images/". $row2["spic"]. "' alt='student picture'>";
+                    }
+                    echo <<<HTML
                                     <h4>{$row2["studentName"]}</h4>
                                     <p id="dateTime">{$row2["rdateTime"]}</p>
                                 </div>

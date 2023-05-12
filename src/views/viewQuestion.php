@@ -159,7 +159,6 @@
     <img src="../../images/galaxy.png" alt="" id="galaxy">
     
     <div id="viewquiz">
-        <h3 ><?php echo $quizname; ?></h3>
         <?php
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];

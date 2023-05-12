@@ -149,7 +149,7 @@
     <div id="quizzes">
         <h2>Quizzes</h2>
         <form action="">
-            <button id="newQuizBtn" name="newQuiz" onclick="newQuiz()" formaction="createQuiz.php">NEW QUIZ</button>
+            <button id="newQuizBtn" name="newQuiz" formaction="createQuiz.php">NEW QUIZ</button>
         </form>
         
         <?php

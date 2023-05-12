@@ -1,4 +1,9 @@
-
+<?php
+    include "../database/connect.php";
+    // include "dbcon.php";
+    $courseid = $_GET['courseid'];
+    echo $courseid;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +17,7 @@
             background-image: url(../../images/spaceBG.png);
             background-size: cover;
             background-attachment: fixed;
+            
         }
         .qBlock {
             background-color: rgba(255, 255, 255, 0.8);
@@ -152,12 +158,6 @@
     <img src="../../images/galaxy.png" alt="" id="galaxy">
     <div id="viewquiz">
         <?php
-            include "../database/connect.php";
-            // include "dbcon.php";
-
-            $courseid = $_GET['courseid'];
-            echo $courseid;
-
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
                 $delete_query = "DELETE FROM questionBank WHERE question_ID = '$question_id'";
@@ -173,25 +173,30 @@
                 FROM ((questionBank
                 INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
                 INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID)
-                WHERE questionBank.course_ID = ".$courseid.";";
+                WHERE questionBank.course_ID = '$courseid';";
+
             $result = mysqli_query($connection, $query);
             $count = 0;
 
-
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
+                    $questionid = $row["question_ID"];
+                    $ans1 = $row["coption1"];
+                    $ans2 = $row["option1"];
+                    $ans3 = $row["option2"];
+                    $ans4 = $row["option3"];
                     $count += 1;
-
+                    print_r($result);
                     $question = 
                         '<div class="qBlock">
                             <h3>Question '.$count.'</h3>
                             <div class="btnBlock">
                                 <div class="theButtons">
                                     <form method="POST">
-                                        <button name="deleteQuiz" value="'.$row["question_ID"].'">
+                                        <button name="deleteQuiz" value="'.$questionid.'">
                                             <img src="images/delete.png" alt="" class="delBtn">
                                         </button>
-                                        <button name="editQuiz" onclick="editQuiz" value="'.$row["question_ID"].'">
+                                        <button name="editQuiz" onclick="editQuiz" value="'.$questionid.'">
                                             <img class="modifyBtn" src="images/edit.png" alt="">
                                         </button>
                                     </form>
@@ -203,18 +208,18 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$row["coption1"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$ans1.'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option1"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans2.'</p></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option2"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans3.'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option3"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans4.'</p></span>
                                             </td>
                                         </tr>
 

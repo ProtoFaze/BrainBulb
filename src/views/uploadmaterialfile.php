@@ -1,3 +1,8 @@
+<?php
+    if(session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -134,7 +139,7 @@
 </script>
 <body>
     <?php
-        $a = "TC00000002";
+        // $a = $_SESSION['user_id'];
         include "../database/connect.php";
         include "../components/nav.php";
         if(isset($_GET['sub'])){
@@ -178,16 +183,21 @@
     <?php
         if(isset($_POST['subbtn'])){
             if($_POST['mattitle'] != ""){
-                $title = $_POST['mattitle'];
-                $filename = $_POST["hide"];
-                $date = date("Y-m-d");
-                $q = "INSERT INTO `learning_material`(`course_ID`, `teacher_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$a','$title','$filename','$date')";
-                $results = mysqli_query($connection,$q);
-                if($results){
-                    echo "<script> alert('Uploaded Sucessfully')</script>";
-                    echo "<script>location.href='viewlearningmaterial.php' </script>";
-                }else{
-                    echo "<script>alert('Uploaded Unsucessfully')</script>";
+                if($_POST["hide"] != ""){
+                    $title = $_POST['mattitle'];
+                    $filename = $_POST["hide"];
+                    $date = date("Y-m-d");
+                    $q = "INSERT INTO `learning_material`(`course_ID`, `material_Title`, `filename`, `post_Material_Date`) VALUES ('$subs','$title','$filename','$date')";
+                    $results = mysqli_query($connection,$q);
+                    if($results){
+                        echo "<script> alert('Uploaded Sucessfully')</script>";
+                        echo "<script>location.href='viewlearningmaterial.php' </script>";
+                    }else{
+                        echo "<script>alert('Uploaded Unsucessfully')</script>";
+                    }
+                }
+                else{
+                    echo "<script>alert('Please upload Material')</script>";
                 }
             }
             else{

@@ -1,6 +1,11 @@
 <?php
 if(session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && isset($_SESSION['management_id']) && isset($_SESSION['delete_id'])){
+    unset($_SESSION['sourceage']);
+    unset($_SESSION['delete_id']);
+    unset($_SESSION['management_id']);
 }?>
 <html lang="en">
 <head>
@@ -100,7 +105,7 @@ if(session_status() == PHP_SESSION_NONE) {
     include("../components/nav.php");
     if(isset($_SESSION['sort'])){
         if($_SESSION['sort'] == "date"){
-            $query = "SELECT * FROM `feedback` INNER JOIN user ON user.account_ID = feedback.account_ID ORDER BY feedback.feedback_Post_Datetime ASC";
+            $query = "SELECT * FROM `feedback` INNER JOIN user ON user.account_ID = feedback.account_ID ORDER BY feedback.feedback_Post_Datetime DESC";
         }
         else if($_SESSION['sort'] == "long"){
             $query = "SELECT * FROM `feedback` INNER JOIN user ON user.account_ID = feedback.account_ID ORDER BY LENGTH(feedback.feedback_Content) DESC";

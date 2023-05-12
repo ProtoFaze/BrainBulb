@@ -35,17 +35,15 @@ if(mysqli_num_rows($parentCheckRequest)>0){
                 echo "<script>alert('User deletion failed!');window.location.href='../views/searchUser.php';</script>";
             }
         }
-    }
+    }else{
+        $sql = "UPDATE user SET state=0 WHERE account_id = $delete_id";
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+            echo "<script>alert('User deleted successfully!');window.location.href='../views/searchUser.php';</script>";
+        } else {
+            echo "<script>alert('User deletion failed!');window.location.href='../views/searchUser.php';</script>";
+        }
+        echo "<script>window.location.href='../views/searchUser.php';</script>";
     
-}else{
-    echo "<script>alert('Not a parent!');</script>";
-    $sql = "UPDATE user SET state=0 WHERE account_id = $delete_id";
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        echo "<script>alert('User deleted successfully!');window.location.href='../views/searchUser.php';</script>";
-    } else {
-        echo "<script>alert('User deletion failed!');window.location.href='../views/searchUser.php';</script>";
     }
-    echo "<script>window.location.href='../views/searchUser.php';</script>";
-
 }

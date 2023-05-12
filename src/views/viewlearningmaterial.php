@@ -106,7 +106,7 @@
                 </div>
                 <hr style="border: 2px solid black; clear:both;">
                 <?php
-                    $query = "SELECT * FROM ((learning_material INNER JOIN course ON course.course_ID = learning_material.course_ID) INNER JOIN subject ON subject.subject_ID = course.subject_ID) WHERE learning_material.teacher_ID = '$a' AND course.course_ID = '$data'";
+                    $query = "SELECT * FROM ((learning_material INNER JOIN course ON course.course_ID = learning_material.course_ID) INNER JOIN subject ON subject.subject_ID = course.subject_ID) WHERE course.teacher_ID = '$a' AND course.course_ID = '$data'";
                     $results = mysqli_query($connection,$query);
                     if(mysqli_num_rows($results) > 0){
                         echo "<table class='mat' cellpadding='5px'>";

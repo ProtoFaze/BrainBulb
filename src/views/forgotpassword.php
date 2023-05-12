@@ -328,6 +328,7 @@ if(session_status() == PHP_SESSION_NONE) {
                         $c2 = mysqli_query($connection,$q2);
                         if($c2){
                             echo "<script> alert('Successfully changed the password!');</script>";
+                            echo "<script> location.href='loginAndregister.php'</script>";
                         }
                         else{
                             echo "<script> alert('Password changed failure');</script>";

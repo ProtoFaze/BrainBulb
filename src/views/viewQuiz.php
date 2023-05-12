@@ -109,6 +109,7 @@
             background: none;
             border: none;
             transition: transform 0.5s;
+            color:white;
         }
         .viewMenu a:hover{
             transform: scale(1.2);
@@ -211,6 +212,7 @@
             $totalAttempt = "";
             $totalCorrect = "";
             $quizAccuracy = "";
+            $quiz = "";
             foreach ($totalCourse as $quizData) {
                 $courseid = $quizData[0];
                 $teacherid = $quizData[1];
@@ -220,7 +222,7 @@
                 $quizAccuracy = $quizData[5];
                 // print_r($quizData);
                 
-                if ($teacherid == $teacher_ID) {
+                if ($teacherid == $teacherID) {
                     $quiz .= 
                         '<div class="quiz">
                             <div class="quizTitle">

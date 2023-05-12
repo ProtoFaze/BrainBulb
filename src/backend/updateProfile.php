@@ -11,12 +11,18 @@ require_once "../database/connect.php";
 if(session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$user_id = $_SESSION['user_id'];
+$user_id = null;
+//if parents are editing child profile
+if(isset($_POST['editChildID'])){
+    $user_id = $_POST['editChildID'];
+}else{
+    $user_id = $_SESSION['user_id'];
+}
 //    check for empty fields
 //    regex check to make sure the input is valid, has right data type and prevents sql injection
 
 //ititialize array to store inputs
-$arrInputs=null;
+$arrInputs=$sql=null;
 
 if(isset($_POST["save_account_details"])){
 
@@ -47,7 +53,7 @@ if(isset($_POST["save_account_details"])){
                 $_SESSION[$inputName."Error"] = "Invalid email format";
             }
         }else if($inputName == "ic"){
-            if(!preg_match("/^[0-9\-]*$/", $values)){
+            if(!preg_match("/^[0-9]{12}$/", $values)){
                 unset($arrInputs[$inputName]);
                 $_SESSION[$inputName."Error"] = "Invalid characters detected";
             }
@@ -69,6 +75,7 @@ if(isset($_POST["save_account_details"])){
         $idField = "teacher_ID";
     }
     $sql .= " WHERE $idField = '$user_id'";
+    // echo $sql;
 }
 
 if(isset($_POST['save_teacher_details'])){
@@ -108,6 +115,7 @@ if(isset($_POST['save_teacher_details'])){
     }
     $sql = rtrim($sql, ", ");
     $sql .= " WHERE teacher_ID = '$user_id'";
+    // echo $sql;
 }
 
 if(isset($_POST['save_student_details'])){
@@ -148,6 +156,7 @@ if(isset($_POST['save_student_details'])){
     }
     $sql = rtrim($sql, ", ");
     $sql .= " WHERE student_ID = '$user_id'";
+    // echo $sql;
 }
 
 if(isset($_POST['save_parent_details'])){
@@ -155,9 +164,7 @@ if(isset($_POST['save_parent_details'])){
     //initialize array to store inputs
     $arrInputs = array(
         "pName" => $_POST["pName"],
-        "pDOB" => $_POST["pDOB"],
-        "pRegion" => $_POST["pRegion"],
-        "pSchool" => $_POST["pSchool"]
+        "pDOB" => $_POST["pDOB"]
     );
     //run for loop to check for empty fields,
     // if empty, remove from array,
@@ -187,6 +194,7 @@ if(isset($_POST['save_parent_details'])){
     }
     $sql = rtrim($sql, ", ");
     $sql .= " WHERE parent_ID = '$user_id'";
+    // echo $sql;
 }
 
 if(isset($_POST['save_qualification_details'])){
@@ -210,13 +218,25 @@ if(isset($_POST['save_qualification_details'])){
             $_SESSION[$inputName."Error"] = "Only letters, digits and white space allowed for professional description";
         }
     }
+    $sql = "UPDATE teacher SET ";
+    foreach($arrInputs as $inputName => $values){
+        $sql .= "$inputName = '$values', ";
+    }
+    $sql = rtrim($sql, ", ");
+    $sql .= " WHERE teacher_ID = '$user_id'";
+    // echo $sql;
 }
-if(isset($_FILES['profile_Picture']) && $_FILES['profile_Picture'] != null && (isset($_POST['save_student_details']) || isset($_POST['save_parent_details']) || isset($_POST['save_teacher_details']))){
+if(isset($_FILES['profile_Picture']) && is_uploaded_file($_FILES['profile_Picture']['tmp_name']) 
+){
     //validate input
     //get temp location and type from input
+    var_dump($_FILES['profile_Picture']);
     $temp = $_FILES['profile_Picture']['tmp_name'];
     $type = $_FILES['profile_Picture']['type'];
-
+    $error = $_FILES['profile_Picture']['error'];
+    if ($error !== UPLOAD_ERR_OK) {
+        $_SESSION["profile_PictureError"] = "Upload failed with error code " . $error;
+    }
     $data = file_get_contents($temp);
     $readable = base64_encode($data);
     $fullData = "data:$type;base64,$readable";

@@ -94,7 +94,7 @@
             HTML;}else{ echo <<<HTML
                 <a href="mainpage.php"><button class="flex_button"><span class="material-symbols-outlined">arrow_back_ios</span>Go Back</button></a>
                 <h1>Teacher profile</h1>
-                <a href="editTeacher.php?teacher_ID =$teacher_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
+                <a href="editTeacher.php?teacher_ID=$teacher_id"><button class="flex_button"><span class="material-symbols-outlined">edit</span>Edit some information</button></a>
             HTML;}?>
         </div>
 

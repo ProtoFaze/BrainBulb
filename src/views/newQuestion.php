@@ -107,7 +107,8 @@
 </html>
 
 <?php
-    include 'dbcon.php';
+    // include 'dbcon.php';
+    include "../database/connect.php";
     $query1 = "SELECT course_ID FROM course ORDER BY course_ID DESC LIMIT 1;";
     $result = mysqli_query($connection, $query1);
     if (mysqli_num_rows($result) > 0) {
@@ -154,7 +155,8 @@
     
 
     function insertQues() {
-        include 'dbcon.php';
+        // include 'dbcon.php';
+        include "../database/connect.php";
 
         foreach ($_SESSION['ansArray'] as $data ) {
             $questions = $data[0];

@@ -118,11 +118,11 @@
                     $sql_queries = array(
                 //join user table with either student, parent or teacher table
                 "SELECT `user`.`account_id`, `user`.`user_Type`, `user`.`username`, `teacher`.`tName` AS `name`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID` FROM `user` INNER JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` 
-                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%'",
+                WHERE `user`.`state` = 1 AND `user`.`$searchby` LIKE '%$searchterm%'",
                 "SELECT `user`.`account_id`, `user`.`user_Type`, `user`.`username`, `parent`.`pName` AS `name`, `user`.`profile_Picture`, `parent`.`parent_ID` AS `user_ID` FROM `user` INNER JOIN `parent` ON `user`.`parent_ID` = `parent`.`parent_ID` 
-                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%'",
+                WHERE `user`.`state` = 1 AND `user`.`$searchby` LIKE '%$searchterm%'",
                 "SELECT `user`.`account_id`, `user`.`user_Type`, `user`.`username`, `student`.`sName` AS `name`, `user`.`profile_Picture`, `student`.`student_ID` AS `user_ID` FROM `user` INNER JOIN `student` ON `user`.`student_ID` = `student`.`student_ID` 
-                WHERE `user`.`state` = 1 AND $searchby LIKE '%$searchterm%'");}
+                WHERE `user`.`state` = 1 AND `user`.`$searchby` LIKE '%$searchterm%'");}
             }else{
                 $sql_queries = array(
                 "SELECT `user`.`account_id`, `user`.`username`, `teacher`.`tName` AS `name`, `user`.`user_Type`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID` FROM `user` INNER JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` WHERE `user`.`state` = 1",
@@ -142,7 +142,7 @@
                     <option value="account_ID">Account ID</option>
                     <option value="Name">Legal name</option>
                     <option value="username">Username</option>
-                    <option value="Email">Email</option>
+                    <option value="email">Email</option>
                     <option value="ic">IC number</option>
                 </select>
                 <h5>Enter search data:</h5> <input type="text" name="txtSearch" id="txtSearch">
@@ -158,31 +158,29 @@ foreach ($queries as $query){
         while($row = mysqli_fetch_assoc($result)) {
             // var_dump($row);
             $data = $row['profile_Picture'];
-            $user_id = $row['account_id'];
-            if (substr($row['user_ID'], 0, 2) == "TC"){
-                $user_type = 'Teacher';
-                // $bg = "rgb(230, 230, 250);";
+            $account_ID = $row['account_id'];
+            $user_ID = $row['user_ID'];
+            $user_type = $row['user_Type'];
+            if ($user_type === "Teacher"){
                 $bg = "var(--bg);";
             }
-            elseif (substr($row['user_ID'], 0, 2) == "PT"){
-                $user_type = 'Parent';
-                // $bg = "rgb(220, 20, 60);";
+            elseif ($user_type === "Parent"){
                 $bg = "var(--box-primary);";
-
             }
-            elseif (substr($row['user_ID'], 0, 2) == "ST"){
-                $user_type = 'Student';
+            elseif ($user_type === "Student"){
                 $bg = "var(--box-secondary);";
-
             }
+            echo $user_type;
             echo
                 "<form method='POST'>
                 <button type='submit' name='profile' class='profile' style='background-color: $bg'>
-                <input type='hidden' name='delete_id' value='".$user_id."'>";
+                <input type='hidden' name='delete_id' value='".$account_ID."'>
+                <input type='hidden' name='user_id' value='".$user_ID."'>
+                <input type='hidden' name='user_type' value='".$user_type."'>";
             if(empty($data) || $data == NULL){
                 echo "<img class='prof_pic' src='../../images/anonymousUser.png'>";
                 }else{
-                echo "<img class='prof_pic' src='../../images/$data'>";
+                echo "<img class='prof_pic' src='$data'>";
                 }
             echo"  
                 <table style='margin: 0 auto;'>
@@ -197,23 +195,21 @@ foreach ($queries as $query){
             </button></form>";
             if(isset($_POST['profile'])){
                 $_SESSION['sourcepage'] = "searchUser";
+                $_SESSION['management_id'] = $_POST['user_id'];
                 $_SESSION['delete_id'] = $_POST['delete_id'];
+                $type = $_POST['user_type'];
                 echo "<script>
-                    window.location.href = './Profile$user_type.php';
+                    window.location.href = './Profile$type.php';
                     </script>";
 
             }
-            $noResults = False;
         }
-    } else{
-        $noResults = True;
+        $noResults = False;
     }
+    //  elseif($noResults == False){
+    //     $noResults = True;
+    // }
 }if($noResults == True){echo "<h1>No results found</h1>";}?>
 </main>
-    <!-- SELECT `user`.`account_ID`, `user`.`username`, `teacher`.`tName` AS `name`,`parent`.`pName` AS `name`, `student`.`sName` AS `name`,`user`.`user_Type`, `user`.`profile_Picture`, `teacher`.`teacher_ID` AS `user_ID`,`parent`.`parent_ID` AS `user_ID`,`student`.`student_ID` AS `user_ID` 
-FROM `user` LEFT JOIN `teacher` ON `user`.`teacher_ID` = `teacher`.`teacher_ID` 
-LEFT JOIN `parent` ON `user`.`parent_ID` = `parent`.`parent_ID` 
-LEFT JOIN `student` ON `user`.`student_ID` = `student`.`student_ID` 
-WHERE `user`.`state` = 1; -->
 </body>
 </html>

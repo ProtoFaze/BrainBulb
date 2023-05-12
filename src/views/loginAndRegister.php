@@ -306,6 +306,13 @@ if(session_status() == PHP_SESSION_NONE) {
                 }
                 elseif($row['user_Type'] == "Student"){
                     $_SESSION['user_id'] = $row['student_ID'];
+                    $temp = $row['student_ID'];
+                    $qqsql = "SELECT * FROM `student` WHERE student_ID = '$temp'";
+                    $qqresult = mysqli_query($connection,$qqsql);
+                    $qqrow = mysqli_fetch_assoc($qqresult);
+                    $fre = $qqrow['aFrequency'] + 1;
+                    $qsql = "UPDATE `student` SET `aFrequency`='$fre' WHERE student_ID = '$temp'";
+                    mysqli_query($connection,$qsql);
                 }
                 else{
                     $_SESSION['user_id'] = $row['parent_ID'];

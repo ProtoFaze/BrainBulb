@@ -275,7 +275,7 @@
                     <div><h3>Level</h3><p><?= $student['level']?></p></div>
                     <div><h3>Experience</h3><p><?= $student['experience']?></p></div>
                     <div><h3>Grade</h3><p><?= $student['sGrade']?></p></div>
-                    <div><h3>Streak</h3><p><?= $student['aFrequency']?></p></div>
+                    <div><h3>Frequency</h3><p><?= $student['aFrequency']?></p></div>
                 </div>
                 <h4 style="align-self:start;">Details</h4>
                 <div class="info_ltr"><h3>Name</h3><p><?=$student['sName']?></p></div>

@@ -133,11 +133,8 @@
                 <button class="btn" name="done" >DONE</button>
                 <button class="btn" name="cancelBtn">RETURN</button>
             </form>
-        </div>
-
-        
+        </div>  
     </div>
-    
 </body>
 </html>
 

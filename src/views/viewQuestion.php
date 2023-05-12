@@ -2,6 +2,7 @@
     include "../database/connect.php";
     // include "dbcon.php";
     $courseid = $_GET['courseid'];
+    $quizname = $_GET['quizname'];
     echo $courseid;
 ?>
 
@@ -156,7 +157,9 @@
     <img src="../../images/spaceship.png" alt="" id="spaceship">
     <img src="../../images/planet.png" alt="" id="planet">
     <img src="../../images/galaxy.png" alt="" id="galaxy">
+    
     <div id="viewquiz">
+        <h3 ><?php echo $quizname; ?></h3>
         <?php
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
@@ -166,7 +169,7 @@
             }
             if (isset($_POST['editQuiz'])) {
                 $question_id = $_POST['editQuiz'];
-                echo "<script>window.location.href='editQuestion.php?questionid=".$question_id."'</script>";
+                echo "<script>window.location.href='editQuestion.php?questionid=".$question_id."&quizname=".$quizname."'</script>";
             }
 
             $query = "SELECT questionBank.question_ID, questionBank.question, questioncorrectanswer.*, questionoptionlist.*
@@ -185,17 +188,16 @@
                     $ans3 = $row["option2"];
                     $ans4 = $row["option3"];
                     $count += 1;
-                    print_r($result);
                     $question = 
                         '<div class="qBlock">
                             <h3>Question '.$count.'</h3>
                             <div class="btnBlock">
                                 <div class="theButtons">
                                     <form method="POST">
-                                        <button name="deleteQuiz" value="'.$row["question_ID"].'">
+                                        <button name="deleteQuiz" value="'.$questionid.'">
                                             <img src="../../images/delete.png" alt="" class="delBtn">
                                         </button>
-                                        <button name="editQuiz" onclick="editQuiz" value="'.$row["question_ID"].'">
+                                        <button name="editQuiz" onclick="editQuiz" value="'.$questionid.'">
                                             <img class="modifyBtn" src="../../images/edit.png" alt="">
                                         </button>
                                     </form>

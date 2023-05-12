@@ -131,10 +131,6 @@
     }
     
     function newPage() {
-        // $pageNumber = isset($_SESSION['pageNumber']) && $_SESSION['pageNumber'] > 0 ? $_SESSION['pageNumber'] : 1;
-        // $pageNumber+=1;
-        // $_SESSION['pageNumber'] = $pageNumber;
-        // echo $_SESSION['pageNumber'];
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     }

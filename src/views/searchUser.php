@@ -175,6 +175,7 @@ foreach ($queries as $query){
                 $bg = "var(--box-secondary);";
 
             }
+            echo $user_type;
             echo
                 "<form method='POST'>
                 <button type='submit' name='profile' class='profile' style='background-color: $bg'>

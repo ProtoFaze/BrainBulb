@@ -206,15 +206,15 @@
                                                 <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$row["coption1"].'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option1"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option1"].'</p></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option2"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option2"].'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option3"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$row["option3"].'</p></span>
                                             </td>
                                         </tr>
 

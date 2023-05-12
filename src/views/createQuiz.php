@@ -30,8 +30,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: #ededed;
-            padding: 30px;
+            padding: 50px;
+            padding-top: 10px;
+            padding-bottom: 30px;
             border-radius: 10px;
+            margin-top: 30px;
         }
 
         #inputColumn1, #inputColumn2, #inputColumn3 {
@@ -45,17 +48,20 @@
             width: 120px;
             height: 35px;
             margin-right: 10px;
-            /* border-radius: 20px; */
+            margin-top: 20px;
+
             background-color: rgb(44, 44, 44);
             color: white;
             border: 0ch;
             transition: background-color 0.5s ease;
+            float: right;
         }
         .theBtn:hover {
             background-color: rgb(239, 238, 238);
             color: black;
             box-shadow: 0px 3px 5px 0px gray;
         }
+
         #coralPic {
             position: absolute;
             bottom: 10px;
@@ -112,8 +118,6 @@
                 <input type="text" name="quizDesc" id="inputColumn3">
                 <br>
                 <button class="theBtn"type="submit" name="createQuizBtn" id="createQuizBtn">CREATE</button>
-                <button class="theBtn" type="submit" name="cancelBtn" formaction="viewQuiz.php">CANCEL</button>
-                <br>
             </form>
         </div>
     </div>

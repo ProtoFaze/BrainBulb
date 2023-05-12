@@ -31,13 +31,11 @@
             padding-bottom: 10px;
         }
         .optionTable {
-            /* width: 100%; */
             margin: auto;
         }
         .optionTable td {
             padding: 5px;
             width: 400px;
-            /* background-color: rgb(169, 214, 253); */
         }
         #spaceship {
             z-index: -1;
@@ -175,7 +173,7 @@
                 FROM ((questionBank
                 INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
                 INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID)
-                -- WHERE questionBank.course_ID = ".$courseid.";";
+                WHERE questionBank.course_ID = ".$courseid.";";
             $result = mysqli_query($connection, $query);
             $count = 0;
 
@@ -232,7 +230,6 @@
             } else {
                 echo "0 results";
             }
-            mysqli_close($connection);
         ?>
     </div>
     

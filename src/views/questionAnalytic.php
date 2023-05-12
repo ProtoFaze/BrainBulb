@@ -93,7 +93,6 @@
                 $result = mysqli_query($connection, $query);
                 $count =0 ;
                 if (mysqli_num_rows($result) > 0) {
-                    echo '<script>alert("Quiz created successfully")</script>';
                     while($row = mysqli_fetch_assoc($result)) {
                         for ($x = 1; $x <= 10; $x++) {
                             $count += 1;

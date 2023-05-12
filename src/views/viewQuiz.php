@@ -147,10 +147,13 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <button id="newQuizBtn">NEW QUIZ</button>
+        <form action="">
+            <button id="newQuizBtn" name="newQuiz" onclick="newQuiz()" formaction="createQuiz.php">NEW QUIZ</button>
+        </form>
+        
         <?php
-            // include "../database/connect.php";
-            include "dbcon.php";            
+            include "../database/connect.php";
+            // include "dbcon.php";            
             
             $query = "SELECT studentquestionresponse.response_ID, course.*, course.chapter_Name,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
@@ -259,12 +262,9 @@
             if(isset($_POST['addQuestion'])) {
                 echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
             }
-            
+
 
         ?>
-
-
-        
     </div>
     
 </body>

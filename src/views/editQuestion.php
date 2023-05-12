@@ -3,13 +3,13 @@
     session_start();
     if (isset($_GET['questionid'])) {
         $quesID = $_GET['questionid'];
-        
     } else {
         echo "Quiz is not found";
         echo '<script>alert("Error");window.location.href = "viewQuiz.php";</script>';
 
     }
     include "../database/connect.php";
+    // include "dbcon.php";
 
     $ques = "";
     $correctid = "";
@@ -136,9 +136,7 @@
                         <input type="text" name="ans4" class="" value="<?php echo $option3; ?>">
                     </div>
                 </div>
-                <!-- <button class="btn" name="editOk" >CONFIRM EDIT</button> -->
                 <button class="btn" name="done" >DONE</button>
-                <button class="btn" name="newQ">NEW QUESTION</button>
                 <button class="btn" name="cancelBtn">RETURN</button>
             </form>
         </div>
@@ -155,10 +153,6 @@
         updateData();
     }
 
-    if(isset($_POST['newQ'])) {
-        header("Location: newQuestion.php".$courseid);
-    }
-
     if (isset($_POST['cancelBtn'])) {
         header("Location: viewQuiz.php");
     }
@@ -166,6 +160,7 @@
 
     function updateData() {
         include "../database/connect.php";
+        // include "dbcon.php";
         global $quesID;
         $ques = $_POST['ques'];
         $correct = $_POST['ans1'];
@@ -180,7 +175,7 @@
         WHERE questionBank.question_ID = '$quesID';";
 
         if (mysqli_query($connection, $query)) {
-            echo '<script>alert("Question edited successfully");window.location.href = "viewQuiz.php";</script>';
+            echo '<script>alert("Question is edited successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
         } else {
             echo "Error editing record: " . mysqli_error($connection);
         }

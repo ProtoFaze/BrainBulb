@@ -1,5 +1,7 @@
 
 <?php
+    $quizname = $_GET['quizname'];
+    // echo $quizname;
     session_start();
     if (isset($_GET['questionid'])) {
         $quesID = $_GET['questionid'];
@@ -9,16 +11,8 @@
 
     }
     include "../database/connect.php";
+    include("../components/nav.php"); 
     // include "dbcon.php";
-
-    $ques = "";
-    $correctid = "";
-    $optionid = "";
-    $correct = "";
-    $option1 = "";
-    $option2 = "";
-    $option3 = "";
-    $courseid = "";
 
     $query1 = "SELECT questionBank.*,questioncorrectanswer.*,questionoptionlist.* FROM ((questionBank 
     INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
@@ -106,7 +100,7 @@
 </head>
 <body>
     <div id="setQues">
-        <h4><?php echo $quizName ?></h4>
+        <h4><?php echo $quizname ?></h4>
         <hr>
         <div id="block">
             <form action="" method="post">

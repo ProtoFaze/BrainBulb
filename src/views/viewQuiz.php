@@ -1,7 +1,7 @@
 <?php
     session_start();
     $teacherID = $_SESSION['user_id'];
-    // $teacherID = "TC00000002";
+    include("../components/nav.php");
 ?>
 
 
@@ -156,7 +156,7 @@
             include "../database/connect.php";
             // include "dbcon.php";            
             
-            $query = "SELECT studentquestionresponse.response_ID, course.*, course.chapter_Name,
+            $query = "SELECT studentquestionresponse.*, course.*,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
@@ -206,21 +206,13 @@
             } else {
                 echo "0 results";
             }
-            $courseid = "";
-            $teacherid = "";
-            $quizname = "";
-            $totalAttempt = "";
-            $totalCorrect = "";
-            $quizAccuracy = "";
-            $quiz = "";
             foreach ($totalCourse as $quizData) {
                 $courseid = $quizData[0];
                 $teacherid = $quizData[1];
                 $quizname = $quizData[2];
                 $totalAttempt = $quizData[3];
                 $totalCorrect = $quizData[4];
-                $quizAccuracy = $quizData[5];
-                // print_r($quizData);
+                $quizAccuracy = round($quizData[5]);
                 
                 if ($teacherid == $teacherID) {
                     $quiz .= 
@@ -232,7 +224,7 @@
                                 <div class="theButtons">
                                     <form method="POST">
                                         <button name="addQuestion" onclick="addQuestion()" value="'.$courseid.'">
-                                            <img src="images/add.png" alt="" class="addBtn">
+                                            <img src="../../images/add.png" alt="" class="addBtn">
                                         </button>
                                     </form>                            
                                 </div>
@@ -245,7 +237,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <a href="viewQuestion.php?courseid='.$courseid.'">VIEW QUESTION</a>
+                                            <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
                                         </td>
                                         <td>
                                             <a href="questionAnalytic.php?courseid='.$courseid.'">VIEW ANALYTIC</a>

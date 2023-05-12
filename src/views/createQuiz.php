@@ -1,9 +1,5 @@
 
 
-<?php
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <?php 
+        if(session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         include "../database/connect.php";
+        include("../components/nav.php");
+        // include "dbcon.php";
         $_SESSION['ansArray'] = array();
     ?>
     <style>
@@ -20,8 +21,8 @@
             font-size: large;
             background-image: url(../../images/wave.jpg);
             background-repeat: no-repeat;
-            background-attachment: fixed; 
             background-size: cover;
+            background-attachment: fixed;
         }
         #newQuiz {
             position: absolute;
@@ -29,11 +30,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: #ededed;
-            padding: 30px;
+            padding: 50px;
+            padding-top: 10px;
+            padding-bottom: 30px;
             border-radius: 10px;
+            margin-top: 30px;
         }
 
-        .inputColumn {
+        #inputColumn1, #inputColumn2, #inputColumn3 {
             width: 300px;
             height: 40px;
             padding-left: 20px;
@@ -44,17 +48,20 @@
             width: 120px;
             height: 35px;
             margin-right: 10px;
-            /* border-radius: 20px; */
+            margin-top: 20px;
+
             background-color: rgb(44, 44, 44);
             color: white;
             border: 0ch;
             transition: background-color 0.5s ease;
+            float: right;
         }
         .theBtn:hover {
             background-color: rgb(239, 238, 238);
             color: black;
             box-shadow: 0px 3px 5px 0px gray;
         }
+
         #coralPic {
             position: absolute;
             bottom: 10px;
@@ -90,14 +97,14 @@
         <h2>New Quiz</h2>
         <hr>
         <div id="formQuiz">
-            <form method="POST" >
+            <form method="POST" name="createForm">
                 Quiz Name 
                 <br>
-                <input type="text" name="quizName" class="inputColumn">
+                <input type="text" name="quizName" id="inputColumn1" required>
                 <br>
                 Quiz Subject
                 <br>
-                <input list="browsers" class="inputColumn" name="quizSubj">
+                <input list="browsers" id="inputColumn2" name="quizSubj" required>
                 <datalist  id="browsers">
                     <option value="Malay">
                     <option value="English">
@@ -108,11 +115,9 @@
                 <br>
                 Quiz Description 
                 <br>
-                <input type="text" name="quizDesc" class="inputColumn">
+                <input type="text" name="quizDesc" id="inputColumn3">
                 <br>
-                <button class="theBtn"type="submit" name="createQuizBtn">CREATE</button>
-                <button class="theBtn" type="submit" name="cancelBtn" formaction="viewQuiz.php">CANCEL</button>
-                <br>
+                <button class="theBtn"type="submit" name="createQuizBtn" id="createQuizBtn">CREATE</button>
             </form>
         </div>
     </div>
@@ -122,12 +127,11 @@
 </body>
 </html>
 
-<!-- counldnt work -->
-<!-- cant inert into database -->
-
 <?php
     $teacherID = $_SESSION['user_id'];
-    
+    // $teacherID = "TC00000002";
+    // include "dbcon.php";
+
     if(isset($_POST['createQuizBtn'])) {
         $name = $_POST['quizName'];
         $subj = $_POST['quizSubj'];
@@ -153,7 +157,7 @@
         VALUES ('$subject_id', '$teacherID', '$qType', '$name', '$desc');";
     
         if (mysqli_query($connection, $query)) {
-            echo "it works HAHAHAHA";
+            session_start();
             echo '<script>alert("Quiz created successfully")</script>';
             echo "<script>window.location.href='newQuestion.php?quizName=".$name."'</script>";
 
@@ -167,3 +171,19 @@
         header("Location: viewQuiz.php");
     }
 ?>
+
+<script>
+    let button = document.getElementById('createQuizBtn');
+    button.disabled = true; 
+    function validateForm() {
+        global button;
+        var qName = document.forms["createForm"]["quizName"].value;
+        var qSubject = document.forms["createForm"]["quizSubj"].value;
+
+        if (qName == "" || qSubject == "") {
+            button.disabled = true; 
+        } else {
+            button.disabled = false; 
+        }
+    }
+</script>

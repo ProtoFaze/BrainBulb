@@ -160,7 +160,7 @@
     </div>
     <script>
         function start(){
-            location.href = "BuiltInQuestions.php?course=CR00000020Science";
+            location.href = "BuiltInQuestions.php?course=CR00000045Science";
         }
     </script>
 </body>

@@ -1,24 +1,18 @@
 
 <?php
+    $quizname = $_GET['quizname'];
+    // echo $quizname;
     session_start();
     if (isset($_GET['questionid'])) {
         $quesID = $_GET['questionid'];
-        
     } else {
         echo "Quiz is not found";
         echo '<script>alert("Error");window.location.href = "viewQuiz.php";</script>';
 
     }
     include "../database/connect.php";
-
-    $ques = "";
-    $correctid = "";
-    $optionid = "";
-    $correct = "";
-    $option1 = "";
-    $option2 = "";
-    $option3 = "";
-    $courseid = "";
+    include("../components/nav.php"); 
+    // include "dbcon.php";
 
     $query1 = "SELECT questionBank.*,questioncorrectanswer.*,questionoptionlist.* FROM ((questionBank 
     INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
@@ -106,7 +100,7 @@
 </head>
 <body>
     <div id="setQues">
-        <h4><?php echo $quizName ?></h4>
+        <h4><?php echo $quizname ?></h4>
         <hr>
         <div id="block">
             <form action="" method="post">
@@ -136,16 +130,11 @@
                         <input type="text" name="ans4" class="" value="<?php echo $option3; ?>">
                     </div>
                 </div>
-                <!-- <button class="btn" name="editOk" >CONFIRM EDIT</button> -->
                 <button class="btn" name="done" >DONE</button>
-                <button class="btn" name="newQ">NEW QUESTION</button>
                 <button class="btn" name="cancelBtn">RETURN</button>
             </form>
-        </div>
-
-        
+        </div>  
     </div>
-    
 </body>
 </html>
 
@@ -155,10 +144,6 @@
         updateData();
     }
 
-    if(isset($_POST['newQ'])) {
-        header("Location: newQuestion.php".$courseid);
-    }
-
     if (isset($_POST['cancelBtn'])) {
         header("Location: viewQuiz.php");
     }
@@ -166,6 +151,7 @@
 
     function updateData() {
         include "../database/connect.php";
+        // include "dbcon.php";
         global $quesID;
         $ques = $_POST['ques'];
         $correct = $_POST['ans1'];
@@ -180,7 +166,7 @@
         WHERE questionBank.question_ID = '$quesID';";
 
         if (mysqli_query($connection, $query)) {
-            echo '<script>alert("Question edited successfully");window.location.href = "viewQuiz.php";</script>';
+            echo '<script>alert("Question is edited successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
         } else {
             echo "Error editing record: " . mysqli_error($connection);
         }

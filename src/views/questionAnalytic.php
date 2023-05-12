@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Analytics</title>
+    <?php 
+        if(session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        include("../components/nav.php"); 
+    ?>
     <style>
         body {
             background-image: url(../../images/night.png);
@@ -93,7 +99,6 @@
                 $result = mysqli_query($connection, $query);
                 $count =0 ;
                 if (mysqli_num_rows($result) > 0) {
-                    echo '<script>alert("Quiz created successfully")</script>';
                     while($row = mysqli_fetch_assoc($result)) {
                         for ($x = 1; $x <= 10; $x++) {
                             $count += 1;

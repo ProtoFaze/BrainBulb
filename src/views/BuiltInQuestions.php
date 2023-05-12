@@ -458,7 +458,11 @@ if(session_status() == PHP_SESSION_NONE) {
         $s = substr($_GET['course'],10);
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
-        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' ORDER BY questionbank.post_Datetime ASC";
+        $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) 
+        INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID)
+        INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE 
+        course.question_Type = 'Build In Assessment' AND course.course_ID = '$courseID' 
+        ORDER BY questionbank.post_Datetime ASC";
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
         $qid = array();
@@ -645,7 +649,8 @@ if(session_status() == PHP_SESSION_NONE) {
                             }
                             echo "</div>"; 
                             echo "<div class='drag-options'>";
-                            echo "<button class='choice' id='reset-button' style='background-color:grey; color:white; font-size:19px; cursor:pointer;' draggable='false' onclick='handleReset()'>Reset</button>";
+                            echo "<button class='choice' id='reset-button' style='background-color:grey; color:white; 
+                            font-size:19px; cursor:pointer;' draggable='false' onclick='handleReset()'>Reset</button>";
                             foreach($arrayss2 as $data){
                                 echo "<div class='choice' draggable='true'>".$data."</div>";
                             }
@@ -773,7 +778,6 @@ if(session_status() == PHP_SESSION_NONE) {
                     humani.style.display = "block";
                 }
             }
-
             nextbtn.disabled = true;
         }
         else if(questionmode[indexans] == "FillInTheBlanks"){
@@ -955,15 +959,10 @@ if(session_status() == PHP_SESSION_NONE) {
                 if(pair.length == 2){
                     selectedPairs.push(pair);
                     pair = [];
-                    // console.log(selectedPairs);
                 }
-                // console.log(pair);
-                // console.log(selectedPairs);
-                // console.log(connectlineanswer[indexans]);
                 if(selectedPairs.length == connectlineanswer[indexans].length){
                     nextbtn.disabled = false;
                     nextbtn.style.backgroundColor = "#58cc02";
-                    // console.log(selectedPairs);
                 }
             }
         })

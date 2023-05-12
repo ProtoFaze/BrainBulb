@@ -2,6 +2,8 @@
 <?php
     session_start();
     $quizName = $_GET['quizName'];
+    $pageNumber = $_SESSION['pageNumber'];
+    $_SESSION['pageNumber'] ++ ;
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +15,7 @@
     <title>Create Question</title>
 
     <style>
+
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -98,20 +101,19 @@
                 <button class="btn" id="cancelBtn" name="cancelBtn">CANCEL</button>
             </form>
         </div>
-
     </div>
     
 </body>
 </html>
 
 <?php
+    // include 'dbcon.php';
     include "../database/connect.php";
     $query1 = "SELECT course_ID FROM course ORDER BY course_ID DESC LIMIT 1;";
     $result = mysqli_query($connection, $query1);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $courseid = $row['course_ID'];
-            echo "ookkkkk";
         }
     } else {
         echo "0 results";
@@ -128,10 +130,10 @@
     }
     
     function newPage() {
-        $pageNumber = isset($_SESSION['pageNumber']) && $_SESSION['pageNumber'] > 0 ? $_SESSION['pageNumber'] : 1;
-        $pageNumber+=1;
-        $_SESSION['pageNumber'] = $pageNumber;
-        echo $_SESSION['pageNumber'];
+        // $pageNumber = isset($_SESSION['pageNumber']) && $_SESSION['pageNumber'] > 0 ? $_SESSION['pageNumber'] : 1;
+        // $pageNumber+=1;
+        // $_SESSION['pageNumber'] = $pageNumber;
+        // echo $_SESSION['pageNumber'];
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
     }
@@ -153,6 +155,7 @@
     
 
     function insertQues() {
+        // include 'dbcon.php';
         include "../database/connect.php";
 
         foreach ($_SESSION['ansArray'] as $data ) {

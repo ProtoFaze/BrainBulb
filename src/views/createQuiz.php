@@ -13,15 +13,12 @@
     <title>Create Quiz</title>
     <?php 
         include "../database/connect.php";
+        // include "dbcon.php";
         $_SESSION['ansArray'] = array();
     ?>
     <style>
         body {
             font-size: large;
-            background-image: url(../../images/wave.jpg);
-            background-repeat: no-repeat;
-            background-attachment: fixed; 
-            background-size: cover;
         }
         #newQuiz {
             position: absolute;
@@ -33,7 +30,7 @@
             border-radius: 10px;
         }
 
-        .inputColumn {
+        #inputColumn1, #inputColumn2, #inputColumn3 {
             width: 300px;
             height: 40px;
             padding-left: 20px;
@@ -90,14 +87,14 @@
         <h2>New Quiz</h2>
         <hr>
         <div id="formQuiz">
-            <form method="POST" >
+            <form method="POST" name="createForm">
                 Quiz Name 
                 <br>
-                <input type="text" name="quizName" class="inputColumn">
+                <input type="text" name="quizName" id="inputColumn1" required>
                 <br>
                 Quiz Subject
                 <br>
-                <input list="browsers" class="inputColumn" name="quizSubj">
+                <input list="browsers" id="inputColumn2" name="quizSubj" required>
                 <datalist  id="browsers">
                     <option value="Malay">
                     <option value="English">
@@ -108,9 +105,9 @@
                 <br>
                 Quiz Description 
                 <br>
-                <input type="text" name="quizDesc" class="inputColumn">
+                <input type="text" name="quizDesc" id="inputColumn3">
                 <br>
-                <button class="theBtn"type="submit" name="createQuizBtn">CREATE</button>
+                <button class="theBtn"type="submit" name="createQuizBtn" id="createQuizBtn">CREATE</button>
                 <button class="theBtn" type="submit" name="cancelBtn" formaction="viewQuiz.php">CANCEL</button>
                 <br>
             </form>
@@ -122,12 +119,11 @@
 </body>
 </html>
 
-<!-- counldnt work -->
-<!-- cant inert into database -->
-
 <?php
     $teacherID = $_SESSION['user_id'];
-    
+    // $teacherID = "TC00000002";
+    // include "dbcon.php";
+
     if(isset($_POST['createQuizBtn'])) {
         $name = $_POST['quizName'];
         $subj = $_POST['quizSubj'];
@@ -153,7 +149,7 @@
         VALUES ('$subject_id', '$teacherID', '$qType', '$name', '$desc');";
     
         if (mysqli_query($connection, $query)) {
-            echo "it works HAHAHAHA";
+            session_start();
             echo '<script>alert("Quiz created successfully")</script>';
             echo "<script>window.location.href='newQuestion.php?quizName=".$name."'</script>";
 
@@ -167,3 +163,19 @@
         header("Location: viewQuiz.php");
     }
 ?>
+
+<script>
+    let button = document.getElementById('createQuizBtn');
+    button.disabled = true; 
+    function validateForm() {
+        global button;
+        var qName = document.forms["createForm"]["quizName"].value;
+        var qSubject = document.forms["createForm"]["quizSubj"].value;
+
+        if (qName == "" || qSubject == "") {
+            button.disabled = true; 
+        } else {
+            button.disabled = false; 
+        }
+    }
+</script>

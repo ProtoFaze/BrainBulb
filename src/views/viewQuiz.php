@@ -148,7 +148,10 @@
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
-        <button id="newQuizBtn">NEW QUIZ</button>
+        <form action="">
+            <button id="newQuizBtn" name="newQuiz" formaction="createQuiz.php">NEW QUIZ</button>
+        </form>
+        
         <?php
             include "../database/connect.php";
             // include "dbcon.php";            
@@ -261,12 +264,9 @@
             if(isset($_POST['addQuestion'])) {
                 echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
             }
-            
+
 
         ?>
-
-
-        
     </div>
     
 </body>

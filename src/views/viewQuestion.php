@@ -1,4 +1,9 @@
-
+<?php
+    include "../database/connect.php";
+    // include "dbcon.php";
+    $courseid = $_GET['courseid'];
+    echo $courseid;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +17,7 @@
             background-image: url(../../images/spaceBG.png);
             background-size: cover;
             background-attachment: fixed;
+            
         }
         .qBlock {
             background-color: rgba(255, 255, 255, 0.8);
@@ -31,13 +37,11 @@
             padding-bottom: 10px;
         }
         .optionTable {
-            /* width: 100%; */
             margin: auto;
         }
         .optionTable td {
             padding: 5px;
             width: 400px;
-            /* background-color: rgb(169, 214, 253); */
         }
         #spaceship {
             z-index: -1;
@@ -154,12 +158,6 @@
     <img src="../../images/galaxy.png" alt="" id="galaxy">
     <div id="viewquiz">
         <?php
-            include "../database/connect.php";
-            // include "dbcon.php";
-
-            $courseid = $_GET['courseid'];
-            echo $courseid;
-
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];
                 $delete_query = "DELETE FROM questionBank WHERE question_ID = '$question_id'";
@@ -179,11 +177,15 @@
             $result = mysqli_query($connection, $query);
             $count = 0;
 
-
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
+                    $questionid = $row["question_ID"];
+                    $ans1 = $row["coption1"];
+                    $ans2 = $row["option1"];
+                    $ans3 = $row["option2"];
+                    $ans4 = $row["option3"];
                     $count += 1;
-
+                    print_r($result);
                     $question = 
                         '<div class="qBlock">
                             <h3>Question '.$count.'</h3>
@@ -205,18 +207,18 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$row["coption1"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/checked.png"><p>'.$ans1.'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option1"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans2.'</p></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option2"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans3.'</p></span>
                                             </td>
                                             <td>
-                                                <span class="correctiveIcon"><img src="../../images/cross.png"><p>'.$row["option3"].'</p></span>
+                                                <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans4.'</p></span>
                                             </td>
                                         </tr>
 
@@ -232,7 +234,6 @@
             } else {
                 echo "0 results";
             }
-            mysqli_close($connection);
         ?>
     </div>
     

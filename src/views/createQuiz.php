@@ -19,6 +19,10 @@
     <style>
         body {
             font-size: large;
+            background-image: url(../../images/wave.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
         #newQuiz {
             position: absolute;

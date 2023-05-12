@@ -175,7 +175,7 @@
                 FROM ((questionBank
                 INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
                 INNER JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID)
-                -- WHERE questionBank.course_ID = ".$courseid.";";
+                WHERE questionBank.course_ID = '$courseid';";
             $result = mysqli_query($connection, $query);
             $count = 0;
 
@@ -191,10 +191,10 @@
                                 <div class="theButtons">
                                     <form method="POST">
                                         <button name="deleteQuiz" value="'.$row["question_ID"].'">
-                                            <img src="images/delete.png" alt="" class="delBtn">
+                                            <img src="../../images/delete.png" alt="" class="delBtn">
                                         </button>
                                         <button name="editQuiz" onclick="editQuiz" value="'.$row["question_ID"].'">
-                                            <img class="modifyBtn" src="images/edit.png" alt="">
+                                            <img class="modifyBtn" src="../../images/edit.png" alt="">
                                         </button>
                                     </form>
                                 </div>

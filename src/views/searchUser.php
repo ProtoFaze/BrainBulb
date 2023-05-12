@@ -150,7 +150,7 @@
             </form>
         </div>
     <div class="grid_box">
-<?php $noResults = False;
+<?php $noResults = true;
 foreach ($queries as $query){
     // echo $query;
     $result = mysqli_query($connection, $query);
@@ -203,8 +203,9 @@ foreach ($queries as $query){
                     </script>";
 
             }
+            $noResults = False;
         }
-    } else {
+    } else{
         $noResults = True;
     }
 }if($noResults == True){echo "<h1>No results found</h1>";}?>

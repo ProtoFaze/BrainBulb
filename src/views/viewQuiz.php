@@ -1,7 +1,7 @@
 <?php
     session_start();
     $teacherID = $_SESSION['user_id'];
-    // $teacherID = "TC00000002";
+    include("../components/nav.php");
 ?>
 
 

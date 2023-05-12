@@ -1,6 +1,7 @@
 <?php
+    session_start();
     include "../database/connect.php";
-    // include "dbcon.php";
+    include("../components/nav.php");
     $courseid = $_GET['courseid'];
     $quizname = $_GET['quizname'];
     echo $courseid;

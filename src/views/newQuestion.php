@@ -4,6 +4,7 @@
     $quizName = $_GET['quizName'];
     $pageNumber = $_SESSION['pageNumber'];
     $_SESSION['pageNumber'] ++ ;
+    include("../components/nav.php");
 ?>
 
 <!DOCTYPE html>

@@ -11,9 +11,8 @@
 
     }
     include "../database/connect.php";
+    include("../components/nav.php"); 
     // include "dbcon.php";
-
-
 
     $query1 = "SELECT questionBank.*,questioncorrectanswer.*,questionoptionlist.* FROM ((questionBank 
     INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)

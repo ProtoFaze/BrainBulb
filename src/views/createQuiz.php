@@ -1,9 +1,5 @@
 
 
-<?php
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Quiz</title>
     <?php 
+        if(session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         include "../database/connect.php";
+        include("../components/nav.php");
         // include "dbcon.php";
         $_SESSION['ansArray'] = array();
     ?>

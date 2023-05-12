@@ -322,7 +322,8 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             <div class="adv">
                 <div style="margin-left:30px; margin-top: 85px;">
                     <h1>Engagement</h1>
-                    <p style="color: #464E51; font-size:23px;">Visual, <b>interactive lessons</b> make concepts feel intuitive — so even complex ideas just click. Our real-time feedback and simple explanations make learning efficient.</p>
+                    <p style="color: #464E51; font-size:23px; text-align: justify;">
+                    BrainBulb brings learning to life! Replace the boring classes with fun and <b>ENGAGING</b> lessons that capture the imagination of young minds. To give students a joyful experience, we designed BrainBulb to be highly interactive and fun for kids.</p>
                 </div>
             </div>
             <div class="adv" style="text-align:center;">
@@ -335,9 +336,10 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
                 <img src="../../images/technology.png" style="width:75%;">
             </div>
             <div class="adv">
-                <div style="margin-left:30px; margin-top: 85px;">
+                <div style="margin-left:30px; margin-top: 85px; text-align: justify;">
                     <h1>Interactive</h1>
-                    <p style="color: #464E51; font-size:23px;">Visual, interactive lessons make concepts feel intuitive — so even complex ideas just click. Our real-time feedback and simple explanations make learning efficient.</p>
+                    <p style="color: #464E51; font-size:23px;">
+                    Learning is not just reading texts. It's about <b>INTERACTING</b> with learning in a way that we can enjoy it. We offer a plethora of interactive features combining quizzes and games, that encourage active participation and provide instant feedback.</p>
                 </div>
             </div>
         </div>
@@ -346,7 +348,9 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             <div class="adv">
                 <div style="margin-left:30px; margin-top: 85px;">
                     <h1>Knowledges</h1>
-                    <p style="color: #464E51; font-size:23px;">Visual, interactive lessons make concepts feel <b>intuitive</b> — so even complex ideas just click. Our real-time feedback and simple explanations make learning efficient.</p>
+                    <p style="color: #464E51; font-size:23px; text-align: justify;">
+                    BrainBulb is designed to provide students with a solid foundation of knowledge in all subjects. From language like Malay and English to STEM fields like mathematics and science, our curriculum is comprehensive and aligned with standards from the Ministry of Education. And it uses various teaching methods to ensure that the kids not only learn but also retain that <b>KNOWLEDGE</b>. With us, your child will be well-equipped for success in school and beyond.
+                    </p>
                 </div>
             </div>
             <div class="adv" style="text-align:center;">
@@ -363,21 +367,21 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
                     <div>
                         <img src="../../images/student.png" style="width:70%;">
                         <h2>Student</h2>
-                        <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur <br>adipisicing elit. Consequuntur, debitis.kfsf</p>
+                        <p style="font-size:18px;">Give your children a chance to </br><b>love the process</b> of learning</p>
                     </div>
                 </div>
                 <div class="user">
                     <div>
                         <img src="../../images/parent.png" style="width:70%;">
                         <h2>Parent</h2>
-                        <p style="font-size:18px;">Lorem ipsum dolor sit amet, <br>consectetur adipisicing elit. Aliquid, soluta.</p>
+                        <p style="font-size:18px;">Have an easier time,<br><b>looking after your children</b>'s education.</p>
                     </div>
                 </div>
                 <div class="user">
                     <div>
                         <img src="../../images/teacher.png" style="width:70%;">
                         <h2>Teacher</h2>
-                        <p style="font-size:18px;">Lorem ipsum dolor sit amet consectetur <br>adipisicing elit. Voluptate, maiores.</p>
+                        <p style="font-size:18px;"><b>Get a head start</b><br>in becoming an online teacher.</p>
                     </div>
                 </div>
             </div>

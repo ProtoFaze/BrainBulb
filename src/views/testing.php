@@ -28,6 +28,7 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             float: left;
             width: 50%;
             padding: 10px;
+            position: relative;
         }
         .start-btn{
             padding: 18px 25px;
@@ -70,10 +71,13 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         }
         .features{
             margin: 0px 45px;
-            /* position: fixed; */
-            /* left: -500px; */
+            /* position: relative; */
+            /* right: 1700px; */
+            /* transition: transform 0.5s, opacity 0.5s;
+            transform: translateX(200px);
+            opacity: 0; */
         }
-        .features:hover {
+        .features:hover .adv{
             animation-duration: 2.5s;
             animation-name: appear;
             animation-fill-mode: forwards;
@@ -83,6 +87,9 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             float: left;
             width: 50%;
             padding: 10px;
+            position: relative;
+            right: -100px;
+            opacity: 0;
         }
         .usertype{
             background-color: #ececec;
@@ -227,12 +234,12 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
 
         @keyframes appear {
             from {
-                transform: translate(300px, 0);
+                transform: translate(0px, 0);
                 opacity: 0;
                 visibility: hidden;
             }
             to {
-                transform: translate(0px, 0);
+                transform: translate(-100px, 0);
                 opacity: 1;
                 visibility: visible;
             }
@@ -431,5 +438,6 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
                 ?>
         </div>
     </div>
+    
 </body>
 </html>

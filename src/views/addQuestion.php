@@ -204,7 +204,7 @@
             echo "Number of pages stored: ".count($_SESSION['ansArray'])."<br>";
             echo '<script>alert("Question created successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
     }
-    if ($_POST['cancelBtn'] == "viewQuiz.php") {
+    if (isset($_POST['cancelBtn']) && $_POST['cancelBtn'] == "viewQuiz.php") {
         header("Location: viewQuiz.php");
     }
 ?>

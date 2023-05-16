@@ -167,7 +167,7 @@
         }
         
     }
-    if ($_POST['cancelBtn'] == "viewQuiz.php") {
+    if (isset($_POST['cancelBtn']) && $_POST['cancelBtn'] == "viewQuiz.php") {
         header("Location: viewQuiz.php");
     }
 ?>

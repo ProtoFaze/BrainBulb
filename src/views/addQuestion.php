@@ -203,6 +203,13 @@
             }
             }
             echo "Number of pages stored: ".count($_SESSION['ansArray'])."<br>";
+<<<<<<< HEAD
             echo '<script>alert("Question added successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
+=======
+            echo '<script>alert("Question created successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
+    }
+    if (isset($_POST['cancelBtn']) && $_POST['cancelBtn'] == "viewQuiz.php") {
+        header("Location: viewQuiz.php");
+>>>>>>> 3525bd44fb8a0025678487d1eee98fb09ba56905
     }
 ?>

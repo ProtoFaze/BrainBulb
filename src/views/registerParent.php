@@ -244,7 +244,7 @@
                             echo "<script>alert('Registration Failed to User!')</script>";
                         }
                     }else{
-                        echo "<script>alert('Registration Failed to Teacher due to!')</script>";
+                        echo "<script>alert('Registration Failed')</script>";
                         
                     }
                 }else{

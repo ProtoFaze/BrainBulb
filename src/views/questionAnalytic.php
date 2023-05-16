@@ -11,6 +11,7 @@
             session_start();
         }
         include("../components/nav.php"); 
+        $quizname = $_GET['quizname'];
     ?>
     <style>
         body {
@@ -73,9 +74,10 @@
     <img src="../../images/planet4.png" alt="" id="earth" >
     <div id="viewAnalytic">
         <h2>Question Analytics</h2>
-        <h3>Quiz Name</h3>
+        <h3><?php echo $quizname;?></h3>
         <hr>
         <div class="quizQ">
+            
             <?php
                 include "../database/connect.php";
                 // include "dbcon.php";

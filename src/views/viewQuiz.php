@@ -240,10 +240,10 @@
                                             <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
                                         </td>
                                         <td>
-                                            <a href="questionAnalytic.php?courseid='.$courseid.'">VIEW ANALYTIC</a>
+                                            <a href="questionAnalytic.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW ANALYTIC</a>
                                         </td>
                                         <td>
-                                            <a href="studentRanking.php?courseid='.$courseid.'">VIEW STUDENT PERFORMANCE</a>
+                                            <a href="studentRanking.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW STUDENT PERFORMANCE</a>
                                         </td>
                                     </tr>
                                 </table>

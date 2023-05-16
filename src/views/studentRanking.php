@@ -11,6 +11,7 @@
             session_start();
         }
         include("../components/nav.php"); 
+        $quizname = $_GET['quizname'];
     ?>
     <style>
         body {
@@ -18,10 +19,6 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
-        }
-        #rankingTitle {
-            color: white;
-            text-shadow: 1px 1px 1px white;
         }
         #viewRanking {
             width: 1000px;
@@ -155,7 +152,7 @@
     <img src="../../images/planet6.png" alt="" id="planet4" >
     <img src="../../images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
-        <h3 id="rankingTitle">Quizz 2 Student Performance</h3>
+        <h3><?php echo $quizname;?></h3>
         <?php
             include "../database/connect.php";
             // include "dbcon.php";

@@ -4,7 +4,6 @@
     include("../components/nav.php");
     $courseid = $_GET['courseid'];
     $quizname = $_GET['quizname'];
-    echo $courseid;
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +19,11 @@
             background-size: cover;
             background-attachment: fixed;
             
+        }
+        #rankingTitle {
+            color: white;
+            /* text-shadow: 1px 1px 1px white; */
+            margin-left: 280px;
         }
         .qBlock {
             background-color: rgba(255, 255, 255, 0.8);
@@ -160,6 +164,7 @@
     <img src="../../images/galaxy.png" alt="" id="galaxy">
     
     <div id="viewquiz">
+        <h3 id="rankingTitle"><?php echo $quizname;?></h3>
         <?php
             if (isset($_POST['deleteQuiz'])) {
                 $question_id = $_POST['deleteQuiz'];

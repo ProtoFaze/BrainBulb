@@ -129,6 +129,9 @@
                             elseif(substr($row['filename'],-3) == "pdf"){
                                 $imgs = "pdf";
                             }
+                            elseif(substr($row['filename'],-3) == "mp4"){
+                                $imgs = "videoicon";
+                            }
 
                             echo "<tr>";
                             echo "<td>";

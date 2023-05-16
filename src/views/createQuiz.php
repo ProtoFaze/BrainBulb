@@ -13,8 +13,8 @@
         }
         include "../database/connect.php";
         include("../components/nav.php");
-        // include "dbcon.php";
         $_SESSION['ansArray'] = array();
+        $_SESSION['questionCount'] = 0;
     ?>
     <style>
         body {
@@ -129,9 +129,6 @@
 
 <?php
     $teacherID = $_SESSION['user_id'];
-    // $teacherID = "TC00000002";
-    // include "dbcon.php";
-
     if(isset($_POST['createQuizBtn'])) {
         $name = $_POST['quizName'];
         $subj = $_POST['quizSubj'];
@@ -172,18 +169,3 @@
     }
 ?>
 
-<script>
-    let button = document.getElementById('createQuizBtn');
-    button.disabled = true; 
-    function validateForm() {
-        global button;
-        var qName = document.forms["createForm"]["quizName"].value;
-        var qSubject = document.forms["createForm"]["quizSubj"].value;
-
-        if (qName == "" || qSubject == "") {
-            button.disabled = true; 
-        } else {
-            button.disabled = false; 
-        }
-    }
-</script>

@@ -80,10 +80,9 @@
             
             <?php
                 include "../database/connect.php";
-                // include "dbcon.php";
 
                 $courseid = $_GET['courseid'];
-
+                
                 $query = "SELECT 
                 COUNT(response_ID) AS total,
                 COUNT(CASE WHEN question1 = '1' THEN 1 ELSE NULL END) AS q1,
@@ -109,6 +108,7 @@
                             $question =
                                 '<div class="quizQ">
                                     <h4>Question '.$count.'</h4>
+
                                     <div class="barAnalytic">
                                         <div class="progressBlock">
                                             <label for="progress">Accuracy '.$accuracy.'%</label>

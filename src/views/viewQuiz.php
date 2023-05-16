@@ -2,6 +2,8 @@
     session_start();
     $teacherID = $_SESSION['user_id'];
     include("../components/nav.php");
+    $_SESSION['ansArray'] = array();
+    $_SESSION['questionCount'] = 0;
 ?>
 
 
@@ -187,7 +189,6 @@
             SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
-            
             FROM (studentquestionresponse 
             INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
             GROUP BY course.course_ID";
@@ -212,57 +213,54 @@
             } else {
                 echo "0 results";
             }
-            foreach ($totalCourse as $quizData) {
-                $courseid = $quizData[0];
-                $teacherid = $quizData[1];
-                $quizname = $quizData[2];
-                $totalAttempt = $quizData[3];
-                $totalCorrect = $quizData[4];
-                $quizAccuracy = round($quizData[5]);
-                
-                if ($teacherid == $teacherID) {
-                    $quiz .= 
-                        '<div class="quiz">
-                            <div class="quizTitle">
-                                <div>
-                                    <h4>'.$quizname.'</h4>
+            if (empty($totalCourse)) {
+                echo "No results found.";
+            } else {
+                foreach ($totalCourse as $quizData) {
+                    $courseid = $quizData[0];
+                    $teacherid = $quizData[1];
+                    $quizname = $quizData[2];
+                    $totalAttempt = $quizData[3];
+                    $totalCorrect = $quizData[4];
+                    $quizAccuracy = round($quizData[5]);
+                    
+                    if ($teacherid == $teacherID) {
+                        $quiz .= 
+                            '<div class="quiz">
+                                <div class="quizTitle">
+                                    <div>
+                                        <h4>'.$quizname.'</h4>
+                                    </div>
+                                    <div class="theButtons">
+                                        <form method="POST">
+                                            <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
+                                        </form>                            
+                                    </div>
                                 </div>
-                                <div class="theButtons">
-                                    <form method="POST">
-                                        <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
-                                    </form>                            
+                                <div class="progressBlock">
+                                    <label for="progress">Accuracy '.$quizAccuracy.'%</label>
+                                    <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$quizAccuracy.'%</progress>
                                 </div>
-                            </div>
-                            <div class="progressBlock">
-                                <label for="progress">Accuracy '.$quizAccuracy.'%</label>
-                                <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$quizAccuracy.'%</progress>
-                            </div>
-                            <div class="viewMenu">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
-                                        </td>
-                                        <td>
-                                            <a href="questionAnalytic.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW ANALYTIC</a>
-                                        </td>
-                                        <td>
-                                            <a href="studentRanking.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW STUDENT PERFORMANCE</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>';
+                                <div class="viewMenu">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
+                                            </td>
+                                            <td>
+                                                <a href="questionAnalytic.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW ANALYTIC</a>
+                                            </td>
+                                            <td>
+                                                <a href="studentRanking.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW STUDENT PERFORMANCE</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>';
+                    }
                 }
+                echo $quiz;
             }
-            echo $quiz;
-
-            if(isset($_POST['addQuestion'])) {
-                echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
-            }
-            
-
-
         ?>
     </div>
     

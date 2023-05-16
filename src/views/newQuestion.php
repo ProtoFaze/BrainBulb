@@ -2,9 +2,9 @@
 <?php
     session_start();
     $quizName = $_GET['quizName'];
-    $pageNumber = $_SESSION['pageNumber'];
-    if (isset($_SESSION['pageNumber'])) {
-        $_SESSION['pageNumber'] ++ ;
+    $pageNumber = $_SESSION['questionCount'];
+    if (isset($_SESSION['questionCount'])) {
+        $_SESSION['questionCount'] ++ ;
     }
     include("../components/nav.php");
 ?>
@@ -74,7 +74,7 @@
         <div id="block">
             <form action="" method="post">
                 <div id="ques">
-                    <p>Question <?php echo $_SESSION['pageNumber'] ?></p>
+                    <p>Question <?php echo $_SESSION['questionCount'] ?></p>
                     <input type="text" name="ques" id="quesInput">
                 </div>
                 <div id="optionList">
@@ -203,12 +203,13 @@
             $current_time = new DateTime();
             $formatted_time = $current_time->format('Y-m-d H:i:s');
             
-            $query6 = "INSERT INTO `questionbank`(`course_ID`, `correct_List_ID`, `option_List_ID`, `question`, `question_Gamemode`, `post_Datetime`) VALUES ('$courseid','$correctID', '$optionID', '$questions', '$question_Gamemode', '$formatted_time');";
+            $query6 = "INSERT INTO `questionbank`(`course_ID`, `correct_List_ID`, `option_List_ID`, `question`, `question_Gamemode`, `post_Datetime`) 
+            VALUES ('$courseid','$correctID', '$optionID', '$questions', '$question_Gamemode', '$formatted_time');";
 
             if (mysqli_query($connection, $query6)) {
 
                 $_SESSION['ansArray'] = array();
-                $_SESSION['pageNumber'] = 1;
+                $_SESSION['questionCount'] = 1;
             } else {
                 echo "Error creating quiz : " . mysqli_error($connection);
             }

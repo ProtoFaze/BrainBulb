@@ -3,8 +3,6 @@
     session_start();
     $courseid = $_GET['courseid'];
     $quizname = $_GET['quizname'];
-    echo $courseid;
-    echo $quizname;
     include("../components/nav.php");
 ?>
 

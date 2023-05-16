@@ -241,7 +241,7 @@
 
         function showFile(){
             let fileType = file.type; 
-            let validExtensions = ["application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/pdf","application/vnd.openxmlformats-officedocument.presentationml.presentation"]; 
+            let validExtensions = ["video/mp4","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/pdf","application/vnd.openxmlformats-officedocument.presentationml.presentation"]; 
             console.log(fileType);
             if(validExtensions.includes(fileType)){
                 var form = document.getElementById("forms");

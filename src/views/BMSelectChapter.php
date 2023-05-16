@@ -141,7 +141,7 @@ if(session_status() == PHP_SESSION_NONE) {
     <?php
         $chaplist = array();
         $studentID = $_SESSION['user_id'];
-        $subjectID = 'SJ00000003';//fixed subject
+        $subjectID = 'SJ00000001';//fixed subject
         include("../components/nav.php");
         include "../database/connect.php";
         $query = "SELECT * FROM studentquestionresponse INNER JOIN course ON course.course_ID = studentquestionresponse.course_ID WHERE studentquestionresponse.student_ID = '$studentID' AND course.question_Type = 'Build In Assessment' AND course.subject_ID = '$subjectID'";

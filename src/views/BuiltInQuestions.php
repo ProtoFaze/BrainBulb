@@ -466,6 +466,7 @@ if(session_status() == PHP_SESSION_NONE) {
         $results = mysqli_query($connection,$query);
         $count = mysqli_num_rows($results);
         $qid = array();
+        $counts = 0;
     ?>
     <div class="maincontainer">    
         <div id="topbar" style="margin-left:100px; margin-right: 100px; margin-top: 48px; margin-bottom:45px;">
@@ -632,7 +633,6 @@ if(session_status() == PHP_SESSION_NONE) {
                             echo "<h1>Match the Following</h1>";
                             echo "</div>";
                             echo "<div class='drag-area'>";
-                            $counts = 0;
                             foreach($a as $v){
                                 $counts += 1;
                                 echo "<table cellpadding=5px>";
@@ -722,10 +722,15 @@ if(session_status() == PHP_SESSION_NONE) {
 
     let selectedPairs = [];
 
+    var l = 0;
+    var ccc = 1;
+
     var correctpopup = document.getElementById("cpopup");
     var wrongpopup = document.getElementById("wpopup");
 
     function checkfitbans(a){
+        console.log(a);
+        console.log(fillinblankans[indexans]);
         for (var i = 0; i < fillinblankans[indexans].length;i++){
             if(a[i] != fillinblankans[indexans][i]){
                 return false;
@@ -781,10 +786,15 @@ if(session_status() == PHP_SESSION_NONE) {
             nextbtn.disabled = true;
         }
         else if(questionmode[indexans] == "FillInTheBlanks"){
+            //get user response fillintheblank and check for answer
+            var le = fillinblankans[indexans].length;
             var responseans = [];
-            for (var i = 1; i <= fillinblankans[indexans].length;i++){
+            l = l + le;
+            for (var i = ccc; i <= l;i++){
                 responseans.push(document.getElementById('box'+i+'').innerHTML)
             }
+            ccc = ccc +fillinblankans[indexans].length;
+
             if(checkfitbans(responseans)){
                 buttonbg.classList.add('button-bg-animation-correct');
                 correctpopup.style.display = "block";

@@ -18,11 +18,7 @@ if(session_status() == PHP_SESSION_NONE) {
             $myVariable = $_POST['myVariable'];
             $t = $_POST['my'];
             $t2 = $_POST['my2'];
-            echo $t;
-            echo $t2;
             $_SESSION['xp'] = $myVariable;
-            // $_SESSION['ctime'] = $t;
-            // $_SESSION['etime'] = $t2; 
             $myArray = json_decode($_POST["myArray"]);
             $myArray = explode(",",$myArray);
             $Array = array();
@@ -34,8 +30,6 @@ if(session_status() == PHP_SESSION_NONE) {
                     array_push($Array,0);
                 }
             }
-            // var_dump($myArray);
-            // var_dump($Array);
             $q = "SELECT * FROM studentquestionresponse_seq ORDER BY id DESC LIMIT 1";
             $r = mysqli_query($connection, $q);
             $ro = mysqli_fetch_assoc($r);

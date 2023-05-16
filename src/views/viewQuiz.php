@@ -22,6 +22,10 @@
             background-size: cover;
             background-attachment: fixed;
         }
+        #norecord {
+            color: white;
+            text-align: center;
+        }
         
         progress {
             height: 15px;
@@ -217,7 +221,7 @@
                             } else {
                                 $totalAttempt = $row['total_attempt'];
                                 $totalCorrect = $row['correct_attempt'];
-                                $totalAccuracy = ($totalCorrect/$totalAttempt) * 100;
+                                $totalAccuracy = round(($totalCorrect/$totalAttempt) * 100);
                             }
                             
 
@@ -254,10 +258,12 @@
                                     </div>
                                 </div>';
                         }
-                        
                     }
                 }
-            echo $quiz;
+                echo $quiz;
+            } else {
+                // Data is empty
+                echo '<p id="norecord">-No Question Created in this Quiz-</p>';
             }
         ?>
     </div>

@@ -27,6 +27,10 @@
         #rankingTitle {
             color: white;
         }
+        #norecord {
+            color: white;
+            text-align: center;
+        }
         progress {
             height: 15px;
             width: 100%;
@@ -235,6 +239,9 @@
                     echo $question;
                 }
                 
+            } else {
+                // Data is empty
+                echo '<p id="norecord">-No Student Response to this Quiz Yet-</p>';
             }
         ?>
     

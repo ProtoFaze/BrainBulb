@@ -25,6 +25,10 @@
             /* text-shadow: 1px 1px 1px white; */
             margin-left: 280px;
         }
+        #norecord {
+            color: white;
+            text-align: center;
+        }
         .qBlock {
             background-color: rgba(255, 255, 255, 0.8);
             width: 900px;
@@ -239,7 +243,7 @@
                     echo $question;
                 }
             } else {
-                echo "0 results";
+                echo '<p id="norecord">-No Question Created in this Quiz-</p>';
             }
         ?>
     </div>

@@ -25,6 +25,10 @@
             margin: auto;
             width: 1000px;
         }
+        #norecord {
+            color: white;
+            text-align: center;
+        }
         #analyticPage {
             margin: auto;
         }
@@ -119,6 +123,9 @@
                             echo $question;;
                         } 
                     }
+                } else {
+                    // Data is empty
+                    echo '<p id="norecord">-No Question Created in this Quiz-</p>';
                 }
             ?>
         </div>

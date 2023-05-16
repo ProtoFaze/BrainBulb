@@ -3,6 +3,8 @@
     session_start();
     $courseid = $_GET['courseid'];
     $quizname = $_GET['quizname'];
+    echo $courseid;
+    echo $quizname;
     include("../components/nav.php");
 ?>
 
@@ -98,7 +100,7 @@
                 </div>
                 <button class="btn" name="done" type="submit">DONE</button>
                 <button class="btn" name="newQ">NEW QUESTION</button>
-                <button class="btn" id="cancelBtn" name="cancelBtn">CANCEL</button>
+                <button class="btn" id="cancelBtn" name="cancelBtn" formaction="viewQuiz.php">CANCEL</button>
             </form>
         </div>
     </div>
@@ -135,7 +137,6 @@
         $answers = array();
         array_push($answers,$ques,$correct,$option1,$option2,$option3);
         array_push( $_SESSION['ansArray'],$answers);
-        print_r($_SESSION['ansArray']);
         return true;
     }
     
@@ -202,9 +203,6 @@
             }
             }
             echo "Number of pages stored: ".count($_SESSION['ansArray'])."<br>";
-            echo '<script>alert("Question created successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
-    }
-    if (isset($_POST['cancelBtn']) && $_POST['cancelBtn'] == "viewQuiz.php") {
-        header("Location: viewQuiz.php");
+            echo '<script>alert("Question added successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
     }
 ?>

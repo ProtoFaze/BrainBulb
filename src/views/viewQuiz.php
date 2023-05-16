@@ -187,6 +187,7 @@
             SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
+            
             FROM (studentquestionresponse 
             INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
             GROUP BY course.course_ID";
@@ -201,6 +202,11 @@
                     $countCorrect = $row['correct_attempt'];
                     $nameOfquiz = $row['chapter_Name'];
                     $countAccuracy = ($countCorrect/$countAttempt) * 100;
+                    if ($countCorrect == NULL) {
+                        $countAttempt = 0;
+                        $countCorrect = 0;
+                        $countAccuracy = 0;
+                    }
                     $totalCourse[] = array($cID,$tID,$nameOfquiz,$countAttempt,$countCorrect,$countAccuracy);
                 }
             } else {
@@ -223,9 +229,7 @@
                                 </div>
                                 <div class="theButtons">
                                     <form method="POST">
-                                        <button name="addQuestion" onclick="addQuestion()" value="'.$courseid.'">
-                                            <img src="../../images/add.png" alt="" class="addBtn">
-                                        </button>
+                                        <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
                                     </form>                            
                                 </div>
                             </div>
@@ -256,6 +260,7 @@
             if(isset($_POST['addQuestion'])) {
                 echo '<script>window.location.href = "addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'";</script>';
             }
+            
 
 
         ?>

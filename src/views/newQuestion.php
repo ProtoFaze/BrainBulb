@@ -146,7 +146,6 @@
         $answers = array();
         array_push($answers,$ques,$correct,$option1,$option2,$option3);
         array_push( $_SESSION['ansArray'],$answers);
-        print_r($_SESSION['ansArray']);
         return true;
     }
     

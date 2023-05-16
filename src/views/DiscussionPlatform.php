@@ -125,7 +125,10 @@
                 margin-top: 1.5px;
             }
     
-            .ask-Btn, .sort-Btn, .filter-btn, .filter-btn2{
+            .ask-Btn,
+            .sort-Btn,
+            .filter-btn,
+            .filter-btn2 {
                 background-color: #3a4b61;
                 border: none;
                 color: #f1f4f3;
@@ -137,31 +140,61 @@
                 border-radius: 5px;
                 cursor: pointer;
                 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+                margin-right: 10px; /* Adjust the margin to create spacing between the buttons */
             }
 
-            .filter-btn{
+
+            .filter-btn {
                 display: flex;
                 flex-direction: row;
-                margin-left: -150%;
-                margin-top: -52%;
+                margin-left: 0; /* Adjusted to remove the negative margin */
+                margin-right: 10px; /* Adjusted to create spacing between the buttons */
                 background-color: #455d7c;
             }
 
-            .filter-btn2{
+            .filter-btn2 {
                 display: flex;
                 flex-direction: row;
-                margin-left: -60%;
-                margin-top: -42%;
+                margin-top: -46px;
+                margin-left: 0; /* Adjusted to remove the negative margin */
                 background-color: #455d7c;
             }
-    
-            .functionButton{
+                
+            .functionButton {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start; /* Adjusted to align the buttons to the left */
+                margin-left: 70%;
+            }
+
+            .functionButton2 {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start; /* Adjusted to align the buttons to the left */
                 margin-left: 76%;
             }
-
-            .tfunctionButton{
-                margin-left: 80%;
+            .sort-Btn {
+                margin-right: 10px; /* Adjusted the margin to create spacing between the buttons */
             }
+
+            .tfunctionButton {
+                display: flex;
+                flex-direction: row;
+                align-items: center; /* Add this line to vertically align the buttons */
+                justify-content: flex-end; /* Add this line to align the buttons to the right */
+                margin-top: 44px;
+            }
+
+            .tfunctionButton2 {
+                display: flex;
+                flex-direction: row;
+                align-items: center; /* Add this line to vertically align the buttons */
+                justify-content: flex-end; /* Add this line to align the buttons to the right */
+                margin-top: 0;
+            }
+
     
             .ask-Btn{
                 text-align: center;
@@ -220,13 +253,13 @@
             } elseif (substr($user_id,0,2) == "TC" ){
                 echo <<<HTML
                 <form action="" method="post">
-                    <div class="tfunctionButton">  
+                    <div class="functionButton2">  
                         <select class="sort-Btn" name="sort_option">
                             <option value="mostComments">Most Comments</option>
                             <option value="oldestPost">Oldest Post</option>
                             <option value="LatestPost">Latest Post</option>
                         </select>
-                        <div class="tfunctionButton">  
+                        <div class="tfunctionButton2">  
                         <button name="Filter" class="filter-btn">Filter</button>
                         </div>
                     </div>

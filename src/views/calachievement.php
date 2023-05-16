@@ -175,7 +175,6 @@
                 else{
                     echo "<script>location.href='studentviewquiz.php'</script>";
                 }
-                
             }
 
             $q5 = "SELECT * FROM student_achievement WHERE student_ID = '$studentID' achievement_ID = 'AC00000018'";

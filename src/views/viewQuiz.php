@@ -157,109 +157,107 @@
         <?php
             include "../database/connect.php";
             // include "dbcon.php";            
-            $quiz="";
-            $query = "SELECT studentquestionresponse.*, course.*,
-            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) AS correct_attempt,  
-            SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question1 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question2 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question3 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question4 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question5 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question6 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question7 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question8 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
-            SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
-            FROM (studentquestionresponse 
-            INNER JOIN course ON studentquestionresponse.course_ID = course.course_ID)
-            GROUP BY course.course_ID";
+            
+            $query = "SELECT * FROM course WHERE teacher_ID = '$teacherID'";
 
-            $totalCourse = array();
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    $cID = $row["course_ID"];
-                    $tID = $row['teacher_ID'];
-                    $countAttempt = $row['total_attempt'];
-                    $countCorrect = $row['correct_attempt'];
-                    $nameOfquiz = $row['chapter_Name'];
-                    $countAccuracy = ($countCorrect/$countAttempt) * 100;
-                    if ($countCorrect == NULL) {
-                        $countAttempt = 0;
-                        $countCorrect = 0;
-                        $countAccuracy = 0;
-                    }
-                    $totalCourse[] = array($cID,$tID,$nameOfquiz,$countAttempt,$countCorrect,$countAccuracy);
-                }
-            } else {
-                echo "0 results";
-            }
-            if (empty($totalCourse)) {
-                echo "No results found.";
-            } else {
-                foreach ($totalCourse as $quizData) {
-                    $courseid = $quizData[0];
-                    $teacherid = $quizData[1];
-                    $quizname = $quizData[2];
-                    $totalAttempt = $quizData[3];
-                    $totalCorrect = $quizData[4];
-                    $quizAccuracy = round($quizData[5]);
-                    
-                    if ($teacherid == $teacherID) {
-                        $quiz .= 
-                            '<div class="quiz">
-                                <div class="quizTitle">
-                                    <div>
-                                        <h4>'.$quizname.'</h4>
+                $quiz="";
+                while($data = mysqli_fetch_assoc($result)) {
+                    $courseid = $data['course_ID'];
+                    $quizname = $data['chapter_Name'];
+                    $desc = $data['description'];
+
+                    $query1 = "SELECT
+                    SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) AS correct_attempt,  
+                    SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question1 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question2 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question3 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question3 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question4 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question4 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question5 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question5 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question6 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question6 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question7 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question7 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question8 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question8 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question9 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question9 = '0' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question10 = '1' THEN 1 ELSE 0 END) +
+                    SUM(CASE WHEN question10 = '0' THEN 1 ELSE 0 END) AS total_attempt
+                    FROM studentquestionresponse
+                    WHERE course_ID = '$courseid';";
+
+                    $totalCourse = array();
+                    $totalAttempt = 0;
+                    $totalCorrect = 0;
+                    $totalAccuracy = 0;
+
+                    $result1 = mysqli_query($connection, $query1);
+                    if (mysqli_num_rows($result1) > 0) {
+                        while($row = mysqli_fetch_assoc($result1)) {
+                            if ($row['total_attempt'] == null && $row['correct_attempt'] == null) {
+                                $totalAttempt = 0;
+                                $totalCorrect = 0;
+                                $totalAccuracy = 0;
+                            } else {
+                                $totalAttempt = $row['total_attempt'];
+                                $totalCorrect = $row['correct_attempt'];
+                                $totalAccuracy = ($totalCorrect/$totalAttempt) * 100;
+                            }
+                            
+
+                            $quiz .= 
+                                '<div class="quiz">
+                                    <div class="quizTitle">
+                                        <div>
+                                            <h4>'.$quizname.'</h4><h5>'.$totalCorrect.' / '.$totalAttempt.' Attempts</h5>
+                                        </div>
+                                        <div class="theButtons">
+                                            <form method="POST">
+                                                <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
+                                            </form>                            
+                                        </div>
                                     </div>
-                                    <div class="theButtons">
-                                        <form method="POST">
-                                            <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
-                                        </form>                            
+                                    <div class="progressBlock">
+                                        <label for="progress">Accuracy '.$totalAccuracy.'%</label>
+                                        <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$totalAccuracy.'%</progress>
                                     </div>
-                                </div>
-                                <div class="progressBlock">
-                                    <label for="progress">Accuracy '.$quizAccuracy.'%</label>
-                                    <progress value = '.$totalCorrect.' max = '.$totalAttempt.' class="progress">'.$quizAccuracy.'%</progress>
-                                </div>
-                                <div class="viewMenu">
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
-                                            </td>
-                                            <td>
-                                                <a href="questionAnalytic.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW ANALYTIC</a>
-                                            </td>
-                                            <td>
-                                                <a href="studentRanking.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW STUDENT PERFORMANCE</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>';
+                                    <div class="viewMenu">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <a href="viewQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW QUESTION</a>
+                                                </td>
+                                                <td>
+                                                    <a href="questionAnalytic.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW ANALYTIC</a>
+                                                </td>
+                                                <td>
+                                                    <a href="studentRanking.php?courseid='.$courseid.'&quizname='.$quizname.'">VIEW STUDENT PERFORMANCE</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>';
+                        }
+                        
                     }
                 }
-                echo $quiz;
+            echo $quiz;
             }
         ?>
     </div>

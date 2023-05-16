@@ -2,7 +2,6 @@
 <?php
     session_start();
     $quizName = $_GET['quizName'];
-    $pageNumber = $_SESSION['questionCount'];
     if (isset($_SESSION['questionCount'])) {
         $_SESSION['questionCount'] ++ ;
     }
@@ -110,7 +109,6 @@
 </html>
 
 <?php
-    // include 'dbcon.php';
     include "../database/connect.php";
     $query1 = "SELECT course_ID FROM course ORDER BY course_ID DESC LIMIT 1;";
     $result = mysqli_query($connection, $query1);
@@ -148,7 +146,6 @@
         $answers = array();
         array_push($answers,$ques,$correct,$option1,$option2,$option3);
         array_push( $_SESSION['ansArray'],$answers);
-        return true;
     }
     
 

@@ -108,7 +108,6 @@ if(session_status() == PHP_SESSION_NONE) {
     }
 </style>
 <?php
-    // $a = $_SESSION['lists'];
     include "../database/connect.php";
     $studentID = $_SESSION['user_id'];  
     $courseID = $_SESSION['course'];
@@ -136,8 +135,6 @@ if(session_status() == PHP_SESSION_NONE) {
     const dt = new Date(Ctime).getTime();
     const dtnow = new Date(now).getTime();
     const duration =dtnow - dt;
-    // console.log(Ctime);
-    // console.log(now);
     const minutes = Math.floor(duration/60000);
     const seconds = ((duration % 60000)/1000).toFixed(0);
     const milli = duration % 1000; 
@@ -188,128 +185,144 @@ if(session_status() == PHP_SESSION_NONE) {
         else{
             $bol = false;
             $b = $containxp + intval($_SESSION['xp']);
-            if($level == 1){
-                if ($b >= 100){
-                    $v =$b%100;
-                    $a = ceil(($b%100)/100*100);
-                    $bol = true;
-                    $level += 1;
+            $i = 1;
+            while($i < 10){//maximum level is 10
+                if($level == $i){
+                    if ($b >= ($i * 100)){
+                        $v =$b%($i * 100);
+                        $a = ceil(($b%($i * 100))/($i * 100)*100);
+                        $bol = true;
+                        $level += 1;
+                    }
+                    else{
+                        $v = $b;
+                        $a = ceil($b/($i * 100)*100);
+                    }
+                    break;
                 }
-                else{
-                    $v = $b;
-                    $a = ceil($b/100*100);
-                }
-                
+                $i++;
             }
-            elseif($level == 2){
-                if ($b >= 200){
-                    $v =$b%200;
-                    $a = ceil(($b%200)/200*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/200*100);
-                }
-            }
-            elseif($level == 3){
-                if ($b >= 300){
-                    $v =$b%300;
-                    $a = ceil(($b%300)/300*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/300*100);
-                }
-            }
-            elseif($level == 4){
-                if ($b >= 400){
-                    $v =$b%400;
-                    $a = ceil(($b%400)/400*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/400*100);
-                }
+            // if($level == 1){
+            //     if ($b >= 100){
+            //         $v =$b%100;
+            //         $a = ceil(($b%100)/100*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/100*100);
+            //     }
+            // }
+            // elseif($level == 2){
+            //     if ($b >= 200){
+            //         $v =$b%200;
+            //         $a = ceil(($b%200)/200*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/200*100);
+            //     }
+            // }
+            // elseif($level == 3){
+            //     if ($b >= 300){
+            //         $v =$b%300;
+            //         $a = ceil(($b%300)/300*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/300*100);
+            //     }
+            // }
+            // elseif($level == 4){
+            //     if ($b >= 400){
+            //         $v =$b%400;
+            //         $a = ceil(($b%400)/400*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/400*100);
+            //     }
 
-            }
-            else if($level == 5){
-                if ($b >= 500){
-                    $v =$b%500;
-                    $a = ceil(($b%500)/500*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/500*100);
-                }
-            }
-            else if($level == 6){
-                if ($b >= 600){
-                    $v =$b%600;
-                    $a = ceil(($b%600)/600*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/600*100);
-                }
-            }
-            else if($level == 7){
-                if ($b >= 700){
-                    $v =$b%700;
-                    $a = ceil(($b%700)/700*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/700*100);
-                }
-            }
-            else if($level == 8){
-                if ($b >= 800){
-                    $v =$b%800;
-                    $a = ceil(($b%800)/800*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/800*100);
-                }
-            }
-            else if($level == 9){
-                if ($b >= 900){
-                    $v =$b%900;
-                    $a = ceil(($b%900)/900*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/900*100);
-                }
-            }
-            else if($level == 10){
-                if ($b >= 1000){
-                    $v =$b%1000;
-                    $a = ceil(($b%1000)/1000*100);
-                    $bol = true;
-                    $level += 1;
-                }
-                else{
-                    $v = $b;
-                    $a = ceil($b/1000*100);
-                }
-            }
+            // }
+            // else if($level == 5){
+            //     if ($b >= 500){
+            //         $v =$b%500;
+            //         $a = ceil(($b%500)/500*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/500*100);
+            //     }
+            // }
+            // else if($level == 6){
+            //     if ($b >= 600){
+            //         $v =$b%600;
+            //         $a = ceil(($b%600)/600*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/600*100);
+            //     }
+            // }
+            // else if($level == 7){
+            //     if ($b >= 700){
+            //         $v =$b%700;
+            //         $a = ceil(($b%700)/700*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/700*100);
+            //     }
+            // }
+            // else if($level == 8){
+            //     if ($b >= 800){
+            //         $v =$b%800;
+            //         $a = ceil(($b%800)/800*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/800*100);
+            //     }
+            // }
+            // else if($level == 9){
+            //     if ($b >= 900){
+            //         $v =$b%900;
+            //         $a = ceil(($b%900)/900*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/900*100);
+            //     }
+            // }
+            // else if($level == 10){
+            //     if ($b >= 1000){
+            //         $v =$b%1000;
+            //         $a = ceil(($b%1000)/1000*100);
+            //         $bol = true;
+            //         $level += 1;
+            //     }
+            //     else{
+            //         $v = $b;
+            //         $a = ceil($b/1000*100);
+            //     }
+            // }
 
             if($bol){
                 //update lvl sql
@@ -322,10 +335,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 $results5 = mysqli_query($connection,$query5);
             }
 
-            // $stime_str = $_SESSION['ctime'];
-            // $time_str = $_SESSION['etime'];
-            // $query = "INSERT INTO `learning_record`(`course_ID`, `student_ID`,`start_Datetime`,`end_Datetime`) VALUES ('$courseID','$studentID','$stime_str','$time_str')";
-            // $result = mysqli_query($connection,$query);
             ?>  
                 <style>
                     .progress-striped .progress-bar { 	

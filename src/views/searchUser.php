@@ -152,7 +152,6 @@
     <div class="grid_box">
 <?php $noResults = true;
 foreach ($queries as $query){
-    // echo $query;
     $result = mysqli_query($connection, $query);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
@@ -170,7 +169,6 @@ foreach ($queries as $query){
             elseif ($user_type === "Student"){
                 $bg = "var(--box-secondary);";
             }
-            echo $user_type;
             echo
                 "<form method='POST'>
                 <button type='submit' name='profile' class='profile' style='background-color: $bg'>

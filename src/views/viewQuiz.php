@@ -155,7 +155,7 @@
         <?php
             include "../database/connect.php";
             // include "dbcon.php";            
-            
+            $quiz="";
             $query = "SELECT studentquestionresponse.*, course.*,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
             SUM(CASE WHEN question2 = '1' THEN 1 ELSE 0 END) +

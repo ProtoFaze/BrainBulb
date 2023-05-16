@@ -250,6 +250,9 @@ if(session_status() == PHP_SESSION_NONE) {
     ?>
         <div class="contain" id="container">
             <div class="form-container sign-up-container">
+                <a href="loginAndregister.php">
+                    <img src="../../images/cross1.jpg" class="cross">
+                </a>
                 <form class="lrform" method="post" id='mainform'>
                     <h1 class="heavytitle" style="font-size:18px;">You can now change your password.</h1>
                     <br>

@@ -100,7 +100,7 @@
                     </div>
                     <div class="col" style="width:5%;">
                         <a href="uploadmaterialfile.php?sub=<?php echo $data;?>">
-                            <img src="../../images/uploadfile.jpg" style="width:60px;">
+                            <img src="../../images/uploadfile.png" style="width:60px;">
                         </a>    
                     </div>
                 </div>
@@ -128,6 +128,9 @@
                             }
                             elseif(substr($row['filename'],-3) == "pdf"){
                                 $imgs = "pdf";
+                            }
+                            elseif(substr($row['filename'],-3) == "mp4"){
+                                $imgs = "videoicon";
                             }
 
                             echo "<tr>";

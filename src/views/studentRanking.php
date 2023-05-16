@@ -24,6 +24,9 @@
             width: 1000px;
             margin: auto;
         }
+        #rankingTitle {
+            color: white;
+        }
         progress {
             height: 15px;
             width: 100%;
@@ -152,7 +155,7 @@
     <img src="../../images/planet6.png" alt="" id="planet4" >
     <img src="../../images/planet7.png" alt="" id="planet5" >
     <div id="viewRanking">
-        <h3><?php echo $quizname;?></h3>
+        <h3 id="rankingTitle"><?php echo $quizname;?></h3>
         <?php
             include "../database/connect.php";
             // include "dbcon.php";

@@ -86,7 +86,6 @@
                 include "../database/connect.php";
 
                 $courseid = $_GET['courseid'];
-                
                 $query = "SELECT 
                 COUNT(response_ID) AS total,
                 COUNT(CASE WHEN question1 = '1' THEN 1 ELSE NULL END) AS q1,
@@ -101,35 +100,40 @@
                 COUNT(CASE WHEN question10 = '1' THEN 1 ELSE NULL END) AS q10
                 FROM studentquestionresponse
                 WHERE course_ID ='$courseid';";
-                $result = mysqli_query($connection, $query);
-                $count =0 ;
-                if (mysqli_num_rows($result) > 0) {
-                    $accuracy1 = 0;
-                    while($row = mysqli_fetch_assoc($result)) {
-                        for ($x = 1; $x <= 10; $x++) {
-                            $count += 1;
-                            if ($row["q$x"] == 0 || $row['total'] == 0) {
-                                $accuracy1 = ($row["q$x"] / $row['total']) * 100;
-                            }
-                            $accuracy = round($accuracy1);
-                            $question =
-                                '<div class="quizQ">
-                                    <h4>Question '.$count.'</h4>
 
-                                    <div class="barAnalytic">
-                                        <div class="progressBlock">
-                                            <label for="progress">Accuracy '.$accuracy.'%</label>
-                                            <progress value = '.$row["q$x"].' max = '.$row["total"].' class="progress">'.$accuracy.'%</progress>
-                                        </div>
-                                    </div>
-                                </div>';
-                            echo $question;;
-                        } 
+            $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($result);
+
+            if ($row['total'] == 0) {
+                // Data is empty
+                echo '<p id="norecord">-No Student Response in this Quiz Yet-</p>';
+            } else {
+                $count = 0;
+                
+                for ($x = 1; $x <= 10; $x++) {
+                    $count += 1;
+                    
+                    if ($row['total'] != 0) {
+                        $accuracy = round(($row["q$x"] / $row['total']) * 100);
+                    } else {
+                        $accuracy = 0;
                     }
-                } else {
-                    // Data is empty
-                    echo '<p id="norecord">-No Question Created in this Quiz-</p>';
+                    
+                    $question = '
+                        <div class="quizQ">
+                            <h4>Question ' . $count . '</h4>
+                            <div class="barAnalytic">
+                                <div class="progressBlock">
+                                    <label for="progress">Accuracy ' . $accuracy . '%</label>
+                                    <progress value="' . $row["q$x"] . '" max="' . $row["total"] . '" class="progress">' . $accuracy . '%</progress>
+                                </div>
+                            </div>
+                        </div>';
+                    
+                    echo $question;
                 }
+            }
+
             ?>
         </div>
     </div>

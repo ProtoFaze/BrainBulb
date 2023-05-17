@@ -6,6 +6,10 @@
         $_SESSION['questionCount'] ++ ;
     }
     include("../components/nav.php");
+    if ($_SESSION['questionCount'] > 10 ) {
+        echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQUestion will be created automatically");</script>';
+        insertQues();
+    }
 ?>
 
 <!DOCTYPE html>

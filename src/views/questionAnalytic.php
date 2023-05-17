@@ -104,10 +104,13 @@
                 $result = mysqli_query($connection, $query);
                 $count =0 ;
                 if (mysqli_num_rows($result) > 0) {
+                    $accuracy1 = 0;
                     while($row = mysqli_fetch_assoc($result)) {
                         for ($x = 1; $x <= 10; $x++) {
                             $count += 1;
-                            $accuracy1 = ($row["q$x"] / $row['total']) * 100;
+                            if ($row["q$x"] == 0 || $row['total'] == 0) {
+                                $accuracy1 = ($row["q$x"] / $row['total']) * 100;
+                            }
                             $accuracy = round($accuracy1);
                             $question =
                                 '<div class="quizQ">

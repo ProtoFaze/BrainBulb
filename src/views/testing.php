@@ -69,28 +69,29 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         .subjects img{
             width: 80%;
         }
-        .features{
+        .features {
             margin: 0px 45px;
-            /* position: relative; */
-            /* right: 1700px; */
-            /* transition: transform 0.5s, opacity 0.5s;
-            transform: translateX(200px);
-            opacity: 0; */
-        }
-        .features:hover .adv{
-            animation-duration: 2.5s;
-            animation-name: appear;
-            animation-fill-mode: forwards;
-        }
+            position: relative;
+            overflow: hidden;
+            }
 
-        .features .adv{
+        .features .adv {
             float: left;
             width: 50%;
             padding: 10px;
             position: relative;
-            right: -100px;
+            /* left: 0; */
             opacity: 0;
+            right: -50px;
+            transition: transform 1s ease, opacity 1s ease;
         }
+
+        .features:hover .adv {
+            transform: translateX(-50px);
+            opacity: 1;
+        }
+
+
         .usertype{
             background-color: #ececec;
             display: flex;
@@ -246,6 +247,19 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         }
     </style>
 </head>
+<script>
+    function showAdv(element) {
+  var adv = element.querySelector('.adv');
+  adv.parentNode.classList.add('show');
+}
+
+function hideAdv(element) {
+  var adv = element.querySelector('.adv');
+  adv.parentNode.classList.remove('show');
+}
+
+
+</script>
 <body>
     <?php
         include("../components/nav.php");
@@ -358,7 +372,7 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             </div>
         </div>
         <div style="clear: both;"></div>
-        <div class="features">
+        <div class="features" >
             <div class="adv" style="text-align:center;">
                 <img src="../../images/technology.png" style="width:75%;">
             </div>
@@ -370,7 +384,7 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             </div>
         </div>
         <div style="clear: both;"></div>
-        <div class="features">
+        <div class="features" >
             <div class="adv">
                 <div style="margin-left:30px; margin-top: 85px;">
                     <h1>Knowledges</h1>

@@ -131,7 +131,7 @@
                     </div>
                 </div>
                 <button class="btn" name="done" >DONE</button>
-                <button class="btn" name="cancelBtn">RETURN</button>
+                <button class="btn" name="cancelBtn" formaction="viewQuiz.php">RETURN</button>
             </form>
         </div>  
     </div>
@@ -142,10 +142,6 @@
     
     if(isset($_POST['done'])) {
         updateData();
-    }
-
-    if (isset($_POST['cancelBtn'])) {
-        header("Location: viewQuiz.php");
     }
     
 

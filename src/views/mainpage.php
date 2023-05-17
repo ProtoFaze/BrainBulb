@@ -71,10 +71,21 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         .features{
             margin: 0px 45px;
         }
+        .features:hover .adv{
+            animation-duration: 2.5s;
+            animation-name: appear;
+            /* animation-fill-mode: forwards; */
+            animation-fill-mode: both;
+
+        }
+
         .features .adv{
             float: left;
             width: 50%;
             padding: 10px;
+            position: relative;
+            right: -50px;
+            opacity: 0;
         }
         .usertype{
             background-color: #ececec;
@@ -215,6 +226,18 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
 
         .user p{
             line-height: 1.5;
+        }
+        @keyframes appear {
+            from {
+                transform: translate(0px, 0);
+                opacity: 0;
+                visibility: hidden;
+            }
+            to {
+                transform: translate(-50px, 0);
+                opacity: 1;
+                visibility: visible;
+            }
         }
     </style>
 </head>

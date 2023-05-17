@@ -81,10 +81,8 @@
         <h3><?php echo $quizname;?></h3>
         <hr>
         <div class="quizQ">
-            
             <?php
                 include "../database/connect.php";
-
                 $courseid = $_GET['courseid'];
                 $query = "SELECT 
                 COUNT(response_ID) AS total,
@@ -100,41 +98,35 @@
                 COUNT(CASE WHEN question10 = '1' THEN 1 ELSE NULL END) AS q10
                 FROM studentquestionresponse
                 WHERE course_ID ='$courseid';";
-
             $result = mysqli_query($connection, $query);
             $row = mysqli_fetch_assoc($result);
-
             if ($row['total'] == 0) {
                 // Data is empty
                 echo '<p id="norecord">-No Student Response in this Quiz Yet-</p>';
             } else {
                 $count = 0;
-                
                 for ($x = 1; $x <= 10; $x++) {
                     $count += 1;
-                    
                     if ($row['total'] != 0) {
                         $accuracy = round(($row["q$x"] / $row['total']) * 100);
                     } else {
                         $accuracy = 0;
                     }
-                    
                     $question = '
                         <div class="quizQ">
                             <h4>Question ' . $count . '</h4>
                             <div class="barAnalytic">
                                 <div class="progressBlock">
                                     <label for="progress">Accuracy ' . $accuracy . '%</label>
-                                    <progress value="' . $row["q$x"] . '" max="' . $row["total"] . '" class="progress">' . $accuracy . '%</progress>
+                                    <progress value="' . $row["q$x"] . '" max="' . $row["total"] . '" 
+                                    class="progress">' . $accuracy . '%</progress>
                                 </div>
                             </div>
                         </div>';
                     
                     echo $question;
                 }
-            }
-
-            ?>
+            }?>
         </div>
     </div>
 </body>

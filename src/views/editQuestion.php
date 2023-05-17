@@ -1,7 +1,6 @@
 
 <?php
     $quizname = $_GET['quizname'];
-    // echo $quizname;
     session_start();
     if (isset($_GET['questionid'])) {
         $quesID = $_GET['questionid'];
@@ -12,7 +11,6 @@
     }
     include "../database/connect.php";
     include("../components/nav.php"); 
-    // include "dbcon.php";
 
     $query1 = "SELECT questionBank.*,questioncorrectanswer.*,questionoptionlist.* FROM ((questionBank 
     INNER JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID)
@@ -33,10 +31,7 @@
         }
     } else {
         echo "0 results";
-    }
-    
-
-    
+    }    
 ?>
 
 
@@ -139,15 +134,12 @@
 </html>
 
 <?php
-    
     if(isset($_POST['done'])) {
         updateData();
     }
     
-
     function updateData() {
         include "../database/connect.php";
-        // include "dbcon.php";
         global $quesID;
         $ques = $_POST['ques'];
         $correct = $_POST['ans1'];
@@ -158,7 +150,8 @@
         $query ="UPDATE questionBank
         JOIN questioncorrectanswer ON questionBank.correct_List_ID = questioncorrectanswer.correct_List_ID
         JOIN questionoptionlist ON questionBank.option_List_ID = questionoptionlist.option_List_ID
-        SET questionBank.question = '$ques', questioncorrectanswer.coption1 = '$correct', questionoptionlist.option1='$option1', questionoptionlist.option2='$option2', questionoptionlist.option3='$option3'
+        SET questionBank.question = '$ques', questioncorrectanswer.coption1 = '$correct', questionoptionlist.option1='$option1', 
+        questionoptionlist.option2='$option2', questionoptionlist.option3='$option3'
         WHERE questionBank.question_ID = '$quesID';";
 
         if (mysqli_query($connection, $query)) {
@@ -167,7 +160,4 @@
             echo "Error editing record: " . mysqli_error($connection);
         }
     }
-
-
-    
 ?>

@@ -232,11 +232,7 @@
                                                 <span class="correctiveIcon"><img src="../../images/option.png"><p>'.$ans4.'</p></span>
                                             </td>
                                         </tr>
-
                                     </table>
-                                    
-                                    
-                                    
                                 </div>
                             </div>
                         </div>';

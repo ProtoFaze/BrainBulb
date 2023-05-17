@@ -6,7 +6,6 @@
     $_SESSION['questionCount'] = 0;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +18,7 @@
             background-image: url(../../images/night.png);
             color: white;
             background-repeat: no-repeat;
-            background-size: cover;
+            background-size: cover;-
             background-attachment: fixed;
         }
         #norecord {
@@ -160,10 +159,7 @@
         
         <?php
             include "../database/connect.php";
-            // include "dbcon.php";            
-            
             $query = "SELECT * FROM course WHERE teacher_ID = '$teacherID'";
-
             $result = mysqli_query($connection, $query);
             if (mysqli_num_rows($result) > 0) {
                 $quiz="";
@@ -223,8 +219,6 @@
                                 $totalCorrect = $row['correct_attempt'];
                                 $totalAccuracy = round(($totalCorrect/$totalAttempt) * 100);
                             }
-                            
-
                             $quiz .= 
                                 '<div class="quiz">
                                     <div class="quizTitle">
@@ -233,7 +227,9 @@
                                         </div>
                                         <div class="theButtons">
                                             <form method="POST">
-                                                <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'"><img src="../../images/add.png" alt="" class="addBtn"></a>
+                                                <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">
+                                                    <img src="../../images/add.png" alt="" class="addBtn">
+                                                </a>
                                             </form>                            
                                         </div>
                                     </div>

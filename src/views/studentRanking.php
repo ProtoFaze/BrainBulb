@@ -162,8 +162,6 @@
         <h3 id="rankingTitle"><?php echo $quizname;?></h3>
         <?php
             include "../database/connect.php";
-            // include "dbcon.php";
-
             $courseid = $_GET['courseid'];
             $query = "SELECT studentquestionresponse.student_ID,student.sName,
             SUM(CASE WHEN question1 = '1' THEN 1 ELSE 0 END) +
@@ -213,8 +211,6 @@
                 usort($array, function($a, $b) {
                     return $b[3] <=> $a[3];
                 });
-                
-                // print_r($array);
                 foreach ($array as $info) {
                     $rank += 1;
                     $question = 
@@ -238,7 +234,6 @@
                     </div>';
                     echo $question;
                 }
-                
             } else {
                 // Data is empty
                 echo '<p id="norecord">-No Student Response to this Quiz Yet-</p>';

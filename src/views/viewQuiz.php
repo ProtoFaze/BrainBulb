@@ -3,7 +3,7 @@
     $teacherID = $_SESSION['user_id'];
     include("../components/nav.php");
     $_SESSION['ansArray'] = array();
-    $_SESSION['questionCount'] = 0;
+    $_SESSION['questionCount'] = 1;
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
             background-image: url(../../images/night.png);
             color: white;
             background-repeat: no-repeat;
-            background-size: cover;-
+            background-size: cover;
             background-attachment: fixed;
         }
         #norecord {

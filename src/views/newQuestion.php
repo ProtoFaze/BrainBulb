@@ -2,14 +2,7 @@
 <?php
     session_start();
     $quizName = $_GET['quizName'];
-    if (isset($_SESSION['questionCount'])) {
-        $_SESSION['questionCount'] ++ ;
-    }
     include("../components/nav.php");
-    if ($_SESSION['questionCount'] > 10 ) {
-        echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQUestion will be created automatically");</script>';
-        insertQues();
-    }
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +14,6 @@
     <title>Create Question</title>
 
     <style>
-
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -149,21 +141,25 @@
 
         $answers = array();
         array_push($answers,$ques,$correct,$option1,$option2,$option3);
-        array_push( $_SESSION['ansArray'],$answers);
+        array_push( $_SESSION['ansArray'],$answers); 
+        $_SESSION['questionCount'] ++ ;
+        if ($_SESSION['questionCount'] > 10 ) {
+            echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQUestion will be created automatically");</script>';
+            insertQues();
+        }
     }
     
 
     function insertQues() {
-        // include 'dbcon.php';
         include "../database/connect.php";
-
+        print_r($_SESSION['ansArray']);
         foreach ($_SESSION['ansArray'] as $data ) {
             $questions = $data[0];
             $correct = $data[1];
             $option1 = $data[2];
             $option2 = $data[3];
             $option3 = $data[4];
-
+            print_r($data);
             $query2 = "INSERT INTO questioncorrectanswer (coption1)
             VALUES ('$correct');";
             

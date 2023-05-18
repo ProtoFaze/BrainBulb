@@ -3,7 +3,9 @@
     session_start();
     $courseid = $_GET['courseid'];
     $quizname = $_GET['quizname'];
-    include("../components/nav.php");
+    include("../components/nav.php"); 
+    $query = "SELECT COUNT question_ID FROM questionBank WHERE course_ID = '$courseid'";
+    $_SESSION['questionCount'] ++ ; 
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +17,6 @@
     <title>Create Question</title>
 
     <style>
-
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -71,7 +72,7 @@
         <div id="block">
             <form action="" method="post">
                 <div id="ques">
-                    <p>Question</p>
+                    <p>Question <?php echo $_SESSION['questionCount'] ?></p>
                     <input type="text" name="ques" id="quesInput">
                 </div>
                 <div id="optionList">
@@ -135,7 +136,11 @@
         $answers = array();
         array_push($answers,$ques,$correct,$option1,$option2,$option3);
         array_push( $_SESSION['ansArray'],$answers);
-        return true;
+        $_SESSION['questionCount'] ++ ;
+        if ($_SESSION['questionCount'] > 10 ) {
+            echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQUestion will be created automatically");</script>';
+            insertQues();
+        }
     }
     
 
@@ -193,7 +198,6 @@
             $query6 = "INSERT INTO `questionbank`(`course_ID`, `correct_List_ID`, `option_List_ID`, `question`, `question_Gamemode`, `post_Datetime`) VALUES ('$courseid','$correctID', '$optionID', '$questions', '$question_Gamemode', '$formatted_time');";
 
             if (mysqli_query($connection, $query6)) {
-
                 $_SESSION['ansArray'] = array();
                 $_SESSION['pageNumber'] = 1;
             } else {

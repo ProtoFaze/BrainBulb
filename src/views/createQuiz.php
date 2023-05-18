@@ -14,7 +14,7 @@
         include "../database/connect.php";
         include("../components/nav.php");
         $_SESSION['ansArray'] = array();
-        $_SESSION['questionCount'] = 0;
+        $_SESSION['questionCount'] = 1;
     ?>
     <style>
         body {

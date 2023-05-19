@@ -259,7 +259,7 @@
                 echo $quiz;
             } else {
                 // Data is empty
-                echo '<p id="norecord">-No Question Created in this Quiz-</p>';
+                echo '<p id="norecord">-No Quiz being created yet-</p>';
             }
         ?>
     </div>

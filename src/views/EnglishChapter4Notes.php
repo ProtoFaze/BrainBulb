@@ -202,7 +202,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "BuiltInQuestions.php?course=CR00000006English";
+            location.href = "QuestionStarting.php?course=CR00000006English";
         }
     </script>
 </body>

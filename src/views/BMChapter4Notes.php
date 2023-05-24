@@ -139,28 +139,6 @@ if(session_status() == PHP_SESSION_NONE) {
             <h1>Bab 4 : Tatabahasa (Kata Bilangan)</h1>
         </div>
         <div class="con">
-            <!-- <div class="idea" style="background-color:transparent;">
-                <b>Puisi tradisional yang terdiri daripada empat baris dalam tiap-tiap rangkap. Pantun teka-teki, pantun kanak-kanak, pantun jenaka dan lain-lain adalah contoh jenis pantun</b>  
-            </div> -->
-            <!-- <div class="idea">
-                <div class="sub" style="width: 50%;">
-                    <p style="color:#58cc02; font-weight:bold;">Buah lontar masak berisi;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Dari rantau tanam di laman;<br></p>
-                    <p style="color:#ff4b4b; font-weight:bold;">Kamera pintar alatan inovasi;<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Untuk memantau sekitar kediaman.</p>
-                </div>
-                <div class="sub" style="width:10%;">
-                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
-                    <img src="../../images/leftarrow.png" style="width:90px; height:auto;">
-                </div>
-                <div class="sub" style="width: 40%;">
-                    <div style="margin-left: 100px; padding:20px; background-color:#58cc02; border-radius:7px; text-align:center; margin-bottom: 10px; font-weight:bold;">Pembayang</div>
-                    <div style="margin-left: 100px; padding:20px; background-color:#ff4b4b; border-radius:7px; text-align:center; font-weight:bold; ">Maksud</div>
-                </div>    
-            </div>
-            <div class="idea" style="background-color:transparent;">
-                <b>Contoh dan Maksud Pantun</b>  
-            </div> -->
             <div class="idea">
                 <p style="margin:10px;"><b>Apa itu kata bilangan?</b><br>
                 Kata yang menyatakan bilangan atau jumlah sesuatu.
@@ -254,7 +232,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "BuiltInQuestions.php?course=CR00000025BM";
+            location.href = "QuestionStarting.php?course=CR00000025BM";
         }
         const audios = document.querySelectorAll("audio");
         const songs = document.querySelectorAll("i");

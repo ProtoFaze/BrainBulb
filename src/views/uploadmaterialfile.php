@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>BrainBulb</title>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <!-- <link rel="stylesheet" href="../styles/inputs.css"> -->
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -37,14 +36,12 @@
 
     .filedrop{
         display: flex;
-        /* flex-direction: row; */
         justify-content: center;
         align-items: center;
         margin:50px;
     }
 
     .drag-area{
-        /* margin-top: 50px; */
         border: 4px dashed black;
         height: 420px;
         width: 700px;
@@ -96,10 +93,7 @@
     }
 
     .inputform{
-        /* margin-bottom: 50px; */
-        /* margin: 0 auto; */
         text-align: center;
-        /* width: 300px; */
     }
 
     #submitbutton, #gobackbutton{
@@ -119,7 +113,6 @@
         border-radius: 4px;
         font-size: 20px;
         font-weight: bold;
-        /* margin: 8px 0; */
         box-sizing: border-box;
         border: 3px solid #ccc;
         -webkit-transition: 0.5s;
@@ -139,7 +132,6 @@
 </script>
 <body>
     <?php
-        // $a = $_SESSION['user_id'];
         include "../database/connect.php";
         include "../components/nav.php";
         if(isset($_GET['sub'])){

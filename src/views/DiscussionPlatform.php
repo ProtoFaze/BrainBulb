@@ -49,7 +49,6 @@
                 background-color:#ffffff;
                 border-radius: 4px;
                 position: relative;
-                /* https://css-tricks.com/almanac/properties/b/box-shadow/ */
                 box-shadow: 0 8px 8px -4px rgb(202, 194, 194);
             }
     
@@ -97,15 +96,7 @@
                 flex-wrap: wrap;
             }
     
-    
-            /* #reminders {
-                font-size: 14px;
-                margin-left: auto;
-                color: #999;
-            } */
-    
             .question{
-                /* margin-bottom: 15px; */
                 margin: 25px;
                 letter-spacing: 1px;
             }

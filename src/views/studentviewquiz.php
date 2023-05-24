@@ -125,7 +125,6 @@ if(session_status() == PHP_SESSION_NONE) {
         border:none;
         font-weight: bold;
         cursor: pointer;
-        /* margin: 10px 0; */
         margin:0 10px;
         outline: none;
         background-color: lightcyan;
@@ -259,15 +258,6 @@ if(session_status() == PHP_SESSION_NONE) {
         </div>
     </div>
     <script>
-        // $('.dropdown-el').click(function(e) {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     $(this).toggleClass('expanded');
-        //     $('#'+$(e.target).attr('for')).prop('checked',true);
-        // });
-        // $(document).click(function() {
-        //     $('.dropdown-el').removeClass('expanded');
-        // });
     </script>
 </body>
 </html>

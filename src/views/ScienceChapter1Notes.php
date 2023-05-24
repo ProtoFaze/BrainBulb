@@ -21,7 +21,6 @@ if(session_status() == PHP_SESSION_NONE) {
     }
 
     .main{
-        /* position: relative; */
         background: linear-gradient(180deg, #46d6e2, 5%, #38beca, 50%, #17687d);
         height: auto;
         width: 100%;
@@ -114,15 +113,12 @@ if(session_status() == PHP_SESSION_NONE) {
         padding: 20px 50px;
         line-height: 75px;   
         font-size: 30px;
-        /* background-color: cyan; */
         border-radius: 7px;
-        /* width:100px; */
         margin:10px;
         font-weight: bold;
     }
 </style>
 <?php
-    // $a = $_SESSION['lists'];
     include "../database/connect.php";
     include("../components/nav.php");
 ?>
@@ -139,9 +135,6 @@ if(session_status() == PHP_SESSION_NONE) {
             <h1>Chapter 1 : Living things and non-living things</h1>
         </div>
         <div class="con">
-            <!-- <div class="idea" style="background-color:transparent;">
-                <b>Today, We will be learning some basic daily life Malay phrases.</b>  
-            </div> -->
             <div class="idea">
                 <div style="display:flex; flex-direction: column;">
                     <h3 style="margin:10px;">Characteristics of Living Things</h3>

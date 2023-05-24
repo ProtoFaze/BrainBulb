@@ -25,7 +25,6 @@
             float: left;
             box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
             padding: 15px;
-            /* padding-top: 45px; */
             box-sizing: border-box;
             border: none;
             transition: transform 0.4s;

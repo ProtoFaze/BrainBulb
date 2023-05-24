@@ -48,7 +48,6 @@ if(session_status() == PHP_SESSION_NONE) {
     }
 
     .final {
-        /* color: lime; */
         font-size: 40px;
         position: fixed;
         top: 50%;
@@ -76,7 +75,6 @@ if(session_status() == PHP_SESSION_NONE) {
     }
 
     .nums {
-        /* color: #3498db; */
         position: relative;
         font-size: 70px;
         overflow: hidden;
@@ -205,7 +203,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 <span class="in" style="color:red;">3</span>
                 <span style="color:orange;">2</span>
                 <span style="color:green;">1</span>
-                <!-- <span>0</span> -->
             </div>
             <br>
             <h4>Get Ready</h4>

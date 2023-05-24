@@ -53,7 +53,6 @@
             background-color:#ffffff;
             border-radius: 4px;
             position: relative;
-            /* https://css-tricks.com/almanac/properties/b/box-shadow/ */
             box-shadow: 0 8px 8px -4px rgb(202, 194, 194);
         }
 

@@ -22,7 +22,6 @@
         }
         #rankingTitle {
             color: white;
-            /* text-shadow: 1px 1px 1px white; */
             margin-left: 280px;
         }
         #norecord {
@@ -32,7 +31,6 @@
         .qBlock {
             background-color: rgba(255, 255, 255, 0.8);
             width: 900px;
-            /* height: 100px; */
             margin: auto;
             padding: 10px;
             margin-bottom: 20px;

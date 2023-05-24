@@ -43,9 +43,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modify Question</title>
     <style>
-        /* body {
-            background-image: linear-gradient(to bottom, white, #e6e9f9);
-        } */
         #setQues {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 40px;
@@ -68,7 +65,6 @@
         }
         .options {
             margin: 40px;
-            /* margin-left: 0%; */
             float: left;
         }
         .btn {

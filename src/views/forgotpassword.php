@@ -271,7 +271,6 @@ if(session_status() == PHP_SESSION_NONE) {
                     <br>
                     <input type="text" name="ic" placeholder="IC Number" class="input-field" required form='mainform'/>
                     <input type="text" name="email" placeholder="Email Address" class="input-field" required form='mainform'/>
-                    <!-- <a href="#" class="alink">Forgot your password?</a> -->
                     <br>
                     <input type="button" name="enter" class="login-btn" value="Continue" id="signUp">
                 </div>
@@ -281,12 +280,10 @@ if(session_status() == PHP_SESSION_NONE) {
                     <div class="overlay-panel overlay-left">
                         <h1 class="heavytitle">Change Your Password</h1>
                         <p class="normaltext">Strong Password: contain 16-digits,<br> special characters, numbers and letters</p>
-                        <!-- <button class="ghost" id="signIn">Login</button> -->
                     </div>
                     <div class="overlay-panel overlay-right">
                         <h1 class="heavytitle">Security<br> Purposes</h1>
                         <p class="normaltext">Please enter your IC number and Email Address to verify </p>
-                        <!-- <button class="ghost" id="signUp">Register</button> -->
                     </div>
                 </div>
             </div>

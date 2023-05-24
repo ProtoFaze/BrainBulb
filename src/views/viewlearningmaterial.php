@@ -36,7 +36,6 @@
     .mat td{
         padding: 22px 22px;
         font-size: 20px;    
-        /* border: 1px solid black; */
     }
 
     .mat tr:hover{

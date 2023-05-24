@@ -25,7 +25,6 @@
             float: left;
             box-shadow: 0 12px 10px rgba(0, 0, 0, 0.2);
             padding: 15px;
-            /* padding-top: 45px; */
             box-sizing: border-box;
             border: none;
             transition: transform 0.4s;
@@ -155,7 +154,6 @@ foreach ($queries as $query){
     $result = mysqli_query($connection, $query);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
-            // var_dump($row);
             $data = $row['profile_Picture'];
             $account_ID = $row['account_id'];
             $user_ID = $row['user_ID'];
@@ -204,9 +202,6 @@ foreach ($queries as $query){
         }
         $noResults = False;
     }
-    //  elseif($noResults == False){
-    //     $noResults = True;
-    // }
 }if($noResults == True){echo "<h1>No results found</h1>";}?>
 </main>
 </body>

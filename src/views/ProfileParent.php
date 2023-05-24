@@ -19,14 +19,8 @@
             $parent_id = $_SESSION['management_id'];
         }else{
             $parent_id = $_SESSION['user_id'];
-            // $parent_id = 'PT00000001';
         }
 
-
-
-
-
-        // 
         $profileRequest = "SELECT * FROM parent 
         inner join user on parent.parent_ID = user.parent_ID
         WHERE parent.parent_ID = '$parent_id'";
@@ -64,9 +58,6 @@
         a{
             text-decoration: none;
         }
-        /* .split_container{
-            height:100%;
-        } */
         .split_section{
             flex-grow: 1;
         }

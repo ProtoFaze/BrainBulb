@@ -74,7 +74,6 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         .features:hover .adv{
             animation-duration: 2.5s;
             animation-name: appear;
-            /* animation-fill-mode: forwards; */
             animation-fill-mode: both;
 
         }
@@ -117,7 +116,6 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
             transform-style: preserve-3d;
             position: relative;
             height: 300px;
-            /* cursor: pointer; */
             backface-visibility: visible;
         }
 

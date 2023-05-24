@@ -16,17 +16,8 @@
             session_start();
         }
 
-
-
-
         $teacher_id = $_GET['teacher_ID'];
-        // $teacher_id = 'TC00000001';
 
-
-
-
-
-        // $_SESSION['parent_id'];
         $profileRequest = "SELECT * FROM teacher 
         inner join user on teacher.teacher_ID = user.teacher_ID
         WHERE teacher.teacher_ID = '$teacher_id'";

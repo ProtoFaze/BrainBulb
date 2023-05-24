@@ -24,7 +24,6 @@ if(session_status() == PHP_SESSION_NONE) {
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            /* border: 1px solid black; */
         }
 
         .chapter1{
@@ -38,9 +37,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 #31969e 60%,
                 #46d6e2 100%
             );
-            /* box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
-                inset 88px 0px 60px #c2d8fe, inset -20px -60px 100px #fde9ea,
-                inset 0 50px 140px #fde9ea, 0 0 90px #fff; */
             box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
@@ -48,9 +44,6 @@ if(session_status() == PHP_SESSION_NONE) {
             text-align: center;
             font-weight: bold;
             font-size: 30px;
-            /* margin: 90px; */
-            /* border-color: #fff; */
-            /* border: 10px outset lightgrey; */
             transform: scale(1.10);
             opacity: 0.60;
         }
@@ -129,13 +122,11 @@ if(session_status() == PHP_SESSION_NONE) {
         }
 
         .main .titlebg{
-            /* background-image: linear-gradient(45deg, #83AAE6 12.5%, #E6BF83 12.5%, #E6BF83 25%, #83AAE6 25%, #83AAE6 37.5%, #E6BF83 37.5%, #E6BF83 50%, #83AAE6 50%, #83AAE6 62.5%, #E6BF83 62.5%, #E6BF83 75%, #83AAE6 75%, #83AAE6 87.5%,#E6BF83 87.5%, #E6BF83 );  */
             background-image: url('../../images/planks.png');
             padding: 5px 10px;
             background-position: center;
             border-radius: 5px;
             background-repeat: no-repeat;
-            /* background-size: cover; */
         }
     </style>
 </head>

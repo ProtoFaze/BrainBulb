@@ -24,7 +24,6 @@ if(session_status() == PHP_SESSION_NONE) {
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            /* border: 1px solid black; */
         }
 
         .chapter1{
@@ -38,9 +37,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 #31969e 60%,
                 #46d6e2 100%
             );
-            /* box-shadow: inset 0 0 20px #fff, inset 10px 0 46px #eaf5fc,
-                inset 88px 0px 60px #c2d8fe, inset -20px -60px 100px #fde9ea,
-                inset 0 50px 140px #fde9ea, 0 0 90px #fff; */
             box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: center;
@@ -48,9 +44,6 @@ if(session_status() == PHP_SESSION_NONE) {
             text-align: center;
             font-weight: bold;
             font-size: 30px;
-            /* margin: 90px; */
-            /* border-color: #fff; */
-            /* border: 10px outset lightgrey; */
             transform: scale(1.10);
             opacity: 0.60;
         }

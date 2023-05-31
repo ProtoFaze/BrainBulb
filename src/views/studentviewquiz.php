@@ -259,15 +259,6 @@ if(session_status() == PHP_SESSION_NONE) {
         </div>
     </div>
     <script>
-        // $('.dropdown-el').click(function(e) {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     $(this).toggleClass('expanded');
-        //     $('#'+$(e.target).attr('for')).prop('checked',true);
-        // });
-        // $(document).click(function() {
-        //     $('.dropdown-el').removeClass('expanded');
-        // });
     </script>
 </body>
 </html>

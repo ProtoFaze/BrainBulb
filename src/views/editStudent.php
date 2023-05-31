@@ -16,7 +16,6 @@
             session_start();
         }
         $student_id = $_GET['student_ID'];
-        // $student_id = 'ST00000001';
 
         //user info
         $profileRequest = "SELECT * FROM student 
@@ -139,7 +138,6 @@
             </form >
         </div>
     </main>
-    <!-- <script src="../styles/conditionalShadows.js"></script> -->
     <script src="../styles/togglePlaceholder.js"></script>
     <script src="../styles/previewImage.js"></script>
 </body>

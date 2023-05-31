@@ -128,7 +128,6 @@ if(session_status() == PHP_SESSION_NONE) {
     let startTime = localStorage.getItem('starttime');
     let endTime = localStorage.getItem('endtime');
     let respone = localStorage.getItem('res');
-    // console.log(respone);
     const options = { timeZone: 'Asia/Kuala_Lumpur' };
     var Ctime = new Date(startTime).toLocaleString('en-US', options);
     var now = new Date(endTime).toLocaleString('en-US', options);
@@ -202,127 +201,6 @@ if(session_status() == PHP_SESSION_NONE) {
                 }
                 $i++;
             }
-            // if($level == 1){
-            //     if ($b >= 100){
-            //         $v =$b%100;
-            //         $a = ceil(($b%100)/100*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/100*100);
-            //     }
-            // }
-            // elseif($level == 2){
-            //     if ($b >= 200){
-            //         $v =$b%200;
-            //         $a = ceil(($b%200)/200*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/200*100);
-            //     }
-            // }
-            // elseif($level == 3){
-            //     if ($b >= 300){
-            //         $v =$b%300;
-            //         $a = ceil(($b%300)/300*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/300*100);
-            //     }
-            // }
-            // elseif($level == 4){
-            //     if ($b >= 400){
-            //         $v =$b%400;
-            //         $a = ceil(($b%400)/400*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/400*100);
-            //     }
-
-            // }
-            // else if($level == 5){
-            //     if ($b >= 500){
-            //         $v =$b%500;
-            //         $a = ceil(($b%500)/500*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/500*100);
-            //     }
-            // }
-            // else if($level == 6){
-            //     if ($b >= 600){
-            //         $v =$b%600;
-            //         $a = ceil(($b%600)/600*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/600*100);
-            //     }
-            // }
-            // else if($level == 7){
-            //     if ($b >= 700){
-            //         $v =$b%700;
-            //         $a = ceil(($b%700)/700*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/700*100);
-            //     }
-            // }
-            // else if($level == 8){
-            //     if ($b >= 800){
-            //         $v =$b%800;
-            //         $a = ceil(($b%800)/800*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/800*100);
-            //     }
-            // }
-            // else if($level == 9){
-            //     if ($b >= 900){
-            //         $v =$b%900;
-            //         $a = ceil(($b%900)/900*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/900*100);
-            //     }
-            // }
-            // else if($level == 10){
-            //     if ($b >= 1000){
-            //         $v =$b%1000;
-            //         $a = ceil(($b%1000)/1000*100);
-            //         $bol = true;
-            //         $level += 1;
-            //     }
-            //     else{
-            //         $v = $b;
-            //         $a = ceil($b/1000*100);
-            //     }
-            // }
 
             if($bol){
                 //update lvl sql
@@ -390,7 +268,6 @@ if(session_status() == PHP_SESSION_NONE) {
         document.getElementById('cAmount').textContent = CValue.toString();
         document.getElementById('wAmount').textContent = WValue.toString();
         document.getElementById('timespent').textContent = Tspent;
-        // document.getElementById('xpAmount').textContent = xpValue.toString();
     }
     <?php mysqli_close($connection);?>
 </script>

@@ -1,7 +1,7 @@
 
 <?php
     session_start();
-    $quizName = $_GET['quizName'];
+    $quizname = $_GET['quizname'];
     include("../components/nav.php");
 ?>
 
@@ -144,7 +144,7 @@
         array_push( $_SESSION['ansArray'],$answers); 
         $_SESSION['questionCount'] ++ ;
         if ($_SESSION['questionCount'] > 10 ) {
-            echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQUestion will be created automatically");</script>';
+            echo '<script>alert("!!The questions reach the maximum questions in a quiz!!\nQuestion will be created automatically");</script>';
             insertQues();
         }
     }

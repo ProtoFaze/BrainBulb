@@ -110,7 +110,6 @@
                     <option value="English">
                     <option value="Science">
                     <option value="Math">
-                    <option value="Others">
                 </datalist>
                 <br>
                 Quiz Description 

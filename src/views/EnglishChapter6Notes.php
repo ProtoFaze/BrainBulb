@@ -21,7 +21,6 @@ if(session_status() == PHP_SESSION_NONE) {
     }
 
     .main{
-        /* position: relative; */
         background: linear-gradient(180deg, #46d6e2, 5%, #38beca, 50%, #17687d);
         height: auto;
         width: 100%;
@@ -108,11 +107,9 @@ if(session_status() == PHP_SESSION_NONE) {
         padding:20px 40px;
         border-radius: 7px;
         margin: 30px 10px;
-        /* width: 100%; */
     }
 </style>
 <?php
-    // $a = $_SESSION['lists'];
     include "../database/connect.php";
     include("../components/nav.php");
 ?>

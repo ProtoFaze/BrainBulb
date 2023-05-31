@@ -15,20 +15,12 @@
             session_start();
         }
 
-
-
         if(isset($_SESSION['management_id'])){
             $teacher_id = $_SESSION['management_id'];
         }else{
         $teacher_id = $_SESSION['user_id'];
-        // $teacher_id = 'TC00000001';
         }
 
-
-
-
-
-        // $_SESSION['parent_id'];
         $profileRequest = "SELECT * FROM teacher 
         inner join user on teacher.teacher_ID = user.teacher_ID
         WHERE teacher.teacher_ID = '$teacher_id'";
@@ -124,9 +116,6 @@
             </div>
         </div>
 
-        <!-- bottom section containing children info -->
-        <!-- <div class="content_box">
-        </div> -->
     </main>
     <script src="../styles/conditionalShadows.js"></script>
 </body>

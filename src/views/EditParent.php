@@ -16,25 +16,13 @@
             session_start();
         }
 
-
-
-
         $parent_id = $_GET['parent_ID'];
-        // $parent_id = 'PT00000001';
 
-
-
-
-
-        // $_SESSION['parent_id'];
         $profileRequest = "SELECT * FROM parent 
         inner join user on parent.parent_ID = user.parent_ID
         WHERE parent.parent_ID = '$parent_id'";
         $parentRequest = mysqli_query($connection, $profileRequest);
         $parent = mysqli_fetch_assoc($parentRequest);
-
-        // $childsql = "SELECT * FROM student WHERE parent_ID = '$parent_id'";
-        // $childRequest = mysqli_query($connection, $childsql);
 
     //redirect to child
         if(isset($_POST['child'])){
@@ -64,9 +52,7 @@
         a{
             text-decoration: none;
         }
-        /* .split_container{
-            height:100%;
-        } */
+
         .split_section{
             flex-grow: 1;
         }

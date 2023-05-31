@@ -27,7 +27,6 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
     }
 
     .main{
-        /* background: linear-gradient(180deg, #46d6e2, 5%, #38beca, 50%, #17687d); */
         height: auto;
         width: 100%;
         position: absolute;
@@ -68,7 +67,6 @@ if(isset($_SESSION['sourceage']) && $_SESSION['sourceage'] == "searchUser" && is
         border:none;
         font-weight: bold;
         cursor: pointer;
-        /* margin: 10px 0; */
         margin:0 10px;
         outline: none;
         background-color: #2e424d;

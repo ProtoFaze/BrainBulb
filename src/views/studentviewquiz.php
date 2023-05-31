@@ -125,7 +125,6 @@ if(session_status() == PHP_SESSION_NONE) {
         border:none;
         font-weight: bold;
         cursor: pointer;
-        /* margin: 10px 0; */
         margin:0 10px;
         outline: none;
         background-color: lightcyan;

@@ -3,7 +3,6 @@
     $teacherID = $_SESSION['user_id'];
     include("../components/nav.php");
     $_SESSION['ansArray'] = array();
-    $_SESSION['questionCount'] = 1;
 ?>
 
 <!DOCTYPE html>
@@ -123,16 +122,6 @@
             width: 25px;
             height: 25px;
         }
-        .addBtn {
-            width: 20px;
-            height: 20px;
-        }
-        .theButtons {
-            /* margin: 0px; */
-            position: absolute;
-            right: 15px;
-            bottom: 10px;
-        }
         .quizTitle {
             display: flex;
             flex-direction: row;
@@ -150,6 +139,12 @@
         }
     </style>
 </head>
+<script>
+    function executeQueryAndRedirect() {
+    // Submit the form
+    document.getElementById("myForm").submit();
+    }
+</script>
 <body>
     <div id="quizzes">
         <h2>Quizzes</h2>
@@ -225,13 +220,6 @@
                                         <div>
                                             <h4>'.$quizname.'</h4><h5>'.$totalCorrect.' / '.$totalAttempt.' Attempts</h5>
                                         </div>
-                                        <div class="theButtons">
-                                            <form method="POST">
-                                                <a href="addQuestion.php?courseid='.$courseid.'&quizname='.$quizname.'">
-                                                    <img src="../../images/add.png" alt="" class="addBtn">
-                                                </a>
-                                            </form>                            
-                                        </div>
                                     </div>
                                     <div class="progressBlock">
                                         <label for="progress">Accuracy '.$totalAccuracy.'%</label>
@@ -259,7 +247,7 @@
                 echo $quiz;
             } else {
                 // Data is empty
-                echo '<p id="norecord">-No Question Created in this Quiz-</p>';
+                echo '<p id="norecord">-No Quiz being created yet-</p>';
             }
         ?>
     </div>

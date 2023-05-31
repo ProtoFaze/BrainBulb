@@ -24,17 +24,8 @@ if(session_status() == PHP_SESSION_NONE) {
         background-size: cover;
     }
     
-    .maincontainer{
-        /* padding-bottom: 0.03px; */
-        /* height: 650px; */
-        /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
-        /* margin: auto 100px; */
-        /* background-color: lightgrey; */
-    }
-
     .progressbar{
-        width: 100%
-        /* max-width: 400px; */
+        width: 100%;
     }
 
     .steps{
@@ -67,12 +58,6 @@ if(session_status() == PHP_SESSION_NONE) {
         color:#4070f4;
     }
 
-    /* .steps .circle.correct{
-        transition-delay: 100ms;
-        border-color: #58cc02;
-        color:#58cc02;
-    } */
-
     .steps .progress{
         position: absolute;
         height: 6px;
@@ -94,16 +79,13 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 25px;
         font-weight: bold;
         margin: 20px auto;
-        /* background-color: gray; */
     }
 
     .options .box{
-        /* margin: 20px 20px; */
         border-radius: 7px;
         background-color: white;
         padding: 50px 50px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        /* text-align: center; */
         margin: 45px 20px;
         border: 0;
         font-size: 25px;
@@ -118,26 +100,6 @@ if(session_status() == PHP_SESSION_NONE) {
     .box:active{
         transform: scale(0.91);
     }
-
-    /* .boxes{
-        border-radius: 7px;
-        background-color: white;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        border: 0;
-        cursor: pointer;
-        padding: 10px 50px;
-        margin: 6px 50px;
-        font-size: 25px;
-        font-weight: bold;
-    } */
-
-    /* .boxes:hover{
-        transform: scale(1.07);
-    }
-
-    .boxes:active{
-        transform: scale(0.91);
-    } */
 
     .title{
         margin: 20px auto;
@@ -230,7 +192,6 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .container{
         width: 100%;
-        /* height: 400px; */
         height: auto;
         overflow: hidden;
         -webkit-user-select: none;
@@ -355,7 +316,6 @@ if(session_status() == PHP_SESSION_NONE) {
         background-color: grey;
         padding: 10px 20px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        /* text-align: center; */
         margin: 30px 0;
         bottom: 0;
         border: 0;
@@ -407,7 +367,7 @@ if(session_status() == PHP_SESSION_NONE) {
 </script>
 <body>
     <?php
-        $courseID = $_GET['id']; //fixed
+        $courseID = $_GET['id']; 
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
         $query = "SELECT * FROM (((questionbank INNER JOIN course ON course.course_ID = questionbank.course_ID) INNER JOIN questioncorrectanswer ON questioncorrectanswer.correct_List_ID = questionbank.correct_List_ID) INNER JOIN questionoptionlist ON questionoptionlist.option_List_ID = questionbank.option_List_ID) WHERE course.question_Type = 'Customised Quiz' AND course.course_ID = '$courseID' ORDER BY questionbank.post_Datetime ASC";
@@ -528,7 +488,6 @@ if(session_status() == PHP_SESSION_NONE) {
     var lvlxp = 0;
     var correctness = 0;
     var wrongness = 0;
-    // var fillinamount = 0;
     var mcqselect = "";
     var indexans = 0;
     const pages = document.querySelectorAll(".page");

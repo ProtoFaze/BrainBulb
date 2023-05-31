@@ -27,17 +27,6 @@
         label{
             font-weight:bolder;
         }
-
-        /* form {
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 10px;
-            background-color: #f2f2f2;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        } */
-
         label {
             display: block;
             margin-top: 15px;
@@ -93,13 +82,6 @@
             flex-grow: 1;
             margin-right: 2%;
         }
-
-        /* .entireForm {
-            display: inline-flex;
-            justify-content: space-between;
-            width: 100%;
-            } */
-
 
         .formAction {
             max-width: 500px;

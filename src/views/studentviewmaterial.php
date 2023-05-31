@@ -35,8 +35,7 @@
 
     .mat td{
         padding: 22px 22px;
-        font-size: 20px;    
-        /* border: 1px solid black; */
+        font-size: 20px;
     }
 
     .mat tr:hover{
@@ -63,9 +62,6 @@
         margin: 0 70px;
     }
 
-    /* .sub .col{
-        float: left;
-    } */
 </style>
 <body>
     <?php

@@ -46,7 +46,6 @@
             border-radius: 10px 0px 0px 10px;
         }
         .accuracyBlock {
-            /* background-color: aliceblue; */
             padding: 20px;
             padding-top: 10px;
         }
@@ -61,7 +60,6 @@
             width: 100%;
         }
         .student td {
-            /* background-color: rgb(217, 237, 255); */
             text-align: center;
         }
         .iconProf {

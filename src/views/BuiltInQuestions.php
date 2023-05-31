@@ -24,17 +24,8 @@ if(session_status() == PHP_SESSION_NONE) {
         background-size: cover;
     }
 
-    .maincontainer{
-        /* padding-bottom: 0.03px; */
-        /* height: 650px; */
-        /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
-        /* margin: auto 100px; */
-        /* background-color: lightgrey; */
-    }
-
     .progressbar{
         width: 100%
-        /* max-width: 400px; */
     }
 
     .steps{
@@ -67,12 +58,6 @@ if(session_status() == PHP_SESSION_NONE) {
         color:#4070f4;
     }
 
-    /* .steps .circle.correct{
-        transition-delay: 100ms;
-        border-color: #58cc02;
-        color:#58cc02;
-    } */
-
     .steps .progress{
         position: absolute;
         height: 6px;
@@ -94,16 +79,13 @@ if(session_status() == PHP_SESSION_NONE) {
         font-size: 25px;
         font-weight: bold;
         margin: 20px auto;
-        /* background-color: gray; */
     }
 
     .options .box{
-        /* margin: 20px 20px; */
         border-radius: 7px;
         background-color: white;
         padding: 50px 50px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        /* text-align: center; */
         margin: 45px 20px;
         border: 0;
         font-size: 25px;
@@ -230,7 +212,6 @@ if(session_status() == PHP_SESSION_NONE) {
 
     .container{
         width: 100%;
-        /* height: 400px; */
         height: auto;
         overflow: hidden;
         -webkit-user-select: none;
@@ -266,17 +247,12 @@ if(session_status() == PHP_SESSION_NONE) {
         background-color: #ddd;
         padding: 10px 20px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        /* text-align: center; */
         margin: 10px 10px;
         border: 0;
         font-size: 25px;
         font-weight: bold;
         cursor: move;
     }
-    .drag-area{
-        /* margin: 10px auto; */
-    }
-
     .drag-area .answer-box{
         background-color: #ddd;
         border: 1px solid #999;
@@ -399,7 +375,6 @@ if(session_status() == PHP_SESSION_NONE) {
         background-color: grey;
         padding: 10px 20px;
         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        /* text-align: center; */
         margin: 30px 0;
         bottom: 0;
         border: 0;
@@ -454,7 +429,7 @@ if(session_status() == PHP_SESSION_NONE) {
 </script>
 <body>
     <?php
-        $courseID = substr($_GET['course'],0,10); //fixed
+        $courseID = substr($_GET['course'],0,10);
         $s = substr($_GET['course'],10);
         include "../database/connect.php";
         $_SESSION['course'] = $courseID;
@@ -694,9 +669,6 @@ if(session_status() == PHP_SESSION_NONE) {
         return true;
     }
 
-    // console.log(questionmode);
-    // console.log(mcqanswer);
-    // console.log(connectlineanswer);
     const constant = [true,false,false,false,false,false,false,false,false,false];
     const humani = document.querySelector(".popuphuman");
     var resp = [];
@@ -978,7 +950,6 @@ if(session_status() == PHP_SESSION_NONE) {
         })
     })
 
-    /////////////////////////////////
     const choices = document.querySelectorAll('.choice');
     const answerBoxes = document.querySelectorAll('.answer-box');
     const resetButton = document.querySelector('#reset-button');

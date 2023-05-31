@@ -199,7 +199,7 @@ if(session_status() == PHP_SESSION_NONE) {
     </div>
     <script>
         function start(){
-            location.href = "QuestionStarting.php?course=CR00000026BM";
+            location.href = "QuestionStarting.php?course=CR00000026BMb";
         }
         const audios = document.querySelectorAll("audio");
         const songs = document.querySelectorAll("i");

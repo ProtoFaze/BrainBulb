@@ -232,7 +232,7 @@ if(session_status() == PHP_SESSION_NONE) {
                             <p><?php echo $row['subject_Name'];?></p>
                         </div>
                         <div class="sub" style="width: 30%;">
-                            <a href="Quiz.php?id=<?php echo $row['course_ID'];?>">
+                            <a href="QuestionStarting.php?course=<?php echo $row['course_ID'];?>q">
                                 <div class="start">Start Quiz</div>
                             </a>
                             <a href="studentviewmaterial.php?id=<?php echo $row['course_ID'];?>">

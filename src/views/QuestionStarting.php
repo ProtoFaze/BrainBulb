@@ -191,7 +191,8 @@ if(session_status() == PHP_SESSION_NONE) {
     
 </style>
 <?php
-    $a = $_GET['course'];
+    $a = substr($_GET['course'],0,-1);
+    $g = substr($_GET['course'],-1);
 ?>
 <body>
     <div class="main">
@@ -232,8 +233,15 @@ if(session_status() == PHP_SESSION_NONE) {
                         counter.classList.add('hide');
                         finalMessage.classList.add('show');
                         setTimeout(function() {
-                            
-                            location.href = "BuiltInQuestions.php?course=<?php echo $a;?>";
+                            <?php
+                                if($g == "q"){
+                                    echo 'location.href = "Quiz.php?id='.$a.'";';
+                                }
+                                else{
+                                    echo 'location.href = "BuiltInQuestions.php?course='.$a.'";';
+                                }
+                            ?>
+                            // location.href = "BuiltInQuestions.php?course=<?php //echo $a;?>";
                         }, 800);
                         
                     }

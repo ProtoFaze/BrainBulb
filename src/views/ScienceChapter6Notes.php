@@ -148,7 +148,7 @@
     </div>
     <script>
         function start(){
-            location.href = "QuestionStarting.php?course=CR00000046Science";
+            location.href = "QuestionStarting.php?course=CR00000046Scienceb";
         }
     </script>
 </body>

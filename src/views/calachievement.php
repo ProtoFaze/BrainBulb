@@ -141,7 +141,7 @@
                 } 
             }
 
-            if(intval(substr($courseID,-2)) >= 3 && intval(substr($courseID,-2)) <= 27){            
+            if(intval(substr($courseID,-2)) >= 41 && intval(substr($courseID,-2)) <= 46){            
                 echo"<script>location.href='ScienceSelectChapter.php'</script>";
             }
             else{

@@ -1,7 +1,7 @@
 
 <?php
     session_start();
-    $quizname = $_GET['quizname'];
+    $quizname = $_GET['quizName'];
     include("../components/nav.php");
 ?>
 
@@ -10,6 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Question</title>
 
@@ -64,7 +65,7 @@
 
 <body>
     <div id="setQues">
-        <h4><?php echo $quizName ?></h4>
+        <h4><?php echo $quizname ?></h4>
         <hr>
         <div id="block">
             <form action="" method="post">
@@ -214,7 +215,8 @@
             echo "Number of pages stored: ".count($_SESSION['ansArray'])."<br>";
             echo '<script>alert("Question created successfully"); setTimeout(function(){ window.location.href = "viewQuiz.php"; }, 200);</script>';
     }
-    if (isset($_POST['cancelBtn']) && $_POST['cancelBtn'] == "viewQuiz.php") {
-        header("Location: viewQuiz.php");
+    if (isset($_POST['cancelBtn'])) {
+        // header("Location: viewQuiz.php");
+        echo "<script>location.href='viewQuiz.php'</script>";
     }
 ?>

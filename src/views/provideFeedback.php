@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provide Feedback</title>
     <link rel="stylesheet" href="../styles/design.css">
+    <link rel="icon" type="image/x-icon" href="../../images/brainlogo3.png">
     <style>
     body{
         background-color:#f2f5f7 ;

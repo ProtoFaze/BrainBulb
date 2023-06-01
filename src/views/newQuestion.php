@@ -27,6 +27,10 @@
             width: 1000px;
             height: 100px;
         }
+        input {
+            border-style: solid;
+            border-width: 2px;
+        }
         #optionList {
             margin: 0px;
             width: 100%;
@@ -128,8 +132,8 @@
     }
     
     function newPage() {
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit;
+        // header('Location: ' . $_SERVER['PHP_SELF']);
+        // exit;
     }
     
     

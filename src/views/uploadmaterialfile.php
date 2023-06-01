@@ -155,7 +155,7 @@
                 <input type="file" name="file1" hidden>
             </div>    
         </div>
-        <p style="font-size:20px; text-align:center;">*Only <i style="color:red;">.pdf, .docs and .ppt </i>format allow*</p>
+        <p style="font-size:20px; text-align:center;">*Only <i style="color:red;">.pdf, .docs, .ppt or .mp4 </i>format allow*</p>
         <div class="inputform">
             <div style="float: left; width: 33.33%;">
                 <button id="gobackbutton" onclick="backgo()">Cancel</button>
